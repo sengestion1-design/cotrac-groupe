@@ -1,8 +1,8 @@
 <?php
-define('DB_HOST', 'db5020666806.hosting-data.io');
-define('DB_NAME', 'dbs15776005');
-define('DB_USER', 'dbu2431230');
-define('DB_PASS', 'Senegal202061986');
+define('DB_HOST', getenv('DB_HOST') ?: 'db5020666806.hosting-data.io');
+define('DB_NAME', getenv('DB_NAME') ?: 'dbs15776005');
+define('DB_USER', getenv('DB_USER') ?: 'dbu2431230');
+define('DB_PASS', getenv('DB_PASS') ?: 'Senegal202061986');
 define('DB_CHARSET', 'utf8mb4');
 define('SITE_URL', 'https://cotracgroup.com');
 define('SITE_NAME', 'COTRAC - Compagnie des Travaux et Constructions');
