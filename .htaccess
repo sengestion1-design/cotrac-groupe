@@ -1,0 +1,13 @@
+Options -Indexes
+RewriteEngine On
+
+# Supprimer l'extension .php dans l'URL (réécriture interne, préserve le POST)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# Rediriger les URLs avec .php vers sans .php
+# EXCLURE admin/ajax/* : un 301 transforme POST en GET et vide $_POST
+RewriteCond %{REQUEST_URI} !^/cotrac/admin/ [NC]
+RewriteCond %{THE_REQUEST} \s/+cotrac/([^.]+)\.php[\s?] [NC]
+RewriteRule ^ /cotrac/%1 [R=301,L]

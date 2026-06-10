@@ -1,0 +1,12 @@
+.DS_Store
+tests/
+*.mov
+photos et videos/
+cotrac_db.sql
+offre-cotrac.html
+uploads/projets/*
+uploads/actualites/*
+uploads/cms/*
+!uploads/projets/.gitkeep
+!uploads/actualites/.gitkeep
+!uploads/cms/.gitkeep
