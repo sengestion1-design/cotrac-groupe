@@ -21,29 +21,22 @@ jobs:
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
-      - name: Get changed files
-        id: changed
+      - name: Deploy changed files via SFTP
+        env:
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
         run: |
           git diff --name-only HEAD~1 HEAD > /tmp/changed_files.txt
           cat /tmp/changed_files.txt
 
-      - name: Deploy changed files via SFTP
-        run: |
           while IFS= read -r file; do
-            # Skip excluded files
             if [[ "$file" == .git* ]] || [[ "$file" == tests/* ]] || [[ "$file" == *.sql ]] || [[ "$file" == *.mov ]]; then
               continue
             fi
-            # Skip deleted files
             if [ ! -f "$file" ]; then
               continue
             fi
-            remote_dir=$(dirname "/cotracgroup/$file")
-            lftp -u "${{ secrets.SFTP_USER }}","${{ secrets.SFTP_PASSWORD }}" sftp://access971979113.webspace-data.io << LFTP
-            set sftp:connect-program "ssh -o StrictHostKeyChecking=yes"
-            set net:timeout 30
-            -mkdir -p $remote_dir
-            put "$file" -o "/cotracgroup/$file"
-            bye
-LFTP
+            remote_path="/cotracgroup/$file"
+            remote_dir=$(dirname "$remote_path")
+            lftp -u "$SFTP_USER","$SFTP_PASSWORD" sftp://access971979113.webspace-data.io -e "-mkdir -p $remote_dir; put $file -o $remote_path; bye"
           done < /tmp/changed_files.txt
