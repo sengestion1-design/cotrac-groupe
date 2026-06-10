@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Setup known hosts
         run: |
@@ -19,11 +21,29 @@ jobs:
       - name: Install lftp
         run: sudo apt-get install -y lftp
 
-      - name: Deploy via SFTP
+      - name: Get changed files
+        id: changed
         run: |
-          lftp -u "${{ secrets.SFTP_USER }}","${{ secrets.SFTP_PASSWORD }}" sftp://access971979113.webspace-data.io << 'EOF'
-          set sftp:connect-program "ssh -o StrictHostKeyChecking=yes"
-          set net:timeout 30
-          mirror -R --delete --verbose --exclude=^\.git/ --exclude=^tests/ --exclude=^\.DS_Store --exclude=cotrac_db\.sql --exclude=cotrac_ionos\.sql . /
-          bye
-          EOF
+          git diff --name-only HEAD~1 HEAD > /tmp/changed_files.txt
+          cat /tmp/changed_files.txt
+
+      - name: Deploy changed files via SFTP
+        run: |
+          while IFS= read -r file; do
+            # Skip excluded files
+            if [[ "$file" == .git* ]] || [[ "$file" == tests/* ]] || [[ "$file" == *.sql ]] || [[ "$file" == *.mov ]]; then
+              continue
+            fi
+            # Skip deleted files
+            if [ ! -f "$file" ]; then
+              continue
+            fi
+            remote_dir=$(dirname "/cotracgroup/$file")
+            lftp -u "${{ secrets.SFTP_USER }}","${{ secrets.SFTP_PASSWORD }}" sftp://access971979113.webspace-data.io << LFTP
+            set sftp:connect-program "ssh -o StrictHostKeyChecking=yes"
+            set net:timeout 30
+            -mkdir -p $remote_dir
+            put "$file" -o "/cotracgroup/$file"
+            bye
+LFTP
+          done < /tmp/changed_files.txt
