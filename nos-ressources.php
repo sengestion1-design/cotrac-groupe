@@ -364,7 +364,7 @@ require_once 'includes/header.php';
         <?php foreach ($galerie as $idx => $g):
           $src = SITE_URL . '/assets/ressources/' . $g[0];
         ?>
-        <div class="gal-card animate-fade-up" data-gtab="<?= $g[2] ?>" onclick="openGal(<?= $idx ?>)">
+        <div class="gal-card" data-gtab="<?= $g[2] ?>" onclick="openGal(<?= $idx ?>)">
           <div class="gal-img-wrap">
             <img src="<?= $src ?>" alt="<?= htmlspecialchars($g[1]) ?>" loading="lazy">
             <div class="gal-overlay">
