@@ -422,69 +422,154 @@ require_once __DIR__ . '/includes/header.php';
     <h2 class="section-title"><?= t('apropos_org_titre') ?></h2>
     <p class="section-sub"><?= t('apropos_org_desc') ?></p>
 
-    <div class="org-chart">
+    <!-- Organigramme complet -->
+    <div class="org2-wrap">
 
-      <!-- Niveau 1 : DG -->
-      <div class="org-level">
-        <div class="org-node org-node--top">
-          <div class="org-avatar"><?= icon('users', '', '1.4rem') ?></div>
-          <div class="org-name"><?= t('org_dg_nom') ?></div>
-          <div class="org-role"><?= t('org_dg_role') ?></div>
+      <!-- DG -->
+      <div class="org2-row">
+        <div class="org2-card org2-card--ceo">
+          <div class="org2-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          </div>
+          <div class="org2-label">Directeur Général</div>
+          <div class="org2-sub">CEO</div>
+          <div class="org2-badge">Direction</div>
         </div>
       </div>
 
-      <div class="org-connector org-connector--down"></div>
+      <div class="org2-vline"></div>
 
-      <!-- Niveau 2 : 3 directions -->
-      <div class="org-level org-level--3">
+      <!-- Ligne horizontale N2 -->
+      <div class="org2-hline org2-hline--3"></div>
 
-        <div class="org-node">
-          <div class="org-avatar org-avatar--bleu"><?= icon('wrench', '', '1.2rem') ?></div>
-          <div class="org-name"><?= t('org_tech_nom') ?></div>
-          <div class="org-role"><?= t('org_tech_role') ?></div>
+      <!-- N2 : DGA + Admin + Commercial -->
+      <div class="org2-row org2-row--3">
+
+        <div class="org2-branch">
+          <div class="org2-vline org2-vline--short"></div>
+          <div class="org2-card org2-card--dir">
+            <div class="org2-icon org2-icon--dir">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+            </div>
+            <div class="org2-label">Directeur Général Adjoint</div>
+            <div class="org2-sub">DGA</div>
+          </div>
+          <!-- Sous DGA : Direction Technique -->
+          <div class="org2-vline org2-vline--short"></div>
+          <div class="org2-card org2-card--dir org2-card--tech">
+            <div class="org2-icon org2-icon--tech">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <div class="org2-label">Direction Technique & Opérations</div>
+            <div class="org2-sub">DTO</div>
+          </div>
+          <!-- Services techniques -->
+          <div class="org2-vline org2-vline--short"></div>
+          <div class="org2-hline org2-hline--4"></div>
+          <div class="org2-row org2-row--4">
+            <div class="org2-branch">
+              <div class="org2-vline org2-vline--short"></div>
+              <div class="org2-card org2-card--service">
+                <div class="org2-dot" style="background:#1a6bb5"></div>
+                <div class="org2-label">Ingénierie Électrique</div>
+                <div class="org2-sub">HTA, MT, BT</div>
+              </div>
+            </div>
+            <div class="org2-branch">
+              <div class="org2-vline org2-vline--short"></div>
+              <div class="org2-card org2-card--service">
+                <div class="org2-dot" style="background:#1a6bb5"></div>
+                <div class="org2-label">Gestion de Projets</div>
+                <div class="org2-sub">Travaux Réseaux</div>
+              </div>
+            </div>
+            <div class="org2-branch">
+              <div class="org2-vline org2-vline--short"></div>
+              <div class="org2-card org2-card--service">
+                <div class="org2-dot" style="background:#1a6bb5"></div>
+                <div class="org2-label">Supply Chain</div>
+                <div class="org2-sub">Logistique</div>
+              </div>
+            </div>
+            <div class="org2-branch">
+              <div class="org2-vline org2-vline--short"></div>
+              <div class="org2-card org2-card--service">
+                <div class="org2-dot" style="background:#1a6bb5"></div>
+                <div class="org2-label">Sécurité & Qualité</div>
+                <div class="org2-sub">HSE</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="org-node">
-          <div class="org-avatar org-avatar--orange"><?= icon('target', '', '1.2rem') ?></div>
-          <div class="org-name"><?= t('org_proj_nom') ?></div>
-          <div class="org-role"><?= t('org_proj_role') ?></div>
+        <div class="org2-branch">
+          <div class="org2-vline org2-vline--short"></div>
+          <div class="org2-card org2-card--dir">
+            <div class="org2-icon org2-icon--dir">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="org2-label">Direction Administrative</div>
+            <div class="org2-sub">DAF</div>
+          </div>
+          <div class="org2-vline org2-vline--short"></div>
+          <div class="org2-hline org2-hline--3"></div>
+          <div class="org2-row org2-row--3 org2-row--sub">
+            <div class="org2-branch">
+              <div class="org2-vline org2-vline--short"></div>
+              <div class="org2-card org2-card--service">
+                <div class="org2-dot" style="background:#27ae60"></div>
+                <div class="org2-label">Direction Financière</div>
+                <div class="org2-sub">Comptabilité</div>
+              </div>
+            </div>
+            <div class="org2-branch">
+              <div class="org2-vline org2-vline--short"></div>
+              <div class="org2-card org2-card--service">
+                <div class="org2-dot" style="background:#27ae60"></div>
+                <div class="org2-label">Direction RH</div>
+                <div class="org2-sub">Ressources Humaines</div>
+              </div>
+            </div>
+            <div class="org2-branch">
+              <div class="org2-vline org2-vline--short"></div>
+              <div class="org2-card org2-card--service">
+                <div class="org2-dot" style="background:#27ae60"></div>
+                <div class="org2-label">Direction Juridique</div>
+                <div class="org2-sub">Affaires Légales</div>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="org-node">
-          <div class="org-avatar org-avatar--vert"><?= icon('handshake', '', '1.2rem') ?></div>
-          <div class="org-name"><?= t('org_admin_nom') ?></div>
-          <div class="org-role"><?= t('org_admin_role') ?></div>
-        </div>
-
-      </div>
-
-      <div class="org-connector org-connector--down"></div>
-
-      <!-- Niveau 3 : 4 pôles -->
-      <div class="org-level org-level--4">
-
-        <div class="org-node org-node--pole">
-          <div class="org-pole-dot" style="background:var(--bleu)"></div>
-          <div class="org-name"><?= t('org_pole_btp_nom') ?></div>
-          <div class="org-role"><?= t('org_pole_btp_role') ?></div>
-        </div>
-
-        <div class="org-node org-node--pole">
-          <div class="org-pole-dot" style="background:#27ae60"></div>
-          <div class="org-name"><?= t('org_pole_energie_nom') ?></div>
-          <div class="org-role"><?= t('org_pole_energie_role') ?></div>
-        </div>
-
-        <div class="org-node org-node--pole">
-          <div class="org-pole-dot" style="background:var(--orange)"></div>
-          <div class="org-name"><?= t('org_pole_routes_nom') ?></div>
-          <div class="org-role"><?= t('org_pole_routes_role') ?></div>
-        </div>
-
-        <div class="org-node org-node--pole">
-          <div class="org-pole-dot" style="background:#8e44ad"></div>
-          <div class="org-name"><?= t('org_pole_industrie_nom') ?></div>
-          <div class="org-role"><?= t('org_pole_industrie_role') ?></div>
+        <div class="org2-branch">
+          <div class="org2-vline org2-vline--short"></div>
+          <div class="org2-card org2-card--dir">
+            <div class="org2-icon org2-icon--dir">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="org2-label">Direction Commerciale & Marketing</div>
+            <div class="org2-sub">DCM</div>
+          </div>
+          <div class="org2-vline org2-vline--short"></div>
+          <div class="org2-hline org2-hline--2"></div>
+          <div class="org2-row org2-row--2 org2-row--sub">
+            <div class="org2-branch">
+              <div class="org2-vline org2-vline--short"></div>
+              <div class="org2-card org2-card--service">
+                <div class="org2-dot" style="background:#f7941d"></div>
+                <div class="org2-label">Service Marketing</div>
+                <div class="org2-sub">Communication</div>
+              </div>
+            </div>
+            <div class="org2-branch">
+              <div class="org2-vline org2-vline--short"></div>
+              <div class="org2-card org2-card--service">
+                <div class="org2-dot" style="background:#f7941d"></div>
+                <div class="org2-label">Service Ventes</div>
+                <div class="org2-sub">Développement Commercial</div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -494,132 +579,169 @@ require_once __DIR__ . '/includes/header.php';
 </section>
 
 <style>
-.org-chart { max-width: 900px; margin: 48px auto 0; }
+/* ═══════════════ ORGANIGRAMME V2 ═══════════════ */
+.org2-wrap {
+  max-width: 1100px;
+  margin: 56px auto 0;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
 
-.org-level {
+.org2-row {
   display: flex;
   justify-content: center;
-  gap: 24px;
+  align-items: flex-start;
+  gap: 0;
   position: relative;
 }
-.org-level--3 { gap: 20px; }
-.org-level--4 { gap: 16px; }
+.org2-row--3 { gap: 0; }
+.org2-row--4 { gap: 0; }
+.org2-row--2 { gap: 0; }
+.org2-row--sub { margin-top: 0; }
 
-/* Ligne de connexion verticale */
-.org-connector--down {
-  width: 2px;
-  height: 36px;
-  background: var(--border);
-  margin: 0 auto;
-  position: relative;
-}
-.org-connector--down::before,
-.org-connector--down::after {
-  content: '';
-  position: absolute;
-  background: var(--border);
-}
-
-/* Ligne horizontale entre les nodes */
-.org-level--3::before,
-.org-level--4::before {
-  content: '';
-  position: absolute;
-  top: -36px;
-  left: 50%;
-  transform: translateX(-50%);
-  height: 2px;
-  background: var(--border);
-  width: calc(100% - 100px);
-}
-
-.org-node {
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  padding: 20px 18px 16px;
-  min-width: 160px;
-  max-width: 200px;
-  flex: 1;
-  text-align: center;
-  box-shadow: 0 2px 12px rgba(26,107,181,0.06);
-  transition: var(--transition);
-  position: relative;
-}
-.org-node:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 28px rgba(26,107,181,0.13);
-  border-color: var(--bleu-light);
-}
-.org-node--top {
-  min-width: 200px;
-  max-width: 240px;
-  border-color: var(--bleu);
-  border-width: 2px;
-}
-.org-node--pole {
-  padding: 16px 12px 14px;
-  min-width: 130px;
-}
-
-.org-avatar {
-  width: 52px; height: 52px;
-  background: var(--bleu-light);
-  border-radius: 12px;
+.org2-branch {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin: 0 auto 12px;
-  color: var(--bleu);
+  flex: 1;
+  min-width: 140px;
 }
-.org-avatar svg { fill: var(--bleu); width: 1.4rem; height: 1.4rem; }
-.org-avatar--bleu   { background: var(--bleu-light); }
-.org-avatar--orange { background: #fff3e0; color: var(--orange); }
-.org-avatar--orange svg { fill: var(--orange); }
-.org-avatar--vert   { background: #e8f5e9; color: #27ae60; }
-.org-avatar--vert svg { fill: #27ae60; }
 
-.org-pole-dot {
-  width: 14px; height: 14px;
+/* Lignes verticales */
+.org2-vline {
+  width: 2px;
+  height: 32px;
+  background: linear-gradient(to bottom, #1a6bb5, #cbd5e1);
+  margin: 0 auto;
+  flex-shrink: 0;
+}
+.org2-vline--short { height: 24px; }
+
+/* Lignes horizontales */
+.org2-hline {
+  height: 2px;
+  background: linear-gradient(to right, transparent, #1a6bb5 20%, #1a6bb5 80%, transparent);
+  align-self: stretch;
+  margin: 0 auto;
+}
+.org2-hline--3 { width: 66%; }
+.org2-hline--4 { width: 88%; }
+.org2-hline--2 { width: 44%; }
+
+/* Carte CEO */
+.org2-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px 18px 16px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(26,107,181,0.10);
+  border: 1.5px solid #e2eaf4;
+  transition: transform .22s, box-shadow .22s;
+  position: relative;
+  width: 100%;
+  max-width: 200px;
+  cursor: default;
+}
+.org2-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(26,107,181,0.18);
+  border-color: #1a6bb5;
+}
+.org2-card--ceo {
+  background: linear-gradient(135deg, #f7941d 0%, #e07b0f 100%);
+  border-color: transparent;
+  color: #fff;
+  max-width: 220px;
+  padding: 24px 24px 20px;
+  box-shadow: 0 8px 32px rgba(247,148,29,0.35);
+}
+.org2-card--ceo:hover { box-shadow: 0 16px 48px rgba(247,148,29,0.45); }
+.org2-card--ceo .org2-label { color: #fff; font-size: 1rem; }
+.org2-card--ceo .org2-sub   { color: rgba(255,255,255,.8); }
+
+.org2-card--dir {
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a6bb5 100%);
+  border-color: transparent;
+  color: #fff;
+  max-width: 190px;
+  box-shadow: 0 6px 24px rgba(26,58,92,0.25);
+}
+.org2-card--dir:hover { box-shadow: 0 12px 36px rgba(26,58,92,0.35); }
+.org2-card--dir .org2-label { color: #fff; font-size: .85rem; }
+.org2-card--dir .org2-sub   { color: rgba(255,255,255,.7); }
+
+.org2-card--tech {
+  background: linear-gradient(135deg, #0f5c96 0%, #1a8bb5 100%);
+  max-width: 210px;
+}
+
+.org2-card--service {
+  background: #f8fafd;
+  border: 1.5px solid #dbe8f5;
+  max-width: 160px;
+  padding: 14px 12px 12px;
+}
+.org2-card--service:hover { border-color: #1a6bb5; background: #fff; }
+
+/* Icônes */
+.org2-icon {
+  width: 48px; height: 48px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 12px;
+}
+.org2-icon svg { width: 22px; height: 22px; stroke: #fff; }
+.org2-icon--dir { width: 40px; height: 40px; }
+.org2-icon--tech { background: rgba(255,255,255,0.15); }
+
+/* Point coloré services */
+.org2-dot {
+  width: 10px; height: 10px;
   border-radius: 50%;
-  margin: 0 auto 12px;
+  margin: 0 auto 10px;
 }
 
-.org-name {
-  font-size: 0.9rem;
+/* Textes */
+.org2-label {
+  font-size: .82rem;
   font-weight: 700;
-  color: var(--texte);
+  color: #1a3a5c;
+  line-height: 1.3;
   margin-bottom: 4px;
 }
-.org-role {
-  font-size: 0.78rem;
-  color: var(--gris);
-  line-height: 1.4;
+.org2-sub {
+  font-size: .72rem;
+  color: #7a8fa6;
+  font-weight: 500;
 }
 
-/* Ligne qui relie les nodes du même niveau à leur parent */
-.org-node::before {
-  content: '';
-  position: absolute;
-  top: -36px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 2px;
-  height: 36px;
-  background: var(--border);
+/* Badge CEO */
+.org2-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.25);
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 50px;
+  margin-top: 8px;
 }
-.org-node--top::before { display: none; }
 
-@media (max-width: 768px) {
-  .org-level--3,
-  .org-level--4 { flex-wrap: wrap; gap: 12px; }
-  .org-level--3::before,
-  .org-level--4::before { display: none; }
-  .org-node { min-width: calc(50% - 6px); max-width: none; flex: 1 1 calc(50% - 6px); }
-  .org-node::before { display: none; }
+/* Responsive */
+@media (max-width: 900px) {
+  .org2-row--3 { flex-direction: column; align-items: center; gap: 0; }
+  .org2-branch { width: 100%; max-width: 340px; }
+  .org2-hline { display: none; }
+  .org2-card { max-width: 280px; }
+  .org2-row--4, .org2-row--2 { flex-wrap: wrap; justify-content: center; gap: 0; }
 }
 @media (max-width: 480px) {
-  .org-node { min-width: 100%; flex: 1 1 100%; }
+  .org2-card { max-width: 100%; }
+  .org2-branch { min-width: 0; width: 100%; }
 }
 </style>
 

@@ -53,23 +53,16 @@ require_once __DIR__ . '/includes/header.php';
   <h2>2. Directeur de la publication</h2>
   <p>Le directeur de la publication est le Directeur Général de COTRAC SARL.</p>
 
-  <h2>3. Hébergement</h2>
-  <ul>
-    <li><strong>Hébergeur :</strong> IONOS SE</li>
-    <li><strong>Adresse :</strong> Elgendorfer Str. 57, 56410 Montabaur, Allemagne</li>
-    <li><strong>Site :</strong> www.ionos.fr</li>
-  </ul>
-
-  <h2>4. Propriété intellectuelle</h2>
+  <h2>3. Propriété intellectuelle</h2>
   <p>L'ensemble des contenus présents sur ce site (textes, images, logos, graphismes, vidéos) sont la propriété exclusive de COTRAC SARL ou de ses partenaires, et sont protégés par les lois applicables en matière de propriété intellectuelle. Toute reproduction, représentation, modification, publication ou adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite sans autorisation écrite préalable de COTRAC.</p>
 
-  <h2>5. Limitation de responsabilité</h2>
+  <h2>4. Limitation de responsabilité</h2>
   <p>COTRAC s'efforce d'assurer l'exactitude et la mise à jour des informations diffusées sur ce site. Toutefois, COTRAC ne peut garantir l'exactitude, la précision ou l'exhaustivité des informations mises à disposition. En conséquence, COTRAC décline toute responsabilité pour toute imprécision, inexactitude ou omission portant sur des informations disponibles sur ce site.</p>
 
-  <h2>6. Liens hypertextes</h2>
+  <h2>5. Liens hypertextes</h2>
   <p>Le site cotracgroup.com peut contenir des liens vers d'autres sites internet. COTRAC n'est pas responsable du contenu de ces sites tiers et ne saurait être tenu responsable de tout dommage résultant de leur utilisation.</p>
 
-  <h2>7. Droit applicable</h2>
+  <h2>6. Droit applicable</h2>
   <p>Les présentes mentions légales sont soumises au droit sénégalais. En cas de litige, les tribunaux compétents de Dakar seront seuls habilités à en connaître.</p>
 
 </div>
