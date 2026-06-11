@@ -5,8 +5,33 @@ $page_title = 'Nos Ressources — Équipements & Matériaux | COTRAC';
 $page_desc  = 'Découvrez les ressources de COTRAC : machines de production, engins de chantier, véhicules, matériaux et équipements logistiques.';
 cms_load('nos-ressources');
 
+// Migration automatique table equipements
+$db = getDB();
+try {
+    $db->exec("CREATE TABLE IF NOT EXISTS equipements (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        categorie VARCHAR(50) NOT NULL DEFAULT 'engins',
+        nom VARCHAR(200) NOT NULL,
+        description VARCHAR(300) DEFAULT '',
+        quantite VARCHAR(50) DEFAULT '',
+        couleur VARCHAR(20) DEFAULT '#1a6bb5',
+        sort_order INT DEFAULT 0,
+        actif TINYINT(1) DEFAULT 1,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+} catch (Exception $e) {}
+
+// Charger les équipements depuis la DB
+$equip_db = [];
+try {
+    $rows = $db->query("SELECT * FROM equipements WHERE actif=1 ORDER BY categorie, sort_order ASC, id ASC")->fetchAll();
+    foreach ($rows as $r) {
+        $equip_db[$r['categorie']][] = $r;
+    }
+} catch (Exception $e) {}
+$use_db_equip = !empty($equip_db);
+
 // Charger toutes les sections et leurs images depuis la DB
-$db  = getDB();
 $sections_db = $db->query(
     "SELECT id, section_key, label, active FROM page_sections
      WHERE page_slug='nos-ressources' ORDER BY sort_order"
@@ -171,147 +196,114 @@ require_once 'includes/header.php';
       <button class="res-filter-btn" data-cat="vehicules">Véhicules</button>
     </div>
 
-    <!-- ENGINS TP -->
-    <div class="res-category" data-cat="engins">
+    <?php
+    $cat_meta = [
+      'engins'     => ['title'=>'Engins de Travaux Publics',        'couleur'=>'#1a6bb5', 'note'=>''],
+      'vehicules'  => ['title'=>'Véhicules & Transport',             'couleur'=>'#f7941d', 'note'=>''],
+      'electrique' => ['title'=>'Prestations & Matériaux Électriques','couleur'=>'#27ae60','note'=>'Matériaux fournis et installés chez le client dans le cadre des travaux d\'électrification.'],
+      'industriel' => ['title'=>'Génie Industriel & Soudure',        'couleur'=>'#8e44ad', 'note'=>''],
+    ];
+    $svg_icons = [
+      'engins'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>',
+      'vehicules'  => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
+      'electrique' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
+      'industriel' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
+    ];
+    // Données statiques de fallback (si table DB vide)
+    $fallback = [
+      'engins' => [
+        ['Pelle mécanique Caterpillar 325C','Terrassement & excavation','2 unités','#1a6bb5'],
+        ['Bulldozer Caterpillar D8R','Décapage & nivellement','2 unités','#1a6bb5'],
+        ['Chargeur Caterpillar 930-950','Chargement & manutention','2 unités','#1a6bb5'],
+        ['Niveleuse Caterpillar 140H','Mise en forme plateforme','2 unités','#1a6bb5'],
+        ['Compacteurs mécaniques','Compactage des sols','2 unités','#1a6bb5'],
+        ['Foreuses / Foreuse de forage','Forage & fondations','3 unités','#1a6bb5'],
+        ['Vibreurs (aiguilles vibrantes)','Vibration & mise en place béton','14 unités','#1a6bb5'],
+        ['Dumper / Tombereau','Transport matériaux chantier','4 unités','#1a6bb5'],
+        ['Grue de chantier','Levage & manutention lourde','','#1a6bb5'],
+        ['Monte-charge électrique 1000kg','Élévation charges','1 unité','#1a6bb5'],
+        ['Compresseur à air','Outils pneumatiques','1 unité','#1a6bb5'],
+        ['Conteneurs 20 pieds','Stockage matériaux & outillage','10 unités','#1a6bb5'],
+        ['Brouettes','Manutention manuelle chantier','75 unités','#1a6bb5'],
+        ['Serre-joints','Assemblage & coffrage','2000 unités','#1a6bb5'],
+      ],
+      'vehicules' => [
+        ['Camions 20m³','Transport grands volumes','5 unités','#f7941d'],
+        ['Camion benne 12m³ & 20m³','Transport matériaux chantier','2 unités','#f7941d'],
+        ['Camion porte-charge Renault Crax 440','Transport engins lourds','1 unité','#f7941d'],
+        ['Camion-citerne','Alimentation eau chantier','1 unité','#f7941d'],
+        ['Véhicules de liaison pick-up','Mobilité équipes terrain','7 unités','#f7941d'],
+      ],
+      'electrique' => [
+        ['Groupe électrogène 15 KVA','Alimentation électrique chantier','1 unité (parc)','#27ae60'],
+        ['Groupes électrogènes jusqu\'à 450 KVA','Fourniture & pose sur site client','installation client','#27ae60'],
+        ['Poteaux béton armé','Supports lignes aériennes HTA/BT','fourniture & pose','#27ae60'],
+        ['Pylônes métalliques','Supports lignes haute tension','fourniture & pose','#27ae60'],
+        ['Transformateurs HTA/BT','Construction postes de transformation','fourniture & pose','#27ae60'],
+        ['Cellules préfabriquées HTA','Distribution haute tension','fourniture & pose','#27ae60'],
+        ['Luminaires LED / SHP','Éclairage public & industriel','fourniture & pose','#27ae60'],
+        ['Câbles électriques HTA/BT','Réseaux aériens & souterrains','fourniture & pose','#27ae60'],
+      ],
+      'industriel' => [
+        ['Postes à souder','Soudage MIG/TIG/Arc','12 unités','#8e44ad'],
+        ['Jeux de chalumeaux complets','Soudage oxyacétylénique','4 unités','#8e44ad'],
+        ['Meuleuses grand modèle','Meulage & découpe','2 unités','#8e44ad'],
+        ['Meuleuses petit modèle','Finition & ébarbage','2 unités','#8e44ad'],
+        ['Caisses à outils soudeurs','Outillage soudure','3 unités','#8e44ad'],
+        ['Caisses à outils chaudronnerie','Outillage chaudronnerie','3 unités','#8e44ad'],
+        ['Palans & élingues','Levage industriel','','#8e44ad'],
+        ['Machines-outils (tour, fraiseuse)','Usinage pièces mécaniques','','#8e44ad'],
+        ['Bétonnières 500 L','Préparation béton','3 unités','#8e44ad'],
+        ['Matériels topographiques','Relevés & implantations','1 unité','#8e44ad'],
+      ],
+    ];
+    foreach ($cat_meta as $ckey => $cmeta):
+      $items_db = $equip_db[$ckey] ?? [];
+      $items_fb = $fallback[$ckey] ?? [];
+      $use_db   = !empty($items_db);
+      $count_items = $use_db ? count($items_db) : count($items_fb);
+      $label_count = $ckey === 'electrique' ? $count_items . ' prestations' : $count_items . ' équipements';
+    ?>
+    <div class="res-category" data-cat="<?= $ckey ?>">
       <div class="res-cat-header">
-        <div class="res-cat-bar" style="background:#1a6bb5;"></div>
-        <h2 class="res-cat-title">Engins de Travaux Publics</h2>
-        <span class="res-cat-count">14 équipements</span>
+        <div class="res-cat-bar" style="background:<?= $cmeta['couleur'] ?>;"></div>
+        <h2 class="res-cat-title"><?= e($cmeta['title']) ?></h2>
+        <span class="res-cat-count"><?= $label_count ?></span>
       </div>
+      <?php if ($cmeta['note']): ?>
+      <p style="color:#718096;font-size:.88rem;margin:-8px 0 20px;font-style:italic;"><?= e($cmeta['note']) ?></p>
+      <?php endif; ?>
       <div class="res-equip-grid">
-        <?php $engins = [
-          ['Pelle mécanique Caterpillar 325C','2 unités','Terrassement & excavation','#1a6bb5'],
-          ['Bulldozer Caterpillar D8R','2 unités','Décapage & nivellement','#1a6bb5'],
-          ['Chargeur Caterpillar 930-950','2 unités','Chargement & manutention','#1a6bb5'],
-          ['Niveleuse Caterpillar 140H','2 unités','Mise en forme plateforme','#1a6bb5'],
-          ['Compacteurs mécaniques','2 unités','Compactage des sols','#1a6bb5'],
-          ['Foreuses / Foreuse de forage','3 unités','Forage & fondations','#1a6bb5'],
-          ['Vibreurs (aiguilles vibrantes)','14 unités','Vibration & mise en place béton','#1a6bb5'],
-          ['Dumper / Tombereau','4 unités','Transport matériaux chantier','#1a6bb5'],
-          ['Grue de chantier','—','Levage & manutention lourde','#1a6bb5'],
-          ['Monte-charge électrique 1000kg','1 unité','Élévation charges','#1a6bb5'],
-          ['Compresseur à air','—','Outils pneumatiques','#1a6bb5'],
-          ['Conteneurs 20 pieds','10 unités','Stockage matériaux & outillage','#1a6bb5'],
-          ['Brouettes','75 unités','Manutention manuelle chantier','#1a6bb5'],
-          ['Serre-joints','2000 unités','Assemblage & coffrage','#1a6bb5'],
-        ]; foreach ($engins as $eq): ?>
-        <div class="res-equip-card animate-fade-up">
-          <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        <?php if ($use_db): foreach ($items_db as $eq): ?>
+        <div class="res-equip-card">
+          <div class="res-equip-icon" style="background:<?= e($eq['couleur']) ?>18; color:<?= e($eq['couleur']) ?>;">
+            <?= $svg_icons[$ckey] ?>
           </div>
           <div class="res-equip-info">
-            <div class="res-equip-name"><?= $eq[0] ?></div>
-            <div class="res-equip-desc"><?= $eq[2] ?></div>
+            <div class="res-equip-name"><?= e($eq['nom']) ?></div>
+            <div class="res-equip-desc"><?= e($eq['description']) ?></div>
           </div>
-          <?php if ($eq[1] !== '—'): ?>
-          <span class="res-equip-qty" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;"><?= $eq[1] ?></span>
+          <?php if (!empty($eq['quantite'])): ?>
+          <span class="res-equip-qty" style="background:<?= e($eq['couleur']) ?>18; color:<?= e($eq['couleur']) ?>;"><?= e($eq['quantite']) ?></span>
           <?php endif; ?>
         </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-
-    <!-- VÉHICULES -->
-    <div class="res-category" data-cat="vehicules">
-      <div class="res-cat-header">
-        <div class="res-cat-bar" style="background:#f7941d;"></div>
-        <h2 class="res-cat-title">Véhicules & Transport</h2>
-        <span class="res-cat-count">5 équipements</span>
-      </div>
-      <div class="res-equip-grid">
-        <?php $vehicules = [
-          ['Camions 20m³','5 unités','Transport grands volumes','#f7941d'],
-          ['Camion benne 12m³ & 20m³','2 unités','Transport matériaux chantier','#f7941d'],
-          ['Camion porte-charge Renault Crax 440','1 unité','Transport engins lourds','#f7941d'],
-          ['Camion-citerne','1 unité','Alimentation eau chantier','#f7941d'],
-          ['Véhicules de liaison pick-up','7 unités','Mobilité équipes terrain','#f7941d'],
-        ]; foreach ($vehicules as $eq): ?>
-        <div class="res-equip-card animate-fade-up">
+        <?php endforeach; else: foreach ($items_fb as $eq): ?>
+        <div class="res-equip-card">
           <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+            <?= $svg_icons[$ckey] ?>
           </div>
           <div class="res-equip-info">
-            <div class="res-equip-name"><?= $eq[0] ?></div>
-            <div class="res-equip-desc"><?= $eq[2] ?></div>
+            <div class="res-equip-name"><?= e($eq[0]) ?></div>
+            <div class="res-equip-desc"><?= e($eq[1]) ?></div>
           </div>
-          <?php if ($eq[1] !== '—'): ?>
-          <span class="res-equip-qty" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;"><?= $eq[1] ?></span>
+          <?php if (!empty($eq[2])): ?>
+          <span class="res-equip-qty" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;"><?= e($eq[2]) ?></span>
           <?php endif; ?>
         </div>
-        <?php endforeach; ?>
+        <?php endforeach; endif; ?>
       </div>
     </div>
-
-    <!-- ÉLECTRIQUE -->
-    <div class="res-category" data-cat="electrique">
-      <div class="res-cat-header">
-        <div class="res-cat-bar" style="background:#27ae60;"></div>
-        <h2 class="res-cat-title">Prestations & Matériaux Électriques</h2>
-        <span class="res-cat-count">8 prestations</span>
-      </div>
-      <p style="color:#718096;font-size:.88rem;margin:-8px 0 20px;font-style:italic;">Matériaux fournis et installés chez le client dans le cadre des travaux d'électrification.</p>
-      <div class="res-equip-grid">
-        <?php $electrique = [
-          ['Groupe électrogène 15 KVA','1 unité (parc)','Alimentation électrique chantier','#27ae60'],
-          ['Groupes électrogènes jusqu\'à 450 KVA','installation client','Fourniture & pose sur site client','#27ae60'],
-          ['Poteaux béton armé','fourniture & pose','Supports lignes aériennes HTA/BT','#27ae60'],
-          ['Pylônes métalliques','fourniture & pose','Supports lignes haute tension','#27ae60'],
-          ['Transformateurs HTA/BT','fourniture & pose','Construction postes de transformation','#27ae60'],
-          ['Cellules préfabriquées HTA','fourniture & pose','Distribution haute tension','#27ae60'],
-          ['Luminaires LED / SHP','fourniture & pose','Éclairage public & industriel','#27ae60'],
-          ['Câbles électriques HTA/BT','fourniture & pose','Réseaux aériens & souterrains','#27ae60'],
-        ]; foreach ($electrique as $eq): ?>
-        <div class="res-equip-card animate-fade-up">
-          <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <div class="res-equip-info">
-            <div class="res-equip-name"><?= $eq[0] ?></div>
-            <div class="res-equip-desc"><?= $eq[2] ?></div>
-          </div>
-          <?php if ($eq[1] !== '—'): ?>
-          <span class="res-equip-qty" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;"><?= $eq[1] ?></span>
-          <?php endif; ?>
-        </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-
-    <!-- GÉNIE INDUSTRIEL -->
-    <div class="res-category" data-cat="industriel">
-      <div class="res-cat-header">
-        <div class="res-cat-bar" style="background:#8e44ad;"></div>
-        <h2 class="res-cat-title">Génie Industriel & Soudure</h2>
-        <span class="res-cat-count">10 équipements</span>
-      </div>
-      <div class="res-equip-grid">
-        <?php $industriel = [
-          ['Postes à souder','12 unités','Soudage MIG/TIG/Arc','#8e44ad'],
-          ['Jeux de chalumeaux complets','4 unités','Soudage oxyacétylénique','#8e44ad'],
-          ['Meuleuses grand modèle','2 unités','Meulage & découpe','#8e44ad'],
-          ['Meuleuses petit modèle','2 unités','Finition & ébarbage','#8e44ad'],
-          ['Caisses à outils soudeurs','3 unités','Outillage soudure','#8e44ad'],
-          ['Caisses à outils chaudronnerie','3 unités','Outillage chaudronnerie','#8e44ad'],
-          ['Palans & élingues','—','Levage industriel','#8e44ad'],
-          ['Machines-outils (tour, fraiseuse)','—','Usinage pièces mécaniques','#8e44ad'],
-          ['Bétonnières 500 L','3 unités','Préparation béton','#8e44ad'],
-          ['Matériels topographiques','—','Relevés & implantations','#8e44ad'],
-        ]; foreach ($industriel as $eq): ?>
-        <div class="res-equip-card animate-fade-up">
-          <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-          </div>
-          <div class="res-equip-info">
-            <div class="res-equip-name"><?= $eq[0] ?></div>
-            <div class="res-equip-desc"><?= $eq[2] ?></div>
-          </div>
-          <?php if ($eq[1] !== '—'): ?>
-          <span class="res-equip-qty" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;"><?= $eq[1] ?></span>
-          <?php endif; ?>
-        </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
+    <?php endforeach; ?>
 
     <!-- ══ GALERIE PHOTOS STATIQUE ══ -->
     <div style="margin-top:56px;" id="galerie">
