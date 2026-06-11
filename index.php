@@ -62,33 +62,40 @@ $db = getDB();
 
       </div>
 
-      <!-- Colonne droite : visuels -->
+      <!-- Colonne droite : slider -->
       <div class="hero-right animate-fade-up delay-2">
-
-        <!-- Photo principale -->
-        <div class="hero-photo-main">
-          <img src="<?= SITE_URL ?>/assets/images/energie/pose-poteau-grue.jpg"
-               alt="<?= t('img_alt_chantier_elec') ?>"
-               loading="eager">
+        <div class="hero-slider" id="heroSlider">
+          <div class="hero-slider-track" id="heroSliderTrack">
+            <?php
+            $hero_slides = [
+              ['src' => 'assets/images/energie/pose-poteau-grue.jpg',        'alt' => 'Pose de poteau COTRAC'],
+              ['src' => 'assets/images/energie/ligne-hta-transformateur.jpg', 'alt' => 'Ligne HTA transformateur'],
+              ['src' => 'assets/images/equipe/gilet-cotrac.jpg',              'alt' => 'Équipe COTRAC terrain'],
+              ['src' => 'assets/images/energie/tranchee-cable-bt.jpg',        'alt' => 'Tranchée câble BT'],
+              ['src' => 'assets/images/industrie/genie-industriel-chantier.jpg','alt' => 'Génie industriel chantier'],
+              ['src' => 'assets/images/energie/poteau-transformateur.jpg',    'alt' => 'Poteau transformateur'],
+              ['src' => 'assets/images/equipe/equipe-terrain.jpg',            'alt' => 'Équipe terrain COTRAC'],
+            ];
+            foreach ($hero_slides as $slide): ?>
+            <div class="hero-slide">
+              <img src="<?= SITE_URL ?>/<?= e($slide['src']) ?>"
+                   alt="<?= e($slide['alt']) ?>" loading="eager">
+            </div>
+            <?php endforeach; ?>
+          </div>
           <!-- Badge flottant -->
           <div class="hero-photo-badge">
             <span class="stat-value">✓</span>
             <span class="stat-label"><?= t('index_hero_badge_senelec') ?></span>
           </div>
-        </div>
-
-        <!-- 2 petites photos en dessous -->
-        <div class="hero-photo-grid">
-          <div class="hero-photo-sm">
-            <img src="<?= SITE_URL ?>/assets/images/equipe/gilet-cotrac.jpg"
-                 alt="<?= t('img_alt_technicien') ?>" loading="eager">
-          </div>
-          <div class="hero-photo-sm">
-            <img src="<?= SITE_URL ?>/assets/images/industrie/genie-industriel-chantier.jpg"
-                 alt="<?= t('img_alt_chantier_indus') ?>" loading="eager">
+          <!-- Dots de navigation -->
+          <div class="hero-slider-dots" id="heroSliderDots">
+            <?php foreach ($hero_slides as $i => $slide): ?>
+            <button class="hero-dot <?= $i === 0 ? 'active' : '' ?>"
+                    onclick="heroGoTo(<?= $i ?>)" aria-label="Slide <?= $i+1 ?>"></button>
+            <?php endforeach; ?>
           </div>
         </div>
-
       </div>
 
     </div>
@@ -897,4 +904,37 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
   </div>
 </section>
 
+<script>
+(function(){
+  var track = document.getElementById('heroSliderTrack');
+  var dots  = document.querySelectorAll('.hero-dot');
+  if (!track) return;
+  var total   = track.children.length;
+  var current = 0;
+  var timer;
+
+  function goTo(n) {
+    current = (n + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach(function(d, i){ d.classList.toggle('active', i === current); });
+  }
+
+  function next() { goTo(current + 1); }
+
+  function startAuto() { timer = setInterval(next, 3500); }
+  function stopAuto()  { clearInterval(timer); }
+
+  window.heroGoTo = function(n) { stopAuto(); goTo(n); startAuto(); };
+
+  /* Swipe tactile */
+  var startX = 0;
+  track.parentElement.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  track.parentElement.addEventListener('touchend', function(e){
+    var dx = e.changedTouches[0].clientX - startX;
+    if (Math.abs(dx) > 40) { stopAuto(); goTo(current + (dx < 0 ? 1 : -1)); startAuto(); }
+  }, {passive:true});
+
+  startAuto();
+})();
+</script>
 <?php require_once 'includes/footer.php'; ?>
