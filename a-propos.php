@@ -446,9 +446,9 @@ require_once __DIR__ . '/includes/header.php';
       <div class="org2-hline org2-hline--3"></div>
 
       <!-- N2 : DGA + Admin + Commercial -->
-      <div class="org2-row org2-row--3">
+      <div class="org2-row org2-row--3" style="align-items:flex-start;">
 
-        <div class="org2-branch">
+        <div class="org2-branch" style="flex:1.6;">
           <div class="org2-vline org2-vline--short"></div>
           <div class="org2-card org2-card--dir">
             <div class="org2-icon org2-icon--dir">
@@ -598,8 +598,8 @@ require_once __DIR__ . '/includes/header.php';
   gap: 0;
   position: relative;
 }
-.org2-row--3 { gap: 8px; }
-.org2-row--4 { gap: 4px; }
+.org2-row--3 { gap: 8px; align-items: flex-start; }
+.org2-row--4 { gap: 6px; }
 .org2-row--2 { gap: 8px; }
 .org2-row--sub { margin-top: 0; }
 
@@ -682,9 +682,9 @@ require_once __DIR__ . '/includes/header.php';
 .org2-card--service {
   background: #f8fafd;
   border: 1.5px solid #dbe8f5;
-  max-width: 140px;
+  max-width: 155px;
   width: 100%;
-  padding: 14px 10px 12px;
+  padding: 14px 12px 12px;
 }
 .org2-card--service:hover { border-color: #1a6bb5; background: #fff; }
 
