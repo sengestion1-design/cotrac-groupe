@@ -440,69 +440,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   100% { transform: translateY(0); }
 }
 
-/* ── Bande photos défilante verticale (sous hero) ── */
-.hero-band-section {
-  background: #f4f7fb;
-  overflow: hidden;
-  padding: 20px 0;
-  position: relative;
-  height: 320px;
-}
-.hero-band-section::before,
-.hero-band-section::after {
-  content: '';
-  position: absolute;
-  left: 0; right: 0;
-  height: 60px;
-  z-index: 2;
-  pointer-events: none;
-}
-.hero-band-section::before { top: 0;    background: linear-gradient(to bottom, #f4f7fb, transparent); }
-.hero-band-section::after  { bottom: 0; background: linear-gradient(to top,    #f4f7fb, transparent); }
 
-/* Conteneur des colonnes */
-.hero-band-track {
-  display: flex;
-  gap: 12px;
-  height: 100%;
-  justify-content: center;
-  animation: none;
-}
-
-/* Chaque colonne défile indépendamment */
-.hero-band-col {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  flex-shrink: 0;
-}
-.hero-band-col:nth-child(odd)  { animation: heroColUp   18s linear infinite; }
-.hero-band-col:nth-child(even) { animation: heroColDown 22s linear infinite; }
-
-.hero-band-card {
-  width: 180px;
-  height: 130px;
-  border-radius: 12px;
-  overflow: hidden;
-  flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-}
-.hero-band-card img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.4s ease;
-}
-.hero-band-card:hover img { transform: scale(1.06); }
-
-@keyframes heroColUp {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
-}
-@keyframes heroColDown {
-  0%   { transform: translateY(-50%); }
-  100% { transform: translateY(0); }
-}
 
 .hero-photo-sm img {
   width: 100%; height: 100%;
