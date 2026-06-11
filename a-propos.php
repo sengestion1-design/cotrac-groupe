@@ -1,4 +1,7 @@
 <?php
+header('Cache-Control: no-store, no-cache, must-revalidate');
+header('Pragma: no-cache');
+header('Expires: 0');
 $page_title = 'À propos – COTRAC';
 $page_desc  = 'Découvrez l\'histoire, la mission et les valeurs de COTRAC, entreprise sénégalaise de BTP et de travaux spécialisés depuis 2015.';
 require_once __DIR__ . '/includes/header.php';
@@ -721,10 +724,17 @@ require_once __DIR__ . '/includes/header.php';
   transform: none !important;
 }
 
-/* Forcer visibilité complète organigramme */
-.org2-wrap, .org2-wrap * {
+/* Forcer visibilité organigramme — ne pas toucher aux transforms */
+.org2-wrap .org2-label,
+.org2-wrap .org2-sub,
+.org2-wrap .org2-dot,
+.org2-wrap .org2-badge,
+.org2-wrap .org2-icon,
+.org2-wrap .org2-vline,
+.org2-wrap .org2-hline,
+.org2-wrap .org2-card,
+.org2-wrap .org2-branch {
   opacity: 1 !important;
-  transform: none !important;
   visibility: visible !important;
 }
 
