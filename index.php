@@ -906,17 +906,23 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
 
 <script>
 document.addEventListener('DOMContentLoaded', function(){
-  var track = document.getElementById('heroSliderTrack');
-  var dots  = document.querySelectorAll('.hero-dot');
+  var track  = document.getElementById('heroSliderTrack');
+  var dots   = document.querySelectorAll('.hero-dot');
   if (!track) return;
-  var total   = track.children.length;
+  var slides = track.querySelectorAll('.hero-slide');
+  var total  = slides.length;
   var current = 0;
   var timer;
 
+  /* Activer la première slide au départ */
+  slides[0].classList.add('active');
+
   function goTo(n) {
+    slides[current].classList.remove('active');
+    dots[current] && dots[current].classList.remove('active');
     current = (n + total) % total;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    dots.forEach(function(d, i){ d.classList.toggle('active', i === current); });
+    slides[current].classList.add('active');
+    dots[current] && dots[current].classList.add('active');
   }
 
   function next() { goTo(current + 1); }
