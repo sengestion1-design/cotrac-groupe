@@ -48,7 +48,7 @@ jobs:
             if [ ! -f "$file" ]; then
               continue
             fi
-            remote_path="/cotracgroup/$file"
+            remote_path="/$file"
             remote_dir=$(dirname "$remote_path")
             lftp -u "$SFTP_USER","$SFTP_PASSWORD" sftp://access971979113.webspace-data.io -e "mkdir -p $remote_dir; put $file -o $remote_path; bye"
           done < /tmp/changed_files.txt
