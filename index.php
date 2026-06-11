@@ -51,7 +51,7 @@ $db = getDB();
             <span class="stat-label"><?= t('index_hero_stat_projets') ?></span>
           </div>
           <div class="stat-card">
-            <span class="stat-value">4</span>
+            <span class="stat-value">5</span>
             <span class="stat-label"><?= t('index_hero_stat_poles') ?></span>
           </div>
           <div class="stat-card">
@@ -191,6 +191,24 @@ $db = getDB();
           <span class="tag"><?= t('pole_industrie_tag3') ?></span>
         </div>
         <a href="<?= SITE_URL ?>/industrie.php" class="pole-link">
+          <?= t('btn_en_savoir_plus') ?> <span>→</span>
+        </a>
+      </div>
+
+      <div class="pole-card teal animate-fade-up delay-5">
+        <div class="pole-icon">
+          <span class="ico ico-froid"><!--froid--></span>
+        </div>
+        <h3 class="pole-title"><?= t('pole_froid_titre') ?></h3>
+        <p class="pole-desc">
+          <?= t('pole_froid_desc') ?>
+        </p>
+        <div class="pole-tags">
+          <span class="tag"><?= t('pole_froid_tag1') ?></span>
+          <span class="tag"><?= t('pole_froid_tag2') ?></span>
+          <span class="tag"><?= t('pole_froid_tag3') ?></span>
+        </div>
+        <a href="<?= SITE_URL ?>/froid-clim.php" class="pole-link">
           <?= t('btn_en_savoir_plus') ?> <span>→</span>
         </a>
       </div>

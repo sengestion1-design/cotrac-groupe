@@ -33,7 +33,7 @@ return [
 
     // ── Sections principales ────────────────────────────────────────
     'section_tag_poles'         => 'Nos domaines d\'expertise',
-    'section_titre_poles'       => 'Quatre pôles, une excellence',
+    'section_titre_poles'       => 'Cinq pôles, une excellence',
     'section_desc_poles'        => 'COTRAC intervient sur l\'ensemble du cycle de vos projets d\'infrastructure avec des équipes spécialisées et des équipements de pointe.',
 
     'section_tag_realisations'  => 'Nos réalisations',
@@ -611,7 +611,7 @@ return [
 
     // ── Index — Pôles ────────────────────────────────────────────
     'index_poles_tag'             => 'Ce que nous faisons',
-    'index_poles_titre'           => 'Nos 4 Pôles d\'Activités',
+    'index_poles_titre'           => 'Nos 5 Pôles d\'Activités',
     'index_poles_desc'            => 'De la conception à la livraison, COTRAC maîtrise l\'ensemble de la chaîne de valeur dans quatre domaines stratégiques pour le développement du Sénégal.',
     'pole_btp_titre'              => 'BTP - Études & Réalisations',
     'pole_btp_desc'               => 'Construction de bâtiments résidentiels, commerciaux et industriels. Études techniques, terrassements, fondations, gros œuvre et second œuvre. Nous livrons des ouvrages solides dans le respect des normes et des délais contractuels.',
@@ -636,6 +636,12 @@ return [
     'pole_industrie_tag2'         => 'VMC',
     'pole_industrie_tag3'         => 'Chambres froides',
 
+    'pole_froid_titre'            => 'Génie Industriel Froid & Climatisation',
+    'pole_froid_desc'             => 'Installation et maintenance de systèmes de froid industriel et de climatisation. Chambres froides, groupes frigorifiques, climatiseurs split et centralisés pour bâtiments résidentiels, commerciaux et industriels.',
+    'pole_froid_tag1'             => 'Froid industriel',
+    'pole_froid_tag2'             => 'Climatisation',
+    'pole_froid_tag3'             => 'Maintenance',
+
     // ── Index — Chiffres clés ────────────────────────────────────
     'index_stats_tag'             => 'Notre impact',
     'index_stats_titre'           => 'COTRAC en Chiffres',
@@ -643,7 +649,7 @@ return [
     'index_stats_ans_label'       => 'Ans d\'expérience',
     'index_stats_ans_desc'        => 'Fondée en 2015, SARL depuis 2018',
     'index_stats_projets_label'   => 'Projets réalisés',
-    'index_stats_projets_desc'    => 'Dans 4 pôles d\'activités',
+    'index_stats_projets_desc'    => 'Dans 5 pôles d\'activités',
     'index_stats_poles_label'     => 'Pôles d\'activités',
     'index_stats_poles_desc'      => 'BTP, Énergie, Routes, Industrie',
     'index_stats_experts_label'   => 'Experts mobilisables',
@@ -672,7 +678,7 @@ return [
     'valeur_local_titre'          => 'Ancrage Local',
     'valeur_local_desc'           => 'Entreprise 100 % sénégalaise, COTRAC connaît le terrain, les réglementations locales et les réalités du marché. Une présence forte au Sénégal avec une vision d\'expansion en Afrique de l\'Ouest.',
     'valeur_expertise_titre'      => 'Expertise Technique',
-    'valeur_expertise_desc'       => 'Notre équipe d\'ingénieurs, de techniciens et de chefs de chantier qualifiés apporte une expertise pointue dans chacun de nos 4 pôles d\'activités, garantissant des ouvrages durables et conformes.',
+    'valeur_expertise_desc'       => 'Notre équipe d\'ingénieurs, de techniciens et de chefs de chantier qualifiés apporte une expertise pointue dans chacun de nos 5 pôles d\'activités, garantissant des ouvrages durables et conformes.',
 
     // ── Index — Vidéo chantier ───────────────────────────────────
     'index_video_badge'           => 'COTRAC sur le terrain',
@@ -750,7 +756,7 @@ return [
     'apropos_hist_titre'          => 'Fondée à Dakar, ancrée dans l\'avenir',
     'apropos_hist_p1'             => 'Créée en 2015 à Dakar par des ingénieurs passionnés, COTRAC - Compagnie des Travaux et Constructions - s\'est imposée comme un acteur de référence dans les domaines du BTP, des réseaux électriques haute tension et du génie civil au Sénégal.',
     'apropos_hist_p2'             => 'Animés par une vision long terme, nos équipes s\'inscrivent résolument dans la dynamique du Plan <strong>Sénégal 2050</strong> : construire des infrastructures durables, fiables et au service des populations.',
-    'apropos_hist_p3'             => 'Avec quatre pôles d\'expertise complémentaires et plus de 25 projets réalisés à travers le pays, COTRAC combine la rigueur technique à l\'engagement humain.',
+    'apropos_hist_p3'             => 'Avec cinq pôles d\'expertise complémentaires et plus de 25 projets réalisés à travers le pays, COTRAC combine la rigueur technique à l\'engagement humain.',
     'apropos_hist_btn'            => 'Voir nos réalisations',
     'img_alt_ingenieure_plans2'   => 'Ingénieure COTRAC sur plans',
 

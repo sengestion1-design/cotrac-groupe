@@ -489,6 +489,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .pole-card.orange::before { background: var(--orange); }
 .pole-card.green::before { background: #27ae60; }
 .pole-card.purple::before { background: #8e44ad; }
+.pole-card.teal::before { background: #0891b2; }
 
 .pole-icon {
   width: 64px; height: 64px;
@@ -503,6 +504,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .pole-card.orange .pole-icon { background: #fff3e0; }
 .pole-card.green .pole-icon { background: #e8f8f0; }
 .pole-card.purple .pole-icon { background: #f3e8fd; }
+.pole-card.teal .pole-icon { background: #e0f7fa; }
 
 .pole-title {
   font-family: 'Poppins', sans-serif;
@@ -530,6 +532,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .pole-card.orange .tag { background: #fff3e0; color: #c2610a; }
 .pole-card.green  .tag { background: #e8f8f0; color: #1a7c46; }
 .pole-card.purple .tag { background: #f3e8fd; color: #6b21a8; }
+.pole-card.teal   .tag { background: #e0f7fa; color: #0e7490; }
 .pole-link {
   display: inline-flex;
   align-items: center;
@@ -543,6 +546,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .pole-card.orange .pole-link { color: var(--orange); }
 .pole-card.green .pole-link { color: #27ae60; }
 .pole-card.purple .pole-link { color: #8e44ad; }
+.pole-card.teal .pole-link { color: #0891b2; }
 
 /* ============================================================
    CHIFFRES CLÉS
@@ -1309,6 +1313,7 @@ table tr:hover td { background: var(--gris-clair); }
 .pole-card.orange .pole-icon .ico   { background-color: var(--orange); }
 .pole-card.green  .pole-icon .ico   { background-color: #27ae60; }
 .pole-card.purple .pole-icon .ico   { background-color: #8e44ad; }
+.pole-card.teal   .pole-icon .ico   { background-color: #0891b2; }
 .service-icon .ico                  { width: 1.6rem; height: 1.6rem; background-color: var(--bleu); }
 .contact-card-icon .ico,
 .contact-card .icon .ico { width: 1.8rem; height: 1.8rem; background-color: var(--orange); }
