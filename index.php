@@ -904,6 +904,7 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
   </div>
 </section>
 
+<?php require_once 'includes/footer.php'; ?>
 <script>
 (function(){
   var track = document.getElementById('heroSliderTrack');
@@ -926,7 +927,6 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
 
   window.heroGoTo = function(n) { stopAuto(); goTo(n); startAuto(); };
 
-  /* Swipe tactile */
   var startX = 0;
   track.parentElement.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
   track.parentElement.addEventListener('touchend', function(e){
@@ -937,4 +937,3 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
   startAuto();
 })();
 </script>
-<?php require_once 'includes/footer.php'; ?>
