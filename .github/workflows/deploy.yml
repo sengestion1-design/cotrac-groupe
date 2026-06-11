@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 2
+          fetch-depth: 3
 
       - name: Setup known hosts
         run: |
@@ -27,6 +27,12 @@ jobs:
           SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
         run: |
           git diff --name-only HEAD~1 HEAD > /tmp/changed_files.txt
+
+          # Si commit vide, prendre les fichiers du commit précédent
+          if [ ! -s /tmp/changed_files.txt ]; then
+            git diff --name-only HEAD~2 HEAD~1 > /tmp/changed_files.txt
+          fi
+
           cat /tmp/changed_files.txt
 
           while IFS= read -r file; do
