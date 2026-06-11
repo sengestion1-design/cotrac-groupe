@@ -298,7 +298,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   grid-template-columns: 55fr 45fr;
   gap: 56px;
   align-items: center;
+  min-width: 0;
 }
+.hero-layout > * { min-width: 0; }
 
 /* Colonne gauche */
 .hero-left {}
@@ -379,14 +381,21 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* Colonne droite — photos */
 /* ── Hero Right ── */
-.hero-right { display: flex; flex-direction: column; gap: 12px; min-width: 0; overflow: hidden; }
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  width: 100%;
+  overflow: hidden;
+}
 
 .hero-photo-main {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   height: 300px;
-  max-width: 100%;
+  width: 100%;
   box-shadow: 0 20px 56px rgba(0,0,0,0.32);
 }
 .hero-photo-main img {
