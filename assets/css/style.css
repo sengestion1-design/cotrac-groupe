@@ -419,52 +419,51 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   z-index: 2;
 }
 
-/* ── Bande défilante infinie ── */
-.hero-band-wrap {
+/* ── Bande défilante verticale ── */
+.hero-vband-wrap {
   overflow: hidden;
-  border-radius: 14px;
+  border-radius: 20px;
   position: relative;
-  max-width: 100%;
+  width: 100%;
+  height: 420px;
+  box-shadow: 0 20px 56px rgba(0,0,0,0.32);
 }
-.hero-band-wrap::before,
-.hero-band-wrap::after {
+.hero-vband-wrap::before,
+.hero-vband-wrap::after {
   content: '';
   position: absolute;
-  top: 0; bottom: 0;
-  width: 40px;
+  left: 0; right: 0;
+  height: 60px;
   z-index: 2;
   pointer-events: none;
 }
-.hero-band-wrap::before { left: 0;  background: linear-gradient(to right, rgba(10,26,70,0.5), transparent); }
-.hero-band-wrap::after  { right: 0; background: linear-gradient(to left,  rgba(10,26,70,0.5), transparent); }
+.hero-vband-wrap::before { top: 0;    background: linear-gradient(to bottom, rgba(10,26,70,0.6), transparent); }
+.hero-vband-wrap::after  { bottom: 0; background: linear-gradient(to top,    rgba(10,26,70,0.6), transparent); }
 
-.hero-band-track {
+.hero-vband-track {
   display: flex;
+  flex-direction: column;
   gap: 10px;
-  width: max-content;
-  animation: heroBandScroll 22s linear infinite;
+  animation: heroVBandScroll 20s linear infinite;
 }
-.hero-band-track:hover { animation-play-state: paused; }
+.hero-vband-track:hover { animation-play-state: paused; }
 
-.hero-band-card {
-  width: 148px;
-  height: 110px;
-  border-radius: 12px;
+.hero-vband-card {
+  width: 100%;
+  height: 190px;
+  border-radius: 14px;
   overflow: hidden;
   flex-shrink: 0;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
 }
-.hero-band-card img {
+.hero-vband-card img {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.4s ease;
 }
-.hero-band-card:hover img { transform: scale(1.06); }
 
-@keyframes heroBandScroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@keyframes heroVBandScroll {
+  0%   { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
 }
 
 /* Responsive hero */

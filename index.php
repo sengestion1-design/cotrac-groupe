@@ -63,22 +63,11 @@ $db = getDB();
       </div>
 
       <!-- Colonne droite : slider -->
-      <!-- Colonne droite : grille + bande défilante -->
+      <!-- Colonne droite : bande défilante verticale -->
       <div class="hero-right animate-fade-up delay-2">
-
-        <!-- Photo principale fixe -->
-        <div class="hero-photo-main">
-          <img src="<?= SITE_URL ?>/assets/images/energie/pose-poteau-grue.jpg"
-               alt="<?= t('img_alt_chantier_elec') ?>" loading="eager">
-          <div class="hero-photo-badge">
-            <span class="stat-value">✓</span>
-            <span class="stat-label"><?= t('index_hero_badge_senelec') ?></span>
-          </div>
-        </div>
-
-        <!-- Bande défilante infinie -->
         <?php
         $band_photos = [
+          ['src'=>'assets/images/energie/pose-poteau-grue.jpg',         'alt'=>'Pose poteau'],
           ['src'=>'assets/images/energie/ligne-hta-transformateur.jpg', 'alt'=>'Ligne HTA'],
           ['src'=>'assets/images/equipe/gilet-cotrac.jpg',              'alt'=>'Équipe COTRAC'],
           ['src'=>'assets/images/energie/tranchee-cable-bt.jpg',        'alt'=>'Tranchée BT'],
@@ -87,18 +76,18 @@ $db = getDB();
           ['src'=>'assets/images/equipe/equipe-terrain.jpg',            'alt'=>'Équipe terrain'],
           ['src'=>'assets/images/energie/tranchee-chantier.jpg',        'alt'=>'Chantier tranchée'],
           ['src'=>'assets/images/energie/raccordement-cable.jpg',       'alt'=>'Raccordement câble'],
+          ['src'=>'assets/images/energie/jonction-cable-hta.jpg',       'alt'=>'Jonction câble HTA'],
         ];
         ?>
-        <div class="hero-band-wrap">
-          <div class="hero-band-track">
+        <div class="hero-vband-wrap">
+          <div class="hero-vband-track">
             <?php foreach (array_merge($band_photos, $band_photos) as $p): ?>
-            <div class="hero-band-card">
-              <img src="<?= SITE_URL ?>/<?= e($p['src']) ?>" alt="<?= e($p['alt']) ?>" loading="lazy">
+            <div class="hero-vband-card">
+              <img src="<?= SITE_URL ?>/<?= e($p['src']) ?>" alt="<?= e($p['alt']) ?>" loading="eager">
             </div>
             <?php endforeach; ?>
           </div>
         </div>
-
       </div>
 
     </div>
