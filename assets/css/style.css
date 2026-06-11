@@ -388,7 +388,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: relative;
   overflow: hidden;
   margin-top: 32px;
-  height: 180px;
+  height: 160px;
+  width: 100%;
 }
 .hero-slider::before,
 .hero-slider::after {
@@ -404,14 +405,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 .hero-slider-track {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
   gap: 12px;
   width: max-content;
+  height: 160px;
   animation: heroSlide 30s linear infinite;
 }
 
 .hero-slider-card {
-  width: 240px;
-  height: 180px;
+  width: 220px;
+  height: 160px;
   border-radius: 14px;
   overflow: hidden;
   flex-shrink: 0;
