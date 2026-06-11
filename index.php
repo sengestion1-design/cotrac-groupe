@@ -904,9 +904,8 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
   </div>
 </section>
 
-<?php require_once 'includes/footer.php'; ?>
 <script>
-(function(){
+document.addEventListener('DOMContentLoaded', function(){
   var track = document.getElementById('heroSliderTrack');
   var dots  = document.querySelectorAll('.hero-dot');
   if (!track) return;
@@ -921,7 +920,6 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
   }
 
   function next() { goTo(current + 1); }
-
   function startAuto() { timer = setInterval(next, 3500); }
   function stopAuto()  { clearInterval(timer); }
 
@@ -935,5 +933,6 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
   }, {passive:true});
 
   startAuto();
-})();
+});
 </script>
+<?php require_once 'includes/footer.php'; ?>
