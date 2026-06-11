@@ -448,9 +448,9 @@ require_once __DIR__ . '/includes/header.php';
       <!-- N2 : DGA + Admin + Commercial -->
       <div class="org2-row org2-row--3" style="align-items:flex-start;">
 
-        <div class="org2-branch" style="flex:1.6;">
+        <div class="org2-branch" style="flex:2;">
           <div class="org2-vline org2-vline--short"></div>
-          <div class="org2-card org2-card--dir">
+          <div class="org2-card org2-card--dir" style="max-width:200px;">
             <div class="org2-icon org2-icon--dir">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
             </div>
@@ -614,12 +614,12 @@ require_once __DIR__ . '/includes/header.php';
 /* Lignes verticales */
 .org2-vline {
   width: 2px;
-  height: 32px;
+  height: 24px;
   background: linear-gradient(to bottom, #1a6bb5, #cbd5e1);
   margin: 0 auto;
   flex-shrink: 0;
 }
-.org2-vline--short { height: 24px; }
+.org2-vline--short { height: 18px; }
 
 /* Lignes horizontales */
 .org2-hline {
@@ -656,7 +656,7 @@ require_once __DIR__ . '/includes/header.php';
   border-color: transparent;
   color: #fff;
   max-width: 220px;
-  padding: 24px 24px 20px;
+  padding: 20px 24px 16px;
   box-shadow: 0 8px 32px rgba(247,148,29,0.35);
 }
 .org2-card--ceo:hover { box-shadow: 0 16px 48px rgba(247,148,29,0.45); }
@@ -682,9 +682,10 @@ require_once __DIR__ . '/includes/header.php';
 .org2-card--service {
   background: #f8fafd;
   border: 1.5px solid #dbe8f5;
-  max-width: 155px;
+  max-width: 148px;
   width: 100%;
-  padding: 14px 12px 12px;
+  padding: 12px 10px 10px;
+  box-sizing: border-box;
 }
 .org2-card--service:hover { border-color: #1a6bb5; background: #fff; }
 
