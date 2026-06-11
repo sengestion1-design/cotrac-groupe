@@ -11,11 +11,11 @@ $db = getDB();
 // Migration auto : ajout colonnes si absentes
 try {
     $db->exec("ALTER TABLE projets ADD COLUMN IF NOT EXISTS annee VARCHAR(10) DEFAULT NULL");
-    $db->exec("ALTER TABLE projets ADD COLUMN IF NOT EXISTS montant VARCHAR(100) DEFAULT NULL");
+    // montant volontairement non affiché
     $db->exec("ALTER TABLE projets ADD COLUMN IF NOT EXISTS lieu VARCHAR(150) DEFAULT NULL");
     // Remplir les données manquantes depuis les PDFs
     $updates = [
-        ["annee='2023', montant='262 889 361 FCFA', lieu='Dakar'", "%ESP/UCAD%"],
+        ["annee='2023', lieu='Dakar'", "%ESP/UCAD%"],
         ["annee='2022', lieu='Ngor, Dakar'", "%Commune de Ngor%"],
         ["annee='2018', lieu='Ngoundiane, Thiès'", "%Ngoundiane%"],
         ["annee='2017', lieu='Fass-Colobane, Dakar'", "%allée Fass%"],
@@ -206,12 +206,6 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
                     <span style="display:inline-flex;align-items:center;gap:4px;font-size:.75rem;color:#555;background:#f1f5f9;padding:3px 9px;border-radius:20px;">
                       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                       <?= e($projet['annee']) ?>
-                    </span>
-                  <?php endif; ?>
-                  <?php if (!empty($projet['montant'])): ?>
-                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:.75rem;color:#1a6bb5;background:#e8f1fb;padding:3px 9px;border-radius:20px;font-weight:600;">
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                      <?= e($projet['montant']) ?>
                     </span>
                   <?php endif; ?>
                 </div>

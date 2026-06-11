@@ -3,7 +3,7 @@ ALTER TABLE projets ADD COLUMN IF NOT EXISTS annee VARCHAR(10) DEFAULT NULL;
 ALTER TABLE projets ADD COLUMN IF NOT EXISTS montant VARCHAR(100) DEFAULT NULL;
 ALTER TABLE projets ADD COLUMN IF NOT EXISTS lieu VARCHAR(150) DEFAULT NULL;
 
-UPDATE projets SET annee='2023', montant='262 889 361 FCFA', lieu='Dakar' WHERE titre LIKE '%ESP/UCAD%';
+UPDATE projets SET annee='2023', lieu='Dakar' WHERE titre LIKE '%ESP/UCAD%';
 UPDATE projets SET annee='2022', lieu='Ngor, Dakar' WHERE titre LIKE '%Commune de Ngor%';
 UPDATE projets SET annee='2018', lieu='Ngoundiane, Thiès' WHERE titre LIKE '%Ngoundiane%';
 UPDATE projets SET annee='2017', lieu='Fass-Colobane, Dakar' WHERE titre LIKE '%allée Fass%';
