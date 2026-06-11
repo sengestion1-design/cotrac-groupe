@@ -584,11 +584,11 @@ require_once __DIR__ . '/includes/header.php';
 <style>
 /* ═══════════════ ORGANIGRAMME V2 ═══════════════ */
 .org2-wrap {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 56px auto 0;
   font-family: 'Poppins', sans-serif;
   overflow-x: auto;
-  padding-bottom: 8px;
+  padding: 0 16px 8px;
 }
 
 .org2-row {
@@ -598,9 +598,9 @@ require_once __DIR__ . '/includes/header.php';
   gap: 0;
   position: relative;
 }
-.org2-row--3 { gap: 0; }
-.org2-row--4 { gap: 0; }
-.org2-row--2 { gap: 0; }
+.org2-row--3 { gap: 8px; }
+.org2-row--4 { gap: 4px; }
+.org2-row--2 { gap: 8px; }
 .org2-row--sub { margin-top: 0; }
 
 .org2-branch {
@@ -608,7 +608,7 @@ require_once __DIR__ . '/includes/header.php';
   flex-direction: column;
   align-items: center;
   flex: 1;
-  min-width: 140px;
+  min-width: 0;
 }
 
 /* Lignes verticales */
@@ -682,8 +682,9 @@ require_once __DIR__ . '/includes/header.php';
 .org2-card--service {
   background: #f8fafd;
   border: 1.5px solid #dbe8f5;
-  max-width: 160px;
-  padding: 14px 12px 12px;
+  max-width: 140px;
+  width: 100%;
+  padding: 14px 10px 12px;
 }
 .org2-card--service:hover { border-color: #1a6bb5; background: #fff; }
 
@@ -753,12 +754,21 @@ require_once __DIR__ . '/includes/header.php';
 }
 
 /* Responsive */
+@media (max-width: 1100px) {
+  .org2-card--dir { max-width: 170px; }
+  .org2-card--service { max-width: 120px; font-size: .75rem; }
+  .org2-label { font-size: .75rem; }
+  .org2-sub { font-size: .68rem; }
+}
 @media (max-width: 900px) {
   .org2-row--3 { flex-direction: column; align-items: center; gap: 0; }
-  .org2-branch { width: 100%; max-width: 340px; }
+  .org2-branch { width: 100%; max-width: 400px; }
   .org2-hline { display: none; }
-  .org2-card { max-width: 280px; }
-  .org2-row--4, .org2-row--2 { flex-wrap: wrap; justify-content: center; gap: 0; }
+  .org2-card { max-width: 320px; }
+  .org2-row--4, .org2-row--2 { flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .org2-card--service { max-width: 160px; }
+  .org2-label { font-size: .82rem; }
+  .org2-sub { font-size: .72rem; }
 }
 @media (max-width: 480px) {
   .org2-card { max-width: 100%; }
