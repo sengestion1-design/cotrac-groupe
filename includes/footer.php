@@ -65,7 +65,13 @@
     <!-- Bottom -->
     <div class="footer-bottom">
       <span>© <?= date('Y') ?> <a href="<?= SITE_URL ?>">COTRAC SARL</a>. <?= t('footer_copyright') ?></span>
-      <span><?= t('footer_slogan') ?></span>
+      <span class="footer-legal-links">
+        <a href="<?= SITE_URL ?>/mentions-legales.php">Mentions légales</a>
+        <span style="opacity:.4;">|</span>
+        <a href="<?= SITE_URL ?>/confidentialite.php">Confidentialité</a>
+        <span style="opacity:.4;">|</span>
+        <a href="<?= SITE_URL ?>/cgu-cgv.php">CGU / CGV</a>
+      </span>
     </div>
   </div>
 </footer>
