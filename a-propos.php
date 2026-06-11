@@ -710,11 +710,22 @@ require_once __DIR__ . '/includes/header.php';
   color: #1a3a5c;
   line-height: 1.3;
   margin-bottom: 4px;
+  opacity: 1 !important;
+  transform: none !important;
 }
 .org2-sub {
   font-size: .72rem;
   color: #7a8fa6;
   font-weight: 500;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Forcer visibilité complète organigramme */
+.org2-wrap, .org2-wrap * {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
 }
 
 /* Badge CEO */
