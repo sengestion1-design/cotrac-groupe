@@ -379,18 +379,20 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* Colonne droite — photos */
 /* ── Hero Right ── */
-.hero-right { display: flex; flex-direction: column; gap: 12px; }
+.hero-right { display: flex; flex-direction: column; gap: 12px; min-width: 0; overflow: hidden; }
 
 .hero-photo-main {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   height: 300px;
+  max-width: 100%;
   box-shadow: 0 20px 56px rgba(0,0,0,0.32);
 }
 .hero-photo-main img {
   width: 100%; height: 100%;
   object-fit: cover;
+  object-position: center;
   display: block;
 }
 .hero-photo-badge {
@@ -413,6 +415,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   overflow: hidden;
   border-radius: 14px;
   position: relative;
+  max-width: 100%;
 }
 .hero-band-wrap::before,
 .hero-band-wrap::after {
