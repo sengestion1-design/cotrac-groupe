@@ -43,7 +43,7 @@ require_once __DIR__ . '/includes/header.php';
     <li><strong>Raison sociale :</strong> COTRAC — Compagnie des Travaux et Constructions</li>
     <li><strong>Forme juridique :</strong> SARL de droit sénégalais</li>
     <li><strong>Capital social :</strong> 5 000 000 FCFA</li>
-    <li><strong>RCCM :</strong> SN DKR 2018-B-19082</li>
+    <li><strong>RCCM :</strong> SN DKR 2018-B-19682</li>
     <li><strong>NINEA :</strong> 006932504 2V2</li>
     <li><strong>Siège social :</strong> Ouest Foire, route de l'aéroport en face SDE Yoff, BP 121754 — Dakar, Sénégal</li>
     <li><strong>Téléphone :</strong> +221 33 827 96 39 / +221 77 620 36 03</li>

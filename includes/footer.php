@@ -50,7 +50,7 @@
       <div class="footer-col">
         <h4><?= t('footer_infos') ?></h4>
         <ul>
-          <li><a href="#">RCCM : SN DKR 2018-B-19082</a></li>
+          <li><a href="#">RCCM : SN DKR 2018-B-19682</a></li>
           <li><a href="#">NINEA : 006932504 2V2</a></li>
           <li><a href="#">SARL - Capital 5 000 000 FCFA</a></li>
           <li><a href="#">Créée en 2015</a></li>
