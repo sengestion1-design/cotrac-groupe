@@ -635,6 +635,12 @@ return [
     'pole_industrie_tag2'         => 'HVAC',
     'pole_industrie_tag3'         => 'Cold rooms',
 
+    'pole_froid_titre'            => 'Industrial Cold & Air Conditioning',
+    'pole_froid_desc'             => 'Installation and maintenance of industrial refrigeration and air conditioning systems. Cold rooms, refrigeration units, split and centralised air conditioners for residential, commercial and industrial buildings.',
+    'pole_froid_tag1'             => 'Industrial refrigeration',
+    'pole_froid_tag2'             => 'Air conditioning',
+    'pole_froid_tag3'             => 'Maintenance',
+
     // ── Index — Key figures ──────────────────────────────────────
     'index_stats_tag'             => 'Our impact',
     'index_stats_titre'           => 'COTRAC in Numbers',
