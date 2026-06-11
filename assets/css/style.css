@@ -419,51 +419,70 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   z-index: 2;
 }
 
-/* ── Bande défilante verticale ── */
-.hero-vband-wrap {
+/* ── Bande photos défilante horizontale (sous hero) ── */
+.hero-band-section {
+  background: #f4f7fb;
   overflow: hidden;
-  border-radius: 20px;
+  padding: 16px 0;
   position: relative;
-  width: 100%;
-  height: 420px;
-  box-shadow: 0 20px 56px rgba(0,0,0,0.32);
 }
-.hero-vband-wrap::before,
-.hero-vband-wrap::after {
+.hero-band-section::before,
+.hero-band-section::after {
   content: '';
   position: absolute;
-  left: 0; right: 0;
-  height: 60px;
+  top: 0; bottom: 0;
+  width: 80px;
   z-index: 2;
   pointer-events: none;
 }
-.hero-vband-wrap::before { top: 0;    background: linear-gradient(to bottom, rgba(10,26,70,0.6), transparent); }
-.hero-vband-wrap::after  { bottom: 0; background: linear-gradient(to top,    rgba(10,26,70,0.6), transparent); }
+.hero-band-section::before { left: 0;  background: linear-gradient(to right, #f4f7fb, transparent); }
+.hero-band-section::after  { right: 0; background: linear-gradient(to left,  #f4f7fb, transparent); }
 
-.hero-vband-track {
+.hero-band-track {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  animation: heroVBandScroll 20s linear infinite;
+  gap: 12px;
+  width: max-content;
+  animation: heroBandScroll 25s linear infinite;
 }
-.hero-vband-track:hover { animation-play-state: paused; }
+.hero-band-track:hover { animation-play-state: paused; }
 
-.hero-vband-card {
-  width: 100%;
-  height: 190px;
-  border-radius: 14px;
+.hero-band-card {
+  width: 200px;
+  height: 130px;
+  border-radius: 12px;
   overflow: hidden;
   flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
 }
-.hero-vband-card img {
+.hero-band-card img {
   width: 100%; height: 100%;
   object-fit: cover;
   display: block;
+  transition: transform 0.4s ease;
+}
+.hero-band-card:hover img { transform: scale(1.06); }
+
+@keyframes heroBandScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
 
-@keyframes heroVBandScroll {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
+/* Restaurer hero-photo-grid */
+.hero-photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.hero-photo-sm {
+  border-radius: 14px;
+  overflow: hidden;
+  height: 120px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.hero-photo-sm img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* Responsive hero */

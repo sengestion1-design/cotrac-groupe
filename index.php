@@ -63,29 +63,24 @@ $db = getDB();
       </div>
 
       <!-- Colonne droite : slider -->
-      <!-- Colonne droite : bande défilante verticale -->
+      <!-- Colonne droite : 2 photos fixes -->
       <div class="hero-right animate-fade-up delay-2">
-        <?php
-        $band_photos = [
-          ['src'=>'assets/images/energie/pose-poteau-grue.jpg',         'alt'=>'Pose poteau'],
-          ['src'=>'assets/images/energie/ligne-hta-transformateur.jpg', 'alt'=>'Ligne HTA'],
-          ['src'=>'assets/images/equipe/gilet-cotrac.jpg',              'alt'=>'Équipe COTRAC'],
-          ['src'=>'assets/images/energie/tranchee-cable-bt.jpg',        'alt'=>'Tranchée BT'],
-          ['src'=>'assets/images/industrie/genie-industriel-chantier.jpg','alt'=>'Génie industriel'],
-          ['src'=>'assets/images/energie/poteau-transformateur.jpg',    'alt'=>'Transformateur'],
-          ['src'=>'assets/images/equipe/equipe-terrain.jpg',            'alt'=>'Équipe terrain'],
-          ['src'=>'assets/images/energie/tranchee-chantier.jpg',        'alt'=>'Chantier tranchée'],
-          ['src'=>'assets/images/energie/raccordement-cable.jpg',       'alt'=>'Raccordement câble'],
-          ['src'=>'assets/images/energie/jonction-cable-hta.jpg',       'alt'=>'Jonction câble HTA'],
-        ];
-        ?>
-        <div class="hero-vband-wrap">
-          <div class="hero-vband-track">
-            <?php foreach (array_merge($band_photos, $band_photos) as $p): ?>
-            <div class="hero-vband-card">
-              <img src="<?= SITE_URL ?>/<?= e($p['src']) ?>" alt="<?= e($p['alt']) ?>" loading="eager">
-            </div>
-            <?php endforeach; ?>
+        <div class="hero-photo-main">
+          <img src="<?= SITE_URL ?>/assets/images/energie/pose-poteau-grue.jpg"
+               alt="<?= t('img_alt_chantier_elec') ?>" loading="eager">
+          <div class="hero-photo-badge">
+            <span class="stat-value">✓</span>
+            <span class="stat-label"><?= t('index_hero_badge_senelec') ?></span>
+          </div>
+        </div>
+        <div class="hero-photo-grid">
+          <div class="hero-photo-sm">
+            <img src="<?= SITE_URL ?>/assets/images/equipe/gilet-cotrac.jpg"
+                 alt="<?= t('img_alt_technicien') ?>" loading="eager">
+          </div>
+          <div class="hero-photo-sm">
+            <img src="<?= SITE_URL ?>/assets/images/industrie/genie-industriel-chantier.jpg"
+                 alt="<?= t('img_alt_chantier_indus') ?>" loading="eager">
           </div>
         </div>
       </div>
@@ -101,6 +96,33 @@ $db = getDB();
     </svg>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     BANDE PHOTOS DÉFILANTE
+═══════════════════════════════════════════════════════════ -->
+<div class="hero-band-section">
+  <?php
+  $band_photos = [
+    ['src'=>'assets/images/energie/pose-poteau-grue.jpg',         'alt'=>'Pose poteau'],
+    ['src'=>'assets/images/energie/ligne-hta-transformateur.jpg', 'alt'=>'Ligne HTA'],
+    ['src'=>'assets/images/equipe/gilet-cotrac.jpg',              'alt'=>'Équipe COTRAC'],
+    ['src'=>'assets/images/energie/tranchee-cable-bt.jpg',        'alt'=>'Tranchée BT'],
+    ['src'=>'assets/images/industrie/genie-industriel-chantier.jpg','alt'=>'Génie industriel'],
+    ['src'=>'assets/images/energie/poteau-transformateur.jpg',    'alt'=>'Transformateur'],
+    ['src'=>'assets/images/equipe/equipe-terrain.jpg',            'alt'=>'Équipe terrain'],
+    ['src'=>'assets/images/energie/tranchee-chantier.jpg',        'alt'=>'Chantier'],
+    ['src'=>'assets/images/energie/raccordement-cable.jpg',       'alt'=>'Raccordement'],
+    ['src'=>'assets/images/energie/jonction-cable-hta.jpg',       'alt'=>'Jonction HTA'],
+  ];
+  ?>
+  <div class="hero-band-track">
+    <?php foreach (array_merge($band_photos, $band_photos) as $p): ?>
+    <div class="hero-band-card">
+      <img src="<?= SITE_URL ?>/<?= e($p['src']) ?>" alt="<?= e($p['alt']) ?>" loading="lazy">
+    </div>
+    <?php endforeach; ?>
+  </div>
+</div>
 
 
 <!-- ═══════════════════════════════════════════════════════════
