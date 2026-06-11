@@ -522,7 +522,7 @@ return [
     // ── Réalisations — Hero ─────────────────────────────────────
     'real_breadcrumb_page'          => 'Réalisations',
     'real_hero_titre'               => 'Nos <span>Réalisations</span>',
-    'real_hero_desc'                => 'Plus de 25 projets réalisés au Sénégal et en Afrique - du génie civil aux infrastructures électriques, en passant par les routes et l\'industrie.',
+    'real_hero_desc'                => 'Plus de 15 projets réalisés au Sénégal et en Afrique - du génie civil aux infrastructures électriques, en passant par les routes et l\'industrie.',
     'real_stat1_label'              => 'Projets réalisés',
     'real_stat2_label'              => 'Pôles d\'expertise',
     'real_stat3_label'              => 'Années d\'expérience',
@@ -756,7 +756,7 @@ return [
     'apropos_hist_titre'          => 'Fondée à Dakar, ancrée dans l\'avenir',
     'apropos_hist_p1'             => 'Créée en 2015 à Dakar par des ingénieurs passionnés, COTRAC - Compagnie des Travaux et Constructions - s\'est imposée comme un acteur de référence dans les domaines du BTP, des réseaux électriques haute tension et du génie civil au Sénégal.',
     'apropos_hist_p2'             => 'Animés par une vision long terme, nos équipes s\'inscrivent résolument dans la dynamique du Plan <strong>Sénégal 2050</strong> : construire des infrastructures durables, fiables et au service des populations.',
-    'apropos_hist_p3'             => 'Avec cinq pôles d\'expertise complémentaires et plus de 25 projets réalisés à travers le pays, COTRAC combine la rigueur technique à l\'engagement humain.',
+    'apropos_hist_p3'             => 'Avec cinq pôles d\'expertise complémentaires et plus de 15 projets réalisés à travers le pays, COTRAC combine la rigueur technique à l\'engagement humain.',
     'apropos_hist_btn'            => 'Voir nos réalisations',
     'img_alt_ingenieure_plans2'   => 'Ingénieure COTRAC sur plans',
 

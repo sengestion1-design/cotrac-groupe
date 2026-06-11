@@ -290,7 +290,7 @@ return [
     // ── Réalisations — Hero ─────────────────────────────────────
     'real_breadcrumb_page'          => 'Projects',
     'real_hero_titre'               => 'Our <span>Projects</span>',
-    'real_hero_desc'                => 'Over 25 projects completed in Senegal and Africa - from civil engineering to electrical infrastructure, roads and industry.',
+    'real_hero_desc'                => 'Over 15 projects completed in Senegal and Africa - from civil engineering to electrical infrastructure, roads and industry.',
     'real_stat1_label'              => 'Completed projects',
     'real_stat2_label'              => 'Areas of expertise',
     'real_stat3_label'              => 'Years of experience',

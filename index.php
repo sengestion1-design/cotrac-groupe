@@ -60,7 +60,7 @@ $db = getDB();
             <span class="stat-label"><?= t('index_hero_stat_ans') ?></span>
           </div>
           <div class="stat-card">
-            <span class="stat-value" data-target="25" data-suffix="+">25+</span>
+            <span class="stat-value" data-target="15" data-suffix="+">15+</span>
             <span class="stat-label"><?= t('index_hero_stat_projets') ?></span>
           </div>
           <div class="stat-card">
@@ -254,7 +254,7 @@ $db = getDB();
       </div>
       <div class="stat-item">
         <div class="stat-item-num">
-          <span class="counter" data-target="25">0</span>+
+          <span class="counter" data-target="15">0</span>+
         </div>
         <div class="stat-item-label"><?= t('index_stats_projets_label') ?></div>
         <div class="stat-item-desc"><?= t('index_stats_projets_desc') ?></div>
@@ -425,7 +425,7 @@ $db = getDB();
         </div>
         <div style="width:1px;background:rgba(255,255,255,0.15);"></div>
         <div style="text-align:center;">
-          <div style="font-size:2rem;font-weight:800;color:#f7941d;font-family:'Poppins',sans-serif;">25+</div>
+          <div style="font-size:2rem;font-weight:800;color:#f7941d;font-family:'Poppins',sans-serif;">15+</div>
           <div style="font-size:.75rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.08em;"><?= t('index_video_stat_projets') ?></div>
         </div>
         <div style="width:1px;background:rgba(255,255,255,0.15);"></div>

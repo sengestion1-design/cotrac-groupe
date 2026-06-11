@@ -41,7 +41,7 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
     <!-- Chiffres clés -->
     <div class="animate-fade-up delay-2" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
       <div style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:16px; padding:24px 20px; text-align:center; backdrop-filter:blur(6px);">
-        <div class="counter" data-target="25" data-suffix="+" style="font-size:2.4rem; font-weight:800; color:#f08014; line-height:1;">0</div>
+        <div class="counter" data-target="15" data-suffix="+" style="font-size:2.4rem; font-weight:800; color:#f08014; line-height:1;">0</div>
         <div style="font-size:.78rem; color:rgba(255,255,255,0.75); margin-top:6px; text-transform:uppercase; letter-spacing:.08em;"><?= t('real_stat1_label') ?></div>
       </div>
       <div style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:16px; padding:24px 20px; text-align:center; backdrop-filter:blur(6px);">
