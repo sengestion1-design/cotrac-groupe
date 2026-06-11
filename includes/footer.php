@@ -15,7 +15,7 @@
         </div>
         <div class="footer-contact-item">
           <span class="icon"><?= icon('phone') ?></span>
-          <span><a href="tel:+221338279639">+221 33 827 96 39</a> &nbsp;|&nbsp; <a href="tel:+221776301646">+221 77 630 16 46</a></span>
+          <span><a href="tel:+221338279639">+221 33 827 96 39</a> &nbsp;|&nbsp; <a href="tel:+221776203603">+221 77 620 36 03</a></span>
         </div>
         <div class="footer-contact-item">
           <span class="icon"><?= icon('mail') ?></span>
@@ -50,7 +50,7 @@
       <div class="footer-col">
         <h4><?= t('footer_infos') ?></h4>
         <ul>
-          <li><a href="#">RCCM : SN DKR 2018-B-19682</a></li>
+          <li><a href="#">RCCM : SN DKR 2018-B-19082</a></li>
           <li><a href="#">NINEA : 006932504 2V2</a></li>
           <li><a href="#">SARL - Capital 5 000 000 FCFA</a></li>
           <li><a href="#">Créée en 2015</a></li>
@@ -79,7 +79,7 @@
 <script src="<?= SITE_URL ?>/assets/js/main.js"></script>
 
 <!-- ── Bouton WhatsApp flottant ── -->
-<a href="https://wa.me/221776301646?text=Bonjour%20COTRAC%2C%20je%20souhaite%20obtenir%20des%20informations%20sur%20vos%20services."
+<a href="https://wa.me/221776203603?text=Bonjour%20COTRAC%2C%20je%20souhaite%20obtenir%20des%20informations%20sur%20vos%20services."
    class="whatsapp-float"
    target="_blank"
    rel="noopener noreferrer"

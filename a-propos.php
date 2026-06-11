@@ -827,7 +827,7 @@ require_once __DIR__ . '/includes/header.php';
         <div class="cert-badge">RCCM</div>
         <div class="cert-body">
           <div class="cert-title"><?= t('cert_rccm_titre') ?></div>
-          <div class="cert-ref">SN DKR 2018-B-19682</div>
+          <div class="cert-ref">SN DKR 2018-B-19082</div>
           <div class="cert-desc"><?= t('cert_rccm_desc') ?></div>
         </div>
       </div>

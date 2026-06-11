@@ -158,7 +158,7 @@ require_once 'includes/header.php';
       <div class="res-cat-header">
         <div class="res-cat-bar" style="background:#1a6bb5;"></div>
         <h2 class="res-cat-title">Engins de Travaux Publics</h2>
-        <span class="res-cat-count">10 équipements</span>
+        <span class="res-cat-count">14 équipements</span>
       </div>
       <div class="res-equip-grid">
         <?php $engins = [
@@ -167,11 +167,15 @@ require_once 'includes/header.php';
           ['Chargeur Caterpillar 930-950','2 unités','Chargement & manutention','#1a6bb5'],
           ['Niveleuse Caterpillar 140H','2 unités','Mise en forme plateforme','#1a6bb5'],
           ['Compacteurs mécaniques','2 unités','Compactage des sols','#1a6bb5'],
-          ['Dumper / Tombereau','—','Transport matériaux chantier','#1a6bb5'],
+          ['Foreuses / Foreuse de forage','3 unités','Forage & fondations','#1a6bb5'],
+          ['Vibreurs (aiguilles vibrantes)','14 unités','Vibration & mise en place béton','#1a6bb5'],
+          ['Dumper / Tombereau','4 unités','Transport matériaux chantier','#1a6bb5'],
           ['Grue de chantier','—','Levage & manutention lourde','#1a6bb5'],
           ['Monte-charge électrique 1000kg','1 unité','Élévation charges','#1a6bb5'],
-          ['Vibrateur à béton','1 unité','Mise en place béton','#1a6bb5'],
           ['Compresseur à air','—','Outils pneumatiques','#1a6bb5'],
+          ['Conteneurs 20 pieds','10 unités','Stockage matériaux & outillage','#1a6bb5'],
+          ['Brouettes','75 unités','Manutention manuelle chantier','#1a6bb5'],
+          ['Serre-joints','2000 unités','Assemblage & coffrage','#1a6bb5'],
         ]; foreach ($engins as $eq): ?>
         <div class="res-equip-card animate-fade-up">
           <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
@@ -194,15 +198,16 @@ require_once 'includes/header.php';
       <div class="res-cat-header">
         <div class="res-cat-bar" style="background:#f7941d;"></div>
         <h2 class="res-cat-title">Véhicules & Transport</h2>
-        <span class="res-cat-count">5 équipements</span>
+        <span class="res-cat-count">6 équipements</span>
       </div>
       <div class="res-equip-grid">
         <?php $vehicules = [
-          ['Camion benne 12m³','—','Transport matériaux','#f7941d'],
-          ['Camion benne 20m³','—','Transport grands volumes','#f7941d'],
+          ['Camions 20m³','5 unités','Transport grands volumes','#f7941d'],
+          ['Camion benne 12m³','—','Transport matériaux chantier','#f7941d'],
           ['Camion porte-charge Renault Crax 440','1 unité','Transport engins lourds','#f7941d'],
           ['Camion-citerne','—','Alimentation eau chantier','#f7941d'],
-          ['Véhicules de liaison pick-up','—','Mobilité équipes terrain','#f7941d'],
+          ['Véhicules de liaison pick-up','7 unités','Mobilité équipes terrain','#f7941d'],
+          ['Dumper / Tombereau','4 unités','Transport matériaux sur chantier','#f7941d'],
         ]; foreach ($vehicules as $eq): ?>
         <div class="res-equip-card animate-fade-up">
           <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
@@ -271,7 +276,7 @@ require_once 'includes/header.php';
           ['Caisses à outils chaudronnerie','3 unités','Outillage chaudronnerie','#8e44ad'],
           ['Palans & élingues','—','Levage industriel','#8e44ad'],
           ['Machines-outils (tour, fraiseuse)','—','Usinage pièces mécaniques','#8e44ad'],
-          ['Bétonnières 350 & 500 L','2 unités','Préparation béton','#8e44ad'],
+          ['Bétonnières 500 L','3 unités','Préparation béton','#8e44ad'],
           ['Matériels topographiques','—','Relevés & implantations','#8e44ad'],
         ]; foreach ($industriel as $eq): ?>
         <div class="res-equip-card animate-fade-up">

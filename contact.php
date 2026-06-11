@@ -420,7 +420,7 @@ require_once __DIR__ . '/includes/header.php';
               <div class="contact-info-label"><?= t('contact_label_telephone2') ?></div>
               <div class="contact-info-value">
                 <a href="tel:+221338279639">+221 33 827 96 39</a><br>
-                <a href="tel:+221776301646">+221 77 630 16 46</a>
+                <a href="tel:+221776203603">+221 77 620 36 03</a>
               </div>
             </div>
           </div>
