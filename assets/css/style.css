@@ -450,8 +450,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* Responsive hero */
 @media (max-width: 900px) {
-  .hero-layout { grid-template-columns: 1fr; gap: 40px; }
-  .hero-right { display: none; }
+  .hero-layout { grid-template-columns: 1fr; gap: 24px; }
+  .hero-right { display: flex; height: 280px; }
   .hero-title { font-size: clamp(1.9rem, 6vw, 2.8rem); }
 }
 @media (max-width: 480px) {
