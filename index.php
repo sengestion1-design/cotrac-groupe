@@ -63,39 +63,42 @@ $db = getDB();
       </div>
 
       <!-- Colonne droite : slider -->
+      <!-- Colonne droite : grille + bande défilante -->
       <div class="hero-right animate-fade-up delay-2">
-        <div class="hero-slider" id="heroSlider">
-          <div class="hero-slider-track" id="heroSliderTrack">
-            <?php
-            $hero_slides = [
-              ['src' => 'assets/images/energie/pose-poteau-grue.jpg',        'alt' => 'Pose de poteau COTRAC'],
-              ['src' => 'assets/images/energie/ligne-hta-transformateur.jpg', 'alt' => 'Ligne HTA transformateur'],
-              ['src' => 'assets/images/equipe/gilet-cotrac.jpg',              'alt' => 'Équipe COTRAC terrain'],
-              ['src' => 'assets/images/energie/tranchee-cable-bt.jpg',        'alt' => 'Tranchée câble BT'],
-              ['src' => 'assets/images/industrie/genie-industriel-chantier.jpg','alt' => 'Génie industriel chantier'],
-              ['src' => 'assets/images/energie/poteau-transformateur.jpg',    'alt' => 'Poteau transformateur'],
-              ['src' => 'assets/images/equipe/equipe-terrain.jpg',            'alt' => 'Équipe terrain COTRAC'],
-            ];
-            foreach ($hero_slides as $slide): ?>
-            <div class="hero-slide">
-              <img src="<?= SITE_URL ?>/<?= e($slide['src']) ?>"
-                   alt="<?= e($slide['alt']) ?>" loading="eager">
-            </div>
-            <?php endforeach; ?>
-          </div>
-          <!-- Badge flottant -->
+
+        <!-- Photo principale fixe -->
+        <div class="hero-photo-main">
+          <img src="<?= SITE_URL ?>/assets/images/energie/pose-poteau-grue.jpg"
+               alt="<?= t('img_alt_chantier_elec') ?>" loading="eager">
           <div class="hero-photo-badge">
             <span class="stat-value">✓</span>
             <span class="stat-label"><?= t('index_hero_badge_senelec') ?></span>
           </div>
-          <!-- Dots de navigation -->
-          <div class="hero-slider-dots" id="heroSliderDots">
-            <?php foreach ($hero_slides as $i => $slide): ?>
-            <button class="hero-dot <?= $i === 0 ? 'active' : '' ?>"
-                    onclick="heroGoTo(<?= $i ?>)" aria-label="Slide <?= $i+1 ?>"></button>
+        </div>
+
+        <!-- Bande défilante infinie -->
+        <?php
+        $band_photos = [
+          ['src'=>'assets/images/energie/ligne-hta-transformateur.jpg', 'alt'=>'Ligne HTA'],
+          ['src'=>'assets/images/equipe/gilet-cotrac.jpg',              'alt'=>'Équipe COTRAC'],
+          ['src'=>'assets/images/energie/tranchee-cable-bt.jpg',        'alt'=>'Tranchée BT'],
+          ['src'=>'assets/images/industrie/genie-industriel-chantier.jpg','alt'=>'Génie industriel'],
+          ['src'=>'assets/images/energie/poteau-transformateur.jpg',    'alt'=>'Transformateur'],
+          ['src'=>'assets/images/equipe/equipe-terrain.jpg',            'alt'=>'Équipe terrain'],
+          ['src'=>'assets/images/energie/tranchee-chantier.jpg',        'alt'=>'Chantier tranchée'],
+          ['src'=>'assets/images/energie/raccordement-cable.jpg',       'alt'=>'Raccordement câble'],
+        ];
+        ?>
+        <div class="hero-band-wrap">
+          <div class="hero-band-track">
+            <?php foreach (array_merge($band_photos, $band_photos) as $p): ?>
+            <div class="hero-band-card">
+              <img src="<?= SITE_URL ?>/<?= e($p['src']) ?>" alt="<?= e($p['alt']) ?>" loading="lazy">
+            </div>
             <?php endforeach; ?>
           </div>
         </div>
+
       </div>
 
     </div>
@@ -904,41 +907,4 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
   </div>
 </section>
 
-<script>
-document.addEventListener('DOMContentLoaded', function(){
-  var track  = document.getElementById('heroSliderTrack');
-  var dots   = document.querySelectorAll('.hero-dot');
-  if (!track) return;
-  var slides = track.querySelectorAll('.hero-slide');
-  var total  = slides.length;
-  var current = 0;
-  var timer;
-
-  /* Activer la première slide au départ */
-  slides[0].classList.add('active');
-
-  function goTo(n) {
-    slides[current].classList.remove('active');
-    dots[current] && dots[current].classList.remove('active');
-    current = (n + total) % total;
-    slides[current].classList.add('active');
-    dots[current] && dots[current].classList.add('active');
-  }
-
-  function next() { goTo(current + 1); }
-  function startAuto() { timer = setInterval(next, 3500); }
-  function stopAuto()  { clearInterval(timer); }
-
-  window.heroGoTo = function(n) { stopAuto(); goTo(n); startAuto(); };
-
-  var startX = 0;
-  track.parentElement.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
-  track.parentElement.addEventListener('touchend', function(e){
-    var dx = e.changedTouches[0].clientX - startX;
-    if (Math.abs(dx) > 40) { stopAuto(); goTo(current + (dx < 0 ? 1 : -1)); startAuto(); }
-  }, {passive:true});
-
-  startAuto();
-});
-</script>
 <?php require_once 'includes/footer.php'; ?>
