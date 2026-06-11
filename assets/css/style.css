@@ -379,47 +379,48 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   white-space: nowrap;
 }
 
-/* ── Hero Right — 2 colonnes défilantes ── */
+/* ── Hero Right — défilement horizontal droite→gauche ── */
 .hero-right {
   display: flex;
+  flex-direction: column;
+  gap: 10px;
   min-width: 0;
   overflow: hidden;
-  border-radius: 20px;
-  height: 420px;
-  gap: 10px;
   position: relative;
+  height: 420px;
 }
 .hero-right::before,
 .hero-right::after {
   content: '';
   position: absolute;
-  left: 0; right: 0;
-  height: 80px;
+  top: 0; bottom: 0;
+  width: 60px;
   z-index: 2;
   pointer-events: none;
 }
-.hero-right::before { top: 0;    background: linear-gradient(to bottom, var(--bleu-dark), transparent); }
-.hero-right::after  { bottom: 0; background: linear-gradient(to top,    var(--bleu-dark), transparent); }
+.hero-right::before { left: 0;  background: linear-gradient(to right, var(--bleu-dark), transparent); }
+.hero-right::after  { right: 0; background: linear-gradient(to left,  var(--bleu-dark), transparent); }
 
 .hero-vcols {
   display: flex;
+  flex-direction: column;
   gap: 10px;
   width: 100%;
-  overflow: hidden;
+  height: 100%;
 }
 
 .hero-vcol {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 10px;
   flex: 1;
 }
-.hero-vcol--up   { animation: heroColUp   20s linear infinite; }
-.hero-vcol--down { animation: heroColDown 24s linear infinite; }
+.hero-vcol--up   { animation: heroSlideLeft  22s linear infinite; }
+.hero-vcol--down { animation: heroSlideLeft2 28s linear infinite; }
 
 .hero-vcol-card {
-  width: 100%;
-  height: 160px;
+  height: 100%;
+  width: 200px;
   border-radius: 14px;
   overflow: hidden;
   flex-shrink: 0;
@@ -431,13 +432,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: block;
 }
 
-@keyframes heroColUp {
-  0%   { transform: translateY(0); }
-  100% { transform: translateY(-50%); }
+@keyframes heroSlideLeft {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
 }
-@keyframes heroColDown {
-  0%   { transform: translateY(-50%); }
-  100% { transform: translateY(0); }
+@keyframes heroSlideLeft2 {
+  0%   { transform: translateX(-10%); }
+  100% { transform: translateX(-60%); }
 }
 
 
@@ -451,7 +452,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* Responsive hero */
 @media (max-width: 900px) {
   .hero-layout { grid-template-columns: 1fr; gap: 24px; }
-  .hero-right { display: flex; height: 280px; }
+  .hero-right { display: flex; height: 220px; }
+  .hero-vcol-card { width: 160px; }
   .hero-title { font-size: clamp(1.9rem, 6vw, 2.8rem); }
 }
 @media (max-width: 480px) {
