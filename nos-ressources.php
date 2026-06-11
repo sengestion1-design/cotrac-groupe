@@ -19,6 +19,8 @@ try {
         actif TINYINT(1) DEFAULT 1,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+    // Ajout colonne image si absente
+    try { $db->exec("ALTER TABLE equipements ADD COLUMN image VARCHAR(300) DEFAULT '' AFTER couleur"); } catch (Exception $e) {}
 } catch (Exception $e) {}
 
 // Charger les équipements depuis la DB
@@ -28,7 +30,9 @@ try {
     foreach ($rows as $r) {
         $equip_db[$r['categorie']][] = $r;
     }
-} catch (Exception $e) {}
+} catch (Exception $e) {
+    error_log('equipements DB error: ' . $e->getMessage());
+}
 $use_db_equip = !empty($equip_db);
 
 // Charger toutes les sections et leurs images depuis la DB
@@ -128,6 +132,8 @@ require_once 'includes/header.php';
 .res-equip-name { font-size:.9rem;font-weight:700;color:#1a202c;line-height:1.3; }
 .res-equip-desc { font-size:.76rem;color:#718096;margin-top:3px; }
 .res-equip-qty { flex-shrink:0;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap; }
+.res-equip-photo { width:56px;height:46px;border-radius:8px;overflow:hidden;flex-shrink:0; }
+.res-equip-photo img { width:100%;height:100%;object-fit:cover; }
 
 .lightbox-overlay { display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);align-items:center;justify-content:center; }
 .lightbox-overlay.open { display:flex; }
@@ -275,10 +281,17 @@ require_once 'includes/header.php';
       <?php endif; ?>
       <div class="res-equip-grid">
         <?php if ($use_db): foreach ($items_db as $eq): ?>
-        <div class="res-equip-card">
+        <div class="res-equip-card<?= !empty($eq['image']) ? ' has-photo' : '' ?>">
+          <?php if (!empty($eq['image'])): ?>
+          <div class="res-equip-photo">
+            <img src="<?= SITE_URL ?>/uploads/equipements/<?= e($eq['image']) ?>"
+                 alt="<?= e($eq['nom']) ?>" loading="lazy">
+          </div>
+          <?php else: ?>
           <div class="res-equip-icon" style="background:<?= e($eq['couleur']) ?>18; color:<?= e($eq['couleur']) ?>;">
             <?= $svg_icons[$ckey] ?>
           </div>
+          <?php endif; ?>
           <div class="res-equip-info">
             <div class="res-equip-name"><?= e($eq['nom']) ?></div>
             <div class="res-equip-desc"><?= e($eq['description']) ?></div>

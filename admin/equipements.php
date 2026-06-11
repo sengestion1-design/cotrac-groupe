@@ -19,6 +19,7 @@ try {
         actif TINYINT(1) DEFAULT 1,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+    try { $db->exec("ALTER TABLE equipements ADD COLUMN image VARCHAR(300) DEFAULT '' AFTER couleur"); } catch (Exception $e) {}
 } catch (Exception $e) {}
 
 $message = '';
@@ -58,18 +59,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $couleur     = $categories[$categorie]['couleur'];
         $edit_id     = isset($_POST['edit_id']) && is_numeric($_POST['edit_id']) ? (int)$_POST['edit_id'] : 0;
 
+        // Gestion upload photo
+        $image_name = null;
+        if (!empty($_FILES['photo']['name'])) {
+            $ext = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+            if (in_array($ext, ['jpg','jpeg','png','webp']) && $_FILES['photo']['size'] <= 3*1024*1024) {
+                $upload_dir = __DIR__ . '/../uploads/equipements/';
+                if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
+                $image_name = 'eq_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
+                move_uploaded_file($_FILES['photo']['tmp_name'], $upload_dir . $image_name);
+            } else {
+                $message = 'Format ou taille invalide (max 3 Mo, JPG/PNG/WebP).';
+                $type_msg = 'error';
+            }
+        }
+
         if (!$nom) {
             $message = 'Le nom est obligatoire.';
             $type_msg = 'error';
         } elseif ($edit_id) {
-            $db->prepare("UPDATE equipements SET nom=?, description=?, quantite=?, categorie=?, couleur=? WHERE id=?")
-               ->execute([$nom, $description, $quantite, $categorie, $couleur, $edit_id]);
+            if ($image_name) {
+                $db->prepare("UPDATE equipements SET nom=?, description=?, quantite=?, categorie=?, couleur=?, image=? WHERE id=?")
+                   ->execute([$nom, $description, $quantite, $categorie, $couleur, $image_name, $edit_id]);
+            } else {
+                $db->prepare("UPDATE equipements SET nom=?, description=?, quantite=?, categorie=?, couleur=? WHERE id=?")
+                   ->execute([$nom, $description, $quantite, $categorie, $couleur, $edit_id]);
+            }
             $message = 'Équipement mis à jour.';
             $type_msg = 'success';
         } else {
             $max = (int)$db->query("SELECT MAX(sort_order) FROM equipements")->fetchColumn();
-            $db->prepare("INSERT INTO equipements (nom, description, quantite, categorie, couleur, sort_order) VALUES (?,?,?,?,?,?)")
-               ->execute([$nom, $description, $quantite, $categorie, $couleur, $max + 1]);
+            $db->prepare("INSERT INTO equipements (nom, description, quantite, categorie, couleur, image, sort_order) VALUES (?,?,?,?,?,?,?)")
+               ->execute([$nom, $description, $quantite, $categorie, $couleur, $image_name ?? '', $max + 1]);
             $message = 'Équipement ajouté.';
             $type_msg = 'success';
         }
@@ -177,7 +198,7 @@ $csrf = csrf_token();
         <h2 style="margin:0 0 20px;font-size:1.05rem;font-weight:700;color:#1a202c;">
           <?= $edit_item ? '✏️ Modifier l\'équipement' : '➕ Ajouter un équipement' ?>
         </h2>
-        <form method="post" action="equipements.php<?= $edit_item ? '?edit='.$edit_item['id'] : '' ?>">
+        <form method="post" enctype="multipart/form-data" action="equipements.php<?= $edit_item ? '?edit='.$edit_item['id'] : '' ?>">
           <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
           <?php if ($edit_item): ?>
           <input type="hidden" name="edit_id" value="<?= $edit_item['id'] ?>">
@@ -212,6 +233,16 @@ $csrf = csrf_token();
                      value="<?= e($edit_item['description'] ?? '') ?>"
                      placeholder="Ex : Terrassement & excavation">
             </div>
+            <div class="form-group form-full">
+              <label>Photo (optionnelle)</label>
+              <?php if (!empty($edit_item['image'])): ?>
+              <img src="<?= SITE_URL ?>/uploads/equipements/<?= e($edit_item['image']) ?>"
+                   style="height:80px;object-fit:cover;border-radius:8px;margin-bottom:8px;">
+              <?php endif; ?>
+              <input type="file" name="photo" accept="image/jpeg,image/png,image/webp"
+                     style="border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:.875rem;">
+              <span style="font-size:.75rem;color:#a0aec0;margin-top:4px;">JPG, PNG ou WebP — max 3 Mo</span>
+            </div>
           </div>
 
           <div style="display:flex;gap:12px;margin-top:20px;align-items:center;">
@@ -242,6 +273,7 @@ $csrf = csrf_token();
         <table class="eq-table">
           <thead>
             <tr>
+              <th>Photo</th>
               <th>Nom</th>
               <th>Description</th>
               <th>Quantité</th>
@@ -252,6 +284,14 @@ $csrf = csrf_token();
           <tbody>
             <?php foreach ($items as $eq): ?>
             <tr class="<?= !$eq['actif'] ? 'inactive' : '' ?>">
+              <td>
+                <?php if (!empty($eq['image'])): ?>
+                <img src="<?= SITE_URL ?>/uploads/equipements/<?= e($eq['image']) ?>"
+                     style="width:52px;height:40px;object-fit:cover;border-radius:6px;">
+                <?php else: ?>
+                <div style="width:52px;height:40px;background:#f0f4f8;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#cbd5e0;font-size:.7rem;">—</div>
+                <?php endif; ?>
+              </td>
               <td><strong><?= e($eq['nom']) ?></strong></td>
               <td style="color:#718096;"><?= e($eq['description']) ?></td>
               <td>
