@@ -272,8 +272,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: var(--bleu-dark);
   position: relative;
   overflow: hidden;
-  padding-top: calc(72px + 56px);
-  padding-bottom: 80px;
+  padding-top: calc(72px + 24px);
+  padding-bottom: 40px;
 }
 .hero::before {
   content: '';
@@ -391,7 +391,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  height: 300px;
+  height: 220px;
   box-shadow: 0 20px 56px rgba(0,0,0,0.32);
 }
 .hero-photo-main img {
