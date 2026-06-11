@@ -95,6 +95,15 @@ require_once 'includes/header.php';
 .res-stat-val { font-size:2rem;font-weight:800;color:var(--bleu);line-height:1; }
 .res-stat-label { font-size:.78rem;color:#718096;margin-top:6px;text-transform:uppercase;letter-spacing:.06em; }
 
+.res-equip-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:8px; }
+.res-equip-card { display:flex;align-items:center;gap:14px;background:#fff;border-radius:12px;padding:16px;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid #e8eef5;transition:transform .2s,box-shadow .2s; }
+.res-equip-card:hover { transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12); }
+.res-equip-icon { width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
+.res-equip-info { flex:1;min-width:0; }
+.res-equip-name { font-size:.9rem;font-weight:700;color:#1a202c;line-height:1.3; }
+.res-equip-desc { font-size:.76rem;color:#718096;margin-top:3px; }
+.res-equip-qty { flex-shrink:0;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap; }
+
 .lightbox-overlay { display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);align-items:center;justify-content:center; }
 .lightbox-overlay.open { display:flex; }
 .lightbox-img { max-width:90vw;max-height:88vh;object-fit:contain;border-radius:10px; }
@@ -119,57 +128,191 @@ require_once 'includes/header.php';
   </div>
 </section>
 
-<!-- ══ CONTENU ══ -->
-<div class="section bg-gris">
+<!-- ══ STATS ══ -->
+<div style="background:#fff; border-bottom:1px solid #e8eef5; padding:32px 0;">
   <div class="container">
-
-    <!-- Stats -->
-    <?php if (!empty($stats_f)): ?>
     <div class="res-stats">
-      <?php for ($i = 1; $i <= 4; $i++):
-        $val   = $stats_f["stat{$i}_value"] ?? '';
-        $label = $stats_f["stat{$i}_label"] ?? '';
-        if (!$val && !$label) continue;
-      ?>
-      <div class="res-stat-card">
-        <div class="res-stat-val"><?= e($val) ?></div>
-        <div class="res-stat-label"><?= e($label) ?></div>
-      </div>
-      <?php endfor; ?>
+      <div class="res-stat-card"><div class="res-stat-val counter" data-target="25">0</div><div class="res-stat-label">Engins lourds</div></div>
+      <div class="res-stat-card" style="border-top-color:#f7941d;"><div class="res-stat-val counter" data-target="12" style="color:#f7941d;">0</div><div class="res-stat-label">Postes à souder</div></div>
+      <div class="res-stat-card" style="border-top-color:#27ae60;"><div class="res-stat-val counter" data-target="10" style="color:#27ae60;">0</div><div class="res-stat-label">Véhicules & camions</div></div>
+      <div class="res-stat-card" style="border-top-color:#8e44ad;"><div class="res-stat-val counter" data-target="200" style="color:#8e44ad;">0</div><div class="res-stat-label">Équipements & outils</div></div>
     </div>
-    <?php endif; ?>
+  </div>
+</div>
+
+<!-- ══ ÉQUIPEMENTS ══ -->
+<div class="section" style="background:#f8fafd;">
+  <div class="container">
 
     <!-- Filtres -->
     <div class="res-filters">
       <button class="res-filter-btn active" data-cat="tous">Tout voir</button>
-      <?php foreach ($gallery_cats as $ckey => $cmeta): ?>
-      <button class="res-filter-btn" data-cat="<?= $ckey ?>"><?= e($cmeta['label']) ?></button>
-      <?php endforeach; ?>
+      <button class="res-filter-btn" data-cat="engins">Engins TP</button>
+      <button class="res-filter-btn" data-cat="electrique">Électrique</button>
+      <button class="res-filter-btn" data-cat="industriel">Génie Industriel</button>
+      <button class="res-filter-btn" data-cat="vehicules">Véhicules</button>
     </div>
 
-    <!-- Sections galeries -->
-    <?php foreach ($gallery_cats as $ckey => $cmeta):
-      $sec   = $sec_by_key[$ckey] ?? null;
-      if (!$sec || !$sec['active']) continue;
-      $sid   = $sec['id'];
-      $imgs  = $images_by_sec[$sid] ?? [];
-      $stitle = $fields_by_sec[$sid]['section_title'] ?? $cmeta['label'];
-      if (empty($imgs)) continue;
-    ?>
-    <div class="res-category" data-cat="<?= $ckey ?>">
+    <!-- ENGINS TP -->
+    <div class="res-category" data-cat="engins">
       <div class="res-cat-header">
-        <div class="res-cat-bar" style="background:<?= $cmeta['color'] ?>;"></div>
-        <h2 class="res-cat-title"><?= e($stitle) ?></h2>
-        <span class="res-cat-count"><?= count($imgs) ?> photo<?= count($imgs)>1?'s':'' ?></span>
+        <div class="res-cat-bar" style="background:#1a6bb5;"></div>
+        <h2 class="res-cat-title">Engins de Travaux Publics</h2>
+        <span class="res-cat-count">10 équipements</span>
       </div>
-      <div class="res-grid">
-        <?php foreach ($imgs as $idx => $img):
-          $url = res_img_url($img['image_path']);
-        ?>
-        <div class="res-card animate-fade-up"
-             onclick="openLightbox('<?= $ckey ?>', <?= $idx ?>)">
-          <img class="res-card-img" src="<?= e($url) ?>"
-               alt="<?= e($img['alt_text']) ?>" loading="lazy">
+      <div class="res-equip-grid">
+        <?php $engins = [
+          ['Pelle mécanique Caterpillar 325C','2 unités','Terrassement & excavation','#1a6bb5'],
+          ['Bulldozer Caterpillar D8R','2 unités','Décapage & nivellement','#1a6bb5'],
+          ['Chargeur Caterpillar 930-950','2 unités','Chargement & manutention','#1a6bb5'],
+          ['Niveleuse Caterpillar 140H','2 unités','Mise en forme plateforme','#1a6bb5'],
+          ['Compacteurs mécaniques','2 unités','Compactage des sols','#1a6bb5'],
+          ['Dumper / Tombereau','—','Transport matériaux chantier','#1a6bb5'],
+          ['Grue de chantier','—','Levage & manutention lourde','#1a6bb5'],
+          ['Monte-charge électrique 1000kg','1 unité','Élévation charges','#1a6bb5'],
+          ['Vibrateur à béton','1 unité','Mise en place béton','#1a6bb5'],
+          ['Compresseur à air','—','Outils pneumatiques','#1a6bb5'],
+        ]; foreach ($engins as $eq): ?>
+        <div class="res-equip-card animate-fade-up">
+          <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          </div>
+          <div class="res-equip-info">
+            <div class="res-equip-name"><?= $eq[0] ?></div>
+            <div class="res-equip-desc"><?= $eq[2] ?></div>
+          </div>
+          <?php if ($eq[1] !== '—'): ?>
+          <span class="res-equip-qty" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;"><?= $eq[1] ?></span>
+          <?php endif; ?>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+    <!-- VÉHICULES -->
+    <div class="res-category" data-cat="vehicules">
+      <div class="res-cat-header">
+        <div class="res-cat-bar" style="background:#f7941d;"></div>
+        <h2 class="res-cat-title">Véhicules & Transport</h2>
+        <span class="res-cat-count">5 équipements</span>
+      </div>
+      <div class="res-equip-grid">
+        <?php $vehicules = [
+          ['Camion benne 12m³','—','Transport matériaux','#f7941d'],
+          ['Camion benne 20m³','—','Transport grands volumes','#f7941d'],
+          ['Camion porte-charge Renault Crax 440','1 unité','Transport engins lourds','#f7941d'],
+          ['Camion-citerne','—','Alimentation eau chantier','#f7941d'],
+          ['Véhicules de liaison pick-up','—','Mobilité équipes terrain','#f7941d'],
+        ]; foreach ($vehicules as $eq): ?>
+        <div class="res-equip-card animate-fade-up">
+          <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <div class="res-equip-info">
+            <div class="res-equip-name"><?= $eq[0] ?></div>
+            <div class="res-equip-desc"><?= $eq[2] ?></div>
+          </div>
+          <?php if ($eq[1] !== '—'): ?>
+          <span class="res-equip-qty" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;"><?= $eq[1] ?></span>
+          <?php endif; ?>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+    <!-- ÉLECTRIQUE -->
+    <div class="res-category" data-cat="electrique">
+      <div class="res-cat-header">
+        <div class="res-cat-bar" style="background:#27ae60;"></div>
+        <h2 class="res-cat-title">Équipements Électriques</h2>
+        <span class="res-cat-count">8 équipements</span>
+      </div>
+      <div class="res-equip-grid">
+        <?php $electrique = [
+          ['Groupe électrogène 15 KVA','1 unité','Alimentation électrique chantier','#27ae60'],
+          ['Groupes électrogènes jusqu\'à 450 KVA','—','Alimentation industrielle','#27ae60'],
+          ['Poteaux béton armé','—','Supports lignes aériennes','#27ae60'],
+          ['Pylônes métalliques','—','Supports HTA haute tension','#27ae60'],
+          ['Transformateurs HTA/BT','—','Postes de transformation','#27ae60'],
+          ['Cellules préfabriquées HTA','—','Distribution haute tension','#27ae60'],
+          ['Luminaires LED / SHP','—','Éclairage public','#27ae60'],
+          ['Câbles électriques HTA/BT','—','Réseaux aériens & souterrains','#27ae60'],
+        ]; foreach ($electrique as $eq): ?>
+        <div class="res-equip-card animate-fade-up">
+          <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div class="res-equip-info">
+            <div class="res-equip-name"><?= $eq[0] ?></div>
+            <div class="res-equip-desc"><?= $eq[2] ?></div>
+          </div>
+          <?php if ($eq[1] !== '—'): ?>
+          <span class="res-equip-qty" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;"><?= $eq[1] ?></span>
+          <?php endif; ?>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+    <!-- GÉNIE INDUSTRIEL -->
+    <div class="res-category" data-cat="industriel">
+      <div class="res-cat-header">
+        <div class="res-cat-bar" style="background:#8e44ad;"></div>
+        <h2 class="res-cat-title">Génie Industriel & Soudure</h2>
+        <span class="res-cat-count">10 équipements</span>
+      </div>
+      <div class="res-equip-grid">
+        <?php $industriel = [
+          ['Postes à souder','12 unités','Soudage MIG/TIG/Arc','#8e44ad'],
+          ['Jeux de chalumeaux complets','4 unités','Soudage oxyacétylénique','#8e44ad'],
+          ['Meuleuses grand modèle','2 unités','Meulage & découpe','#8e44ad'],
+          ['Meuleuses petit modèle','2 unités','Finition & ébarbage','#8e44ad'],
+          ['Caisses à outils soudeurs','3 unités','Outillage soudure','#8e44ad'],
+          ['Caisses à outils chaudronnerie','3 unités','Outillage chaudronnerie','#8e44ad'],
+          ['Palans & élingues','—','Levage industriel','#8e44ad'],
+          ['Machines-outils (tour, fraiseuse)','—','Usinage pièces mécaniques','#8e44ad'],
+          ['Bétonnières 350 & 500 L','2 unités','Préparation béton','#8e44ad'],
+          ['Matériels topographiques','—','Relevés & implantations','#8e44ad'],
+        ]; foreach ($industriel as $eq): ?>
+        <div class="res-equip-card animate-fade-up">
+          <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          </div>
+          <div class="res-equip-info">
+            <div class="res-equip-name"><?= $eq[0] ?></div>
+            <div class="res-equip-desc"><?= $eq[2] ?></div>
+          </div>
+          <?php if ($eq[1] !== '—'): ?>
+          <span class="res-equip-qty" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;"><?= $eq[1] ?></span>
+          <?php endif; ?>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+
+    <!-- Galerie photos (si disponible) -->
+    <?php
+    $has_photos = false;
+    foreach ($gallery_cats as $ckey => $cmeta) {
+      $sec = $sec_by_key[$ckey] ?? null;
+      if ($sec && !empty($images_by_sec[$sec['id']])) { $has_photos = true; break; }
+    }
+    if ($has_photos): ?>
+    <div style="margin-top:48px;">
+      <div class="res-cat-header">
+        <div class="res-cat-bar" style="background:#1a6bb5;"></div>
+        <h2 class="res-cat-title">Galerie Photos</h2>
+      </div>
+      <?php foreach ($gallery_cats as $ckey => $cmeta):
+        $sec = $sec_by_key[$ckey] ?? null;
+        if (!$sec || !$sec['active']) continue;
+        $imgs = $images_by_sec[$sec['id']] ?? [];
+        if (empty($imgs)) continue;
+      ?>
+      <div class="res-grid" style="margin-bottom:32px;">
+        <?php foreach ($imgs as $idx => $img): $url = res_img_url($img['image_path']); ?>
+        <div class="res-card" onclick="openLightbox('<?= $ckey ?>', <?= $idx ?>)">
+          <img class="res-card-img" src="<?= e($url) ?>" alt="<?= e($img['alt_text']) ?>" loading="lazy">
           <div class="res-card-body">
             <span class="res-card-label" style="background:<?= $cmeta['color'] ?>;"><?= e($cmeta['label']) ?></span>
             <p class="res-card-title"><?= e($img['caption'] ?: $img['alt_text']) ?></p>
@@ -177,8 +320,9 @@ require_once 'includes/header.php';
         </div>
         <?php endforeach; ?>
       </div>
+      <?php endforeach; ?>
     </div>
-    <?php endforeach; ?>
+    <?php endif; ?>
 
   </div>
 </div>
