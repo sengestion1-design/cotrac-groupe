@@ -595,11 +595,11 @@ return [
 
 
     // ── Index — Hero ────────────────────────────────────────────
-    'index_hero_badge'            => 'Entreprise Sénégalaise de Référence depuis 2015',
-    'index_hero_titre'            => 'Bâtissons l\'Avenir du <span>Sénégal</span> Ensemble',
-    'index_hero_sous_titre'       => 'COTRAC intervient sur 4 pôles d\'excellence - BTP, réseaux électriques HTA/BT, construction de routes et ouvrages d\'art, génie industrielle et VMC - pour concevoir, réaliser et livrer des infrastructures durables qui transforment le Sénégal.',
-    'index_hero_btn_realisations' => 'Voir nos réalisations',
-    'index_hero_btn_contact'      => 'Nous contacter',
+    'index_hero_badge'            => 'Entreprise BTP &amp; Énergie — Agréée SENELEC depuis 2015',
+    'index_hero_titre'            => 'Infrastructures durables livrées clés en main au <span>Sénégal</span>',
+    'index_hero_sous_titre'       => 'BTP, réseaux électriques HTA/BT, routes et ouvrages d\'art, génie industriel et climatisation — COTRAC conçoit et réalise vos projets d\'infrastructure avec 10 ans d\'expérience terrain.',
+    'index_hero_btn_realisations' => 'Consulter nos réalisations',
+    'index_hero_btn_contact'      => 'Demander un devis',
     'index_hero_stat_ans'         => 'Ans d\'expérience',
     'index_hero_stat_projets'     => 'Projets réalisés',
     'index_hero_stat_poles'       => 'Pôles d\'activités',
