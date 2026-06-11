@@ -300,7 +300,7 @@ require_once 'includes/header.php';
       $partenaires = [
           'PROQUELEC', 'Expresso Sénégal', 'SENELEC', 'SOBOA',
           'ICS - Industries Chimiques du Sénégal', 'DIYAR KABLO',
-          'ARMTEK ELEKTRIK', 'SENICO', 'SEN\'EAU', 'WISE Energy Solutions',
+          'Armatek (Turquie)', 'SENICO', 'SEN\'EAU', 'WISE Energy Solutions',
       ];
       foreach ($partenaires as $i => $p):
         $delay = ($i % 3) + 1;

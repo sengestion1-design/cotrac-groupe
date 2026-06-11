@@ -42,7 +42,7 @@ require_once 'includes/header.php';
         <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;"><?= t('routes_stat_regions') ?></div>
       </div>
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
-        <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">15+</div>
+        <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">10+</div>
         <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;"><?= t('routes_stat_annees') ?></div>
       </div>
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
@@ -164,7 +164,7 @@ require_once 'includes/header.php';
           <div style="font-size:.68rem;opacity:.85;text-transform:uppercase;letter-spacing:.06em;"><?= t('routes_mini_regions') ?></div>
         </div>
         <div style="background:#7f4f24;color:#fff;border-radius:12px;padding:16px;text-align:center;">
-          <div style="font-size:1.4rem;font-weight:800;">15+</div>
+          <div style="font-size:1.4rem;font-weight:800;">10+</div>
           <div style="font-size:.68rem;opacity:.85;text-transform:uppercase;letter-spacing:.06em;"><?= t('routes_mini_annees') ?></div>
         </div>
         <div style="background:#27ae60;color:#fff;border-radius:12px;padding:16px;text-align:center;">

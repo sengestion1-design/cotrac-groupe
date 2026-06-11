@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/lang/lang.php';
 require_once __DIR__ . '/config/database.php';
-$page_title = 'Génie Industrielle, VMC & Isolation Thermique | COTRAC';
+$page_title = 'Génie Industriel, VMC & Isolation Thermique | COTRAC';
 $page_desc  = 'COTRAC réalise vos installations industrielles au Sénégal : calorifugeage, isolation cryogénique, VMC, chambres froides, charpente métallique, tuyauterie HP et faux plafonds techniques.';
 cms_load('industrie');
 require_once 'includes/header.php';
@@ -364,13 +364,13 @@ require 'includes/galerie.php';
         <?= t('industrie_cta_desc') ?>
       </p>
       <div style="display:flex;flex-direction:column;gap:14px;">
-        <a href="tel:+221338604040" style="display:flex;align-items:center;gap:14px;color:#fff;text-decoration:none;font-weight:500;">
+        <a href="tel:+221338279639" style="display:flex;align-items:center;gap:14px;color:#fff;text-decoration:none;font-weight:500;">
           <span style="background:#f7941d;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><?= icon('phone','','.95rem') ?></span>
-          +221 33 860 40 40
+          +221 33 827 96 39
         </a>
-        <a href="mailto:contact@cotrac.sn" style="display:flex;align-items:center;gap:14px;color:#fff;text-decoration:none;font-weight:500;">
+        <a href="mailto:cotracsenegal@gmail.com" style="display:flex;align-items:center;gap:14px;color:#fff;text-decoration:none;font-weight:500;">
           <span style="background:#f7941d;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><?= icon('mail','','.95rem') ?></span>
-          contact@cotrac.sn
+          cotracsenegal@gmail.com
         </a>
         <div style="display:flex;align-items:center;gap:14px;color:rgba(255,255,255,0.72);font-weight:500;">
           <span style="background:rgba(255,255,255,0.12);border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><?= icon('map-pin','','.95rem') ?></span>
