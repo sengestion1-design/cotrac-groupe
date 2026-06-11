@@ -346,6 +346,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  /* ---- Compteurs animés (stats hero) ---- */
+  const animateCounter = (el) => {
+    const target = parseInt(el.dataset.target, 10);
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const step = 16;
+    const increment = target / (duration / step);
+    let current = 0;
+    el.textContent = '0' + suffix;
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      el.textContent = Math.floor(current) + suffix;
+    }, step);
+  };
+
+  const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.stat-value[data-target]').forEach(el => {
+          if (!el.dataset.animated) {
+            el.dataset.animated = '1';
+            animateCounter(el);
+          }
+        });
+      }
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.hero-stats').forEach(el => statsObserver.observe(el));
+
   /* ---- Ripple effect sur les boutons ---- */
   document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('click', function(e) {

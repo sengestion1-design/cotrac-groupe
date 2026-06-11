@@ -342,7 +342,43 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   margin-bottom: 36px;
   line-height: 1.8;
 }
-.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 40px; }
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+
+/* Bouton appel direct */
+.btn-appel {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #25D366; color: #fff; font-weight: 700;
+  font-size: .9rem; padding: 13px 22px; border-radius: 50px;
+  text-decoration: none; position: relative; overflow: visible;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.4);
+}
+.btn-appel:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(37,211,102,0.55); color: #fff; }
+.btn-appel-pulse {
+  position: absolute; inset: -4px; border-radius: 50px;
+  border: 2px solid rgba(37,211,102,0.5);
+  animation: appel-pulse 1.8s ease-out infinite;
+}
+@keyframes appel-pulse {
+  0%   { transform: scale(1); opacity: .8; }
+  100% { transform: scale(1.18); opacity: 0; }
+}
+
+/* Agréments hero */
+.hero-agrements {
+  display: flex; align-items: center; gap: 10px;
+  flex-wrap: wrap; margin-bottom: 28px;
+}
+.agrement-label {
+  font-size: .78rem; color: rgba(255,255,255,.55);
+  text-transform: uppercase; letter-spacing: .08em;
+}
+.agrement-badge {
+  display: inline-flex; align-items: center;
+  background: rgba(247,148,29,0.15); border: 1px solid rgba(247,148,29,0.4);
+  color: #f7941d; font-size: .78rem; font-weight: 700;
+  padding: 4px 12px; border-radius: 50px; letter-spacing: .04em;
+}
 
 /* Stats sous les boutons */
 .hero-stats {
