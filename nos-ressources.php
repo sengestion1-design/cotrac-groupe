@@ -113,6 +113,24 @@ require_once 'includes/header.php';
 .lightbox-nav:hover { background:rgba(255,255,255,.3); }
 .lightbox-prev { left:16px; }
 .lightbox-next { right:16px; }
+
+/* Galerie photos */
+.gal-tabs { display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px; }
+.gal-tab { border:2px solid #e2e8f0;background:#fff;border-radius:999px;padding:7px 20px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;color:#4a5568; }
+.gal-tab:hover,.gal-tab.active { background:var(--bleu);border-color:var(--bleu);color:#fff; }
+.gal-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px; }
+.gal-card { border-radius:14px;overflow:hidden;background:#fff;box-shadow:0 2px 12px rgba(0,0,0,.08);cursor:pointer;transition:transform .2s,box-shadow .2s; }
+.gal-card:hover { transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.14); }
+.gal-card.hidden { display:none; }
+.gal-img-wrap { position:relative;aspect-ratio:16/10;overflow:hidden; }
+.gal-img-wrap img { width:100%;height:100%;object-fit:cover;transition:transform .35s; }
+.gal-card:hover .gal-img-wrap img { transform:scale(1.06); }
+.gal-overlay { position:absolute;inset:0;background:rgba(26,107,181,.45);opacity:0;transition:opacity .25s;display:flex;align-items:center;justify-content:center; }
+.gal-card:hover .gal-overlay { opacity:1; }
+.gal-zoom { color:#fff;font-size:2rem;font-weight:300; }
+.gal-caption { padding:10px 14px 12px; }
+.gal-badge { display:inline-block;color:#fff;font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:20px;text-transform:uppercase;margin-bottom:5px; }
+.gal-caption p { margin:0;font-size:.82rem;color:#4a5568;line-height:1.4;font-weight:500; }
 </style>
 
 <!-- ══ HERO ══ -->
@@ -295,39 +313,72 @@ require_once 'includes/header.php';
       </div>
     </div>
 
-    <!-- Galerie photos (si disponible) -->
-    <?php
-    $has_photos = false;
-    foreach ($gallery_cats as $ckey => $cmeta) {
-      $sec = $sec_by_key[$ckey] ?? null;
-      if ($sec && !empty($images_by_sec[$sec['id']])) { $has_photos = true; break; }
-    }
-    if ($has_photos): ?>
-    <div style="margin-top:48px;">
+    <!-- ══ GALERIE PHOTOS STATIQUE ══ -->
+    <div style="margin-top:56px;" id="galerie">
       <div class="res-cat-header">
         <div class="res-cat-bar" style="background:#1a6bb5;"></div>
         <h2 class="res-cat-title">Galerie Photos</h2>
+        <span class="res-cat-count">24 photos</span>
       </div>
-      <?php foreach ($gallery_cats as $ckey => $cmeta):
-        $sec = $sec_by_key[$ckey] ?? null;
-        if (!$sec || !$sec['active']) continue;
-        $imgs = $images_by_sec[$sec['id']] ?? [];
-        if (empty($imgs)) continue;
+
+      <!-- Onglets galerie -->
+      <div class="gal-tabs">
+        <button class="gal-tab active" data-gtab="tous">Tout voir</button>
+        <button class="gal-tab" data-gtab="engins">Engins & Véhicules</button>
+        <button class="gal-tab" data-gtab="btp">BTP & Production</button>
+        <button class="gal-tab" data-gtab="electrique">Électrique</button>
+        <button class="gal-tab" data-gtab="logistique">Logistique</button>
+      </div>
+
+      <?php
+      $galerie = [
+        // [fichier, légende, onglet, couleur]
+        ['engin-camion-60t.jpg',          'Camion 60 tonnes COTRAC',              'engins',    '#1a6bb5'],
+        ['engin-camions.jpg',             'Parc camions — maintenance',            'engins',    '#1a6bb5'],
+        ['engin-camions-16m3.jpg',        'Camions bennes 16m³',                  'engins',    '#1a6bb5'],
+        ['engin-camion-benne.jpg',        'Camions bennes chargement',            'engins',    '#1a6bb5'],
+        ['engin-chargeur.jpg',            'Chargeur COTRAC en opération',         'engins',    '#1a6bb5'],
+        ['prod-presse-briques.jpg',       'Presse à briques — production',        'btp',       '#f7941d'],
+        ['prod-presse-briques2.jpg',      'Machine briques pondeuses COTRAC',     'btp',       '#f7941d'],
+        ['prod-chantier-vue.jpg',         'Vue générale chantier de production',  'btp',       '#f7941d'],
+        ['prod-sechage-agglos.jpg',       'Aire de séchage agglos et bordures',   'btp',       '#f7941d'],
+        ['prod-depot-materiaux.jpg',      'Dépôts sables, agglos et bétons',      'btp',       '#f7941d'],
+        ['prod-citerne.jpg',              'Citerne COTRAC — alimentation eau',    'btp',       '#f7941d'],
+        ['elec-eclairage-poteau.jpg',     'Installation luminaire LED sur poteau','electrique','#27ae60'],
+        ['elec-plan-reseau.jpg',          'Ingénieure COTRAC — plan réseau BT',  'electrique','#27ae60'],
+        ['elec-pose-poteau.jpg',          'Pose poteau béton — réseau rural',     'electrique','#27ae60'],
+        ['elec-pose-poteaux-grue.jpg',    'Pose poteaux béton à la grue',         'electrique','#27ae60'],
+        ['elec-tranchee-cable.jpg',       'Tranchée câble souterrain HTA',        'electrique','#27ae60'],
+        ['elec-cellule-hta.jpg',          'Cellule HTA préfabriquée EATON',       'electrique','#27ae60'],
+        ['elec-poste-transformation.jpg', 'Poste de transformation HTA/BT',       'electrique','#27ae60'],
+        ['elec-genie-industriel.jpg',     'Travaux génie industriel — usine',     'electrique','#27ae60'],
+        ['logi-chargeur-echafaudage.jpg', 'Chargeur + échafaudages — logistique','logistique','#8e44ad'],
+        ['logi-betonnieres.jpg',          'Bétonnières COTRAC 500L',              'logistique','#8e44ad'],
+        ['logi-monte-charge.jpg',         'Monte-charge électrique chantier',     'logistique','#8e44ad'],
+        ['logi-betonnieres2.jpg',         'Livraison bétonnière 500L',            'logistique','#8e44ad'],
+        ['equipe-terrain.jpg',            'Équipe COTRAC — inspection terrain',   'btp',       '#f7941d'],
+      ];
       ?>
-      <div class="res-grid" style="margin-bottom:32px;">
-        <?php foreach ($imgs as $idx => $img): $url = res_img_url($img['image_path']); ?>
-        <div class="res-card" onclick="openLightbox('<?= $ckey ?>', <?= $idx ?>)">
-          <img class="res-card-img" src="<?= e($url) ?>" alt="<?= e($img['alt_text']) ?>" loading="lazy">
-          <div class="res-card-body">
-            <span class="res-card-label" style="background:<?= $cmeta['color'] ?>;"><?= e($cmeta['label']) ?></span>
-            <p class="res-card-title"><?= e($img['caption'] ?: $img['alt_text']) ?></p>
+
+      <div class="gal-grid" id="galGrid">
+        <?php foreach ($galerie as $idx => $g):
+          $src = SITE_URL . '/assets/ressources/' . $g[0];
+        ?>
+        <div class="gal-card animate-fade-up" data-gtab="<?= $g[2] ?>" onclick="openGal(<?= $idx ?>)">
+          <div class="gal-img-wrap">
+            <img src="<?= $src ?>" alt="<?= htmlspecialchars($g[1]) ?>" loading="lazy">
+            <div class="gal-overlay">
+              <span class="gal-zoom">⊕</span>
+            </div>
+          </div>
+          <div class="gal-caption">
+            <span class="gal-badge" style="background:<?= $g[3] ?>;"><?= ucfirst($g[2]) ?></span>
+            <p><?= htmlspecialchars($g[1]) ?></p>
           </div>
         </div>
         <?php endforeach; ?>
       </div>
-      <?php endforeach; ?>
     </div>
-    <?php endif; ?>
 
   </div>
 </div>
@@ -389,7 +440,7 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape')     closeLightbox();
 });
 
-// Filtres
+// Filtres équipements
 document.querySelectorAll('.res-filter-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
     document.querySelectorAll('.res-filter-btn').forEach(function(b){ b.classList.remove('active'); });
@@ -397,6 +448,63 @@ document.querySelectorAll('.res-filter-btn').forEach(function(btn) {
     var cat = btn.dataset.cat;
     document.querySelectorAll('.res-category').forEach(function(sec) {
       sec.style.display = (cat === 'tous' || sec.dataset.cat === cat) ? '' : 'none';
+    });
+  });
+});
+
+// Galerie photos — données
+var _galData = <?php
+  $gd = [];
+  foreach ($galerie as $g) {
+    $gd[] = ['url' => SITE_URL . '/assets/ressources/' . $g[0], 'titre' => $g[1], 'tab' => $g[2]];
+  }
+  echo json_encode($gd);
+?>;
+var _galVisible = _galData.map(function(_,i){ return i; });
+var _galCurrent = 0;
+
+function openGal(idx) {
+  // Recalcule les visibles dans l'onglet actif
+  var activeTab = document.querySelector('.gal-tab.active');
+  var tab = activeTab ? activeTab.dataset.gtab : 'tous';
+  _galVisible = [];
+  _galData.forEach(function(g, i) {
+    if (tab === 'tous' || g.tab === tab) _galVisible.push(i);
+  });
+  _galCurrent = _galVisible.indexOf(idx);
+  if (_galCurrent < 0) _galCurrent = 0;
+  showGalItem();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function showGalItem() {
+  var idx = _galVisible[_galCurrent];
+  var item = _galData[idx];
+  if (!item) return;
+  document.getElementById('lightboxImg').src = item.url;
+  document.getElementById('lightboxCaption').textContent = item.titre + ' (' + (_galCurrent+1) + ' / ' + _galVisible.length + ')';
+}
+
+// Override nav pour galerie statique
+function lightboxNav(dir) {
+  if (_galVisible.length) {
+    _galCurrent = (_galCurrent + dir + _galVisible.length) % _galVisible.length;
+    showGalItem();
+  } else {
+    var len = (_lbCats[_lbCat] || []).length;
+    _lbIdx = (_lbIdx + dir + len) % len;
+    showLightboxItem();
+  }
+}
+
+// Onglets galerie
+document.querySelectorAll('.gal-tab').forEach(function(tab) {
+  tab.addEventListener('click', function() {
+    document.querySelectorAll('.gal-tab').forEach(function(t){ t.classList.remove('active'); });
+    tab.classList.add('active');
+    var sel = tab.dataset.gtab;
+    document.querySelectorAll('.gal-card').forEach(function(card) {
+      card.classList.toggle('hidden', sel !== 'tous' && card.dataset.gtab !== sel);
     });
   });
 });
