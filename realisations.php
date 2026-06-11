@@ -7,6 +7,34 @@ cms_load('realisations');
 require_once 'includes/header.php';
 
 $db = getDB();
+
+// Migration auto : ajout colonnes si absentes
+try {
+    $db->exec("ALTER TABLE projets ADD COLUMN IF NOT EXISTS annee VARCHAR(10) DEFAULT NULL");
+    $db->exec("ALTER TABLE projets ADD COLUMN IF NOT EXISTS montant VARCHAR(100) DEFAULT NULL");
+    $db->exec("ALTER TABLE projets ADD COLUMN IF NOT EXISTS lieu VARCHAR(150) DEFAULT NULL");
+    // Remplir les données manquantes depuis les PDFs
+    $updates = [
+        ["annee='2023', montant='262 889 361 FCFA', lieu='Dakar'", "%ESP/UCAD%"],
+        ["annee='2022', lieu='Ngor, Dakar'", "%Commune de Ngor%"],
+        ["annee='2018', lieu='Ngoundiane, Thiès'", "%Ngoundiane%"],
+        ["annee='2017', lieu='Fass-Colobane, Dakar'", "%allée Fass%"],
+        ["lieu='Matam et Kanel'", "%Matam-Kanel%"],
+        ["lieu='Louga'", "%Louga%"],
+        ["lieu='Sébikhotane'", "%Sébikhotane%"],
+        ["lieu='Thiès'", "%silex Thiès%"],
+        ["lieu='Diamniadio'", "%Diamniadio%"],
+        ["lieu='Les Mamelles, Dakar'", "%Mamelles%"],
+        ["lieu='Ziguinchor (Oussouye)'", "%Ziguinchor%"],
+        ["lieu='Sénégal'", "%SENELEC%"],
+        ["lieu='Keur Katim'", "%Keur Katim%"],
+        ["lieu='Diack'", "%Diack%"],
+    ];
+    foreach ($updates as [$set, $like]) {
+        $db->exec("UPDATE projets SET $set WHERE titre LIKE '$like' AND lieu IS NULL");
+    }
+} catch (Exception $e) { /* colonnes déjà présentes */ }
+
 $pole_filter = isset($_GET['pole']) && in_array($_GET['pole'], ['btp','energie','routes','industrie']) ? $_GET['pole'] : 'tous';
 
 if ($pole_filter === 'tous') {
@@ -162,6 +190,30 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
               <?php if (!empty($projet['nature_travaux'])): ?>
                 <div style="margin-top:6px; font-size:.8rem; color:var(--gris);">
                   &#9881; <?= e(mb_strimwidth($projet['nature_travaux'], 0, 55, '...')) ?>
+                </div>
+              <?php endif; ?>
+
+              <!-- Détails : lieu, année, montant -->
+              <?php if (!empty($projet['lieu']) || !empty($projet['annee']) || !empty($projet['montant'])): ?>
+                <div style="margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;">
+                  <?php if (!empty($projet['lieu'])): ?>
+                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:.75rem;color:#555;background:#f1f5f9;padding:3px 9px;border-radius:20px;">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                      <?= e($projet['lieu']) ?>
+                    </span>
+                  <?php endif; ?>
+                  <?php if (!empty($projet['annee'])): ?>
+                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:.75rem;color:#555;background:#f1f5f9;padding:3px 9px;border-radius:20px;">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                      <?= e($projet['annee']) ?>
+                    </span>
+                  <?php endif; ?>
+                  <?php if (!empty($projet['montant'])): ?>
+                    <span style="display:inline-flex;align-items:center;gap:4px;font-size:.75rem;color:#1a6bb5;background:#e8f1fb;padding:3px 9px;border-radius:20px;font-weight:600;">
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                      <?= e($projet['montant']) ?>
+                    </span>
+                  <?php endif; ?>
                 </div>
               <?php endif; ?>
 
