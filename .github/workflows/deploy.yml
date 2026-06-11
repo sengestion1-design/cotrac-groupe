@@ -33,6 +33,12 @@ jobs:
             git diff --name-only HEAD~2 HEAD~1 > /tmp/changed_files.txt
           fi
 
+          # Toujours inclure ces fichiers critiques
+          echo "index.php" >> /tmp/changed_files.txt
+          echo "assets/css/style.css" >> /tmp/changed_files.txt
+          echo "includes/header.php" >> /tmp/changed_files.txt
+
+          sort -u /tmp/changed_files.txt -o /tmp/changed_files.txt
           cat /tmp/changed_files.txt
 
           while IFS= read -r file; do
