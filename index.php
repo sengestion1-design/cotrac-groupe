@@ -261,7 +261,7 @@ $db = getDB();
       </div>
       <div class="stat-item">
         <div class="stat-item-num">
-          <span class="counter" data-target="4">0</span>
+          <span class="counter" data-target="5">0</span>
         </div>
         <div class="stat-item-label"><?= t('index_stats_poles_label') ?></div>
         <div class="stat-item-desc"><?= t('index_stats_poles_desc') ?></div>
