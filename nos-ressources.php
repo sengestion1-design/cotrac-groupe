@@ -216,16 +216,15 @@ require_once 'includes/header.php';
       <div class="res-cat-header">
         <div class="res-cat-bar" style="background:#f7941d;"></div>
         <h2 class="res-cat-title">Véhicules & Transport</h2>
-        <span class="res-cat-count">6 équipements</span>
+        <span class="res-cat-count">5 équipements</span>
       </div>
       <div class="res-equip-grid">
         <?php $vehicules = [
           ['Camions 20m³','5 unités','Transport grands volumes','#f7941d'],
-          ['Camion benne 12m³','—','Transport matériaux chantier','#f7941d'],
+          ['Camion benne 12m³ & 20m³','2 unités','Transport matériaux chantier','#f7941d'],
           ['Camion porte-charge Renault Crax 440','1 unité','Transport engins lourds','#f7941d'],
-          ['Camion-citerne','—','Alimentation eau chantier','#f7941d'],
+          ['Camion-citerne','1 unité','Alimentation eau chantier','#f7941d'],
           ['Véhicules de liaison pick-up','7 unités','Mobilité équipes terrain','#f7941d'],
-          ['Dumper / Tombereau','4 unités','Transport matériaux sur chantier','#f7941d'],
         ]; foreach ($vehicules as $eq): ?>
         <div class="res-equip-card animate-fade-up">
           <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
@@ -247,19 +246,20 @@ require_once 'includes/header.php';
     <div class="res-category" data-cat="electrique">
       <div class="res-cat-header">
         <div class="res-cat-bar" style="background:#27ae60;"></div>
-        <h2 class="res-cat-title">Équipements Électriques</h2>
-        <span class="res-cat-count">8 équipements</span>
+        <h2 class="res-cat-title">Prestations & Matériaux Électriques</h2>
+        <span class="res-cat-count">8 prestations</span>
       </div>
+      <p style="color:#718096;font-size:.88rem;margin:-8px 0 20px;font-style:italic;">Matériaux fournis et installés chez le client dans le cadre des travaux d'électrification.</p>
       <div class="res-equip-grid">
         <?php $electrique = [
-          ['Groupe électrogène 15 KVA','1 unité','Alimentation électrique chantier','#27ae60'],
-          ['Groupes électrogènes jusqu\'à 450 KVA','—','Alimentation industrielle','#27ae60'],
-          ['Poteaux béton armé','—','Supports lignes aériennes','#27ae60'],
-          ['Pylônes métalliques','—','Supports HTA haute tension','#27ae60'],
-          ['Transformateurs HTA/BT','—','Postes de transformation','#27ae60'],
-          ['Cellules préfabriquées HTA','—','Distribution haute tension','#27ae60'],
-          ['Luminaires LED / SHP','—','Éclairage public','#27ae60'],
-          ['Câbles électriques HTA/BT','—','Réseaux aériens & souterrains','#27ae60'],
+          ['Groupe électrogène 15 KVA','1 unité (parc)','Alimentation électrique chantier','#27ae60'],
+          ['Groupes électrogènes jusqu\'à 450 KVA','installation client','Fourniture & pose sur site client','#27ae60'],
+          ['Poteaux béton armé','fourniture & pose','Supports lignes aériennes HTA/BT','#27ae60'],
+          ['Pylônes métalliques','fourniture & pose','Supports lignes haute tension','#27ae60'],
+          ['Transformateurs HTA/BT','fourniture & pose','Construction postes de transformation','#27ae60'],
+          ['Cellules préfabriquées HTA','fourniture & pose','Distribution haute tension','#27ae60'],
+          ['Luminaires LED / SHP','fourniture & pose','Éclairage public & industriel','#27ae60'],
+          ['Câbles électriques HTA/BT','fourniture & pose','Réseaux aériens & souterrains','#27ae60'],
         ]; foreach ($electrique as $eq): ?>
         <div class="res-equip-card animate-fade-up">
           <div class="res-equip-icon" style="background:<?= $eq[3] ?>18; color:<?= $eq[3] ?>;">
