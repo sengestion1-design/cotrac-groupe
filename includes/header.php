@@ -18,7 +18,7 @@ $page_desc  = $page_desc  ?? 'COTRAC, entreprise sénégalaise spécialisée en 
   <meta property="og:description" content="<?= e($page_desc) ?>">
   <meta property="og:type" content="website">
   <title><?= e($page_title) ?></title>
-  <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css">
+  <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css?v=<?= filemtime(__DIR__.'/../assets/css/style.css') ?>">
   <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon.png">
   <style>
     /* ── Sous-menu dropdown ── */
