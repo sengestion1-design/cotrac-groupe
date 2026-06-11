@@ -12,7 +12,7 @@ return [
     'nav_poles_energie_label' => 'Énergie',
     'nav_poles_energie'    => 'Réseaux Électriques HTA/BT',
     'nav_poles_routes'     => 'Routes, Pistes & Ouvrages',
-    'nav_poles_industrie'  => 'Génie Industrielle & VMC',
+    'nav_poles_industrie'  => 'Génie Industriel & VMC',
     'nav_poles_froid_clim' => 'Génie Industriel Froid & Climatisation',
     'nav_realisations'     => 'Réalisations',
     'nav_galerie'          => 'Galerie',
@@ -23,7 +23,7 @@ return [
     // ── Hero ────────────────────────────────────────────────────────
     'hero_tag'             => 'Entreprise Sénégalaise de BTP',
     'hero_titre'           => 'Bâtir l\'avenir <br>du <span>Sénégal</span>',
-    'hero_sous_titre'      => 'COTRAC conçoit et réalise vos projets de construction, réseaux électriques, routes et génie industrielle avec excellence depuis 2015.',
+    'hero_sous_titre'      => 'COTRAC conçoit et réalise vos projets de construction, réseaux électriques, routes et génie industriel avec excellence depuis 2015.',
     'hero_btn_projets'     => 'Voir nos projets',
     'hero_btn_contact'     => 'Demander un devis',
     'hero_stat_projets'    => 'Projets réalisés',
@@ -53,7 +53,7 @@ return [
 
     // ── Footer ──────────────────────────────────────────────────────
     'footer_tagline'            => 'Compagnie des Travaux et Constructions',
-    'footer_desc'               => 'Entreprise sénégalaise de référence dans les domaines du BTP, des réseaux électriques, de la construction routière et du génie industrielle depuis 2015.',
+    'footer_desc'               => 'Entreprise sénégalaise de référence dans les domaines du BTP, des réseaux électriques, de la construction routière et du génie industriel depuis 2015.',
     'footer_poles'              => 'Nos Pôles',
     'footer_liens'              => 'Liens Rapides',
     'footer_infos'              => 'Informations',
@@ -67,7 +67,7 @@ return [
 
     // ── Contact — page ──────────────────────────────────────────────
     'contact_page_title'        => 'Contactez-nous | COTRAC',
-    'contact_page_desc'         => 'Contactez COTRAC pour vos projets BTP, réseaux électriques, routes ou génie industrielle au Sénégal.',
+    'contact_page_desc'         => 'Contactez COTRAC pour vos projets BTP, réseaux électriques, routes ou génie industriel au Sénégal.',
     'contact_breadcrumb'        => 'Contact',
     'contact_hero_titre'        => 'Contactez <span>COTRAC</span>',
     'contact_hero_desc'         => 'Notre équipe est à votre écoute pour étudier vos projets et vous accompagner dans toutes les phases de leur réalisation.',
@@ -141,10 +141,10 @@ return [
     'galerie_label_general'     => 'Général',
 
     'galerie_page_title'        => 'Galerie Photos – COTRAC',
-    'galerie_page_desc'         => 'Découvrez en images les chantiers et réalisations de COTRAC : BTP, réseaux électriques, routes, génie industrielle.',
+    'galerie_page_desc'         => 'Découvrez en images les chantiers et réalisations de COTRAC : BTP, réseaux électriques, routes, génie industriel.',
     'galerie_tag'               => 'Notre Galerie',
     'galerie_hero_titre'        => 'Nos chantiers <span>en images</span>',
-    'galerie_hero_desc'         => 'Découvrez les réalisations de COTRAC à travers notre galerie photographique : BTP, réseaux électriques, routes et génie industrielle au Sénégal.',
+    'galerie_hero_desc'         => 'Découvrez les réalisations de COTRAC à travers notre galerie photographique : BTP, réseaux électriques, routes et génie industriel au Sénégal.',
     'galerie_breadcrumb'        => 'Galerie',
     'galerie_empty_titre'       => 'Aucune photo dans cette catégorie',
     'galerie_empty_desc'        => 'Les photos seront bientôt disponibles.',
@@ -408,8 +408,8 @@ return [
 
     // ── Industrie — Hero ────────────────────────────────────────
     'industrie_breadcrumb_poles'    => 'Nos Pôles',
-    'industrie_breadcrumb_page'     => 'Génie Industrielle',
-    'industrie_hero_titre'          => 'Génie Industrielle, <span>VMC &amp; Isolation</span>',
+    'industrie_breadcrumb_page'     => 'Génie Industriel',
+    'industrie_hero_titre'          => 'Génie Industriel, <span>VMC &amp; Isolation</span>',
     'industrie_hero_desc'           => 'Des techniciens de haut niveau, une grande expérience dans la construction, le montage et l\'entretien d\'unités industrielles complexes. COTRAC intervient en <strong class="text-orange">forfait ou en régie</strong>, avec une capacité de mobilisation rapide sur l\'ensemble du territoire sénégalais et en Afrique de l\'Ouest.',
     'industrie_stat1_label'         => 'Années industrie',
     'industrie_stat2_label'         => 'Fabrication gaines',
@@ -420,7 +420,7 @@ return [
     // ── Industrie — Section domaines ────────────────────────────
     'industrie_tag_domaines'        => 'Expertise',
     'industrie_titre_domaines'      => 'Nos Domaines Industriels',
-    'industrie_desc_domaines'       => 'Dix spécialités techniques complémentaires pour couvrir l\'ensemble des besoins en génie industrielle, VMC, isolation et équipements frigorifiques.',
+    'industrie_desc_domaines'       => 'Dix spécialités techniques complémentaires pour couvrir l\'ensemble des besoins en génie industriel, VMC, isolation et équipements frigorifiques.',
 
     // ── Industrie — Services ────────────────────────────────────
     'industrie_s1_titre'   => 'Construction Mécanique',
@@ -484,7 +484,7 @@ return [
     'industrie_equip6_i4'           => 'Niveaux laser et matériels topographiques',
 
     // ── Industrie — Stats section ────────────────────────────────
-    'industrie_stats1_label'        => 'Années en génie industrielle',
+    'industrie_stats1_label'        => 'Années en génie industriel',
     'industrie_stats2_label'        => 'Capacité de fabrication de gaines',
     'industrie_stats3_label'        => 'Tunnels de congélation réalisés',
     'industrie_stats4_val'          => 'Exclusif',
@@ -630,7 +630,7 @@ return [
     'pole_routes_tag2'            => 'Ponts',
     'pole_routes_tag3'            => 'VRD',
     'pole_routes_tag4'            => 'Pistes rurales',
-    'pole_industrie_titre'        => 'Génie Industrielle & VMC',
+    'pole_industrie_titre'        => 'Génie Industriel & VMC',
     'pole_industrie_desc'         => 'Construction mécanique, ventilation, climatisation et réfrigération industrielle. Réalisation de chambres froides, installations de VMC et systèmes de traitement d\'air pour unités de production, entrepôts et bâtiments tertiaires.',
     'pole_industrie_tag1'         => 'Construction mécanique',
     'pole_industrie_tag2'         => 'VMC',
