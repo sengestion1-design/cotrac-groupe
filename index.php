@@ -63,24 +63,38 @@ $db = getDB();
       </div>
 
       <!-- Colonne droite : slider -->
-      <!-- Colonne droite : 2 photos fixes -->
+      <!-- Colonne droite : 2 colonnes de photos défilantes -->
       <div class="hero-right animate-fade-up delay-2">
-        <div class="hero-photo-main">
-          <img src="<?= SITE_URL ?>/assets/images/energie/pose-poteau-grue.jpg"
-               alt="<?= t('img_alt_chantier_elec') ?>" loading="eager">
-          <div class="hero-photo-badge">
-            <span class="stat-value">✓</span>
-            <span class="stat-label"><?= t('index_hero_badge_senelec') ?></span>
+        <?php
+        $col1 = [
+          ['src'=>'assets/images/energie/pose-poteau-grue.jpg',          'alt'=>'Pose poteau'],
+          ['src'=>'assets/images/energie/tranchee-cable-bt.jpg',         'alt'=>'Tranchée BT'],
+          ['src'=>'assets/images/equipe/equipe-terrain.jpg',             'alt'=>'Équipe terrain'],
+          ['src'=>'assets/images/energie/poteau-transformateur.jpg',     'alt'=>'Transformateur'],
+          ['src'=>'assets/images/energie/armoire-coupure-hta.jpg',       'alt'=>'Armoire HTA'],
+        ];
+        $col2 = [
+          ['src'=>'assets/images/equipe/gilet-cotrac.jpg',               'alt'=>'Équipe COTRAC'],
+          ['src'=>'assets/images/industrie/genie-industriel-chantier.jpg','alt'=>'Génie industriel'],
+          ['src'=>'assets/images/energie/raccordement-cable.jpg',        'alt'=>'Raccordement'],
+          ['src'=>'assets/images/energie/ligne-hta-transformateur.jpg',  'alt'=>'Ligne HTA'],
+          ['src'=>'assets/images/energie/jonction-cable-hta.jpg',        'alt'=>'Jonction HTA'],
+        ];
+        ?>
+        <div class="hero-vcols">
+          <div class="hero-vcol hero-vcol--up">
+            <?php foreach (array_merge($col1, $col1) as $p): ?>
+            <div class="hero-vcol-card">
+              <img src="<?= SITE_URL ?>/<?= e($p['src']) ?>" alt="<?= e($p['alt']) ?>" loading="eager">
+            </div>
+            <?php endforeach; ?>
           </div>
-        </div>
-        <div class="hero-photo-grid">
-          <div class="hero-photo-sm">
-            <img src="<?= SITE_URL ?>/assets/images/equipe/gilet-cotrac.jpg"
-                 alt="<?= t('img_alt_technicien') ?>" loading="eager">
-          </div>
-          <div class="hero-photo-sm">
-            <img src="<?= SITE_URL ?>/assets/images/industrie/genie-industriel-chantier.jpg"
-                 alt="<?= t('img_alt_chantier_indus') ?>" loading="eager">
+          <div class="hero-vcol hero-vcol--down">
+            <?php foreach (array_merge($col2, $col2) as $p): ?>
+            <div class="hero-vcol-card">
+              <img src="<?= SITE_URL ?>/<?= e($p['src']) ?>" alt="<?= e($p['alt']) ?>" loading="eager">
+            </div>
+            <?php endforeach; ?>
           </div>
         </div>
       </div>
@@ -96,51 +110,6 @@ $db = getDB();
     </svg>
   </div>
 </section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     BANDE PHOTOS DÉFILANTE
-═══════════════════════════════════════════════════════════ -->
-<div class="hero-band-section">
-  <?php
-  $band_cols = [
-    [ // colonne 1
-      ['src'=>'assets/images/energie/pose-poteau-grue.jpg',          'alt'=>'Pose poteau'],
-      ['src'=>'assets/images/energie/tranchee-cable-bt.jpg',         'alt'=>'Tranchée BT'],
-      ['src'=>'assets/images/equipe/equipe-terrain.jpg',             'alt'=>'Équipe terrain'],
-      ['src'=>'assets/images/energie/poteau-transformateur.jpg',     'alt'=>'Transformateur'],
-    ],
-    [ // colonne 2
-      ['src'=>'assets/images/energie/ligne-hta-transformateur.jpg',  'alt'=>'Ligne HTA'],
-      ['src'=>'assets/images/industrie/genie-industriel-chantier.jpg','alt'=>'Génie industriel'],
-      ['src'=>'assets/images/energie/raccordement-cable.jpg',        'alt'=>'Raccordement'],
-      ['src'=>'assets/images/equipe/gilet-cotrac.jpg',               'alt'=>'Équipe COTRAC'],
-    ],
-    [ // colonne 3
-      ['src'=>'assets/images/energie/tranchee-chantier.jpg',         'alt'=>'Chantier'],
-      ['src'=>'assets/images/energie/jonction-cable-hta.jpg',        'alt'=>'Jonction HTA'],
-      ['src'=>'assets/images/energie/armoire-coupure-hta.jpg',       'alt'=>'Armoire HTA'],
-      ['src'=>'assets/images/equipe/ingenieure-plans.jpg',           'alt'=>'Ingénieure plans'],
-    ],
-    [ // colonne 4
-      ['src'=>'assets/images/energie/dechargement-supports.jpg',     'alt'=>'Déchargement'],
-      ['src'=>'assets/images/energie/pose-poteau-equipe.jpg',        'alt'=>'Pose poteau équipe'],
-      ['src'=>'assets/images/energie/tranchee-fourreaux.jpg',        'alt'=>'Fourreaux'],
-      ['src'=>'assets/images/energie/tetes-cable-hta.jpg',           'alt'=>'Têtes câble'],
-    ],
-  ];
-  ?>
-  <div class="hero-band-track">
-    <?php foreach ($band_cols as $col): ?>
-    <div class="hero-band-col">
-      <?php foreach (array_merge($col, $col) as $p): ?>
-      <div class="hero-band-card">
-        <img src="<?= SITE_URL ?>/<?= e($p['src']) ?>" alt="<?= e($p['alt']) ?>" loading="lazy">
-      </div>
-      <?php endforeach; ?>
-    </div>
-    <?php endforeach; ?>
-  </div>
-</div>
 
 
 <!-- ═══════════════════════════════════════════════════════════
