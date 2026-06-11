@@ -379,29 +379,24 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   white-space: nowrap;
 }
 
-/* Colonne droite — photos */
 /* ── Hero Right ── */
 .hero-right {
   display: flex;
   flex-direction: column;
   gap: 12px;
   min-width: 0;
-  width: 100%;
   overflow: hidden;
 }
-
 .hero-photo-main {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
   height: 300px;
-  width: 100%;
   box-shadow: 0 20px 56px rgba(0,0,0,0.32);
 }
 .hero-photo-main img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center;
   display: block;
 }
 .hero-photo-badge {
@@ -417,6 +412,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   gap: 10px;
   color: #fff;
   z-index: 2;
+}
+.hero-photo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.hero-photo-sm {
+  border-radius: 14px;
+  overflow: hidden;
+  height: 130px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+}
+.hero-photo-sm img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 /* ── Bande photos défilante horizontale (sous hero) ── */
@@ -467,18 +478,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   100% { transform: translateX(-50%); }
 }
 
-/* Restaurer hero-photo-grid */
-.hero-photo-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.hero-photo-sm {
-  border-radius: 14px;
-  overflow: hidden;
-  height: 120px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-}
 .hero-photo-sm img {
   width: 100%; height: 100%;
   object-fit: cover;
