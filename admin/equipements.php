@@ -179,6 +179,22 @@ $csrf = csrf_token();
       <div class="alert <?= $type_msg ?>"><?= e($message) ?></div>
       <?php endif; ?>
 
+      <?php if (isset($_GET['synced'])): ?>
+      <div class="alert success"><?= (int)$_GET['synced'] ?> équipement(s) associés aux photos existantes.</div>
+      <?php endif; ?>
+
+      <!-- Bouton sync photos -->
+      <div style="background:#f0f7ff;border:1px solid #bee3f8;border-radius:10px;padding:14px 18px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div>
+          <strong style="color:#1a6bb5;">📷 Synchroniser les photos existantes</strong>
+          <p style="margin:4px 0 0;font-size:.82rem;color:#4a5568;">Associe automatiquement les photos de la galerie (assets/ressources/) aux équipements correspondants.</p>
+        </div>
+        <form method="post" action="ajax/sync-equipements-photos.php" style="margin:0;">
+          <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+          <button type="submit" class="btn-sm btn-edit" style="padding:8px 18px;">Synchroniser les photos</button>
+        </form>
+      </div>
+
       <?php
       // Vérifier si la table est vide → proposer import
       $count = (int)$db->query("SELECT COUNT(*) FROM equipements")->fetchColumn();
@@ -235,8 +251,12 @@ $csrf = csrf_token();
             </div>
             <div class="form-group form-full">
               <label>Photo (optionnelle)</label>
-              <?php if (!empty($edit_item['image'])): ?>
-              <img src="<?= SITE_URL ?>/uploads/equipements/<?= e($edit_item['image']) ?>"
+              <?php if (!empty($edit_item['image'])):
+                $ei_url = str_starts_with($edit_item['image'], 'assets/') || str_starts_with($edit_item['image'], 'uploads/')
+                    ? SITE_URL . '/' . $edit_item['image']
+                    : SITE_URL . '/uploads/equipements/' . $edit_item['image'];
+              ?>
+              <img src="<?= e($ei_url) ?>"
                    style="height:80px;object-fit:cover;border-radius:8px;margin-bottom:8px;">
               <?php endif; ?>
               <input type="file" name="photo" accept="image/jpeg,image/png,image/webp"
@@ -285,8 +305,12 @@ $csrf = csrf_token();
             <?php foreach ($items as $eq): ?>
             <tr class="<?= !$eq['actif'] ? 'inactive' : '' ?>">
               <td>
-                <?php if (!empty($eq['image'])): ?>
-                <img src="<?= SITE_URL ?>/uploads/equipements/<?= e($eq['image']) ?>"
+                <?php if (!empty($eq['image'])):
+                  $li_url = str_starts_with($eq['image'], 'assets/') || str_starts_with($eq['image'], 'uploads/')
+                      ? SITE_URL . '/' . $eq['image']
+                      : SITE_URL . '/uploads/equipements/' . $eq['image'];
+                ?>
+                <img src="<?= e($li_url) ?>"
                      style="width:52px;height:40px;object-fit:cover;border-radius:6px;">
                 <?php else: ?>
                 <div style="width:52px;height:40px;background:#f0f4f8;border-radius:6px;display:flex;align-items:center;justify-content:center;color:#cbd5e0;font-size:.7rem;">—</div>

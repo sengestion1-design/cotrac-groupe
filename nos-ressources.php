@@ -282,9 +282,14 @@ require_once 'includes/header.php';
       <div class="res-equip-grid">
         <?php if ($use_db): foreach ($items_db as $eq): ?>
         <div class="res-equip-card<?= !empty($eq['image']) ? ' has-photo' : '' ?>">
-          <?php if (!empty($eq['image'])): ?>
+          <?php if (!empty($eq['image'])):
+            // Chemin absolu (assets/...) ou nom de fichier seul (uploads/equipements/)
+            $eq_img_url = str_starts_with($eq['image'], 'assets/') || str_starts_with($eq['image'], 'uploads/')
+                ? SITE_URL . '/' . $eq['image']
+                : SITE_URL . '/uploads/equipements/' . $eq['image'];
+          ?>
           <div class="res-equip-photo">
-            <img src="<?= SITE_URL ?>/uploads/equipements/<?= e($eq['image']) ?>"
+            <img src="<?= e($eq_img_url) ?>"
                  alt="<?= e($eq['nom']) ?>" loading="lazy">
           </div>
           <?php else: ?>
