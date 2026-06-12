@@ -245,42 +245,51 @@ $db = getDB();
       </p>
     </div>
 
-    <div class="stats-grid">
-      <div class="stat-item">
-        <div class="stat-item-num">
-          <span class="counter" data-target="10">0</span>+
-        </div>
-        <div class="stat-item-label"><?= t('index_stats_ans_label') ?></div>
-        <div class="stat-item-desc"><?= t('index_stats_ans_desc') ?></div>
+    <div style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:center;margin-top:40px;">
+
+      <!-- Photo gauche -->
+      <div style="border-radius:16px;overflow:hidden;height:320px;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+        <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png"
+             alt="Équipe COTRAC" loading="lazy"
+             style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
-      <div class="stat-item">
-        <div class="stat-item-num">
-          <span class="counter" data-target="15">0</span>+
+
+      <!-- Chiffres au centre -->
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-item-num"><span class="counter" data-target="10">0</span>+</div>
+          <div class="stat-item-label"><?= t('index_stats_ans_label') ?></div>
+          <div class="stat-item-desc"><?= t('index_stats_ans_desc') ?></div>
         </div>
-        <div class="stat-item-label"><?= t('index_stats_projets_label') ?></div>
-        <div class="stat-item-desc"><?= t('index_stats_projets_desc') ?></div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-item-num">
-          <span class="counter" data-target="5">0</span>
+        <div class="stat-item">
+          <div class="stat-item-num"><span class="counter" data-target="15">0</span>+</div>
+          <div class="stat-item-label"><?= t('index_stats_projets_label') ?></div>
+          <div class="stat-item-desc"><?= t('index_stats_projets_desc') ?></div>
         </div>
-        <div class="stat-item-label"><?= t('index_stats_poles_label') ?></div>
-        <div class="stat-item-desc"><?= t('index_stats_poles_desc') ?></div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-item-num">
-          <span class="counter" data-target="100">0</span>+
+        <div class="stat-item">
+          <div class="stat-item-num"><span class="counter" data-target="5">0</span></div>
+          <div class="stat-item-label"><?= t('index_stats_poles_label') ?></div>
+          <div class="stat-item-desc"><?= t('index_stats_poles_desc') ?></div>
         </div>
-        <div class="stat-item-label"><?= t('index_stats_experts_label') ?></div>
-        <div class="stat-item-desc"><?= t('index_stats_experts_desc') ?></div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-item-num">
-          <span class="counter" data-target="15">0</span>+
+        <div class="stat-item">
+          <div class="stat-item-num"><span class="counter" data-target="100">0</span>+</div>
+          <div class="stat-item-label"><?= t('index_stats_experts_label') ?></div>
+          <div class="stat-item-desc"><?= t('index_stats_experts_desc') ?></div>
         </div>
-        <div class="stat-item-label"><?= t('index_stats_part_label') ?></div>
-        <div class="stat-item-desc"><?= t('index_stats_part_desc') ?></div>
+        <div class="stat-item">
+          <div class="stat-item-num"><span class="counter" data-target="15">0</span>+</div>
+          <div class="stat-item-label"><?= t('index_stats_part_label') ?></div>
+          <div class="stat-item-desc"><?= t('index_stats_part_desc') ?></div>
+        </div>
       </div>
+
+      <!-- Photo droite -->
+      <div style="border-radius:16px;overflow:hidden;height:320px;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+        <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-photo.jpg"
+             alt="COTRAC sur chantier" loading="lazy"
+             style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      </div>
+
     </div>
   </div>
 </section>
