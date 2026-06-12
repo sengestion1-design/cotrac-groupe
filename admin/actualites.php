@@ -299,28 +299,28 @@ $csrf = csrf_token();
             </div>
 
             <!-- Actions -->
-            <div style="flex-shrink:0;display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+            <div style="flex-shrink:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:flex-end;max-width:220px;">
               <a href="actualites.php?edit=<?= (int)$a['id'] ?>" onclick="showForm()"
-                 style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;background:#eef2ff;color:#4f46e5;font-size:.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                 style="display:inline-flex;align-items:center;gap:4px;padding:5px 11px;border-radius:6px;background:#eef2ff;color:#4f46e5;font-size:.75rem;font-weight:600;text-decoration:none;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
                 Modifier
               </a>
               <a href="actualites.php?toggle=<?= (int)$a['id'] ?>"
-                 style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;background:#f0f7ff;color:#1a6bb5;font-size:.78rem;font-weight:600;text-decoration:none;white-space:nowrap;"
-                 onclick="return confirm('Changer la visibilité de cet article ?')">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                 style="display:inline-flex;align-items:center;gap:4px;padding:5px 11px;border-radius:6px;background:#f0f7ff;color:#1a6bb5;font-size:.75rem;font-weight:600;text-decoration:none;"
+                 onclick="return confirm('Changer la visibilité ?')">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
                 <?= $a['actif'] ? 'Masquer' : 'Afficher' ?>
               </a>
               <a href="<?= SITE_URL ?>/actualite.php?id=<?= (int)$a['id'] ?>" target="_blank"
-                 style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;background:#f0fff4;color:#276749;font-size:.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                 style="display:inline-flex;align-items:center;gap:4px;padding:5px 11px;border-radius:6px;background:#f0fff4;color:#276749;font-size:.75rem;font-weight:600;text-decoration:none;">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 Voir
               </a>
               <a href="actualites.php?delete=<?= (int)$a['id'] ?>"
-                 style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;background:#fff5f5;color:#e53e3e;font-size:.78rem;font-weight:600;text-decoration:none;white-space:nowrap;"
-                 onclick="return confirm('Supprimer définitivement cet article ?')">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
-                Supprimer
+                 style="display:inline-flex;align-items:center;gap:4px;padding:5px 11px;border-radius:6px;background:#fff5f5;color:#e53e3e;font-size:.75rem;font-weight:600;text-decoration:none;"
+                 onclick="return confirm('Supprimer définitivement ?')">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                Suppr.
               </a>
             </div>
           </div>
