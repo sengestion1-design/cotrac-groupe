@@ -321,7 +321,7 @@ $db = getDB();
                loading="lazy">
         </div>
         <div class="galerie-item" style="aspect-ratio:4/3;">
-          <img src="<?= SITE_URL ?>/assets/images/equipe/gilet-cotrac.jpg"
+          <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg"
                alt="<?= t('img_alt_technicien_gilet') ?>"
                loading="lazy">
         </div>
