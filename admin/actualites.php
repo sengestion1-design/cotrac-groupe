@@ -113,6 +113,7 @@ if (isset($_GET['msg'])) {
     $msgs = [
         'imported'  => '4 articles d\'exemple importés. Modifiez-les avec vos vraies informations et photos.',
         'notempty'  => 'Des actualités existent déjà. Videz la liste avant de réimporter.',
+        'actu_btp'  => 'Article "Vision 2050 & BTP Sénégal" publié. Vous pouvez ajouter une photo via Modifier.',
     ];
     if (isset($msgs[$_GET['msg']])) {
         $message_retour = $msgs[$_GET['msg']];
@@ -215,11 +216,17 @@ $csrf = csrf_token();
             <p>Aucune actualité publiée. Créez-en une ci-dessus.</p>
             <div style="margin-top:16px;padding:14px 18px;background:#f0f7ff;border:1px solid #bee3f8;border-radius:10px;text-align:left;">
               <strong style="color:#1a6bb5;">Démarrage rapide</strong>
-              <p style="margin:6px 0 12px;font-size:.85rem;color:#4a5568;">Importez 4 articles d'exemple (chantiers, partenariats, actualités BTP) que vous pourrez modifier avec vos vraies informations.</p>
-              <form method="post" action="ajax/import-actualites.php" style="margin:0;">
-                <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
-                <button type="submit" class="btn-primary" style="font-size:.85rem;padding:9px 20px;">Importer 4 articles d'exemple</button>
-              </form>
+              <p style="margin:6px 0 12px;font-size:.85rem;color:#4a5568;">Importez des articles prêts à l'emploi que vous pourrez modifier avec vos vraies informations et photos.</p>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;">
+                <form method="post" action="ajax/insert-actu-btp.php" style="margin:0;">
+                  <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+                  <button type="submit" class="btn-primary" style="font-size:.85rem;padding:9px 20px;">📰 Publier l'article Vision 2050 & BTP</button>
+                </form>
+                <form method="post" action="ajax/import-actualites.php" style="margin:0;">
+                  <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+                  <button type="submit" class="btn-secondary" style="font-size:.85rem;padding:9px 20px;">Importer 4 articles d'exemple</button>
+                </form>
+              </div>
             </div>
           </div>
         <?php else: ?>
