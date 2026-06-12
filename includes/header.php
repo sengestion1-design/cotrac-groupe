@@ -19,7 +19,10 @@ $page_desc  = $page_desc  ?? 'COTRAC, entreprise sénégalaise spécialisée en 
   <meta property="og:type" content="website">
   <title><?= e($page_title) ?></title>
   <link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/style.css?v=<?= filemtime(__DIR__.'/../assets/css/style.css') ?>">
-  <link rel="icon" type="image/png" href="<?= SITE_URL ?>/assets/images/favicon.png">
+  <link rel="icon" type="image/x-icon" href="<?= SITE_URL ?>/assets/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="<?= SITE_URL ?>/assets/images/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="<?= SITE_URL ?>/assets/images/favicon-16.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="<?= SITE_URL ?>/assets/images/favicon-512.png">
   <style>
     /* ── Sous-menu dropdown ── */
     .dropdown-sub-item { position: relative; }
