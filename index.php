@@ -255,7 +255,7 @@ $db = getDB();
       </div>
 
       <!-- Chiffres au centre -->
-      <div class="stats-grid">
+      <div class="stats-grid" style="grid-template-columns:1fr;gap:16px;text-align:center;">
         <div class="stat-item">
           <div class="stat-item-num"><span class="counter" data-target="10">0</span>+</div>
           <div class="stat-item-label"><?= t('index_stats_ans_label') ?></div>
