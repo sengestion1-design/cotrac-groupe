@@ -181,149 +181,188 @@ $csrf = csrf_token();
 
   <main class="admin-main">
     <div class="admin-topbar">
-      <h1>📰 Actualités</h1>
+      <h1>Actualités</h1>
       <div class="admin-topbar-actions">
-        <span class="admin-user">Connecté : <strong><?= e($_SESSION['admin_user'] ?? 'Admin') ?></strong></span>
-        <a href="<?= SITE_URL ?>" target="_blank" class="btn-site">🌐 Voir le site</a>
+        <a href="<?= SITE_URL ?>/actualites.php" target="_blank" class="btn-site">Voir la page</a>
+        <button class="btn-primary" onclick="toggleForm()" id="btn-add-toggle" style="display:flex;align-items:center;gap:7px;padding:9px 20px;font-size:.875rem;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          <?= $edit_data ? 'Modifier l\'article' : 'Nouvel article' ?>
+        </button>
       </div>
     </div>
 
     <div class="admin-content">
 
       <?php if ($message_retour): ?>
-        <div class="alert alert-<?= $type_retour === 'success' ? 'success' : 'error' ?>">
-          <?= e($message_retour) ?>
-        </div>
+      <div class="alert alert-<?= $type_retour === 'success' ? 'success' : 'error' ?>" style="margin-bottom:20px;">
+        <?= e($message_retour) ?>
+      </div>
       <?php endif; ?>
 
-      <!-- Formulaire -->
-      <div class="admin-card">
-        <div class="admin-card-header">
-          <h3><?= $edit_data ? '✏️ Modifier l\'actualité' : '➕ Publier une actualité' ?></h3>
-          <?php if ($edit_data): ?>
-            <a href="actualites.php" class="btn-icon btn-edit">✕ Annuler</a>
-          <?php endif; ?>
-        </div>
-        <form method="POST" enctype="multipart/form-data">
-          <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
-          <?php if ($edit_data): ?>
+      <!-- ══ FORMULAIRE (masqué par défaut sauf si édition) ══ -->
+      <div class="actu-form-wrap" id="actu-form-wrap" style="<?= $edit_data ? '' : 'display:none;' ?>">
+        <div class="form-card" style="margin-bottom:24px;">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+            <h2 style="margin:0;font-size:1.05rem;font-weight:700;color:#1a202c;">
+              <?= $edit_data ? '✏️ Modifier l\'article' : '➕ Nouvel article' ?>
+            </h2>
+            <button type="button" onclick="toggleForm()" style="background:none;border:none;font-size:1.3rem;cursor:pointer;color:#a0aec0;line-height:1;">✕</button>
+          </div>
+          <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
+            <?php if ($edit_data): ?>
             <input type="hidden" name="edit_id" value="<?= (int)$edit_data['id'] ?>">
-          <?php endif; ?>
-
-          <div class="form-group">
-            <label>Titre *</label>
-            <input type="text" name="titre" value="<?= e($edit_data['titre'] ?? '') ?>"
-                   placeholder="Ex : COTRAC remporte un nouveau marché à Thiès" required>
-          </div>
-
-          <div class="form-group" style="margin-top:16px;">
-            <label>Contenu / Description</label>
-            <textarea name="contenu" placeholder="Rédigez le contenu de l'actualité..."><?= e($edit_data['contenu'] ?? '') ?></textarea>
-          </div>
-
-          <div class="form-group" style="margin-top:16px;">
-            <label>Image (JPG, PNG, WEBP - max 3 Mo)</label>
-            <?php if (!empty($edit_data['image'])): ?>
-              <div style="margin-bottom:8px;">
-                <img src="<?= SITE_URL ?>/uploads/actualites/<?= e($edit_data['image']) ?>" alt="Image actuelle"
-                     style="height:80px;width:160px;object-fit:cover;border-radius:8px;border:1px solid #e2e8f0;">
-                <span style="font-size:.75rem;color:#718096;display:block;margin-top:4px;">Image actuelle - laisser vide pour conserver</span>
-              </div>
             <?php endif; ?>
-            <input type="file" name="image" accept="image/*">
-          </div>
 
-          <div style="margin-top:20px;">
-            <button type="submit" class="btn-primary"><?= $edit_data ? '💾 Enregistrer' : '📢 Publier l\'actualité' ?></button>
-          </div>
-        </form>
+            <div class="form-group" style="margin-bottom:16px;">
+              <label style="font-size:.82rem;font-weight:600;color:#4a5568;display:block;margin-bottom:6px;">Titre *</label>
+              <input type="text" name="titre" value="<?= e($edit_data['titre'] ?? '') ?>"
+                     placeholder="Ex : COTRAC remporte un nouveau marché à Thiès" required
+                     style="width:100%;border:1.5px solid #e2e8f0;border-radius:8px;padding:10px 14px;font-size:.9rem;font-family:inherit;box-sizing:border-box;">
+            </div>
+
+            <div class="form-group" style="margin-bottom:16px;">
+              <label style="font-size:.82rem;font-weight:600;color:#4a5568;display:block;margin-bottom:6px;">Contenu</label>
+              <textarea name="contenu" placeholder="Rédigez le contenu de l'actualité..."
+                        style="width:100%;border:1.5px solid #e2e8f0;border-radius:8px;padding:10px 14px;font-size:.88rem;font-family:inherit;min-height:200px;resize:vertical;box-sizing:border-box;"><?= e($edit_data['contenu'] ?? '') ?></textarea>
+              <span style="font-size:.73rem;color:#a0aec0;margin-top:4px;display:block;">Séparez les paragraphes par une ligne vide. Les titres de section courts seront mis en valeur automatiquement.</span>
+            </div>
+
+            <div class="form-group" style="margin-bottom:20px;">
+              <label style="font-size:.82rem;font-weight:600;color:#4a5568;display:block;margin-bottom:6px;">Image <?= $edit_data ? '(laisser vide pour conserver)' : '(optionnelle)' ?></label>
+              <?php if (!empty($edit_data['image'])): ?>
+              <img src="<?= SITE_URL ?>/uploads/actualites/<?= e($edit_data['image']) ?>"
+                   style="height:80px;width:160px;object-fit:cover;border-radius:8px;margin-bottom:8px;display:block;">
+              <?php endif; ?>
+              <input type="file" name="image" accept="image/jpeg,image/png,image/webp"
+                     style="border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:.875rem;width:100%;box-sizing:border-box;">
+              <span style="font-size:.73rem;color:#a0aec0;margin-top:4px;display:block;">JPG, PNG ou WebP — max 3 Mo</span>
+            </div>
+
+            <div style="display:flex;gap:12px;align-items:center;">
+              <button type="submit" class="btn-primary">
+                <?= $edit_data ? 'Enregistrer les modifications' : 'Publier l\'article' ?>
+              </button>
+              <button type="button" onclick="toggleForm()" class="btn-secondary">Annuler</button>
+            </div>
+          </form>
+        </div>
       </div>
 
-      <!-- Liste -->
-      <div class="admin-card">
-        <div class="admin-card-header">
-          <h3>📋 Actualités publiées (<?= count($actualites) ?>)</h3>
+      <!-- ══ LISTE ARTICLES ══ -->
+      <div class="form-card" style="padding:20px 24px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+          <h3 style="margin:0;font-size:1rem;font-weight:700;color:#1a202c;">
+            Articles publiés <span style="font-size:.78rem;color:#a0aec0;font-weight:500;margin-left:6px;"><?= count($actualites) ?> article(s)</span>
+          </h3>
         </div>
+
         <?php if (empty($actualites)): ?>
-          <div class="empty-state">
-            <div class="empty-state-icon">📰</div>
-            <p>Aucune actualité publiée. Créez-en une ci-dessus.</p>
-            <div style="margin-top:16px;padding:14px 18px;background:#f0f7ff;border:1px solid #bee3f8;border-radius:10px;text-align:left;">
-              <strong style="color:#1a6bb5;">Démarrage rapide</strong>
-              <p style="margin:6px 0 12px;font-size:.85rem;color:#4a5568;">Importez des articles prêts à l'emploi que vous pourrez modifier avec vos vraies informations et photos.</p>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <form method="post" action="ajax/insert-actu-btp.php" style="margin:0;">
-                  <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
-                  <button type="submit" class="btn-primary" style="font-size:.85rem;padding:9px 20px;">📰 Publier l'article Vision 2050 & BTP</button>
-                </form>
-                <form method="post" action="ajax/import-actualites.php" style="margin:0;">
-                  <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
-                  <button type="submit" class="btn-secondary" style="font-size:.85rem;padding:9px 20px;">Importer 4 articles d'exemple</button>
-                </form>
+        <div style="text-align:center;padding:40px 20px;color:#a0aec0;">
+          <div style="font-size:2.5rem;margin-bottom:12px;">📰</div>
+          <p style="margin:0 0 20px;font-size:.9rem;">Aucun article pour le moment.</p>
+          <button onclick="toggleForm()" class="btn-primary" style="font-size:.85rem;padding:10px 22px;">Créer le premier article</button>
+        </div>
+
+        <?php else: ?>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <?php foreach ($actualites as $a):
+            $has_img = !empty($a['image']);
+            $mois_fr = ['January'=>'janvier','February'=>'février','March'=>'mars','April'=>'avril',
+                        'May'=>'mai','June'=>'juin','July'=>'juillet','August'=>'août',
+                        'September'=>'septembre','October'=>'octobre','November'=>'novembre','December'=>'décembre'];
+            $date_fmt = strtr(date('d F Y', strtotime($a['created_at'])), $mois_fr);
+            $extrait  = mb_strimwidth(strip_tags($a['contenu']), 0, 120, '…');
+          ?>
+          <div style="display:flex;gap:16px;align-items:flex-start;padding:16px;border-radius:12px;border:1.5px solid <?= $a['actif'] ? '#e2e8f0' : '#fde8e8' ?>;background:<?= $a['actif'] ? '#fff' : '#fffafa' ?>;">
+
+            <!-- Vignette -->
+            <div style="flex-shrink:0;width:90px;height:64px;border-radius:8px;overflow:hidden;background:#f0f4f8;">
+              <?php if ($has_img): ?>
+              <img src="<?= SITE_URL ?>/uploads/actualites/<?= e($a['image']) ?>"
+                   style="width:100%;height:100%;object-fit:cover;" alt="">
+              <?php else: ?>
+              <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:#cbd5e0;font-size:1.4rem;">📰</div>
+              <?php endif; ?>
+            </div>
+
+            <!-- Infos -->
+            <div style="flex:1;min-width:0;">
+              <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;flex-wrap:wrap;">
+                <strong style="font-size:.9rem;color:#1a202c;line-height:1.3;"><?= e($a['titre']) ?></strong>
+                <span style="font-size:.7rem;font-weight:700;padding:2px 9px;border-radius:20px;<?= $a['actif'] ? 'background:#f0fff4;color:#276749;' : 'background:#fff5f5;color:#c53030;' ?>">
+                  <?= $a['actif'] ? 'Publiée' : 'Masquée' ?>
+                </span>
               </div>
+              <p style="margin:0 0 6px;font-size:.8rem;color:#718096;line-height:1.5;"><?= e($extrait) ?></p>
+              <span style="font-size:.73rem;color:#a0aec0;"><?= e($date_fmt) ?></span>
+            </div>
+
+            <!-- Actions -->
+            <div style="flex-shrink:0;display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+              <a href="actualites.php?edit=<?= (int)$a['id'] ?>" onclick="showForm()"
+                 style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;background:#eef2ff;color:#4f46e5;font-size:.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                Modifier
+              </a>
+              <a href="actualites.php?toggle=<?= (int)$a['id'] ?>"
+                 style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;background:#f0f7ff;color:#1a6bb5;font-size:.78rem;font-weight:600;text-decoration:none;white-space:nowrap;"
+                 onclick="return confirm('Changer la visibilité de cet article ?')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <?= $a['actif'] ? 'Masquer' : 'Afficher' ?>
+              </a>
+              <a href="<?= SITE_URL ?>/actualite.php?id=<?= (int)$a['id'] ?>" target="_blank"
+                 style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;background:#f0fff4;color:#276749;font-size:.78rem;font-weight:600;text-decoration:none;white-space:nowrap;">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Voir
+              </a>
+              <a href="actualites.php?delete=<?= (int)$a['id'] ?>"
+                 style="display:inline-flex;align-items:center;gap:5px;padding:6px 14px;border-radius:6px;background:#fff5f5;color:#e53e3e;font-size:.78rem;font-weight:600;text-decoration:none;white-space:nowrap;"
+                 onclick="return confirm('Supprimer définitivement cet article ?')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                Supprimer
+              </a>
             </div>
           </div>
-        <?php else: ?>
-          <div style="overflow-x:auto;">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Titre</th>
-                  <th>Aperçu contenu</th>
-                  <th>Date</th>
-                  <th>Statut</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach ($actualites as $a): ?>
-                  <tr>
-                    <td>
-                      <?php if (!empty($a['image'])): ?>
-                        <img class="actu-img-preview"
-                             src="<?= SITE_URL ?>/uploads/actualites/<?= e($a['image']) ?>"
-                             alt="<?= e($a['titre']) ?>">
-                      <?php else: ?>
-                        <div style="width:100px;height:60px;background:#f1f5f9;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">📰</div>
-                      <?php endif; ?>
-                    </td>
-                    <td><strong><?= e($a['titre']) ?></strong></td>
-                    <td>
-                      <span class="actu-contenu-preview">
-                        <?= e($a['contenu'] ?: '(aucun contenu)') ?>
-                      </span>
-                    </td>
-                    <td style="white-space:nowrap;color:#718096;font-size:.82rem;">
-                      <?= e(date('d/m/Y', strtotime($a['created_at']))) ?>
-                    </td>
-                    <td>
-                      <?php if ($a['actif']): ?>
-                        <span class="badge badge-termine">✅ Publiée</span>
-                      <?php else: ?>
-                        <span class="badge badge-nonlu">🚫 Masquée</span>
-                      <?php endif; ?>
-                    </td>
-                    <td>
-                      <div class="action-btns">
-                        <a href="actualites.php?edit=<?= (int)$a['id'] ?>" class="btn-icon btn-edit">✏️ Modifier</a>
-                        <a href="actualites.php?toggle=<?= (int)$a['id'] ?>" class="btn-icon" style="background:#f0f4ff;color:#1a6bb5;">
-                          <?= $a['actif'] ? '👁 Masquer' : '👁 Afficher' ?>
-                        </a>
-                        <a href="actualites.php?delete=<?= (int)$a['id'] ?>" class="btn-icon btn-delete"
-                           onclick="return confirm('Supprimer cette actualité ?')">🗑 Suppr.</a>
-                      </div>
-                    </td>
-                  </tr>
-                <?php endforeach; ?>
-              </tbody>
-            </table>
-          </div>
+          <?php endforeach; ?>
+        </div>
         <?php endif; ?>
       </div>
 
     </div>
   </main>
 </div>
+
+<style>
+.form-card { background:#fff;border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(0,0,0,.07);margin-bottom:28px; }
+.btn-primary { background:#1a6bb5;color:#fff;border:none;border-radius:8px;padding:10px 22px;font-size:.875rem;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px;text-decoration:none; }
+.btn-primary:hover { background:#1558a0; }
+.btn-secondary { background:#f7f8fa;color:#4a5568;border:1.5px solid #e2e8f0;border-radius:8px;padding:9px 18px;font-size:.875rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block; }
+.actu-form-wrap { animation: slideDown .2s ease; }
+@keyframes slideDown { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
+</style>
+
+<script>
+function toggleForm() {
+  var wrap = document.getElementById('actu-form-wrap');
+  var btn  = document.getElementById('btn-add-toggle');
+  if (wrap.style.display === 'none') {
+    wrap.style.display = 'block';
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Fermer';
+    wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } else {
+    wrap.style.display = 'none';
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> Nouvel article';
+  }
+}
+function showForm() {
+  document.getElementById('actu-form-wrap').style.display = 'block';
+}
+<?php if ($edit_data): ?>
+document.getElementById('btn-add-toggle').innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg> Fermer';
+<?php endif; ?>
+</script>
+
+<?php require_once 'includes/footer.php'; ?>
 </body>
 </html>
