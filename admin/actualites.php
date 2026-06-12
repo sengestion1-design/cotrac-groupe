@@ -108,8 +108,21 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 // ---- Liste ----
 $actualites = $db->query("SELECT * FROM actualites ORDER BY created_at DESC")->fetchAll();
 
+// Messages import
+if (isset($_GET['msg'])) {
+    $msgs = [
+        'imported'  => '4 articles d\'exemple importés. Modifiez-les avec vos vraies informations et photos.',
+        'notempty'  => 'Des actualités existent déjà. Videz la liste avant de réimporter.',
+    ];
+    if (isset($msgs[$_GET['msg']])) {
+        $message_retour = $msgs[$_GET['msg']];
+        $type_retour    = $_GET['type'] ?? 'success';
+    }
+}
+
 $nb_messages = (int)$db->query("SELECT COUNT(*) FROM messages WHERE lu=0")->fetchColumn();
 $current_page = 'actualites';
+$csrf = csrf_token();
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -200,6 +213,14 @@ $current_page = 'actualites';
           <div class="empty-state">
             <div class="empty-state-icon">📰</div>
             <p>Aucune actualité publiée. Créez-en une ci-dessus.</p>
+            <div style="margin-top:16px;padding:14px 18px;background:#f0f7ff;border:1px solid #bee3f8;border-radius:10px;text-align:left;">
+              <strong style="color:#1a6bb5;">Démarrage rapide</strong>
+              <p style="margin:6px 0 12px;font-size:.85rem;color:#4a5568;">Importez 4 articles d'exemple (chantiers, partenariats, actualités BTP) que vous pourrez modifier avec vos vraies informations.</p>
+              <form method="post" action="ajax/import-actualites.php" style="margin:0;">
+                <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+                <button type="submit" class="btn-primary" style="font-size:.85rem;padding:9px 20px;">Importer 4 articles d'exemple</button>
+              </form>
+            </div>
           </div>
         <?php else: ?>
           <div style="overflow-x:auto;">
