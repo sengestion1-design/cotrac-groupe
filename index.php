@@ -867,7 +867,7 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
      CTA FINAL
 ═══════════════════════════════════════════════════════════ -->
 <section class="stats-section">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+  <div class="container cta-grid">
 
     <!-- Gauche : contact info -->
     <div class="animate-fade-up delay-1">
@@ -926,4 +926,18 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
   </div>
 </section>
 
+<style>
+.cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .cta-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+</style>
 <?php require_once 'includes/footer.php'; ?>
