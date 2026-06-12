@@ -90,6 +90,7 @@ $db = getDB();
       ['src'=>'assets/images/energie/raccordement-cable.jpg',         'alt'=>'Raccordement'],
       ['src'=>'assets/images/energie/ligne-hta-transformateur.jpg',   'alt'=>'Ligne HTA'],
       ['src'=>'assets/images/energie/jonction-cable-hta.jpg',         'alt'=>'Jonction HTA'],
+      ['src'=>'assets/images/equipe/equipe-bureau.jpg',               'alt'=>'Équipe COTRAC en réunion'],
     ];
     $photos = array_merge($photos, $photos);
     ?>
