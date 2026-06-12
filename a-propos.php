@@ -385,6 +385,14 @@ require_once __DIR__ . '/includes/header.php';
     <span class="section-tag"><?= icon('users') ?> <?= t('apropos_equipe_tag') ?></span>
     <h2 class="section-title"><?= t('apropos_equipe_titre') ?></h2>
     <p class="section-sub"><?= t('apropos_equipe_desc') ?></p>
+
+    <!-- Photo d'équipe complète -->
+    <div style="margin:0 auto 48px;max-width:860px;border-radius:20px;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,0.14);">
+      <img src="<?= SITE_URL ?>/assets/images/equipe/equipe-bureau.jpg"
+           alt="Équipe COTRAC en réunion de travail"
+           style="width:100%;height:420px;object-fit:cover;object-position:center top;display:block;">
+    </div>
+
     <div class="equipe-grid">
 
       <div class="equipe-card stagger-item">
