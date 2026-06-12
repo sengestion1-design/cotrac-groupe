@@ -46,24 +46,8 @@ $page_desc  = $page_desc  ?? 'COTRAC, entreprise sénégalaise spécialisée en 
       transform: translateX(0);
     }
     .dropdown-sub-item:hover .sub-arrow { transform: rotate(90deg); }
-    @media (max-width: 900px) {
-      .dropdown-sub {
-        position: static;
-        opacity: 1;
-        visibility: visible;
-        transform: none;
-        box-shadow: none;
-        border: none;
-        padding: 0 0 0 20px;
-        min-width: unset;
-        width: 100%;
-      }
-      .dropdown-sub-trigger {
-        justify-content: flex-start !important;
-        gap: 8px;
-      }
-      .dropdown-sub-trigger .sub-arrow { display: none; }
-      .dropdown-sub-item { width: 100%; }
+    @media (max-width: 768px) {
+      .dropdown-sub-trigger { justify-content: flex-start !important; }
     }
     /* ── Switcher de langue ── */
     .lang-switcher {
