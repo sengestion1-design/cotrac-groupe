@@ -248,14 +248,14 @@ $db = getDB();
     <div style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:center;margin-top:40px;">
 
       <!-- Photo gauche -->
-      <div style="border-radius:16px;overflow:hidden;height:320px;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+      <div style="border-radius:16px;overflow:hidden;height:220px;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
         <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png"
              alt="Équipe COTRAC" loading="lazy"
              style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
 
       <!-- Chiffres au centre -->
-      <div class="stats-grid" style="grid-template-columns:1fr;gap:16px;text-align:center;">
+      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);gap:12px;text-align:center;">
         <div class="stat-item">
           <div class="stat-item-num"><span class="counter" data-target="10">0</span>+</div>
           <div class="stat-item-label"><?= t('index_stats_ans_label') ?></div>
@@ -284,7 +284,7 @@ $db = getDB();
       </div>
 
       <!-- Photo droite -->
-      <div style="border-radius:16px;overflow:hidden;height:320px;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+      <div style="border-radius:16px;overflow:hidden;height:220px;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
         <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-photo.jpg"
              alt="COTRAC sur chantier" loading="lazy"
              style="width:100%;height:100%;object-fit:cover;object-position:center top;">
