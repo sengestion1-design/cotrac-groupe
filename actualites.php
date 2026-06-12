@@ -67,7 +67,8 @@ $actualites = $db->query("SELECT * FROM actualites WHERE actif=1 ORDER BY create
                        'September'=>'septembre','October'=>'octobre','November'=>'novembre','December'=>'décembre'];
           $date_fmt = strtr($date_fmt, $mois_fr);
         ?>
-        <article class="actu-card animate-fade-up" style="transition-delay:<?= ($i % 3) * 100 ?>ms;">
+        <article class="actu-card animate-fade-up" style="transition-delay:<?= ($i % 3) * 100 ?>ms;"
+                 onclick="location.href='<?= SITE_URL ?>/actualite.php?id=<?= $actu['id'] ?>'" style="cursor:pointer;">
           <!-- Image -->
           <div class="actu-card-img">
             <?php if ($has_img): ?>
@@ -96,7 +97,10 @@ $actualites = $db->query("SELECT * FROM actualites WHERE actif=1 ORDER BY create
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                 <?= e($date_fmt) ?>
               </span>
-              <span class="actu-card-cotrac">COTRAC</span>
+              <a href="<?= SITE_URL ?>/actualite.php?id=<?= $actu['id'] ?>" class="actu-lire-btn">
+                Lire la suite
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </a>
             </div>
           </div>
         </article>
@@ -210,6 +214,14 @@ $actualites = $db->query("SELECT * FROM actualites WHERE actif=1 ORDER BY create
   background: var(--bleu-light);
   padding: 3px 10px; border-radius: 20px;
 }
+.actu-lire-btn {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: .78rem; font-weight: 700; color: var(--bleu);
+  text-decoration: none; letter-spacing: .02em;
+  transition: gap .2s, color .2s;
+}
+.actu-lire-btn:hover { color: var(--orange); gap: 7px; }
+.actu-card { cursor: pointer; }
 
 @media (max-width: 768px) {
   .actu-card-img { height: 160px; }
