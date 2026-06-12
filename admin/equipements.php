@@ -112,9 +112,33 @@ foreach ($equip_all as $eq) {
     $by_cat[$eq['categorie']][] = $eq;
 }
 
+// ---- Galerie : migration + chargement ----
+try {
+    $db->exec("CREATE TABLE IF NOT EXISTS galerie_photos (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        fichier VARCHAR(300) NOT NULL,
+        legende VARCHAR(300) DEFAULT '',
+        onglet VARCHAR(50) DEFAULT 'btp',
+        couleur VARCHAR(20) DEFAULT '#1a6bb5',
+        sort_order INT DEFAULT 0,
+        actif TINYINT(1) DEFAULT 1,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4");
+} catch (Exception $e) {}
+
+$galerie_edit = null;
+if (isset($_GET['gedit']) && is_numeric($_GET['gedit'])) {
+    $stmt = $db->prepare("SELECT * FROM galerie_photos WHERE id=?");
+    $stmt->execute([(int)$_GET['gedit']]);
+    $galerie_edit = $stmt->fetch();
+}
+$galerie_all = $db->query("SELECT * FROM galerie_photos ORDER BY sort_order ASC, id ASC")->fetchAll();
+$gal_count   = count($galerie_all);
+
 $nb_messages = (int)$db->query("SELECT COUNT(*) FROM messages WHERE lu=0")->fetchColumn();
 $current_page = 'equipements';
 $csrf = csrf_token();
+$active_tab = $_GET['tab'] ?? 'equipements';
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -158,6 +182,22 @@ $csrf = csrf_token();
     .btn-primary:hover { background:#1558a0; }
     .btn-secondary { background:#f7f8fa;color:#4a5568;border:1.5px solid #e2e8f0;border-radius:8px;padding:9px 18px;font-size:.875rem;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block; }
     .import-note { background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:14px 18px;font-size:.82rem;color:#92400e;margin-bottom:24px; }
+    /* Onglets */
+    .page-tabs { display:flex;gap:4px;margin-bottom:28px;background:#f0f4f8;border-radius:12px;padding:4px; }
+    .page-tab { padding:9px 22px;border-radius:9px;font-size:.875rem;font-weight:600;cursor:pointer;border:none;background:transparent;color:#718096;text-decoration:none; }
+    .page-tab.active { background:#fff;color:#1a6bb5;box-shadow:0 1px 6px rgba(0,0,0,.1); }
+    .page-tab:hover:not(.active) { color:#1a202c; }
+    /* Galerie admin */
+    .gal-grid-admin { display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-top:12px; }
+    .gal-card-admin { background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 1px 6px rgba(0,0,0,.07);border:1.5px solid #e2e8f0;transition:box-shadow .2s; }
+    .gal-card-admin:hover { box-shadow:0 4px 16px rgba(0,0,0,.12); }
+    .gal-card-admin.inactive { opacity:.5; }
+    .gal-card-admin img { width:100%;height:130px;object-fit:cover;display:block; }
+    .gal-card-body { padding:10px 12px; }
+    .gal-card-legend { font-size:.82rem;font-weight:600;color:#1a202c;margin-bottom:4px;line-height:1.3; }
+    .gal-card-onglet { display:inline-block;padding:2px 9px;border-radius:20px;font-size:.7rem;font-weight:700;color:#fff;margin-bottom:8px; }
+    .gal-card-actions { display:flex;gap:6px;flex-wrap:wrap; }
+    .gal-no-photo { width:100%;height:130px;background:#f0f4f8;display:flex;align-items:center;justify-content:center;color:#a0aec0;font-size:.75rem; }
   </style>
 </head>
 <body>
@@ -167,7 +207,7 @@ $csrf = csrf_token();
 
   <main class="admin-main">
     <div class="admin-topbar">
-      <h1>Gestion des Équipements</h1>
+      <h1><?= $active_tab === 'galerie' ? 'Galerie Photos' : 'Gestion des Équipements' ?></h1>
       <div class="admin-topbar-actions">
         <a href="<?= SITE_URL ?>/nos-ressources.php" target="_blank" class="btn-site">Voir la page</a>
       </div>
@@ -175,9 +215,143 @@ $csrf = csrf_token();
 
     <div class="admin-content">
 
+      <!-- Onglets -->
+      <div class="page-tabs">
+        <a href="equipements.php?tab=equipements" class="page-tab <?= $active_tab === 'equipements' ? 'active' : '' ?>">Équipements</a>
+        <a href="equipements.php?tab=galerie" class="page-tab <?= $active_tab === 'galerie' ? 'active' : '' ?>">Galerie Photos <span style="font-size:.72rem;background:#1a6bb5;color:#fff;border-radius:20px;padding:1px 7px;margin-left:4px;"><?= $gal_count ?></span></a>
+      </div>
+
       <?php if ($message): ?>
       <div class="alert <?= $type_msg ?>"><?= e($message) ?></div>
       <?php endif; ?>
+
+      <?php if ($active_tab === 'galerie'): ?>
+      <!-- ══════════════ ONGLET GALERIE ══════════════ -->
+
+      <?php
+      $gal_msg = '';
+      if (isset($_GET['msg'])) {
+          $msgs = ['added'=>'Photo ajoutée.','updated'=>'Photo modifiée.','deleted'=>'Photo supprimée.','toggled'=>'Visibilité mise à jour.','imported'=>'24 photos importées depuis les données par défaut.'];
+          $gal_msg = $msgs[$_GET['msg']] ?? '';
+      }
+      if (isset($_GET['err'])) {
+          $errs = ['nophoto'=>'Veuillez sélectionner une photo.','notempty'=>'La galerie contient déjà des photos. Videz-la d\'abord pour réimporter.'];
+          $gal_msg = $errs[$_GET['err']] ?? 'Erreur.';
+      }
+      ?>
+      <?php if ($gal_msg): ?>
+      <div class="alert <?= isset($_GET['err']) ? 'error' : 'success' ?>"><?= e($gal_msg) ?></div>
+      <?php endif; ?>
+
+      <!-- Import si vide -->
+      <?php if ($gal_count === 0): ?>
+      <div class="import-note">
+        ℹ️ La galerie est vide. Cliquez sur <strong>Importer les 24 photos par défaut</strong> pour charger les photos existantes du site.
+        <form method="post" action="ajax/import-galerie.php" style="display:inline;margin-left:12px;">
+          <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+          <button type="submit" class="btn-sm btn-edit">Importer les 24 photos par défaut</button>
+        </form>
+      </div>
+      <?php endif; ?>
+
+      <!-- Formulaire ajout / édition galerie -->
+      <div class="form-card">
+        <h2 style="margin:0 0 20px;font-size:1.05rem;font-weight:700;color:#1a202c;">
+          <?= $galerie_edit ? '✏️ Modifier la photo' : '➕ Ajouter une photo' ?>
+        </h2>
+        <form method="post" enctype="multipart/form-data"
+              action="ajax/galerie-action.php?action=<?= $galerie_edit ? 'edit' : 'add' ?>">
+          <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+          <?php if ($galerie_edit): ?>
+          <input type="hidden" name="edit_id" value="<?= $galerie_edit['id'] ?>">
+          <?php endif; ?>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Onglet / Catégorie</label>
+              <select name="onglet">
+                <?php foreach (['engins'=>'Engins & Véhicules','btp'=>'BTP & Travaux','logistique'=>'Logistique'] as $k=>$l): ?>
+                <option value="<?= $k ?>" <?= ($galerie_edit['onglet'] ?? 'btp') === $k ? 'selected' : '' ?>><?= $l ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Légende</label>
+              <input type="text" name="legende" maxlength="300"
+                     value="<?= e($galerie_edit['legende'] ?? '') ?>"
+                     placeholder="Ex : Chargeur COTRAC en opération">
+            </div>
+            <div class="form-group form-full">
+              <label>Photo <?= $galerie_edit ? '(laisser vide pour conserver l\'actuelle)' : '*' ?></label>
+              <?php if (!empty($galerie_edit['fichier'])):
+                $gurl = str_starts_with($galerie_edit['fichier'], 'assets/') ? SITE_URL.'/'.$galerie_edit['fichier'] : SITE_URL.'/uploads/galerie/'.$galerie_edit['fichier'];
+              ?>
+              <img src="<?= e($gurl) ?>" style="height:80px;object-fit:cover;border-radius:8px;margin-bottom:8px;">
+              <?php endif; ?>
+              <input type="file" name="photo" accept="image/jpeg,image/png,image/webp"
+                     style="border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:.875rem;">
+              <span style="font-size:.75rem;color:#a0aec0;margin-top:4px;">JPG, PNG ou WebP — max 5 Mo</span>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:12px;margin-top:20px;">
+            <button type="submit" class="btn-primary">
+              <?= $galerie_edit ? 'Enregistrer les modifications' : 'Ajouter la photo' ?>
+            </button>
+            <?php if ($galerie_edit): ?>
+            <a href="equipements.php?tab=galerie" class="btn-secondary">Annuler</a>
+            <?php endif; ?>
+          </div>
+        </form>
+      </div>
+
+      <!-- Grille photos -->
+      <div class="form-card" style="padding:20px 24px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <h3 style="margin:0;font-size:1rem;font-weight:700;color:#1a202c;">
+            Photos en ligne <span class="cat-count"><?= $gal_count ?> photo(s)</span>
+          </h3>
+        </div>
+
+        <?php if (empty($galerie_all)): ?>
+        <div class="empty-cat">Aucune photo. Importez les données par défaut ou ajoutez une photo ci-dessus.</div>
+        <?php else: ?>
+        <div class="gal-grid-admin">
+          <?php
+          $onglet_labels = ['engins'=>'Engins & Véhicules','btp'=>'BTP & Travaux','logistique'=>'Logistique'];
+          $onglet_colors = ['engins'=>'#1a6bb5','btp'=>'#f7941d','logistique'=>'#8e44ad'];
+          foreach ($galerie_all as $gp):
+            $gp_url = str_starts_with($gp['fichier'], 'assets/') ? SITE_URL.'/'.$gp['fichier'] : SITE_URL.'/uploads/galerie/'.$gp['fichier'];
+            $ocol = $onglet_colors[$gp['onglet']] ?? '#1a6bb5';
+            $olbl = $onglet_labels[$gp['onglet']] ?? $gp['onglet'];
+          ?>
+          <div class="gal-card-admin <?= !$gp['actif'] ? 'inactive' : '' ?>">
+            <img src="<?= e($gp_url) ?>" alt="<?= e($gp['legende']) ?>" loading="lazy"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="gal-no-photo" style="display:none;">Image introuvable</div>
+            <div class="gal-card-body">
+              <span class="gal-card-onglet" style="background:<?= $ocol ?>;"><?= $olbl ?></span>
+              <div class="gal-card-legend"><?= e($gp['legende']) ?: '<em style="color:#a0aec0;">Sans légende</em>' ?></div>
+              <div class="gal-card-actions">
+                <a href="equipements.php?tab=galerie&gedit=<?= $gp['id'] ?>" class="btn-sm btn-edit">Modifier</a>
+                <a href="ajax/galerie-action.php?action=toggle&id=<?= $gp['id'] ?>&csrf_token=<?= urlencode($csrf) ?>"
+                   class="btn-sm btn-toggle <?= !$gp['actif'] ? 'off' : '' ?>"
+                   onclick="return confirm('Changer la visibilité ?')">
+                  <?= $gp['actif'] ? 'Masquer' : 'Afficher' ?>
+                </a>
+                <a href="ajax/galerie-action.php?action=delete&id=<?= $gp['id'] ?>&csrf_token=<?= urlencode($csrf) ?>"
+                   class="btn-sm btn-del"
+                   onclick="return confirm('Supprimer cette photo ?')">Supprimer</a>
+              </div>
+            </div>
+          </div>
+          <?php endforeach; ?>
+        </div>
+        <?php endif; ?>
+      </div>
+
+      <?php else: ?>
+      <!-- ══════════════ ONGLET ÉQUIPEMENTS ══════════════ -->
 
       <?php if (isset($_GET['synced'])): ?>
       <div class="alert success"><?= (int)$_GET['synced'] ?> équipement(s) associés aux photos existantes.</div>
@@ -364,6 +538,8 @@ $csrf = csrf_token();
         <?php endif; ?>
       </div>
       <?php endforeach; ?>
+
+      <?php endif; // fin if galerie / else equipements ?>
 
     </div>
   </main>

@@ -310,65 +310,85 @@ require_once 'includes/header.php';
     </div>
     <?php endforeach; ?>
 
-    <!-- ══ GALERIE PHOTOS STATIQUE ══ -->
+    <!-- ══ GALERIE PHOTOS ══ -->
+    <?php
+    // Charger galerie depuis DB, fallback statique si vide
+    $galerie_db = [];
+    try {
+        $galerie_db = $db->query("SELECT * FROM galerie_photos WHERE actif=1 ORDER BY sort_order ASC, id ASC")->fetchAll();
+    } catch (Exception $e) {}
+
+    $galerie_static = [
+        ['assets/ressources/engin-camion-60t.jpg',         'Camion 60 tonnes COTRAC',              'engins',    '#1a6bb5'],
+        ['assets/ressources/engin-camions.jpg',             'Parc camions — maintenance',            'engins',    '#1a6bb5'],
+        ['assets/ressources/engin-camions-16m3.jpg',        'Camions bennes 16m³',                  'engins',    '#1a6bb5'],
+        ['assets/ressources/engin-camion-benne.jpg',        'Camions bennes chargement',             'engins',    '#1a6bb5'],
+        ['assets/ressources/engin-chargeur.jpg',            'Chargeur COTRAC en opération',          'engins',    '#1a6bb5'],
+        ['assets/ressources/prod-presse-briques.jpg',       'Presse à briques — production',         'btp',       '#f7941d'],
+        ['assets/ressources/prod-presse-briques2.jpg',      'Machine briques pondeuses COTRAC',      'btp',       '#f7941d'],
+        ['assets/ressources/prod-chantier-vue.jpg',         'Vue générale chantier de production',   'btp',       '#f7941d'],
+        ['assets/ressources/prod-sechage-agglos.jpg',       'Aire de séchage agglos et bordures',    'btp',       '#f7941d'],
+        ['assets/ressources/prod-depot-materiaux.jpg',      'Dépôts sables, agglos et bétons',       'btp',       '#f7941d'],
+        ['assets/ressources/prod-citerne.jpg',              'Citerne COTRAC — alimentation eau',     'btp',       '#f7941d'],
+        ['assets/ressources/elec-eclairage-poteau.jpg',     'Installation luminaire LED sur poteau', 'btp',       '#1a6bb5'],
+        ['assets/ressources/elec-plan-reseau.jpg',          'Ingénieure COTRAC — plan réseau BT',   'btp',       '#1a6bb5'],
+        ['assets/ressources/elec-pose-poteau.jpg',          'Pose poteau béton — réseau rural',      'btp',       '#1a6bb5'],
+        ['assets/ressources/elec-pose-poteaux-grue.jpg',    'Pose poteaux béton à la grue',          'btp',       '#1a6bb5'],
+        ['assets/ressources/elec-tranchee-cable.jpg',       'Tranchée câble souterrain HTA',         'btp',       '#1a6bb5'],
+        ['assets/ressources/elec-cellule-hta.jpg',          'Cellule HTA préfabriquée EATON',        'btp',       '#1a6bb5'],
+        ['assets/ressources/elec-poste-transformation.jpg', 'Poste de transformation HTA/BT',        'btp',       '#1a6bb5'],
+        ['assets/ressources/elec-genie-industriel.jpg',     'Travaux génie industriel — usine',      'btp',       '#1a6bb5'],
+        ['assets/ressources/logi-chargeur-echafaudage.jpg', 'Chargeur + échafaudages — logistique',  'logistique','#8e44ad'],
+        ['assets/ressources/logi-betonnieres.jpg',          'Bétonnières COTRAC 500L',               'logistique','#8e44ad'],
+        ['assets/ressources/logi-monte-charge.jpg',         'Monte-charge électrique chantier',      'logistique','#8e44ad'],
+        ['assets/ressources/logi-betonnieres2.jpg',         'Livraison bétonnière 500L',             'logistique','#8e44ad'],
+        ['assets/ressources/equipe-terrain.jpg',            'Équipe COTRAC — inspection terrain',    'btp',       '#f7941d'],
+    ];
+
+    // Construire $galerie normalisée [url, legende, onglet, couleur]
+    $galerie = [];
+    if (!empty($galerie_db)) {
+        foreach ($galerie_db as $gp) {
+            $gurl = str_starts_with($gp['fichier'], 'assets/') ? SITE_URL.'/'.$gp['fichier'] : SITE_URL.'/uploads/galerie/'.$gp['fichier'];
+            $galerie[] = [$gurl, $gp['legende'], $gp['onglet'], $gp['couleur']];
+        }
+    } else {
+        foreach ($galerie_static as $gs) {
+            $galerie[] = [SITE_URL.'/'.$gs[0], $gs[1], $gs[2], $gs[3]];
+        }
+    }
+
+    // Onglets présents
+    $onglets_presents = array_unique(array_column($galerie, 2));
+    $onglet_labels = ['engins'=>'Engins & Véhicules','btp'=>'BTP & Travaux','logistique'=>'Logistique'];
+    ?>
     <div style="margin-top:56px;" id="galerie">
       <div class="res-cat-header">
         <div class="res-cat-bar" style="background:#1a6bb5;"></div>
         <h2 class="res-cat-title">Galerie Photos</h2>
-        <span class="res-cat-count">24 photos</span>
+        <span class="res-cat-count"><?= count($galerie) ?> photos</span>
       </div>
 
       <!-- Onglets galerie -->
       <div class="gal-tabs">
         <button class="gal-tab active" data-gtab="tous">Tout voir</button>
-        <button class="gal-tab" data-gtab="engins">Engins & Véhicules</button>
-        <button class="gal-tab" data-gtab="btp">BTP & Travaux</button>
-        <button class="gal-tab" data-gtab="logistique">Logistique</button>
+        <?php foreach ($onglet_labels as $ok => $ol):
+          if (!in_array($ok, $onglets_presents)) continue; ?>
+        <button class="gal-tab" data-gtab="<?= $ok ?>"><?= $ol ?></button>
+        <?php endforeach; ?>
       </div>
 
-      <?php
-      $galerie = [
-        // [fichier, légende, onglet, couleur]
-        ['engin-camion-60t.jpg',          'Camion 60 tonnes COTRAC',              'engins',    '#1a6bb5'],
-        ['engin-camions.jpg',             'Parc camions — maintenance',            'engins',    '#1a6bb5'],
-        ['engin-camions-16m3.jpg',        'Camions bennes 16m³',                  'engins',    '#1a6bb5'],
-        ['engin-camion-benne.jpg',        'Camions bennes chargement',            'engins',    '#1a6bb5'],
-        ['engin-chargeur.jpg',            'Chargeur COTRAC en opération',         'engins',    '#1a6bb5'],
-        ['prod-presse-briques.jpg',       'Presse à briques — production',        'btp',       '#f7941d'],
-        ['prod-presse-briques2.jpg',      'Machine briques pondeuses COTRAC',     'btp',       '#f7941d'],
-        ['prod-chantier-vue.jpg',         'Vue générale chantier de production',  'btp',       '#f7941d'],
-        ['prod-sechage-agglos.jpg',       'Aire de séchage agglos et bordures',   'btp',       '#f7941d'],
-        ['prod-depot-materiaux.jpg',      'Dépôts sables, agglos et bétons',      'btp',       '#f7941d'],
-        ['prod-citerne.jpg',              'Citerne COTRAC — alimentation eau',    'btp',       '#f7941d'],
-        ['elec-eclairage-poteau.jpg',     'Installation luminaire LED sur poteau','btp','#1a6bb5'],
-        ['elec-plan-reseau.jpg',          'Ingénieure COTRAC — plan réseau BT',  'btp','#1a6bb5'],
-        ['elec-pose-poteau.jpg',          'Pose poteau béton — réseau rural',     'btp','#1a6bb5'],
-        ['elec-pose-poteaux-grue.jpg',    'Pose poteaux béton à la grue',         'btp','#1a6bb5'],
-        ['elec-tranchee-cable.jpg',       'Tranchée câble souterrain HTA',        'btp','#1a6bb5'],
-        ['elec-cellule-hta.jpg',          'Cellule HTA préfabriquée EATON',       'btp','#1a6bb5'],
-        ['elec-poste-transformation.jpg', 'Poste de transformation HTA/BT',       'btp','#1a6bb5'],
-        ['elec-genie-industriel.jpg',     'Travaux génie industriel — usine',     'btp','#1a6bb5'],
-        ['logi-chargeur-echafaudage.jpg', 'Chargeur + échafaudages — logistique','logistique','#8e44ad'],
-        ['logi-betonnieres.jpg',          'Bétonnières COTRAC 500L',              'logistique','#8e44ad'],
-        ['logi-monte-charge.jpg',         'Monte-charge électrique chantier',     'logistique','#8e44ad'],
-        ['logi-betonnieres2.jpg',         'Livraison bétonnière 500L',            'logistique','#8e44ad'],
-        ['equipe-terrain.jpg',            'Équipe COTRAC — inspection terrain',   'btp',       '#f7941d'],
-      ];
-      ?>
-
       <div class="gal-grid" id="galGrid">
-        <?php foreach ($galerie as $idx => $g):
-          $src = SITE_URL . '/assets/ressources/' . $g[0];
-        ?>
+        <?php foreach ($galerie as $idx => $g): ?>
         <div class="gal-card" data-gtab="<?= $g[2] ?>" onclick="openGal(<?= $idx ?>)">
           <div class="gal-img-wrap">
-            <img src="<?= $src ?>" alt="<?= htmlspecialchars($g[1]) ?>" loading="lazy">
+            <img src="<?= htmlspecialchars($g[0]) ?>" alt="<?= htmlspecialchars($g[1]) ?>" loading="lazy">
             <div class="gal-overlay">
               <span class="gal-zoom">⊕</span>
             </div>
           </div>
           <div class="gal-caption">
-            <span class="gal-badge" style="background:<?= $g[3] ?>;"><?= ucfirst($g[2]) ?></span>
+            <span class="gal-badge" style="background:<?= $g[3] ?>;"><?= $onglet_labels[$g[2]] ?? ucfirst($g[2]) ?></span>
             <p><?= htmlspecialchars($g[1]) ?></p>
           </div>
         </div>
@@ -452,7 +472,7 @@ document.querySelectorAll('.res-filter-btn').forEach(function(btn) {
 var _galData = <?php
   $gd = [];
   foreach ($galerie as $g) {
-    $gd[] = ['url' => SITE_URL . '/assets/ressources/' . $g[0], 'titre' => $g[1], 'tab' => $g[2]];
+    $gd[] = ['url' => $g[0], 'titre' => $g[1], 'tab' => $g[2]];
   }
   echo json_encode($gd);
 ?>;
