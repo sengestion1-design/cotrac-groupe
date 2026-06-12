@@ -197,22 +197,19 @@ require_once 'includes/header.php';
     <div class="res-filters">
       <button class="res-filter-btn active" data-cat="tous">Tout voir</button>
       <button class="res-filter-btn" data-cat="engins">Engins TP</button>
-      <button class="res-filter-btn" data-cat="electrique">Électrique</button>
-      <button class="res-filter-btn" data-cat="industriel">Génie Industriel</button>
       <button class="res-filter-btn" data-cat="vehicules">Véhicules</button>
+      <button class="res-filter-btn" data-cat="industriel">Génie Industriel</button>
     </div>
 
     <?php
     $cat_meta = [
       'engins'     => ['title'=>'Engins de Travaux Publics',        'couleur'=>'#1a6bb5', 'note'=>''],
       'vehicules'  => ['title'=>'Véhicules & Transport',             'couleur'=>'#f7941d', 'note'=>''],
-      'electrique' => ['title'=>'Prestations & Matériaux Électriques','couleur'=>'#27ae60','note'=>'Matériaux fournis et installés chez le client dans le cadre des travaux d\'électrification.'],
       'industriel' => ['title'=>'Génie Industriel & Soudure',        'couleur'=>'#8e44ad', 'note'=>''],
     ];
     $svg_icons = [
       'engins'     => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>',
       'vehicules'  => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 4v4h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>',
-      'electrique' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>',
       'industriel' => '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>',
     ];
     // Données statiques de fallback (si table DB vide)
@@ -240,16 +237,6 @@ require_once 'includes/header.php';
         ['Camion-citerne','Alimentation eau chantier','1 unité','#f7941d'],
         ['Véhicules de liaison pick-up','Mobilité équipes terrain','7 unités','#f7941d'],
       ],
-      'electrique' => [
-        ['Groupe électrogène 15 KVA','Alimentation électrique chantier','1 unité (parc)','#27ae60'],
-        ['Groupes électrogènes jusqu\'à 450 KVA','Fourniture & pose sur site client','installation client','#27ae60'],
-        ['Poteaux béton armé','Supports lignes aériennes HTA/BT','fourniture & pose','#27ae60'],
-        ['Pylônes métalliques','Supports lignes haute tension','fourniture & pose','#27ae60'],
-        ['Transformateurs HTA/BT','Construction postes de transformation','fourniture & pose','#27ae60'],
-        ['Cellules préfabriquées HTA','Distribution haute tension','fourniture & pose','#27ae60'],
-        ['Luminaires LED / SHP','Éclairage public & industriel','fourniture & pose','#27ae60'],
-        ['Câbles électriques HTA/BT','Réseaux aériens & souterrains','fourniture & pose','#27ae60'],
-      ],
       'industriel' => [
         ['Postes à souder','Soudage MIG/TIG/Arc','12 unités','#8e44ad'],
         ['Jeux de chalumeaux complets','Soudage oxyacétylénique','4 unités','#8e44ad'],
@@ -268,7 +255,7 @@ require_once 'includes/header.php';
       $items_fb = $fallback[$ckey] ?? [];
       $use_db   = !empty($items_db);
       $count_items = $use_db ? count($items_db) : count($items_fb);
-      $label_count = $ckey === 'electrique' ? $count_items . ' prestations' : $count_items . ' équipements';
+      $label_count = $count_items . ' équipements';
     ?>
     <div class="res-category" data-cat="<?= $ckey ?>">
       <div class="res-cat-header">
@@ -335,8 +322,7 @@ require_once 'includes/header.php';
       <div class="gal-tabs">
         <button class="gal-tab active" data-gtab="tous">Tout voir</button>
         <button class="gal-tab" data-gtab="engins">Engins & Véhicules</button>
-        <button class="gal-tab" data-gtab="btp">BTP & Production</button>
-        <button class="gal-tab" data-gtab="electrique">Électrique</button>
+        <button class="gal-tab" data-gtab="btp">BTP & Travaux</button>
         <button class="gal-tab" data-gtab="logistique">Logistique</button>
       </div>
 
@@ -354,14 +340,14 @@ require_once 'includes/header.php';
         ['prod-sechage-agglos.jpg',       'Aire de séchage agglos et bordures',   'btp',       '#f7941d'],
         ['prod-depot-materiaux.jpg',      'Dépôts sables, agglos et bétons',      'btp',       '#f7941d'],
         ['prod-citerne.jpg',              'Citerne COTRAC — alimentation eau',    'btp',       '#f7941d'],
-        ['elec-eclairage-poteau.jpg',     'Installation luminaire LED sur poteau','electrique','#27ae60'],
-        ['elec-plan-reseau.jpg',          'Ingénieure COTRAC — plan réseau BT',  'electrique','#27ae60'],
-        ['elec-pose-poteau.jpg',          'Pose poteau béton — réseau rural',     'electrique','#27ae60'],
-        ['elec-pose-poteaux-grue.jpg',    'Pose poteaux béton à la grue',         'electrique','#27ae60'],
-        ['elec-tranchee-cable.jpg',       'Tranchée câble souterrain HTA',        'electrique','#27ae60'],
-        ['elec-cellule-hta.jpg',          'Cellule HTA préfabriquée EATON',       'electrique','#27ae60'],
-        ['elec-poste-transformation.jpg', 'Poste de transformation HTA/BT',       'electrique','#27ae60'],
-        ['elec-genie-industriel.jpg',     'Travaux génie industriel — usine',     'electrique','#27ae60'],
+        ['elec-eclairage-poteau.jpg',     'Installation luminaire LED sur poteau','btp','#1a6bb5'],
+        ['elec-plan-reseau.jpg',          'Ingénieure COTRAC — plan réseau BT',  'btp','#1a6bb5'],
+        ['elec-pose-poteau.jpg',          'Pose poteau béton — réseau rural',     'btp','#1a6bb5'],
+        ['elec-pose-poteaux-grue.jpg',    'Pose poteaux béton à la grue',         'btp','#1a6bb5'],
+        ['elec-tranchee-cable.jpg',       'Tranchée câble souterrain HTA',        'btp','#1a6bb5'],
+        ['elec-cellule-hta.jpg',          'Cellule HTA préfabriquée EATON',       'btp','#1a6bb5'],
+        ['elec-poste-transformation.jpg', 'Poste de transformation HTA/BT',       'btp','#1a6bb5'],
+        ['elec-genie-industriel.jpg',     'Travaux génie industriel — usine',     'btp','#1a6bb5'],
         ['logi-chargeur-echafaudage.jpg', 'Chargeur + échafaudages — logistique','logistique','#8e44ad'],
         ['logi-betonnieres.jpg',          'Bétonnières COTRAC 500L',              'logistique','#8e44ad'],
         ['logi-monte-charge.jpg',         'Monte-charge électrique chantier',     'logistique','#8e44ad'],

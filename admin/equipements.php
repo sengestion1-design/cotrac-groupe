@@ -183,6 +183,21 @@ $csrf = csrf_token();
       <div class="alert success"><?= (int)$_GET['synced'] ?> équipement(s) associés aux photos existantes.</div>
       <?php endif; ?>
 
+      <!-- Bouton corriger section électrique -->
+      <?php $has_electrique = (int)$db->query("SELECT COUNT(*) FROM equipements WHERE categorie='electrique'")->fetchColumn() > 0; ?>
+      <?php if ($has_electrique): ?>
+      <div style="background:#fff8e1;border:1px solid #f6d860;border-radius:10px;padding:14px 18px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+        <div>
+          <strong style="color:#b7791f;">⚠️ Section Électrique à corriger</strong>
+          <p style="margin:4px 0 0;font-size:.82rem;color:#4a5568;">Déplace le Groupe électrogène 15 KVA dans Engins TP et supprime les 7 prestations électriques.</p>
+        </div>
+        <form method="post" action="ajax/fix-equipements-electrique.php" style="margin:0;">
+          <input type="hidden" name="csrf_token" value="<?= e($csrf) ?>">
+          <button type="submit" class="btn-sm" style="padding:8px 18px;background:#d97706;color:#fff;border:none;border-radius:6px;cursor:pointer;" onclick="return confirm('Supprimer les prestations électriques et déplacer le groupe électrogène ?')">Corriger section électrique</button>
+        </form>
+      </div>
+      <?php endif; ?>
+
       <!-- Bouton sync photos -->
       <div style="background:#f0f7ff;border:1px solid #bee3f8;border-radius:10px;padding:14px 18px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
         <div>
