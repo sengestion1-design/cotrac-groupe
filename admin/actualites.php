@@ -121,6 +121,40 @@ if (isset($_GET['msg'])) {
     }
 }
 
+// ---- Auto-import si table vide ----
+$count_actu = (int)$db->query("SELECT COUNT(*) FROM actualites")->fetchColumn();
+if ($count_actu === 0) {
+    $articles_defaut = [
+        [
+            "Le Sénégal bâtit son avenir : ce que la Vision 2050 change pour le secteur BTP",
+            "Le Sénégal vit une décennie de transformation infrastructurelle sans précédent. Avec le lancement officiel de la Vision Sénégal 2050 et de son premier plan opérationnel — la Stratégie Nationale de Développement 2025-2029 — le pays s'engage dans un programme d'investissements publics estimé à 18 496 milliards de francs CFA sur cinq ans. Pour les entreprises du BTP, les opportunités sont massives, concrètes et déjà en marche.\n\nUn chantier national à l'échelle d'une génération\n\nHier encore, les entreprises de travaux publics sénégalaises opéraient sur des marchés fragmentés, dépendants de financements externes incertains. Aujourd'hui, le cadre a changé. Le gouvernement a inscrit dans son Masterplan 2025-2034 la réalisation de corridors routiers et ferroviaires structurants, l'extension de l'électrification rurale à l'ensemble du territoire, la construction de zones industrielles dans les pôles régionaux, et un programme ambitieux de logements sociaux — dont 60 000 unités en cours de livraison dans le cadre du programme des 100 000 logements.\n\nL'autoroute Mbour-Fatick-Kaolack, longue de 100 kilomètres, illustre à elle seule l'ampleur de cette dynamique : financée à hauteur de 738 millions d'euros, présentant un taux d'avancement supérieur à 90 % fin 2025, elle matérialise la volonté de désenclaver les régions productrices et de connecter le centre du pays aux corridors économiques côtiers.\n\nUn secteur BTP en pleine expansion\n\nLa Vision 2050 ne se limite pas aux autoroutes. Elle dessine un Sénégal où six corridors ferroviaires relient les pôles territoriaux, où les zones rurales accèdent à l'énergie grâce à des mini-réseaux solaires, où les villes secondaires disposent d'infrastructures sanitaires, scolaires et industrielles à la hauteur de leur potentiel. Le pôle urbain de Diamniadio — avec ses 40 000 logements planifiés — est déjà devenu le laboratoire grandeur nature de cette ambition.\n\nPour le secteur du BTP, cette trajectoire signifie une demande soutenue en génie civil, en travaux électriques haute et basse tension, en construction de routes et en réhabilitation d'ouvrages d'art. Les entreprises capables d'intervenir à grande échelle, avec rigueur technique et ancrage territorial, sont au cœur de cette révolution silencieuse.\n\nCOTRAC, acteur engagé dans la transformation du Sénégal\n\nDepuis 2015, COTRAC accompagne cette montée en puissance infrastructurelle depuis le terrain. Présente dans 14 régions du Sénégal — de Dakar à Tambacounda, de Saint-Louis à Ziguinchor —, l'entreprise intervient sur les quatre pôles stratégiques que la Vision 2050 place en priorité : ingénierie électrique (HTA, MT, BT), travaux routiers, génie civil et électrification rurale.\n\nPartenaire de SENELEC, d'AGEROUTE et de l'ONAS, COTRAC n'est pas un spectateur de cette transformation : elle en est un acteur de terrain, quotidien, engagé. Avec plus de 25 projets réalisés et une équipe formée aux exigences des marchés publics les plus complexes, COTRAC met son expertise au service du Sénégal qui se construit.\n\nVous avez un projet dans le cadre des grands chantiers nationaux ? Contactez-nous pour une étude gratuite sous 48h."
+        ],
+        [
+            "COTRAC remporte un nouveau marché de voirie à Dakar",
+            "COTRAC vient d'être retenu pour l'exécution des travaux de réhabilitation et d'élargissement d'un axe routier structurant dans la banlieue dakaroise. Ce chantier d'envergure mobilise nos équipes spécialisées en travaux publics ainsi qu'une partie significative de notre parc d'engins : pelles mécaniques Caterpillar, compacteurs et camions bennes.\n\nLes travaux portent sur une longueur de plusieurs kilomètres et incluent la pose de caniveaux, le reprofilage de la chaussée et l'installation d'éclairage public. Le délai d'exécution est fixé à 6 mois.\n\nCe marché confirme la confiance accordée à COTRAC par les maîtres d'ouvrage publics et renforce notre positionnement dans les travaux d'infrastructure au Sénégal."
+        ],
+        [
+            "Livraison d'un poste de transformation HTA/BT — Région de Thiès",
+            "COTRAC a réceptionné avec succès la construction et la mise en service d'un poste de transformation HTA/BT dans la région de Thiès. Ce projet s'inscrit dans le cadre de l'électrification rurale et a permis de connecter plusieurs villages au réseau électrique national.\n\nNos équipes de génie électrique ont assuré l'ensemble des opérations : génie civil, installation des cellules HTA préfabriquées EATON, pose du transformateur, raccordement BT et mise sous tension en coordination avec SENELEC.\n\nCOTRAC démontre une fois de plus sa capacité à intervenir sur des projets d'électrification complexes, de la conception à la mise en service."
+        ],
+        [
+            "COTRAC au Salon BTP Sénégal 2025 — Rencontres et partenariats",
+            "COTRAC a participé au Salon National du BTP qui s'est tenu à Dakar en 2025. Notre stand a accueilli de nombreux professionnels du secteur : architectes, bureaux d'études, promoteurs immobiliers et représentants de l'administration publique.\n\nCette participation a été l'occasion de présenter nos réalisations récentes, nos capacités techniques et notre parc matériel. Plusieurs contacts commerciaux prometteurs ont été établis, ouvrant la voie à de futurs partenariats stratégiques.\n\nCOTRAC réaffirme son engagement à rester un acteur de référence dans le secteur du BTP et des travaux publics au Sénégal."
+        ],
+        [
+            "Chantier en cours : construction d'un complexe industriel à Thiès",
+            "COTRAC est actuellement en pleine exécution d'un chantier de construction d'un complexe industriel dans la zone franche de Thiès. Ce projet ambitieux comprend la réalisation de plusieurs bâtiments industriels, la mise en place des réseaux techniques (électricité, eau, assainissement) et l'aménagement des voiries intérieures.\n\nUne équipe de 45 ouvriers et techniciens est mobilisée sur ce chantier, supervisée par nos ingénieurs en génie civil et électrique. Le planning prévoit une livraison partielle d'ici la fin du trimestre.\n\nCe projet illustre parfaitement l'approche multimétiers de COTRAC, capable de prendre en charge l'intégralité d'un projet industriel de A à Z."
+        ],
+    ];
+    $stmt_ins = $db->prepare("INSERT INTO actualites (titre, contenu, image, actif) VALUES (?,?,?,1)");
+    foreach ($articles_defaut as $art) {
+        $stmt_ins->execute([$art[0], $art[1], '']);
+    }
+    $actualites = $db->query("SELECT * FROM actualites ORDER BY created_at DESC")->fetchAll();
+    $message_retour = '5 articles publiés automatiquement. Modifiez-les avec vos vraies informations et photos.';
+    $type_retour = 'success';
+}
+
 $nb_messages = (int)$db->query("SELECT COUNT(*) FROM messages WHERE lu=0")->fetchColumn();
 $current_page = 'actualites';
 $csrf = csrf_token();
