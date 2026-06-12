@@ -1433,18 +1433,119 @@ table tr:hover td { background: var(--gris-clair); }
 }
 
 @media (max-width: 768px) {
-  .nav { display: none; position: fixed; top: 72px; left: 0; right: 0; background: var(--blanc); border-bottom: 1px solid var(--border); flex-direction: column; padding: 16px; gap: 4px; box-shadow: var(--shadow-lg); }
+  .nav {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0;
+    background: var(--blanc);
+    border-bottom: 2px solid var(--bleu);
+    flex-direction: column;
+    padding: 12px;
+    gap: 6px;
+    box-shadow: 0 8px 32px rgba(26,107,181,.13);
+  }
   .nav.open { display: flex; }
+
+  /* Liens principaux — style bouton avec bordure */
   .nav-item { width: 100%; }
-  .nav-link { width: 100%; padding: 12px 16px; }
-  .dropdown { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: none; padding: 0 0 0 16px; width: 100%; }
-  .hamburger { display: flex; }
-  .nav-cta { margin-left: 0; }
-  /* Sous-menu Énergie — fix alignement mobile */
+  .nav-link {
+    width: 100%;
+    padding: 13px 18px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    background: #f8fafd;
+    font-weight: 600;
+    color: var(--texte);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background .18s, border-color .18s, color .18s;
+  }
+  .nav-link:hover, .nav-link.active {
+    background: var(--bleu-light);
+    border-color: var(--bleu);
+    color: var(--bleu);
+  }
+  /* Lien actif (page courante) */
+  .nav-link.active {
+    background: var(--bleu);
+    color: #fff;
+    border-color: var(--bleu);
+  }
+
+  /* Dropdown "Nos Pôles" — zone enfants indentée */
+  .dropdown {
+    position: static; opacity: 1; visibility: visible;
+    transform: none; box-shadow: none;
+    border: none;
+    padding: 6px 0 0 10px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  /* Items du dropdown — style bouton secondaire */
+  .dropdown > a,
+  .dropdown-sub-trigger {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px !important;
+    border-radius: 8px;
+    border: 1px solid #e2eaf5 !important;
+    background: #f0f6ff !important;
+    font-size: .88rem;
+    font-weight: 500;
+    color: var(--texte) !important;
+    text-decoration: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: background .15s, border-color .15s;
+  }
+  .dropdown > a:hover,
+  .dropdown-sub-trigger:hover {
+    background: #dbeafe !important;
+    border-color: var(--bleu) !important;
+    color: var(--bleu) !important;
+  }
+
+  /* Fix alignement Énergie */
   .dropdown-sub-item { width: 100%; }
-  .dropdown-sub-trigger { display: flex !important; justify-content: flex-start !important; align-items: center; gap: 8px; width: 100%; padding: 10px 14px; text-decoration: none; color: var(--texte); }
+  .dropdown-sub-trigger { justify-content: flex-start !important; }
   .dropdown-sub-trigger .sub-arrow { display: none !important; }
-  .dropdown-sub { position: static !important; opacity: 1 !important; visibility: visible !important; transform: none !important; box-shadow: none !important; border: none !important; padding: 0 0 0 20px !important; min-width: unset !important; width: 100% !important; background: transparent !important; }
+  .dropdown-sub {
+    position: static !important; opacity: 1 !important;
+    visibility: visible !important; transform: none !important;
+    box-shadow: none !important; border: none !important;
+    padding: 5px 0 0 12px !important;
+    min-width: unset !important; width: 100% !important;
+    background: transparent !important;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .dropdown-sub > a {
+    padding: 9px 14px !important;
+    border-radius: 7px;
+    border: 1px dashed #bee3f8 !important;
+    background: #f0faff !important;
+    font-size: .84rem !important;
+    color: #1a6bb5 !important;
+  }
+
+  /* Bouton "Nous contacter" — garde son style orange */
+  .nav-cta { margin-left: 0; }
+  .nav-cta .nav-link {
+    background: var(--orange) !important;
+    border-color: var(--orange) !important;
+    color: #fff !important;
+    justify-content: center;
+    font-weight: 700;
+  }
+  .nav-cta .nav-link:hover {
+    background: #e07d10 !important;
+    border-color: #e07d10 !important;
+  }
+
+  .hamburger { display: flex; }
   .hero-stats { flex-wrap: wrap; }
   .stat-card { flex: 1; min-width: 120px; border-radius: var(--radius) !important; }
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
