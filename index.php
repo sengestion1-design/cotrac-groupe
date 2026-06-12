@@ -311,7 +311,7 @@ $db = getDB();
       <!-- Grille de 3 photos -->
       <div class="hero-right animate-fade-up delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
         <div class="galerie-item" style="grid-column:span 2;aspect-ratio:16/7;">
-          <img src="<?= SITE_URL ?>/assets/images/equipe/equipe-bureau.jpg"
+          <img src="<?= SITE_URL ?>/assets/images/equipe/notreequipe.png"
                alt="<?= t('img_alt_equipe_terrain') ?>"
                loading="lazy">
         </div>
