@@ -26,10 +26,9 @@ $message = '';
 $type_msg = '';
 
 $categories = [
-    'engins'     => ['label' => 'Engins TP',                  'couleur' => '#1a6bb5'],
-    'vehicules'  => ['label' => 'Véhicules & Transport',       'couleur' => '#f7941d'],
-    'electrique' => ['label' => 'Prestations Électriques',     'couleur' => '#27ae60'],
-    'industriel' => ['label' => 'Génie Industriel & Soudure',  'couleur' => '#8e44ad'],
+    'engins'     => ['label' => 'Engins TP',                 'couleur' => '#1a6bb5'],
+    'vehicules'  => ['label' => 'Véhicules & Transport',      'couleur' => '#f7941d'],
+    'industriel' => ['label' => 'Génie Industriel & Soudure', 'couleur' => '#8e44ad'],
 ];
 
 // ---- Suppression ----
