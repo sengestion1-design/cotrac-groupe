@@ -80,7 +80,13 @@ require_once 'includes/header.php';
      PAGE HERO BTP
 ═══════════════════════════════════════════════════════════ -->
 <?php $_btp_hero_bg = cms_bg_url(cms('btp','hero','bg_image','')); ?>
-<section class="page-hero" style="<?= $_btp_hero_bg ? 'background-image:url(\''.e($_btp_hero_bg).'\');background-size:cover;background-position:center;' : 'background:linear-gradient(135deg,#0f4d8a 0%,#1a6bb5 100%);' ?>">
+<section class="page-hero" style="position:relative;overflow:hidden;min-height:420px;<?= $_btp_hero_bg ? 'background-image:url(\''.e($_btp_hero_bg).'\');background-size:cover;background-position:center;' : '' ?>">
+  <?php if (!$_btp_hero_bg): ?>
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt=""
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 5%;z-index:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.85) 50%,rgba(10,30,70,0.65));z-index:1;"></div>
+  <?php endif; ?>
+  <div style="position:relative;z-index:2;width:100%;">
   <div class="container btp-hero-grid">
     <div>
       <nav class="breadcrumb">
@@ -117,6 +123,7 @@ require_once 'includes/header.php';
       </div>
     </div>
   </div>
+  </div><!-- /z-index wrapper -->
 </section>
 
 
