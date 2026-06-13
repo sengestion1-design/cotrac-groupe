@@ -24,90 +24,83 @@
       <!-- Tooltip -->
       <div class="carto-tooltip" id="carto-tooltip"></div>
 
-      <!-- Carte : wrapper 3D + image PNG + zones cliquables SVG -->
-      <div class="carto-3d-wrap">
+      <!-- Carte iso 3D : image PNG officielle COTRAC + SVG overlay zones cliquables -->
       <div class="carto-map-container" id="carto-map-container">
 
-        <!-- Image de référence officielle -->
         <img
-          src="<?= SITE_URL ?>/PHOTOCOTRAC/senegal.png"
-          alt="Carte du Sénégal - 14 régions"
+          src="<?= SITE_URL ?>/PHOTOCOTRAC/senegal2.PNG"
+          alt="Carte du Sénégal - 14 régions COTRAC"
           class="carto-img"
           id="carto-img"
           draggable="false"
         />
 
-        <!-- SVG overlay transparent avec zones cliquables -->
+        <!-- SVG overlay : viewBox cale sur les dimensions reelles 1536x1024 -->
         <svg
           id="senegal-map"
-          viewBox="0 0 790 612"
+          viewBox="0 0 1536 1024"
           xmlns="http://www.w3.org/2000/svg"
           class="carto-svg-overlay"
           aria-hidden="true"
         >
-          <!-- Les zones sont des ellipses/polygones approximatifs positionnés
-               par-dessus chaque région de l'image PNG.
-               Couleurs appliquées via JS au hover/clic (mix-blend-mode: multiply) -->
-
-          <!-- Saint-Louis (nord, grande bande violette dans l'image) -->
+          <!-- Saint-Louis : bande nord orange, large -->
           <ellipse class="region" id="reg-saint-louis" data-name="Saint-Louis"
-            cx="310" cy="110" rx="185" ry="95"/>
+            cx="430" cy="195" rx="215" ry="120"/>
 
-          <!-- Matam (nord-est, bleu ciel) -->
+          <!-- Matam : nord-est, bleu clair -->
           <ellipse class="region" id="reg-matam" data-name="Matam"
-            cx="570" cy="155" rx="145" ry="115"/>
+            cx="790" cy="255" rx="190" ry="130"/>
 
-          <!-- Louga (centre-nord, vert) -->
+          <!-- Louga : centre-nord gauche, bleu -->
           <ellipse class="region" id="reg-louga" data-name="Louga"
-            cx="230" cy="225" rx="130" ry="105"/>
+            cx="270" cy="335" rx="155" ry="115"/>
 
-          <!-- Tambacounda (est, marron, tres grand) -->
-          <ellipse class="region" id="reg-tambacounda" data-name="Tambacounda"
-            cx="545" cy="355" rx="175" ry="155"/>
-
-          <!-- Kedougou (extreme sud-est, jaune) -->
-          <ellipse class="region" id="reg-kedougou" data-name="Kédougou"
-            cx="660" cy="490" rx="75" ry="65"/>
-
-          <!-- Diourbel (centre, vert fonce) -->
+          <!-- Diourbel : petit, centre -->
           <ellipse class="region" id="reg-diourbel" data-name="Diourbel"
-            cx="248" cy="295" rx="62" ry="48"/>
+            cx="335" cy="455" rx="80" ry="65"/>
 
-          <!-- Thies (orange dans image) -->
+          <!-- Thiès : côte nord-ouest -->
           <ellipse class="region" id="reg-thies" data-name="Thiès"
-            cx="135" cy="290" rx="70" ry="72"/>
+            cx="200" cy="435" rx="90" ry="80"/>
 
-          <!-- Dakar (presqu'ile, tres petit) -->
+          <!-- Dakar : presqu'île extrême gauche, très petit -->
           <ellipse class="region" id="reg-dakar" data-name="Dakar"
-            cx="55" cy="300" rx="32" ry="28"/>
+            cx="90" cy="445" rx="48" ry="40"/>
 
-          <!-- Kaolack (mauve/violet, bord Gambie) -->
+          <!-- Tambacounda : très grand, centre-est bleu foncé -->
+          <ellipse class="region" id="reg-tambacounda" data-name="Tambacounda"
+            cx="840" cy="510" rx="230" ry="185"/>
+
+          <!-- Kédougou : extrême sud-est orange -->
+          <ellipse class="region" id="reg-kedougou" data-name="Kédougou"
+            cx="1055" cy="670" rx="110" ry="90"/>
+
+          <!-- Kaolack : centre-bas, orange -->
           <ellipse class="region" id="reg-kaolack" data-name="Kaolack"
-            cx="195" cy="375" rx="68" ry="58"/>
+            cx="330" cy="545" rx="90" ry="72"/>
 
-          <!-- Kaffrine (rose, centre) -->
+          <!-- Kaffrine : centre, bleu -->
           <ellipse class="region" id="reg-kaffrine" data-name="Kaffrine"
-            cx="310" cy="350" rx="80" ry="68"/>
+            cx="490" cy="530" rx="105" ry="80"/>
 
-          <!-- Fatick (bleu navy, Sine-Saloum) -->
+          <!-- Fatick : côte, Sine-Saloum -->
           <ellipse class="region" id="reg-fatick" data-name="Fatick"
-            cx="135" cy="368" rx="60" ry="65"/>
+            cx="205" cy="545" rx="75" ry="75"/>
 
-          <!-- Ziguinchor (rose fushia, Casamance ouest) -->
-          <ellipse class="region" id="reg-ziguinchor" data-name="Ziguinchor"
-            cx="118" cy="490" rx="78" ry="58"/>
-
-          <!-- Sedhiou (vert olive, Casamance centre) -->
-          <ellipse class="region" id="reg-sedhiou" data-name="Sédhiou"
-            cx="248" cy="478" rx="68" ry="52"/>
-
-          <!-- Kolda (kaki, Casamance est) -->
+          <!-- Kolda : sud centre-est -->
           <ellipse class="region" id="reg-kolda" data-name="Kolda"
-            cx="375" cy="470" rx="85" ry="52"/>
+            cx="615" cy="710" rx="110" ry="72"/>
+
+          <!-- Sédhiou : sud centre-ouest -->
+          <ellipse class="region" id="reg-sedhiou" data-name="Sédhiou"
+            cx="430" cy="730" rx="100" ry="68"/>
+
+          <!-- Ziguinchor : extrême sud-ouest, orange -->
+          <ellipse class="region" id="reg-ziguinchor" data-name="Ziguinchor"
+            cx="240" cy="740" rx="110" ry="72"/>
 
         </svg>
       </div><!-- /.carto-map-container -->
-      </div><!-- /.carto-3d-wrap -->
 
       <div class="carto-counter">
         <span class="carto-count">14</span> régions &middot;
@@ -124,7 +117,7 @@
   background: #f4f8fd;
 }
 .carto-wrapper {
-  max-width: 680px;
+  max-width: 760px;
   margin: 0 auto;
   position: relative;
 }
@@ -145,87 +138,74 @@
   border-radius: 50%;
 }
 
-/* Wrapper 3D : porte la perspective ET le transform */
-.carto-3d-wrap {
-  perspective: 900px;
-  perspective-origin: 50% 30%;
-  /* Effet plateau incline au repos */
-  transform: rotateX(6deg) scale(0.97);
-  transform-style: preserve-3d;
-  transition: transform 0.55s cubic-bezier(0.23,1,0.32,1), box-shadow 0.55s ease;
-  will-change: transform;
-  border-radius: 22px;
-  box-shadow:
-    0 30px 70px rgba(26,107,181,0.38),
-    0 10px 24px rgba(0,0,0,0.18);
-}
-/* hover géré par JS — pas de règle CSS ici */
-
-/* Conteneur : clip + fond, PAS de transform */
+/* Conteneur image : ombre douce pour renforcer l'effet 3D isométrique natif */
 .carto-map-container {
   position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  background: #1a6bb5;
   display: block;
   width: 100%;
-  isolation: isolate;
+  border-radius: 16px;
+  overflow: hidden;
+  background: transparent;
+  box-shadow:
+    0 32px 80px rgba(26,107,181,0.22),
+    0 8px 24px rgba(0,0,0,0.12);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+.carto-map-container:hover {
+  box-shadow:
+    0 40px 100px rgba(26,107,181,0.32),
+    0 12px 32px rgba(0,0,0,0.16);
+  transform: translateY(-4px);
 }
 
-/* Image PNG = la vraie carte, fond blanc rendu transparent par CSS */
+/* Image iso 3D — on l'affiche telle quelle, sans filtre */
 .carto-img {
   display: block;
   width: 100%;
   height: auto;
   user-select: none;
   -webkit-user-drag: none;
-  /* mix-blend-mode screen : le blanc devient transparent, les couleurs restent */
-  mix-blend-mode: screen;
-  filter: grayscale(1) brightness(2.2) contrast(1.8) invert(1);
 }
-/* Fond bleu COTRAC sous l'image */
-.carto-map-container {
-  background: #1a6bb5 !important;
-}
-/* SVG overlay : exactement superpose sur l'image */
+
+/* SVG overlay : exactement superposé sur l'image */
 .carto-svg-overlay {
   position: absolute;
   inset: 0;
   width: 100%;
-  z-index: 2;
   height: 100%;
+  z-index: 2;
 }
 
-/* Regions : transparentes par defaut, colorees au hover/clic */
+/* Régions : invisibles par défaut, réactives au hover/clic */
 #section-carte .region {
   fill: transparent;
   stroke: transparent;
   cursor: pointer;
-  transition: fill 0.22s ease, filter 0.22s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+  transition: fill 0.2s ease, stroke 0.2s ease, filter 0.2s ease, transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
   transform-box: fill-box;
   transform-origin: center;
 }
 #section-carte .region:hover {
-  fill: rgba(247, 148, 29, 0.4);
+  fill: rgba(247, 148, 29, 0.35);
   stroke: #f7941d;
-  stroke-width: 2;
-  filter: drop-shadow(0 6px 16px rgba(247,148,29,0.6));
-  transform: scale(1.05);
+  stroke-width: 2.5;
+  filter: drop-shadow(0 4px 18px rgba(247,148,29,0.65));
+  transform: scale(1.04);
 }
 #section-carte .region.clicked {
-  fill: rgba(255,255,255, 0.22);
+  fill: rgba(247, 148, 29, 0.55);
   stroke: #fff;
-  stroke-width: 2.5;
-  filter: drop-shadow(0 0 18px rgba(255,255,255,0.8)) drop-shadow(0 0 6px rgba(247,148,29,0.9));
-  transform: scale(1.07);
+  stroke-width: 3;
+  filter: drop-shadow(0 0 20px rgba(247,148,29,0.95)) drop-shadow(0 0 8px rgba(255,255,255,0.7));
+  transform: scale(1.06);
   animation: region-pulse 1.8s ease-in-out infinite;
 }
 @keyframes region-pulse {
-  0%, 100% { filter: drop-shadow(0 0 18px rgba(255,255,255,0.8)) drop-shadow(0 0 6px rgba(247,148,29,0.9)); }
-  50%       { filter: drop-shadow(0 0 28px rgba(255,255,255,1))   drop-shadow(0 0 14px rgba(247,148,29,1)); }
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(247,148,29,0.9)) drop-shadow(0 0 6px rgba(255,255,255,0.6)); }
+  50%       { filter: drop-shadow(0 0 30px rgba(247,148,29,1))   drop-shadow(0 0 14px rgba(255,255,255,0.9)); }
 }
 
-/* Tooltip avec bounce */
+/* Tooltip */
 @keyframes tooltip-bounce {
   0%   { transform: translateY(8px) scale(0.85); opacity:0; }
   60%  { transform: translateY(-3px) scale(1.05); opacity:1; }
@@ -243,8 +223,6 @@
   pointer-events: none;
   white-space: nowrap;
   opacity: 0;
-  transform: translateY(8px);
-  transition: opacity 0.15s ease, transform 0.15s ease;
   z-index: 9999;
   box-shadow: 0 4px 16px rgba(0,0,0,0.25);
 }
@@ -265,7 +243,7 @@
   color: #1a6bb5;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   .carto-wrapper { max-width: 100%; padding: 0 8px; }
 }
 </style>
@@ -279,7 +257,7 @@
   if (!regions.length || !tooltip) return;
 
   function showTooltip(e, name) {
-    tooltip.textContent = name;
+    tooltip.textContent = '📍 ' + name;
     tooltip.classList.add('visible');
     moveTooltip(e);
   }
@@ -325,28 +303,5 @@
       setTimeout(hideTooltip, 2000);
     }, { passive: false });
   });
-
-  /* ---- Tilt 3D carte entiere au mouvement souris ---- */
-  /* Le wrapper 3D porte le transform; le container interieur gere juste le clip */
-  var wrap3d = document.querySelector('.carto-3d-wrap');
-  if (wrap3d && window.innerWidth > 768) {
-    wrap3d.addEventListener('mousemove', function (e) {
-      var rect = wrap3d.getBoundingClientRect();
-      var cx   = rect.left + rect.width  / 2;
-      var cy   = rect.top  + rect.height / 2;
-      var dx   = (e.clientX - cx) / (rect.width  / 2);
-      var dy   = (e.clientY - cy) / (rect.height / 2);
-      var rotX = -dy * 8;
-      var rotY =  dx * 6;
-      wrap3d.style.transform =
-        'perspective(900px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale(1.02)';
-      wrap3d.style.boxShadow =
-        (-dx * 14) + 'px ' + (-dy * 14 + 28) + 'px 60px rgba(26,107,181,0.45)';
-    });
-    wrap3d.addEventListener('mouseleave', function () {
-      wrap3d.style.transform = '';
-      wrap3d.style.boxShadow = '';
-    });
-  }
 })();
 </script>
