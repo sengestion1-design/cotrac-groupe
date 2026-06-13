@@ -196,14 +196,19 @@ $couleurs = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','industri
 </section>
 
 <!-- CTA -->
-<section class="section" style="background:var(--bleu-nuit,#0a1628);padding:60px 0;">
-  <div class="container" style="text-align:center;">
-    <span class="section-tag"><?= t('galerie_cta_tag') ?></span>
-    <h2 class="section-title" style="color:#fff;margin:12px 0 16px;"><?= t('galerie_cta_titre') ?></h2>
-    <p style="color:rgba(255,255,255,.65);max-width:520px;margin:0 auto 28px;"><?= t('galerie_cta_desc') ?></p>
-    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
-      <a href="<?= SITE_URL ?>/contact.php" class="btn btn-primary"><?= t('galerie_cta_contact') ?></a>
-      <a href="<?= SITE_URL ?>/realisations.php" class="btn" style="border:2px solid rgba(255,255,255,.25);color:#fff;background:transparent;"><?= t('galerie_cta_realisations') ?></a>
+<section style="position:relative;overflow:hidden;min-height:300px;display:flex;align-items:center;">
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
+  <div style="position:relative;z-index:2;width:100%;">
+    <div class="container" style="text-align:center;padding-top:4rem;padding-bottom:4rem;">
+      <span class="section-tag"><?= t('galerie_cta_tag') ?></span>
+      <h2 class="section-title" style="color:#fff;margin:12px 0 16px;"><?= t('galerie_cta_titre') ?></h2>
+      <p style="color:rgba(255,255,255,.75);max-width:520px;margin:0 auto 28px;"><?= t('galerie_cta_desc') ?></p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+        <a href="<?= SITE_URL ?>/contact.php" class="btn btn-primary"><?= t('galerie_cta_contact') ?></a>
+        <a href="<?= SITE_URL ?>/realisations.php" class="btn" style="border:2px solid rgba(255,255,255,.25);color:#fff;background:transparent;"><?= t('galerie_cta_realisations') ?></a>
+      </div>
     </div>
   </div>
 </section>

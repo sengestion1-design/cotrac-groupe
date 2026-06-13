@@ -263,7 +263,11 @@ require 'includes/galerie.php';
 <!-- ═══════════════════════════════════════════════════════════
      SECTION : CTA
 ═══════════════════════════════════════════════════════════ -->
-<section class="stats-section" style="padding:64px 0;">
+<section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
+  <div style="position:relative;z-index:2;width:100%;">
   <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
     <div>
       <span class="section-tag orange" style="margin-bottom:20px;display:inline-block;"><?= t('routes_cta_tag') ?></span>
@@ -305,6 +309,7 @@ require 'includes/galerie.php';
         <?= icon('file','','.9rem') ?> <?= t('routes_cta_btn_plaquette') ?>
       </a>
     </div>
+  </div>
   </div>
 </section>
 
