@@ -1091,8 +1091,9 @@ require_once __DIR__ . '/includes/header.php';
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 32px 24px 24px;
+  padding: 24px 16px 20px;
   text-align: center;
+  overflow: hidden;
   transition: var(--transition);
   display: flex;
   flex-direction: column;
@@ -1100,20 +1101,22 @@ require_once __DIR__ . '/includes/header.php';
 }
 .partenaire-inst-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(26,107,181,0.12); border-color: rgba(26,107,181,0.2); }
 .partenaire-inst-logo {
-  width: 160px;
-  height: 72px;
+  width: 120px;
+  height: 56px;
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 18px;
+  margin: 0 auto 12px;
 }
 .partenaire-inst-logo img {
-  width: 100%;
-  height: 100%;
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
   object-fit: contain;
   filter: grayscale(0%);
   transition: filter .3s;
 }
 .partenaire-inst-card:hover .partenaire-inst-logo img { filter: grayscale(0%) drop-shadow(0 2px 8px rgba(0,0,0,0.12)); }
-.partenaire-inst-name { font-size: 0.88rem; font-weight: 600; color: var(--texte); margin-bottom: 5px; line-height: 1.4; }
+.partenaire-inst-name { font-size: 0.85rem; font-weight: 600; color: var(--texte); margin-bottom: 5px; line-height: 1.4; word-break: break-word; }
 .partenaire-inst-pole {
   font-size: 0.72rem;
   font-weight: 700;
