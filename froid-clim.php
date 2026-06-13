@@ -10,7 +10,7 @@ require_once 'includes/header.php';
      PAGE HERO
 ═══════════════════════════════════════════════════════════ -->
 <section class="page-hero">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+  <div class="container grid-2col" style="gap:48px;align-items:center;">
     <div>
       <nav class="breadcrumb">
         <a href="<?= SITE_URL ?>/index.php"><?= t('nav_accueil') ?></a>
@@ -30,7 +30,7 @@ require_once 'includes/header.php';
         <a href="<?= SITE_URL ?>/realisations.php" class="btn btn-outline" style="border-color:rgba(255,255,255,0.5);color:#fff;">Nos réalisations</a>
       </div>
     </div>
-    <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px;">
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
         <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">-40°C</div>
         <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;">Temp. minimale</div>
@@ -209,12 +209,18 @@ require_once 'includes/header.php';
 <!-- ═══════════════════════════════════════════════════════════
      CTA CONTACT
 ═══════════════════════════════════════════════════════════ -->
-<section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
+<style>
+@media(max-width:768px){
+  .cta-section-inner{min-height:auto!important;}
+  .cta-grid{grid-template-columns:1fr!important;gap:32px!important;}
+}
+</style>
+<section class="cta-section-inner" style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
   <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+  <div class="container cta-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:56px;align-items:center;">
 
     <div class="animate-fade-up delay-1">
       <span class="section-tag orange">Devis gratuit</span>
@@ -225,7 +231,7 @@ require_once 'includes/header.php';
       <div style="display:flex;flex-direction:column;gap:14px;">
         <a href="tel:+221338279639" style="display:flex;align-items:center;gap:14px;color:#fff;text-decoration:none;font-weight:500;">
           <span style="background:#f7941d;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><?= icon('phone','','.95rem') ?></span>
-          +221 33 827 96 39 &nbsp;|&nbsp; +221 77 630 16 46
+          +221 33 827 96 39<br>+221 77 630 16 46
         </a>
         <a href="mailto:cotracsenegal@gmail.com" style="display:flex;align-items:center;gap:14px;color:#fff;text-decoration:none;font-weight:500;">
           <span style="background:#f7941d;border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><?= icon('mail','','.95rem') ?></span>

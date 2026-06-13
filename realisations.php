@@ -52,8 +52,25 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
 
 <!-- ===================== PAGE HERO ===================== -->
 <?php $_real_hero_bg = cms_bg_url(cms('realisations','hero','bg_image','')); ?>
+<style>
+.real-hero-grid { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; }
+.real-hero-stats { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width: 768px) {
+  .real-hero-grid { grid-template-columns:1fr; gap:28px; }
+  .real-hero-stats > div { padding:16px 12px !important; }
+}
+.real-cta-grid { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+@media (max-width: 768px) {
+  .real-cta-grid { grid-template-columns:1fr; gap:32px; }
+}
+/* Attestations : réduire padding sur mobile */
+@media (max-width: 560px) {
+  .projet-card[style*="padding:36px 28px"] { padding: 20px 16px !important; }
+}
+</style>
+
 <section class="page-hero" <?= $_real_hero_bg ? 'style="background-image:url(\''.e($_real_hero_bg).'\');background-size:cover;background-position:center;"' : '' ?>>
-  <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;">
+  <div class="container real-hero-grid">
     <div>
       <nav class="breadcrumb" aria-label="Fil d'Ariane">
         <a href="<?= SITE_URL ?>/index.php"><?= t('nav_accueil') ?></a>
@@ -67,7 +84,7 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
     </div>
 
     <!-- Chiffres clés -->
-    <div class="animate-fade-up delay-2" style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+    <div class="animate-fade-up delay-2 real-hero-stats">
       <div style="background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15); border-radius:16px; padding:24px 20px; text-align:center; backdrop-filter:blur(6px);">
         <div class="counter" data-target="15" data-suffix="+" style="font-size:2.4rem; font-weight:800; color:#f08014; line-height:1;">0</div>
         <div style="font-size:.78rem; color:rgba(255,255,255,0.75); margin-top:6px; text-transform:uppercase; letter-spacing:.08em;"><?= t('real_stat1_label') ?></div>
@@ -290,7 +307,7 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
-  <div class="container" style="display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;">
+  <div class="container real-cta-grid">
 
     <!-- Gauche : infos de contact rapide -->
     <div>

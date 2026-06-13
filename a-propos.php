@@ -26,10 +26,29 @@ require_once __DIR__ . '/includes/header.php';
 .page-hero-title { font-size: clamp(2rem, 5vw, 3rem); font-weight: 800; margin: 0 0 1rem; line-height: 1.2; }
 .page-hero-title span { color: var(--orange); }
 .page-hero-desc { opacity: .85; font-size: 1.05rem; line-height: 1.7; }
+/* Hero grid */
+.apropos-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.apropos-hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
 @media (max-width: 900px) {
   .page-hero .container[style*="grid-template-columns"] {
     grid-template-columns: 1fr !important;
     gap: 32px !important;
+  }
+  .apropos-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .apropos-hero-stats > div {
+    padding: 14px 10px !important;
   }
 }
 
@@ -164,12 +183,59 @@ require_once __DIR__ . '/includes/header.php';
 @media (max-width: 768px) {
   .section-2col { grid-template-columns: 1fr; gap: 2rem; }
 }
+
+/* ── Stats section responsive (1fr 380px → 1col sous 900px) ── */
+.apropos-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 900px) {
+  .apropos-stats-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .apropos-stats-grid > div:last-child {
+    max-width: 480px;
+    margin: 0 auto;
+    width: 100%;
+  }
+}
+
+/* ── CTA section responsive ── */
+.apropos-cta-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+@media (max-width: 768px) {
+  .apropos-cta-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+  }
+}
+
+/* ── Photo équipe ── */
+@media (max-width: 768px) {
+  .equipe-photo-full { height: 240px !important; }
+}
+@media (max-width: 480px) {
+  .equipe-photo-full { height: 180px !important; }
+}
 </style>
 
 <!-- ══ HERO ══ -->
 <?php $_apropos_hero_bg = cms_bg_url(cms('a-propos','hero','bg_image','')); ?>
 <section class="page-hero" <?= $_apropos_hero_bg ? 'style="background-image:url(\''.e($_apropos_hero_bg).'\');background-size:cover;background-position:center;"' : '' ?>>
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+  <div class="container apropos-hero-grid">
     <div>
       <nav class="breadcrumb" aria-label="<?= t('apropos_aria_bc') ?>">
         <a href="<?= SITE_URL ?>/index.php"><?= t('apropos_bc_accueil') ?></a>
@@ -181,7 +247,7 @@ require_once __DIR__ . '/includes/header.php';
         <?= t('apropos_hero_desc') ?>
       </p>
     </div>
-    <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="animate-fade-up delay-2 apropos-hero-stats">
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
         <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">10+</div>
         <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;"><?= t('apropos_hero_stat_ans') ?></div>
@@ -298,7 +364,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- ══ CHIFFRES CLÉS ══ -->
 <section class="stats-section">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:center;">
+    <div class="apropos-stats-grid">
       <div style="text-align:center;">
         <span class="section-tag"><?= icon('star') ?> <?= t('apropos_stats_tag') ?></span>
         <h2 class="section-title" style="color:#fff;"><?= t('apropos_stats_titre') ?></h2>
@@ -398,7 +464,7 @@ require_once __DIR__ . '/includes/header.php';
     <div style="margin:0 auto 48px;max-width:860px;border-radius:20px;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,0.14);">
       <img src="<?= SITE_URL ?>/assets/images/equipe/equipe-bureau.jpg"
            alt="Équipe COTRAC en réunion de travail"
-           style="width:100%;height:420px;object-fit:cover;object-position:center top;display:block;">
+           style="width:100%;height:420px;object-fit:cover;object-position:center top;display:block;" class="equipe-photo-full">
     </div>
 
     <div class="equipe-grid">
@@ -1150,7 +1216,7 @@ require_once __DIR__ . '/includes/header.php';
   <!-- Overlay sombre pour lisibilité -->
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <!-- Contenu -->
-  <div class="container" style="position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding-top:4rem;padding-bottom:4rem;">
+  <div class="container apropos-cta-grid">
     <!-- Gauche -->
     <div class="animate-fade-up delay-1">
       <span class="section-tag orange"><?= t('apropos_cta_tag') ?></span>

@@ -12,7 +12,7 @@ require_once 'includes/header.php';
 ═══════════════════════════════════════════════════════════ -->
 <?php $_industrie_hero_bg = cms_bg_url(cms('industrie','hero','bg_image','')); ?>
 <section class="page-hero" <?= $_industrie_hero_bg ? 'style="background-image:url(\''.e($_industrie_hero_bg).'\');background-size:cover;background-position:center;"' : '' ?>>
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+  <div class="container grid-2col" style="gap:48px;align-items:center;">
     <div>
       <nav class="breadcrumb">
         <a href="<?= SITE_URL ?>/index.php"><?= t('nav_accueil') ?></a>
@@ -28,7 +28,7 @@ require_once 'includes/header.php';
         <?= cms('industrie','hero','subtitle', t('industrie_hero_desc')) ?>
       </p>
     </div>
-    <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px;">
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
         <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">10+</div>
         <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;"><?= t('industrie_stat1_label') ?></div>
@@ -179,7 +179,7 @@ require_once 'includes/header.php';
       </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
 
       <?php
       $equipements = [
@@ -303,7 +303,7 @@ require_once 'includes/header.php';
 ═══════════════════════════════════════════════════════════ -->
 <section class="section">
   <div class="container">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center;">
+    <div class="grid-2col" style="gap:40px;align-items:center;">
       <div class="animate-fade-up delay-1">
         <span class="section-tag"><?= t('industrie_tag_terrain') ?></span>
         <h2 class="section-title" style="font-size:1.8rem;"><?= t('industrie_terrain_titre') ?></h2>
@@ -353,12 +353,18 @@ require 'includes/galerie.php';
 <!-- ═══════════════════════════════════════════════════════════
      SECTION : CTA
 ═══════════════════════════════════════════════════════════ -->
-<section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
+<style>
+@media(max-width:768px){
+  .cta-section-inner{min-height:auto!important;}
+  .cta-grid{grid-template-columns:1fr!important;gap:32px!important;}
+}
+</style>
+<section class="cta-section-inner" style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
   <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+  <div class="container cta-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:56px;align-items:center;">
 
     <!-- Gauche : contact info -->
     <div class="animate-fade-up delay-1">

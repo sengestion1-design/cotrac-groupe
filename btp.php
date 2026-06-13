@@ -8,11 +8,80 @@ require_once 'includes/header.php';
 ?>
 
 <!-- ═══════════════════════════════════════════════════════════
+     RESPONSIVE OVERRIDES BTP
+═══════════════════════════════════════════════════════════ -->
+<style>
+/* Hero : 2 colonnes → 1 colonne sous 768px */
+.btp-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+/* Chiffres clés hero : 2x2 → 2x2 conservé mais réduit sur très petit écran */
+.btp-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+/* Galerie réalisations : auto-fit responsive */
+.btp-projets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+}
+/* CTA : 2 colonnes → 1 colonne sous 768px */
+.btp-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+/* Images service : hauteur fixe réduite sur mobile */
+.btp-service-img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+}
+@media (max-width: 768px) {
+  .btp-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .btp-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .btp-cta-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .btp-cta-section {
+    min-height: auto !important;
+  }
+  .btp-service-img {
+    height: 220px;
+  }
+}
+@media (max-width: 480px) {
+  .btp-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .btp-service-img {
+    height: 180px;
+  }
+}
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════
      PAGE HERO BTP
 ═══════════════════════════════════════════════════════════ -->
 <?php $_btp_hero_bg = cms_bg_url(cms('btp','hero','bg_image','')); ?>
 <section class="page-hero" style="<?= $_btp_hero_bg ? 'background-image:url(\''.e($_btp_hero_bg).'\');background-size:cover;background-position:center;' : 'background:linear-gradient(135deg,#0f4d8a 0%,#1a6bb5 100%);' ?>">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+  <div class="container btp-hero-grid">
     <div>
       <nav class="breadcrumb">
         <a href="<?= SITE_URL ?>/index.php"><?= t('breadcrumb_accueil') ?></a>
@@ -29,7 +98,7 @@ require_once 'includes/header.php';
       </p>
     </div>
     <!-- Chiffres clés BTP -->
-    <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="animate-fade-up delay-2 btp-stats-grid">
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
         <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">15+</div>
         <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;"><?= t('btp_stat_batiments') ?></div>
@@ -71,7 +140,8 @@ require_once 'includes/header.php';
         <?php $_btp_c1 = cms_img_url(cms('btp','services_cards','card1_icon','assets/images/equipe/gilet-cotrac2.jpg')); ?>
         <img src="<?= e($_btp_c1) ?>"
              alt="<?= t('btp_pole1_img_alt') ?>"
-             style="width:100%;height:340px;object-fit:cover;object-position:center top;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.14);"
+             class="btp-service-img"
+             style="object-position:center top;"
              loading="lazy">
       </div>
       <!-- Liste droite -->
@@ -117,7 +187,8 @@ require_once 'includes/header.php';
         <?php $_btp_c2 = cms_img_url(cms('btp','services_cards','card2_icon','assets/images/equipe/equipe-inspection.jpg')); ?>
         <img src="<?= e($_btp_c2) ?>"
              alt="<?= t('btp_pole2_img_alt') ?>"
-             style="width:100%;height:340px;object-fit:cover;object-position:center;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.14);"
+             class="btp-service-img"
+             style="object-position:center;"
              loading="lazy">
       </div>
       <!-- Liste droite -->
@@ -163,7 +234,8 @@ require_once 'includes/header.php';
         <?php $_btp_c3 = cms_img_url(cms('btp','services_cards','card3_icon','assets/images/equipe/ingenieure-plans.jpg')); ?>
         <img src="<?= e($_btp_c3) ?>"
              alt="<?= t('btp_pole3_img_alt') ?>"
-             style="width:100%;height:340px;object-fit:cover;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);"
+             class="btp-service-img"
+             style="box-shadow:0 8px 32px rgba(0,0,0,0.12);"
              loading="lazy">
       </div>
       <!-- Liste droite -->
@@ -209,7 +281,8 @@ require_once 'includes/header.php';
         <?php $_btp_c4 = cms_img_url(cms('btp','services_cards','card4_icon','assets/images/equipe/equipe-terrain.jpg')); ?>
         <img src="<?= e($_btp_c4) ?>"
              alt="<?= t('btp_pole4_img_alt') ?>"
-             style="width:100%;height:340px;object-fit:cover;border-radius:16px;box-shadow:0 8px 32px rgba(0,0,0,0.12);"
+             class="btp-service-img"
+             style="box-shadow:0 8px 32px rgba(0,0,0,0.12);"
              loading="lazy">
       </div>
       <!-- Liste droite -->
@@ -315,7 +388,7 @@ require_once 'includes/header.php';
       </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;">
+    <div class="btp-projets-grid">
 
       <!-- Projet 1 -->
       <article class="projet-card animate-fade-up delay-1">
@@ -406,12 +479,12 @@ require 'includes/galerie.php';
 <!-- ═══════════════════════════════════════════════════════════
      SECTION : CTA
 ═══════════════════════════════════════════════════════════ -->
-<section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
+<section class="btp-cta-section" style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
   <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
+  <div class="container btp-cta-grid">
 
     <div class="animate-fade-up delay-1">
       <span class="section-tag orange"><?= t('btp_cta_tag') ?></span>

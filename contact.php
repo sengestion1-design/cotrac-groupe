@@ -231,12 +231,38 @@ require_once __DIR__ . '/includes/header.php';
 
 /* Honeypot caché */
 .hp-field { display: none !important; visibility: hidden; position: absolute; left: -9999px; }
+
+/* Hero responsive */
+.contact-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.contact-hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 768px) {
+  .contact-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .contact-hero-stats {
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .contact-hero-stats > div {
+    padding: 14px 10px !important;
+  }
+}
 </style>
 
 <!-- ===================== PAGE HERO ===================== -->
 <?php $_contact_hero_bg = cms_bg_url(cms('contact','hero','bg_image','')); ?>
 <section class="page-hero" <?= $_contact_hero_bg ? 'style="background-image:url(\''.e($_contact_hero_bg).'\');background-size:cover;background-position:center;"' : '' ?>>
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+  <div class="container contact-hero-grid">
     <div>
       <nav class="breadcrumb" aria-label="Fil d'Ariane">
         <a href="<?= SITE_URL ?>/index.php"><?= t('nav_accueil') ?></a>
@@ -250,7 +276,7 @@ require_once __DIR__ . '/includes/header.php';
         <?= cms('contact','hero','subtitle', t('contact_hero_desc')) ?>
       </p>
     </div>
-    <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="animate-fade-up delay-2 contact-hero-stats">
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
         <div style="font-size:2rem;font-weight:800;color:#f7941d;line-height:1;">48h</div>
         <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;"><?= t('contact_stat_delai') ?></div>

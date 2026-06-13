@@ -20,7 +20,7 @@ require_once 'includes/header.php';
 ═══════════════════════════════════════════════════════════ -->
 <?php $_routes_hero_bg = cms_bg_url(cms('routes','hero','bg_image','')); ?>
 <section class="page-hero" style="<?= $_routes_hero_bg ? 'background-image:url(\''.e($_routes_hero_bg).'\');background-size:cover;background-position:center;' : 'background:linear-gradient(135deg,#7f4f24 0%,#1a6bb5 100%);' ?>">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+  <div class="container grid-2col" style="gap:48px;align-items:center;">
     <div>
       <nav class="breadcrumb">
         <a href="<?= SITE_URL ?>/index.php"><?= t('breadcrumb_accueil') ?></a>
@@ -36,7 +36,7 @@ require_once 'includes/header.php';
         <?= cms('routes','hero','subtitle', t('routes_hero_desc')) ?>
       </p>
     </div>
-    <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;">
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
         <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">14</div>
         <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;"><?= t('routes_stat_regions') ?></div>
@@ -130,11 +130,12 @@ require_once 'includes/header.php';
      SECTION : SPÉCIFICITÉS TECHNIQUES
 ═══════════════════════════════════════════════════════════ -->
 <section class="section">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+  <div class="container grid-2col" style="gap:48px;align-items:center;">
     <div class="animate-fade-up delay-1">
       <span class="section-tag"><?= t('routes_tech_tag') ?></span>
       <h2 class="section-title" style="text-align:left;margin-top:12px;"><?= t('routes_tech_titre') ?></h2>
       <p style="color:var(--gris);margin-bottom:24px;line-height:1.7;"><?= t('routes_tech_desc') ?></p>
+      <div style="width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;">
       <table class="specs-table">
         <thead>
           <tr>
@@ -152,13 +153,14 @@ require_once 'includes/header.php';
           <tr><td><?= t('routes_table_r6c1') ?></td><td>Béton précontraint</td><td>Classe A/B</td></tr>
         </tbody>
       </table>
+      </div>
     </div>
     <div class="animate-fade-up delay-2">
       <?php $_routes_main = cms_img_url(cms('routes','services_cards','card1_icon','uploads/projets/terrain-chantier.jpg')); ?>
       <img src="<?= e($_routes_main) ?>"
            alt="<?= t('routes_img_alt') ?>"
-           style="width:100%;height:420px;object-fit:cover;border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,0.15);">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px;">
+           style="width:100%;height:clamp(220px,40vw,420px);object-fit:cover;border-radius:20px;box-shadow:0 12px 40px rgba(0,0,0,0.15);">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(90px,1fr));gap:12px;margin-top:16px;">
         <div style="background:var(--bleu);color:#fff;border-radius:12px;padding:16px;text-align:center;">
           <div style="font-size:1.4rem;font-weight:800;">14</div>
           <div style="font-size:.68rem;opacity:.85;text-transform:uppercase;letter-spacing:.06em;"><?= t('routes_mini_regions') ?></div>
@@ -190,7 +192,7 @@ require_once 'includes/header.php';
       </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:28px;">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;">
 
       <div class="valeur-card animate-fade-up delay-1" style="padding:36px 28px;display:flex;gap:22px;align-items:flex-start;">
         <div style="min-width:64px;height:64px;background:linear-gradient(135deg,#1a6bb5,#2589d8);border-radius:14px;display:flex;align-items:center;justify-content:center;color:#fff;">
@@ -268,7 +270,7 @@ require 'includes/galerie.php';
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+  <div class="container grid-2col" style="gap:64px;align-items:center;">
     <div>
       <span class="section-tag orange" style="margin-bottom:20px;display:inline-block;"><?= t('routes_cta_tag') ?></span>
       <h2 class="section-title light" style="margin-bottom:16px;"><?= t('routes_cta_titre') ?></h2>

@@ -7,12 +7,89 @@ cms_load('energie');
 require_once 'includes/header.php';
 ?>
 
+<style>
+/* ── Responsive overrides — energie.php ── */
+
+/* Hero : 2 colonnes → 1 colonne sous 768px */
+.energie-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.energie-hero-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+/* CTA : 2 colonnes → 1 colonne sous 768px */
+.energie-cta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+/* Galerie ligne 1 (2fr 1fr) et ligne 4 (1fr 2fr) */
+.energie-galerie-l1,
+.energie-galerie-l4 {
+  display: grid;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.energie-galerie-l1 { grid-template-columns: 2fr 1fr; }
+.energie-galerie-l4 { grid-template-columns: 1fr 2fr; }
+
+/* Hauteur fixe galerie sur desktop */
+.energie-galerie-l1,
+.energie-galerie-l4 { height: 320px; }
+.energie-galerie-l1 > .galerie-item,
+.energie-galerie-l4 > .galerie-item { aspect-ratio: unset; height: 100%; }
+
+/* Normes & lignes galerie égales */
+.energie-normes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.energie-galerie-3col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+  .energie-hero-grid,
+  .energie-cta-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .energie-hero-stats {
+    grid-template-columns: 1fr 1fr; /* garde 2 col pour les stats chiffres */
+  }
+  .energie-galerie-l1,
+  .energie-galerie-l4 {
+    grid-template-columns: 1fr;
+    height: auto;
+  }
+  .energie-galerie-l1 > .galerie-item,
+  .energie-galerie-l4 > .galerie-item {
+    height: 220px;
+  }
+  .energie-cta-grid { gap: 24px; }
+}
+</style>
+
 <!-- ═══════════════════════════════════════════════════════════
      PAGE HERO
 ═══════════════════════════════════════════════════════════ -->
 <?php $_energie_hero_bg = cms_bg_url(cms('energie','hero','bg_image','')); ?>
 <section class="page-hero" <?= $_energie_hero_bg ? 'style="background-image:url(\''.e($_energie_hero_bg).'\');background-size:cover;background-position:center;"' : '' ?>>
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;">
+  <div class="container energie-hero-grid">
     <div>
       <nav class="breadcrumb">
         <a href="<?= SITE_URL ?>/index.php"><?= t('breadcrumb_accueil') ?></a>
@@ -29,7 +106,7 @@ require_once 'includes/header.php';
       </p>
     </div>
     <!-- Chiffres clés énergie -->
-    <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+    <div class="animate-fade-up delay-2 energie-hero-stats">
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
         <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">10+</div>
         <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;"><?= t('energie_stat_projets') ?></div>
@@ -161,12 +238,12 @@ require_once 'includes/header.php';
     $_e_g1 = cms_img_url(cms('energie','services_cards','card1_icon','assets/images/energie/pose-poteau-grue.jpg'));
     $_e_g2 = cms_img_url(cms('energie','services_cards','card2_icon','assets/images/energie/lampadaire-solaire.jpg'));
     ?>
-    <div style="display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:16px;height:320px;">
-      <div class="galerie-item animate-fade-up delay-1" style="aspect-ratio:unset;height:100%;">
+    <div class="energie-galerie-l1">
+      <div class="galerie-item animate-fade-up delay-1">
         <img src="<?= e($_e_g1) ?>" alt="<?= t('energie_galerie_alt1') ?>" loading="lazy">
         <div class="galerie-caption"><?= t('energie_galerie_cap1') ?></div>
       </div>
-      <div class="galerie-item animate-fade-up delay-2" style="aspect-ratio:unset;height:100%;">
+      <div class="galerie-item animate-fade-up delay-2">
         <img src="<?= e($_e_g2) ?>" alt="<?= t('energie_galerie_alt2') ?>" loading="lazy">
         <div class="galerie-caption"><?= t('energie_galerie_cap2') ?></div>
       </div>
@@ -177,7 +254,7 @@ require_once 'includes/header.php';
     $_e_g3 = cms_img_url(cms('energie','services_cards','card3_icon','assets/images/energie/ligne-hta-transformateur.jpg'));
     $_e_g4 = cms_img_url(cms('energie','services_cards','card4_icon','assets/images/energie/armoire-coupure-hta.jpg'));
     ?>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;">
+    <div class="energie-galerie-3col">
       <div class="galerie-item animate-fade-up delay-1">
         <img src="<?= e($_e_g3) ?>" alt="<?= t('energie_galerie_alt3') ?>" loading="lazy">
         <div class="galerie-caption"><?= t('energie_galerie_cap3') ?></div>
@@ -193,7 +270,7 @@ require_once 'includes/header.php';
     </div>
 
     <!-- Ligne 3 : 3 égales -->
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:16px;">
+    <div class="energie-galerie-3col">
       <div class="galerie-item animate-fade-up delay-1">
         <img src="<?= SITE_URL ?>/assets/images/energie/tranchee-cable-bt.jpg" alt="<?= t('energie_galerie_alt6') ?>" loading="lazy">
         <div class="galerie-caption"><?= t('energie_galerie_cap6') ?></div>
@@ -209,12 +286,12 @@ require_once 'includes/header.php';
     </div>
 
     <!-- Ligne 4 : petite + grande, hauteur fixe -->
-    <div style="display:grid;grid-template-columns:1fr 2fr;gap:16px;height:320px;">
-      <div class="galerie-item animate-fade-up delay-1" style="aspect-ratio:unset;height:100%;">
+    <div class="energie-galerie-l4">
+      <div class="galerie-item animate-fade-up delay-1">
         <img src="<?= SITE_URL ?>/assets/images/energie/support-mesure.jpg" alt="<?= t('energie_galerie_alt9') ?>" loading="lazy" style="object-position:center center;">
         <div class="galerie-caption"><?= t('energie_galerie_cap9') ?></div>
       </div>
-      <div class="galerie-item animate-fade-up delay-2" style="aspect-ratio:unset;height:100%;">
+      <div class="galerie-item animate-fade-up delay-2">
         <img src="<?= SITE_URL ?>/assets/images/energie/pose-poteau-equipe.jpg" alt="<?= t('energie_galerie_alt10') ?>" loading="lazy">
         <div class="galerie-caption"><?= t('energie_galerie_cap10') ?></div>
       </div>
@@ -251,7 +328,7 @@ require_once 'includes/header.php';
       </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:900px;margin:0 auto;">
+    <div class="energie-normes-grid">
 
       <div class="valeur-card animate-fade-up delay-1" style="text-align:center;padding:36px 24px;">
         <div style="font-size:2.4rem;margin-bottom:16px;"><span class="ico ico-globe"><!--globe--></span></div>
@@ -340,7 +417,7 @@ require 'includes/galerie.php';
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+  <div class="container energie-cta-grid">
     <div>
       <span class="section-tag orange" style="margin-bottom:20px;display:inline-block;"><?= t('energie_cta_tag') ?></span>
       <h2 class="section-title light" style="margin-bottom:16px;"><?= t('energie_cta_titre') ?></h2>
@@ -387,3 +464,4 @@ require 'includes/galerie.php';
 
 
 <?php require_once 'includes/footer.php'; ?>
+
