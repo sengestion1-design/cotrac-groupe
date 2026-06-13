@@ -18,7 +18,7 @@ $db = getDB();
   <?php else: ?>
   <div class="hero-parallax-bg" style="background:none;">
     <img src="<?= SITE_URL ?>/assets/images/plan.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;z-index:0;">
-    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.82) 45%,rgba(10,30,70,0.55));z-index:1;"></div>
+    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(5,18,45,0.90) 0%,rgba(10,30,70,0.78) 55%,rgba(10,30,70,0.45) 100%);z-index:1;"></div>
   </div>
   <?php endif; ?>
   <div class="hero-blob hero-blob-1"></div>
