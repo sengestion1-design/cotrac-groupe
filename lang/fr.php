@@ -599,7 +599,7 @@ return [
     'index_hero_titre'            => 'Infrastructures durables livrées clés en main au <span>Sénégal</span>',
     'index_hero_sous_titre'       => 'BTP, réseaux HTA/BT, routes et ouvrages d\'art — <strong>COTRAC</strong> conçoit et réalise vos projets d\'infrastructure au Sénégal et en Afrique de l\'Ouest.',
     'index_hero_btn_realisations' => 'Consulter nos réalisations',
-    'index_hero_btn_contact'      => 'Discuter de votre projet',
+    'index_hero_btn_contact'      => 'Nous contacter',
     'index_hero_stat_ans'         => 'Ans d\'expérience',
     'index_hero_stat_projets'     => 'Projets réalisés',
     'index_hero_stat_poles'       => 'Pôles d\'activités',

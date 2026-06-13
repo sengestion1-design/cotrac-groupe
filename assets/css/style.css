@@ -112,14 +112,31 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   box-shadow: 0 8px 24px rgba(247,148,29,0.35);
 }
 .btn-outline {
-  background: transparent;
+  background: rgba(255,255,255,0.12);
   color: var(--blanc);
-  border-color: rgba(255,255,255,0.6);
+  border-color: rgba(255,255,255,0.75);
+  backdrop-filter: blur(4px);
 }
 .btn-outline:hover {
   background: var(--blanc);
   color: var(--bleu);
   border-color: var(--blanc);
+  transform: translateY(-2px);
+}
+/* Alias explicite pour les héros sur fond photo */
+.btn-outline-white {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border: 2px solid rgba(255,255,255,0.75);
+  backdrop-filter: blur(4px);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600; font-size: 0.95rem;
+  padding: 13px 28px; border-radius: 50px;
+  text-decoration: none; transition: background .2s, color .2s, transform .2s;
+}
+.btn-outline-white:hover {
+  background: #fff; color: var(--bleu);
   transform: translateY(-2px);
 }
 .btn-bleu {
@@ -386,9 +403,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   gap: 2px;
 }
 .stat-card {
-  background: rgba(255,255,255,0.12);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: rgba(5,18,45,0.65);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.15);
   border-top: 3px solid var(--orange);
   padding: 14px 20px;
   text-align: center;
@@ -421,10 +438,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero-right  { display: none; }
 
 /* ── Bande photos défilante droite→gauche ── */
+/* Wrap hors hero — fond blanc cassé, séparation propre */
+.hero-slider-wrap {
+  background: #f4f7fb;
+  border-bottom: 1px solid rgba(26,107,181,0.08);
+  padding: 0;
+  overflow: hidden;
+}
 .hero-slider {
   position: relative;
   overflow: hidden;
-  margin-top: 32px;
+  margin-top: 0;
   height: 160px;
   width: 100%;
 }
@@ -437,8 +461,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   z-index: 2;
   pointer-events: none;
 }
-.hero-slider::before { left: 0;  background: linear-gradient(to right, var(--bleu-dark), transparent); }
-.hero-slider::after  { right: 0; background: linear-gradient(to left,  var(--bleu-dark), transparent); }
+.hero-slider::before { left: 0;  background: linear-gradient(to right, #f4f7fb, transparent); }
+.hero-slider::after  { right: 0; background: linear-gradient(to left,  #f4f7fb, transparent); }
 
 .hero-slider-track {
   display: flex;

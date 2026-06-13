@@ -43,12 +43,8 @@ $db = getDB();
         </p>
 
         <div class="hero-actions">
-          <a href="<?= SITE_URL ?>/contact.php" class="btn btn-primary"><?= t('index_hero_btn_contact') ?></a>
-          <a href="tel:+221338279639" class="btn btn-outline" style="display:inline-flex;align-items:center;gap:8px;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16z"/></svg>
-            Appeler maintenant
-          </a>
-          <a href="<?= SITE_URL ?>/realisations.php" class="hero-link-text"><?= t('index_hero_btn_realisations') ?> →</a>
+          <a href="<?= SITE_URL ?>/realisations.php" class="btn btn-primary"><?= t('index_hero_btn_realisations') ?></a>
+          <a href="<?= SITE_URL ?>/contact.php" class="btn btn-outline-white"><?= t('index_hero_btn_contact') ?></a>
         </div>
 
         <!-- Agréments -->
@@ -83,33 +79,6 @@ $db = getDB();
 
     </div>
 
-    <!-- Bande photos défilante sous les stats -->
-    <?php
-    $photos = [
-      ['src'=>'assets/images/energie/pose-poteau-grue.jpg',           'alt'=>'Pose poteau'],
-      ['src'=>'assets/images/energie/tranchee-cable-bt.jpg',          'alt'=>'Tranchée BT'],
-      ['src'=>'assets/images/equipe/equipe-terrain.jpg',              'alt'=>'Équipe terrain'],
-      ['src'=>'assets/images/energie/poteau-transformateur.jpg',      'alt'=>'Transformateur'],
-      ['src'=>'assets/images/energie/armoire-coupure-hta.jpg',        'alt'=>'Armoire HTA'],
-      ['src'=>'assets/images/equipe/gilet-cotrac.jpg',                'alt'=>'Équipe COTRAC'],
-      ['src'=>'assets/images/industrie/genie-industriel-chantier.jpg','alt'=>'Génie industriel'],
-      ['src'=>'assets/images/energie/raccordement-cable.jpg',         'alt'=>'Raccordement'],
-      ['src'=>'assets/images/energie/ligne-hta-transformateur.jpg',   'alt'=>'Ligne HTA'],
-      ['src'=>'assets/images/energie/jonction-cable-hta.jpg',         'alt'=>'Jonction HTA'],
-      ['src'=>'assets/images/equipe/equipe-bureau.jpg',               'alt'=>'Équipe COTRAC en réunion'],
-    ];
-    $photos = array_merge($photos, $photos);
-    ?>
-    <div class="hero-slider">
-      <div class="hero-slider-track">
-        <?php foreach ($photos as $p): ?>
-        <div class="hero-slider-card">
-          <img src="<?= SITE_URL ?>/<?= e($p['src']) ?>" alt="<?= e($p['alt']) ?>" loading="lazy">
-        </div>
-        <?php endforeach; ?>
-      </div>
-    </div>
-
   </div>
 
   <!-- Vagues SVG -->
@@ -121,6 +90,34 @@ $db = getDB();
   </div>
 </section>
 
+<!-- Bande photos défilante — hors hero pour lisibilité -->
+<?php
+$photos = [
+  ['src'=>'assets/images/energie/pose-poteau-grue.jpg',           'alt'=>'Pose poteau'],
+  ['src'=>'assets/images/energie/tranchee-cable-bt.jpg',          'alt'=>'Tranchée BT'],
+  ['src'=>'assets/images/equipe/equipe-terrain.jpg',              'alt'=>'Équipe terrain'],
+  ['src'=>'assets/images/energie/poteau-transformateur.jpg',      'alt'=>'Transformateur'],
+  ['src'=>'assets/images/energie/armoire-coupure-hta.jpg',        'alt'=>'Armoire HTA'],
+  ['src'=>'assets/images/equipe/gilet-cotrac.jpg',                'alt'=>'Équipe COTRAC'],
+  ['src'=>'assets/images/industrie/genie-industriel-chantier.jpg','alt'=>'Génie industriel'],
+  ['src'=>'assets/images/energie/raccordement-cable.jpg',         'alt'=>'Raccordement'],
+  ['src'=>'assets/images/energie/ligne-hta-transformateur.jpg',   'alt'=>'Ligne HTA'],
+  ['src'=>'assets/images/energie/jonction-cable-hta.jpg',         'alt'=>'Jonction HTA'],
+  ['src'=>'assets/images/equipe/equipe-bureau.jpg',               'alt'=>'Équipe COTRAC en réunion'],
+];
+$photos = array_merge($photos, $photos);
+?>
+<div class="hero-slider-wrap">
+  <div class="hero-slider">
+    <div class="hero-slider-track">
+      <?php foreach ($photos as $p): ?>
+      <div class="hero-slider-card">
+        <img src="<?= SITE_URL ?>/<?= e($p['src']) ?>" alt="<?= e($p['alt']) ?>" loading="lazy">
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</div>
 
 <!-- ═══════════════════════════════════════════════════════════
      SECTION : NOS 4 PÔLES D'ACTIVITÉS

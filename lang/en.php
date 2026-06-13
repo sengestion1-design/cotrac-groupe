@@ -598,7 +598,7 @@ return [
     'index_hero_titre'            => 'Let\'s Build the Future of <span>Senegal</span> Together',
     'index_hero_sous_titre'       => 'Civil engineering, HV/LV electrical networks, roads and bridges — <strong>COTRAC</strong> designs and delivers your infrastructure projects across Senegal and West Africa.',
     'index_hero_btn_realisations' => 'View our projects',
-    'index_hero_btn_contact'      => 'Discuss your project',
+    'index_hero_btn_contact'      => 'Contact us',
     'index_hero_stat_ans'         => 'Years of experience',
     'index_hero_stat_projets'     => 'Completed projects',
     'index_hero_stat_poles'       => 'Business divisions',
