@@ -452,39 +452,10 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Localisation -->
         <div class="contact-info-card" style="padding:0;overflow:hidden;">
-          <a href="https://maps.google.com/?q=Ouest+Foire+Dakar+Senegal" target="_blank" rel="noopener noreferrer"
-             style="display:block;position:relative;height:220px;overflow:hidden;text-decoration:none;background:linear-gradient(135deg,#0d2a4f 0%,#1a4a8a 50%,#0f3d6e 100%);">
-            <!-- Grille de carte stylisée -->
-            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;opacity:0.18;">
-              <defs>
-                <pattern id="mapgrid" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#fff" stroke-width="0.8"/>
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#mapgrid)"/>
-              <!-- Routes simulées -->
-              <line x1="0" y1="110" x2="100%" y2="110" stroke="#fff" stroke-width="2" opacity="0.25"/>
-              <line x1="0" y1="70" x2="100%" y2="85" stroke="#fff" stroke-width="1.2" opacity="0.15"/>
-              <line x1="160" y1="0" x2="160" y2="100%" stroke="#fff" stroke-width="1.5" opacity="0.2"/>
-              <line x1="300" y1="0" x2="320" y2="100%" stroke="#fff" stroke-width="1" opacity="0.12"/>
-            </svg>
-            <!-- Pin central -->
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);">
-              <div style="width:48px;height:48px;background:var(--orange);border-radius:50% 50% 50% 0;transform:rotate(-45deg);box-shadow:0 4px 20px rgba(247,148,29,0.6);border:3px solid #fff;"></div>
-              <div style="width:10px;height:10px;background:#fff;border-radius:50%;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(45deg);"></div>
-            </div>
-            <!-- Ripple autour du pin -->
-            <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);width:80px;height:80px;margin-left:-16px;margin-top:-16px;border-radius:50%;background:rgba(247,148,29,0.15);animation:map-ripple 2s ease-out infinite;"></div>
-            <!-- Label -->
-            <div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(to top,rgba(10,22,40,0.95),transparent);">
-              <p style="color:#fff;font-size:0.82rem;font-weight:600;margin:0;display:flex;align-items:center;gap:8px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f7941d" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                <?= t('contact_maps_label') ?>
-              </p>
-            </div>
-            <!-- Hover overlay -->
-            <div style="position:absolute;top:0;left:0;right:0;bottom:0;background:rgba(247,148,29,0.08);opacity:0;transition:opacity .3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0'"></div>
-          </a>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.5!2d-17.4677!3d14.7392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec172f5b3c5b065%3A0x8b1c1c1c1c1c1c1c!2sOuest%20Foire%2C%20Dakar%2C%20S%C3%A9n%C3%A9gal!5e0!3m2!1sfr!2ssn!4v1700000000000"
+            width="100%" height="240" style="border:0;display:block;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade" title="Localisation COTRAC"></iframe>
           <a href="https://maps.google.com/?q=Ouest+Foire+Dakar+Senegal" target="_blank" rel="noopener noreferrer"
              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:var(--bleu-light);color:var(--bleu);font-size:0.82rem;font-weight:600;text-decoration:none;transition:background .2s;"
              onmouseover="this.style.background='#d4e6f7'" onmouseout="this.style.background='var(--bleu-light)'">
