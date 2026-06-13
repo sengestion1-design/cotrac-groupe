@@ -1,4 +1,4 @@
-<!-- COTRAC - Carte SVG Interactive du Senegal - 14 Regions -->
+<!-- COTRAC - Carte SVG Senegal - 14 Regions -->
 
 <section class="carto-section" id="section-carte">
   <div class="container" style="text-align:center;">
@@ -14,12 +14,11 @@
       de Dakar à Kédougou, avec des équipes terrain déployées en permanence.
     </p>
 
-    <!-- Carte SVG -->
     <div class="carto-wrapper">
       <div class="carto-legend">
         <span class="carto-legend-dot" style="background:#1a6bb5;"></span> Région couverte
         <span style="width:20px;display:inline-block;"></span>
-        <span class="carto-legend-dot" style="background:#f7941d;"></span> Survolée
+        <span class="carto-legend-dot" style="background:#f7941d;"></span> Survolée / Sélectionnée
       </div>
 
       <div class="carto-map-container">
@@ -28,160 +27,163 @@
 
         <svg
           id="senegal-map"
-          viewBox="0 0 520 480"
+          viewBox="0 0 800 600"
           xmlns="http://www.w3.org/2000/svg"
           class="carto-svg"
-          aria-label="Carte du Sénégal — 14 régions couvertes par COTRAC"
+          aria-label="Carte du Sénégal - 14 régions couvertes par COTRAC"
           role="img"
+          style="perspective: 800px;"
         >
           <defs>
             <filter id="region-shadow" x="-10%" y="-10%" width="120%" height="120%">
               <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="rgba(26,107,181,0.25)" />
             </filter>
-            <filter id="region-shadow-hover" x="-15%" y="-15%" width="130%" height="130%">
-              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="rgba(247,148,29,0.45)" />
+            <filter id="region-shadow-hover" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="rgba(247,148,29,0.50)" />
+            </filter>
+            <filter id="region-shadow-click" x="-25%" y="-25%" width="150%" height="150%">
+              <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="rgba(26,107,181,0.50)" />
             </filter>
           </defs>
 
-          <!-- ══ SAINT-LOUIS (nord, bord mauritanie) ══ -->
+          <!-- Saint-Louis (nord, grande bande horizontale) -->
           <path
             class="region"
             id="reg-saint-louis"
             data-name="Saint-Louis"
-            d="M 90 20 L 200 20 L 220 30 L 230 50 L 225 80 L 210 100 L 195 115 L 180 125 L 160 130 L 140 130 L 120 125 L 100 115 L 80 100 L 72 80 L 72 50 Z"
+            d="M 290 20 L 560 20 L 580 30 L 590 55 L 585 90 L 565 115 L 540 130 L 510 140 L 480 145 L 450 142 L 420 135 L 395 125 L 370 118 L 345 125 L 320 135 L 300 145 L 278 138 L 262 120 L 255 95 L 258 65 L 270 40 Z"
           />
 
-          <!-- ══ MATAM (nord-est) ══ -->
+          <!-- Matam (nord-est, grand) -->
           <path
             class="region"
             id="reg-matam"
             data-name="Matam"
-            d="M 220 20 L 340 20 L 360 35 L 370 55 L 365 80 L 350 100 L 330 115 L 310 125 L 285 130 L 260 130 L 240 120 L 225 105 L 218 85 L 218 55 Z"
+            d="M 560 20 L 720 20 L 740 35 L 755 60 L 752 95 L 738 125 L 715 148 L 688 162 L 658 170 L 625 172 L 595 165 L 568 152 L 548 138 L 535 120 L 530 98 L 535 72 L 548 48 Z"
           />
 
-          <!-- ══ LOUGA (centre-nord) ══ -->
+          <!-- Louga (centre-nord, grande) -->
           <path
             class="region"
             id="reg-louga"
             data-name="Louga"
-            d="M 72 100 L 100 90 L 130 88 L 165 90 L 195 100 L 210 115 L 215 140 L 210 162 L 195 178 L 175 188 L 155 192 L 130 192 L 108 185 L 88 172 L 74 155 L 68 135 Z"
+            d="M 178 95 L 210 85 L 245 82 L 278 88 L 310 100 L 338 118 L 350 140 L 348 168 L 338 192 L 318 210 L 292 222 L 262 228 L 232 225 L 205 215 L 182 198 L 165 178 L 158 155 L 160 128 Z"
           />
 
-          <!-- ══ TAMBACOUNDA (est, grande région) ══ -->
+          <!-- Tambacounda (est, tres grande region) -->
           <path
             class="region"
             id="reg-tambacounda"
             data-name="Tambacounda"
-            d="M 285 130 L 320 128 L 355 132 L 388 145 L 415 165 L 435 190 L 445 220 L 440 252 L 425 278 L 405 295 L 380 305 L 352 308 L 325 302 L 300 288 L 280 268 L 265 245 L 258 220 L 258 192 L 265 165 L 275 145 Z"
+            d="M 490 165 L 535 160 L 570 168 L 605 182 L 638 202 L 665 228 L 682 258 L 688 292 L 682 328 L 665 358 L 640 380 L 608 395 L 572 402 L 535 398 L 500 385 L 470 365 L 448 340 L 432 310 L 425 278 L 425 245 L 432 215 L 448 190 L 468 175 Z"
           />
 
-          <!-- ══ KÉDOUGOU (extrême sud-est) ══ -->
+          <!-- Kedougou (extreme sud-est, coin) -->
           <path
             class="region"
             id="reg-kedougou"
             data-name="Kédougou"
-            d="M 352 308 L 385 308 L 415 298 L 440 282 L 458 260 L 465 235 L 462 208 L 450 188 L 438 175 L 448 175 L 465 188 L 480 210 L 488 240 L 483 268 L 468 292 L 445 310 L 418 322 L 390 328 L 362 325 Z"
+            d="M 640 380 L 670 368 L 700 355 L 725 338 L 742 315 L 752 288 L 752 260 L 742 235 L 725 215 L 705 202 L 688 195 L 688 258 L 682 292 L 665 328 L 648 358 Z"
           />
 
-          <!-- ══ DIOURBEL (centre-ouest) ══ -->
+          <!-- Diourbel (centre, petit) -->
           <path
             class="region"
             id="reg-diourbel"
             data-name="Diourbel"
-            d="M 130 192 L 162 190 L 190 192 L 208 205 L 215 222 L 212 240 L 200 252 L 182 260 L 162 262 L 142 258 L 125 245 L 115 228 L 115 210 Z"
+            d="M 232 225 L 268 222 L 300 228 L 322 242 L 332 262 L 328 282 L 312 298 L 290 308 L 265 310 L 242 302 L 225 285 L 218 265 L 220 245 Z"
           />
 
-          <!-- ══ THIÈS (ouest) ══ -->
+          <!-- Thies (ouest) -->
           <path
             class="region"
             id="reg-thies"
             data-name="Thiès"
-            d="M 68 155 L 95 150 L 115 152 L 130 165 L 132 192 L 118 210 L 105 222 L 88 228 L 70 225 L 52 215 L 42 198 L 42 175 Z"
+            d="M 148 175 L 182 168 L 210 172 L 228 190 L 232 215 L 218 238 L 202 255 L 180 265 L 155 268 L 132 258 L 115 240 L 110 218 L 118 198 Z"
           />
 
-          <!-- ══ DAKAR (presqu'île, extrême ouest) ══ -->
+          <!-- Dakar (presqu'ile, tres petit coin ouest) -->
           <path
             class="region"
             id="reg-dakar"
             data-name="Dakar"
-            d="M 28 175 L 45 168 L 55 178 L 58 195 L 52 212 L 40 218 L 26 215 L 18 202 L 18 188 Z"
+            d="M 90 195 L 115 185 L 125 198 L 128 218 L 120 235 L 105 245 L 88 242 L 75 228 L 72 212 Z"
           />
 
-          <!-- ══ KAOLACK (centre) ══ -->
+          <!-- Kaolack (centre) -->
           <path
             class="region"
             id="reg-kaolack"
             data-name="Kaolack"
-            d="M 162 262 L 195 258 L 220 265 L 238 282 L 242 302 L 235 320 L 218 332 L 198 336 L 178 330 L 160 315 L 150 295 L 150 275 Z"
+            d="M 262 308 L 298 305 L 328 315 L 348 335 L 352 360 L 340 382 L 318 395 L 292 400 L 265 392 L 245 375 L 238 350 L 242 325 Z"
           />
 
-          <!-- ══ KAFFRINE (centre-est) ══ -->
+          <!-- Kaffrine (centre) -->
           <path
             class="region"
             id="reg-kaffrine"
             data-name="Kaffrine"
-            d="M 210 250 L 240 248 L 265 255 L 278 272 L 280 295 L 268 315 L 248 328 L 228 330 L 210 322 L 198 305 L 196 285 L 202 265 Z"
+            d="M 330 282 L 365 278 L 398 288 L 420 308 L 425 335 L 415 358 L 395 375 L 368 382 L 340 378 L 318 362 L 312 338 L 318 312 Z"
           />
 
-          <!-- ══ FATICK (centre-ouest, Sine-Saloum) ══ -->
+          <!-- Fatick (centre-ouest, Sine-Saloum) -->
           <path
             class="region"
             id="reg-fatick"
             data-name="Fatick"
-            d="M 88 228 L 120 232 L 148 240 L 160 258 L 158 280 L 148 295 L 130 305 L 110 308 L 90 300 L 74 285 L 68 265 L 70 245 Z"
+            d="M 155 268 L 195 265 L 228 272 L 248 290 L 252 315 L 240 338 L 218 352 L 192 358 L 165 352 L 142 335 L 132 312 L 135 288 Z"
           />
 
-          <!-- ══ ZIGUINCHOR (sud-ouest, Casamance) ══ -->
+          <!-- Ziguinchor (sud-ouest, Casamance) -->
           <path
             class="region"
             id="reg-ziguinchor"
             data-name="Ziguinchor"
-            d="M 68 340 L 95 332 L 122 330 L 145 338 L 158 355 L 158 375 L 145 390 L 122 400 L 98 402 L 75 395 L 58 378 L 52 358 Z"
+            d="M 95 442 L 130 432 L 162 430 L 190 438 L 208 458 L 210 482 L 195 500 L 168 512 L 138 515 L 108 508 L 85 490 L 75 468 Z"
           />
 
-          <!-- ══ SÉDHIOU (sud, Casamance centre) ══ -->
+          <!-- Sedhiou (sud, Casamance centre) -->
           <path
             class="region"
             id="reg-sedhiou"
             data-name="Sédhiou"
-            d="M 145 308 L 175 310 L 200 318 L 215 335 L 215 358 L 202 375 L 182 385 L 160 385 L 140 375 L 128 358 L 128 338 Z"
+            d="M 205 430 L 242 425 L 275 430 L 298 448 L 305 472 L 295 495 L 272 510 L 245 515 L 218 508 L 200 490 L 195 465 Z"
           />
 
-          <!-- ══ KOLDA (sud-est, Casamance est) ══ -->
+          <!-- Kolda (sud-est, Casamance est) -->
           <path
             class="region"
             id="reg-kolda"
             data-name="Kolda"
-            d="M 212 318 L 245 320 L 275 328 L 295 348 L 298 375 L 285 395 L 262 408 L 238 410 L 215 400 L 200 382 L 198 358 L 205 338 Z"
+            d="M 298 428 L 338 422 L 375 428 L 405 445 L 420 468 L 418 495 L 400 515 L 372 525 L 342 525 L 312 515 L 292 495 L 288 468 Z"
           />
 
         </svg>
       </div><!-- /.carto-map-container -->
 
-      <!-- Compteur -->
       <div class="carto-counter">
-        <span class="carto-count">14</span> régions · <span class="carto-count">14</span> couvertes · <span class="carto-count">100%</span> du territoire
+        <span class="carto-count">14</span> régions &middot; <span class="carto-count">14</span> couvertes &middot; <span class="carto-count">100%</span> du territoire
       </div>
     </div><!-- /.carto-wrapper -->
   </div>
 </section>
 
-<!-- ══ STYLES ══ -->
+<!-- STYLES -->
 <style>
-/* ─── Section wrapper ─── */
+/* --- Section wrapper --- */
 .carto-section {
   padding: 5rem 0;
   background: #f4f8fd;
 }
 
-/* ─── Wrapper carte ─── */
+/* --- Wrapper carte --- */
 .carto-wrapper {
-  max-width: 500px;
+  max-width: 680px;
   margin: 0 auto;
   position: relative;
 }
 
-/* ─── Légende ─── */
+/* --- Légende --- */
 .carto-legend {
   display: flex;
   align-items: center;
@@ -200,7 +202,7 @@
   border-radius: 50%;
 }
 
-/* ─── Conteneur SVG ─── */
+/* --- Conteneur SVG --- */
 .carto-map-container {
   position: relative;
   background: linear-gradient(160deg, #e8f1fb 0%, #f0f6ff 100%);
@@ -209,14 +211,14 @@
   box-shadow: 0 4px 32px rgba(26,107,181,0.10), inset 0 0 0 1px rgba(26,107,181,0.08);
 }
 
-/* ─── SVG ─── */
+/* --- SVG --- */
 .carto-svg {
   width: 100%;
   height: auto;
   display: block;
 }
 
-/* ─── Régions ─── */
+/* --- Régions : état de base --- */
 #section-carte .region {
   fill: #1a6bb5;
   stroke: #fff;
@@ -224,39 +226,50 @@
   stroke-linejoin: round;
   cursor: pointer;
   filter: url(#region-shadow);
-  /* État initial pour l'animation */
-  opacity: 0;
+  transform-box: fill-box;
   transform-origin: center;
   transition:
     fill 0.22s ease,
     filter 0.22s ease,
-    transform 0.22s ease;
+    transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-#section-carte .region:hover,
-#section-carte .region.hovered {
+/* --- Régions masquées avant animation (ajoutées par JS) --- */
+#section-carte .region.region-hidden {
+  opacity: 0;
+  transform: scale(0.8) translateY(10px);
+}
+
+/* --- Hover --- */
+#section-carte .region:hover {
   fill: #f7941d;
-  filter: url(#region-shadow-hover);
-  transform: scale(1.03);
+  filter: url(#region-shadow-hover) drop-shadow(0 5px 10px rgba(247,148,29,0.35));
 }
 
-/* Animation reveal */
-#section-carte .region.revealed {
-  animation: regionReveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+/* --- Clic / sélection active --- */
+#section-carte .region.clicked {
+  fill: #f7941d;
+  filter: url(#region-shadow-click);
+  transform: translateY(-4px) scale(1.04);
 }
 
-@keyframes regionReveal {
+/* --- Animation d'entrée au scroll --- */
+@keyframes regionIn {
   from {
     opacity: 0;
-    transform: scale(0.85);
+    transform: scale(0.8) translateY(10px);
   }
   to {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
   }
 }
 
-/* ─── Tooltip ─── */
+#section-carte .region.region-visible {
+  animation: regionIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* --- Tooltip --- */
 .carto-tooltip {
   position: fixed;
   background: #1a3a5c;
@@ -289,84 +302,136 @@
   transform: translateY(0);
 }
 
-/* ─── Compteur bas ─── */
+/* --- Compteur bas --- */
 .carto-counter {
   margin-top: 16px;
   font-family: 'Poppins', sans-serif;
   font-size: .82rem;
   color: #6b7280;
   text-align: center;
+  letter-spacing: 0.02em;
 }
 .carto-count {
   font-weight: 700;
   color: #1a6bb5;
 }
+
+/* --- Responsive --- */
+@media (max-width: 480px) {
+  .carto-wrapper {
+    max-width: 100%;
+    padding: 0 8px;
+  }
+  .carto-map-container {
+    padding: 12px;
+    border-radius: 14px;
+  }
+}
 </style>
 
-<!-- ══ JAVASCRIPT ══ -->
+<!-- JAVASCRIPT -->
 <script>
-(function() {
-  const regions   = document.querySelectorAll('#senegal-map .region');
-  const tooltip   = document.getElementById('carto-tooltip');
-  const section   = document.getElementById('section-carte');
-  let   animated  = false;
+(function () {
+  var map     = document.getElementById('senegal-map');
+  var regions = map ? map.querySelectorAll('.region') : [];
+  var tooltip = document.getElementById('carto-tooltip');
+  var section = document.getElementById('section-carte');
+  var active  = null;
+  var animated = false;
 
-  /* ── Tooltip ── */
+  if (!regions.length || !tooltip || !section) return;
+
+  /* --- Masquer toutes les régions via JS avant animation --- */
+  regions.forEach(function (r) {
+    r.classList.add('region-hidden');
+  });
+
+  /* ---- Tooltip ---- */
   function showTooltip(e, name) {
     tooltip.textContent = name;
     tooltip.classList.add('visible');
     moveTooltip(e);
   }
+
   function moveTooltip(e) {
-    const x = e.clientX;
-    const y = e.clientY;
+    var x = e.clientX;
+    var y = e.clientY;
     tooltip.style.left = (x - tooltip.offsetWidth / 2) + 'px';
     tooltip.style.top  = (y - tooltip.offsetHeight - 14) + 'px';
   }
+
   function hideTooltip() {
     tooltip.classList.remove('visible');
   }
 
-  regions.forEach(function(region) {
-    const name = region.getAttribute('data-name');
+  /* ---- Clic effet 3D ---- */
+  function handleClick(region) {
+    if (active === region) {
+      /* Desélection */
+      region.classList.remove('clicked');
+      active = null;
+    } else {
+      if (active) {
+        active.classList.remove('clicked');
+      }
+      region.classList.add('clicked');
+      active = region;
+    }
+  }
 
-    region.addEventListener('mouseenter', function(e) { showTooltip(e, name); });
-    region.addEventListener('mousemove',  moveTooltip);
+  /* ---- Binding événements par région ---- */
+  regions.forEach(function (region) {
+    var name = region.getAttribute('data-name');
+
+    region.addEventListener('mouseenter', function (e) {
+      showTooltip(e, name);
+    });
+    region.addEventListener('mousemove', moveTooltip);
     region.addEventListener('mouseleave', hideTooltip);
 
-    /* Touch support */
-    region.addEventListener('touchstart', function(e) {
+    region.addEventListener('click', function () {
+      handleClick(region);
+    });
+
+    /* Support tactile */
+    region.addEventListener('touchstart', function (e) {
       e.preventDefault();
-      const t = e.touches[0];
+      var t = e.touches[0];
       showTooltip(t, name);
-      setTimeout(hideTooltip, 1800);
+      handleClick(region);
+      setTimeout(hideTooltip, 2000);
     }, { passive: false });
   });
 
-  /* ── Animation stagger au scroll ── */
+  /* ---- Animation stagger au scroll ---- */
   function animateRegions() {
     if (animated) return;
     animated = true;
-    regions.forEach(function(region, i) {
-      setTimeout(function() {
-        region.classList.add('revealed');
-      }, i * 80);
+
+    regions.forEach(function (region, i) {
+      setTimeout(function () {
+        region.classList.remove('region-hidden');
+        region.classList.add('region-visible');
+      }, i * 60);
     });
   }
 
   /* IntersectionObserver */
   if ('IntersectionObserver' in window) {
-    var obs = new IntersectionObserver(function(entries) {
-      entries.forEach(function(entry) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           animateRegions();
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.2 });
+    }, { threshold: 0.15 });
     obs.observe(section);
   } else {
-    animateRegions(); /* fallback */
+    /* Fallback si IntersectionObserver absent */
+    regions.forEach(function (r) {
+      r.classList.remove('region-hidden');
+    });
   }
 })();
 </script>
