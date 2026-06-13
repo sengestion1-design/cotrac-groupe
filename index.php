@@ -878,6 +878,11 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
 <?php endif; ?>
 
 <!-- ═══════════════════════════════════════════════════════════
+     CARTE SÉNÉGAL — 14 RÉGIONS
+═══════════════════════════════════════════════════════════ -->
+<?php require_once __DIR__ . '/includes/carte-senegal.php'; ?>
+
+<!-- ═══════════════════════════════════════════════════════════
      CTA FINAL
 ═══════════════════════════════════════════════════════════ -->
 <section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">

@@ -507,9 +507,13 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 </section>
 
-<!-- ══ ORGANIGRAMME ══ -->
+<!-- ══ ORGANIGRAMME ANIMÉ ══ -->
+<?php require_once __DIR__ . '/includes/organigramme-anime.php'; ?>
+
+<!-- ══ ORGANIGRAMME LEGACY (masqué — remplacé par organigramme-anime.php) ══ -->
+<?php if (false): ?>
 <section class="section">
-  <div class="container" style="text-align:center;">
+  <div class="container" style="text-align:center;display:none;">
     <span class="section-tag"><?= icon('building') ?> <?= t('apropos_org_tag') ?></span>
     <h2 class="section-title"><?= t('apropos_org_titre') ?></h2>
     <p class="section-sub"><?= t('apropos_org_desc') ?></p>
@@ -865,6 +869,7 @@ require_once __DIR__ . '/includes/header.php';
   .org2-branch { min-width: 0; width: 100%; }
 }
 </style>
+<?php endif; ?>
 
 <!-- ══ VALEURS ══ -->
 <section class="section" style="background:var(--gris-clair);">

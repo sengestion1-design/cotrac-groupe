@@ -451,4 +451,101 @@ document.addEventListener('DOMContentLoaded', () => {
     heroBadge.classList.add('hero-badge--animate');
   }
 
+  /* ---- A — Particules flottantes canvas (hero) ---- */
+  (function initParticles() {
+    const hero = document.querySelector('.hero');
+    if (!hero) return;
+    const canvas = document.createElement('canvas');
+    canvas.id = 'hero-particles';
+    hero.insertBefore(canvas, hero.firstChild);
+    const ctx = canvas.getContext('2d');
+    const COUNT = 50;
+    let pts = [];
+
+    function resize() {
+      canvas.width  = hero.offsetWidth;
+      canvas.height = hero.offsetHeight;
+    }
+
+    function makeParticle() {
+      return {
+        x:  Math.random() * canvas.width,
+        y:  Math.random() * canvas.height,
+        r:  1 + Math.random() * 2,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        a:  0.10 + Math.random() * 0.15
+      };
+    }
+
+    function tick() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pts.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x - p.r < 0)              { p.x = p.r;               p.vx = Math.abs(p.vx); }
+        if (p.x + p.r > canvas.width)   { p.x = canvas.width - p.r; p.vx = -Math.abs(p.vx); }
+        if (p.y - p.r < 0)              { p.y = p.r;               p.vy = Math.abs(p.vy); }
+        if (p.y + p.r > canvas.height)  { p.y = canvas.height - p.r; p.vy = -Math.abs(p.vy); }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(tick);
+    }
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        resize();
+        pts.forEach(p => {
+          p.x = Math.min(p.x, canvas.width  - p.r);
+          p.y = Math.min(p.y, canvas.height - p.r);
+        });
+      }, 150);
+    }, { passive: true });
+
+    resize();
+    pts = Array.from({ length: COUNT }, makeParticle);
+    requestAnimationFrame(tick);
+  })();
+
+  /* ---- D — Skeleton loading images projets ---- */
+  (function initSkeletons() {
+    document.querySelectorAll('.projet-img img').forEach(img => {
+      const wrapper = img.closest('.projet-img');
+      if (!wrapper) return;
+      const skel = document.createElement('div');
+      skel.className = 'skeleton-pulse';
+      wrapper.appendChild(skel);
+
+      function reveal() {
+        skel.style.transition = 'opacity 0.25s ease';
+        skel.style.opacity = '0';
+        setTimeout(() => skel.remove(), 260);
+        img.classList.add('img-loaded');
+      }
+
+      if (img.complete && img.naturalWidth > 0) { reveal(); return; }
+      img.addEventListener('load',  reveal, { once: true });
+      img.addEventListener('error', () => skel.remove(), { once: true });
+    });
+  })();
+
+  /* ---- C — Stats cascade bounce (hero) ---- */
+  (function initStatsBounce() {
+    const cards = document.querySelectorAll('.hero-stats .stat-card');
+    if (!cards.length) return;
+    cards.forEach(c => { c.style.animationPlayState = 'running'; });
+    const last = cards[cards.length - 1];
+    last.addEventListener('animationend', () => {
+      cards.forEach(c => {
+        c.style.opacity   = '1';
+        c.style.transform = 'none';
+        c.style.animation = 'none';
+      });
+    }, { once: true });
+  })();
+
 });
