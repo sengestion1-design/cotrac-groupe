@@ -112,14 +112,14 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   box-shadow: 0 8px 24px rgba(247,148,29,0.35);
 }
 .btn-outline {
-  background: transparent;
-  color: var(--bleu);
-  border-color: var(--bleu);
+  background: transparent !important;
+  color: var(--bleu) !important;
+  border-color: var(--bleu) !important;
 }
 .btn-outline:hover {
-  background: var(--bleu);
-  color: var(--blanc);
-  border-color: var(--bleu);
+  background: var(--bleu) !important;
+  color: var(--blanc) !important;
+  border-color: var(--bleu) !important;
   transform: translateY(-2px);
 }
 /* Alias explicite pour les héros sur fond photo */
