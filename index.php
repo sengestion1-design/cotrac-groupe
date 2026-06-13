@@ -877,8 +877,11 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
 <!-- ═══════════════════════════════════════════════════════════
      CTA FINAL
 ═══════════════════════════════════════════════════════════ -->
-<section class="stats-section">
-  <div class="container cta-grid">
+<section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
+  <div class="container cta-grid" style="position:relative;z-index:2;padding-top:4rem;padding-bottom:4rem;">
 
     <!-- Gauche : contact info -->
     <div class="animate-fade-up delay-1">
