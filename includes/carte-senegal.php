@@ -43,61 +43,61 @@
           class="carto-svg-overlay"
           aria-hidden="true"
         >
-          <!-- Saint-Louis : bande nord orange, large -->
+          <!-- Saint-Louis : nord, grande zone orange -->
           <ellipse class="region" id="reg-saint-louis" data-name="Saint-Louis"
-            cx="430" cy="195" rx="215" ry="120"/>
+            cx="620" cy="185" rx="210" ry="115"/>
 
-          <!-- Matam : nord-est, bleu clair -->
+          <!-- Matam : nord-est, orange -->
           <ellipse class="region" id="reg-matam" data-name="Matam"
-            cx="790" cy="255" rx="190" ry="130"/>
+            cx="870" cy="270" rx="195" ry="125"/>
 
-          <!-- Louga : centre-nord gauche, bleu -->
+          <!-- Louga : centre-nord, bleu -->
           <ellipse class="region" id="reg-louga" data-name="Louga"
-            cx="270" cy="335" rx="155" ry="115"/>
+            cx="490" cy="350" rx="155" ry="105"/>
 
-          <!-- Diourbel : petit, centre -->
+          <!-- Diourbel : petit centre, blanc -->
           <ellipse class="region" id="reg-diourbel" data-name="Diourbel"
-            cx="335" cy="455" rx="80" ry="65"/>
+            cx="390" cy="455" rx="75" ry="60"/>
 
-          <!-- Thiès : côte nord-ouest -->
+          <!-- Thiès : gauche, blanc -->
           <ellipse class="region" id="reg-thies" data-name="Thiès"
-            cx="200" cy="435" rx="90" ry="80"/>
+            cx="270" cy="445" rx="80" ry="68"/>
 
-          <!-- Dakar : presqu'île extrême gauche, très petit -->
+          <!-- Dakar : extrême gauche, petit orange -->
           <ellipse class="region" id="reg-dakar" data-name="Dakar"
-            cx="90" cy="445" rx="48" ry="40"/>
+            cx="155" cy="445" rx="55" ry="45"/>
 
-          <!-- Tambacounda : très grand, centre-est bleu foncé -->
-          <ellipse class="region" id="reg-tambacounda" data-name="Tambacounda"
-            cx="840" cy="510" rx="230" ry="185"/>
-
-          <!-- Kédougou : extrême sud-est orange -->
-          <ellipse class="region" id="reg-kedougou" data-name="Kédougou"
-            cx="1055" cy="670" rx="110" ry="90"/>
-
-          <!-- Kaolack : centre-bas, orange -->
-          <ellipse class="region" id="reg-kaolack" data-name="Kaolack"
-            cx="330" cy="545" rx="90" ry="72"/>
-
-          <!-- Kaffrine : centre, bleu -->
+          <!-- Kaffrine : centre, blanc/gris -->
           <ellipse class="region" id="reg-kaffrine" data-name="Kaffrine"
-            cx="490" cy="530" rx="105" ry="80"/>
+            cx="570" cy="490" rx="110" ry="82"/>
 
-          <!-- Fatick : côte, Sine-Saloum -->
+          <!-- Fatick : gauche-bas, bleu -->
           <ellipse class="region" id="reg-fatick" data-name="Fatick"
-            cx="205" cy="545" rx="75" ry="75"/>
+            cx="270" cy="535" rx="75" ry="68"/>
 
-          <!-- Kolda : sud centre-est -->
-          <ellipse class="region" id="reg-kolda" data-name="Kolda"
-            cx="615" cy="710" rx="110" ry="72"/>
+          <!-- Kaolack : centre-gauche bas, bleu -->
+          <ellipse class="region" id="reg-kaolack" data-name="Kaolack"
+            cx="400" cy="530" rx="85" ry="68"/>
 
-          <!-- Sédhiou : sud centre-ouest -->
-          <ellipse class="region" id="reg-sedhiou" data-name="Sédhiou"
-            cx="430" cy="730" rx="100" ry="68"/>
+          <!-- Tambacounda : centre-est, grand orange -->
+          <ellipse class="region" id="reg-tambacounda" data-name="Tambacounda"
+            cx="870" cy="530" rx="230" ry="175"/>
 
-          <!-- Ziguinchor : extrême sud-ouest, orange -->
+          <!-- Kédougou : extrême droite bas, bleu -->
+          <ellipse class="region" id="reg-kedougou" data-name="Kédougou"
+            cx="1115" cy="660" rx="115" ry="95"/>
+
+          <!-- Ziguinchor : sud-ouest, orange -->
           <ellipse class="region" id="reg-ziguinchor" data-name="Ziguinchor"
-            cx="240" cy="740" rx="110" ry="72"/>
+            cx="250" cy="720" rx="115" ry="75"/>
+
+          <!-- Sédhiou : sud-centre, bleu -->
+          <ellipse class="region" id="reg-sedhiou" data-name="Sédhiou"
+            cx="450" cy="730" rx="105" ry="70"/>
+
+          <!-- Kolda : sud-centre-est, blanc -->
+          <ellipse class="region" id="reg-kolda" data-name="Kolda"
+            cx="640" cy="700" rx="115" ry="75"/>
 
         </svg>
       </div><!-- /.carto-map-container -->
