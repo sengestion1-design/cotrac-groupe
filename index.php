@@ -247,44 +247,44 @@ $db = getDB();
 
     <div style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:center;margin-top:40px;">
 
-      <!-- Photo gauche -->
-      <div style="border-radius:16px;overflow:hidden;height:220px;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+      <!-- Photo gauche — décalée vers le haut -->
+      <div style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d, 0 12px 40px rgba(0,0,0,0.35);transform:translateY(-20px);">
         <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png"
              alt="Équipe COTRAC" loading="lazy"
              style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
 
-      <!-- Chiffres au centre -->
-      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr);gap:12px;text-align:center;">
-        <div class="stat-item">
-          <div class="stat-item-num"><span class="counter" data-target="10">0</span>+</div>
-          <div class="stat-item-label"><?= t('index_stats_ans_label') ?></div>
-          <div class="stat-item-desc"><?= t('index_stats_ans_desc') ?></div>
+      <!-- Chiffres au centre avec séparateurs -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;text-align:center;">
+        <div style="padding:16px 12px;border-right:1px solid rgba(255,255,255,0.15);">
+          <div style="font-size:3.5rem;font-weight:800;color:#f7941d;line-height:1;"><span class="counter" data-target="10">0</span>+</div>
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin:6px 0 4px;"><?= t('index_stats_ans_label') ?></div>
+          <div style="font-size:0.8rem;color:#fff;"><?= t('index_stats_ans_desc') ?></div>
         </div>
-        <div class="stat-item">
-          <div class="stat-item-num"><span class="counter" data-target="15">0</span>+</div>
-          <div class="stat-item-label"><?= t('index_stats_projets_label') ?></div>
-          <div class="stat-item-desc"><?= t('index_stats_projets_desc') ?></div>
+        <div style="padding:16px 12px;border-right:1px solid rgba(255,255,255,0.15);">
+          <div style="font-size:3.5rem;font-weight:800;color:#f7941d;line-height:1;"><span class="counter" data-target="15">0</span>+</div>
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin:6px 0 4px;"><?= t('index_stats_projets_label') ?></div>
+          <div style="font-size:0.8rem;color:#fff;"><?= t('index_stats_projets_desc') ?></div>
         </div>
-        <div class="stat-item">
-          <div class="stat-item-num"><span class="counter" data-target="5">0</span></div>
-          <div class="stat-item-label"><?= t('index_stats_poles_label') ?></div>
-          <div class="stat-item-desc"><?= t('index_stats_poles_desc') ?></div>
+        <div style="padding:16px 12px;">
+          <div style="font-size:3.5rem;font-weight:800;color:#f7941d;line-height:1;"><span class="counter" data-target="5">0</span></div>
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin:6px 0 4px;"><?= t('index_stats_poles_label') ?></div>
+          <div style="font-size:0.8rem;color:#fff;"><?= t('index_stats_poles_desc') ?></div>
         </div>
-        <div class="stat-item">
-          <div class="stat-item-num"><span class="counter" data-target="100">0</span>+</div>
-          <div class="stat-item-label"><?= t('index_stats_experts_label') ?></div>
-          <div class="stat-item-desc"><?= t('index_stats_experts_desc') ?></div>
+        <div style="padding:16px 12px;border-top:1px solid rgba(255,255,255,0.15);border-right:1px solid rgba(255,255,255,0.15);grid-column:span 1;">
+          <div style="font-size:3.5rem;font-weight:800;color:#f7941d;line-height:1;"><span class="counter" data-target="100">0</span>+</div>
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin:6px 0 4px;"><?= t('index_stats_experts_label') ?></div>
+          <div style="font-size:0.8rem;color:#fff;">Mobilisables sous 72h</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-item-num"><span class="counter" data-target="15">0</span>+</div>
-          <div class="stat-item-label"><?= t('index_stats_part_label') ?></div>
-          <div class="stat-item-desc"><?= t('index_stats_part_desc') ?></div>
+        <div style="padding:16px 12px;border-top:1px solid rgba(255,255,255,0.15);grid-column:span 2;">
+          <div style="font-size:3.5rem;font-weight:800;color:#f7941d;line-height:1;"><span class="counter" data-target="15">0</span>+</div>
+          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin:6px 0 4px;"><?= t('index_stats_part_label') ?></div>
+          <div style="font-size:0.8rem;color:#fff;"><?= t('index_stats_part_desc') ?></div>
         </div>
       </div>
 
-      <!-- Photo droite -->
-      <div style="border-radius:16px;overflow:hidden;height:220px;box-shadow:0 8px 32px rgba(0,0,0,0.3);">
+      <!-- Photo droite — décalée vers le bas -->
+      <div style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d, 0 12px 40px rgba(0,0,0,0.35);transform:translateY(20px);">
         <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-photo.jpg"
              alt="COTRAC sur chantier" loading="lazy"
              style="width:100%;height:100%;object-fit:cover;object-position:center top;">
