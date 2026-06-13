@@ -131,8 +131,22 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
     $s = $db->prepare("SELECT * FROM videos_chantiers WHERE id=?"); $s->execute([(int)$_GET['edit']]); $edit_data = $s->fetch();
 }
 ?>
-<?php require_once 'includes/header.php'; ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vidéos Chantiers - Admin COTRAC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="admin-layout">
 
+  <?php require_once 'includes/sidebar.php'; ?>
+
+  <main class="admin-main">
 <div class="admin-topbar">
   <div style="display:flex;align-items:center;gap:12px;">
     <h1 style="margin:0;font-size:1.2rem;font-weight:700;color:#1a202c;">Vidéos Chantiers</h1>
@@ -240,4 +254,8 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
   <?php endif; ?>
 </div>
 
+  </main>
+</div>
 <?php require_once 'includes/footer.php'; ?>
+</body>
+</html>
