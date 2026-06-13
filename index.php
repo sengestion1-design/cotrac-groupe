@@ -629,7 +629,7 @@ try {
         ];
         $pole_key = strtolower($p['pole'] ?? 'btp');
         $fallback = $pole_photos[$pole_key] ?? 'projets/tranchee-cable-bt.jpg';
-        $has_img  = !empty($p['image']) && file_exists(__DIR__ . '/uploads/projets/' . $p['image']);
+        $has_img  = !empty($p['image']);
       ?>
       <div class="projet-card animate-fade-up">
         <div class="projet-img">
@@ -781,7 +781,7 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
 
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:28px;">
       <?php foreach ($actualites_home as $i => $actu):
-        $has_img  = !empty($actu['image']) && file_exists(__DIR__ . '/uploads/actualites/' . $actu['image']);
+        $has_img  = !empty($actu['image']);
         $date_fmt = strtr(date('d F Y', strtotime($actu['created_at'])), $mois_fr_home);
       ?>
       <article class="actu-home-card animate-fade-up" style="transition-delay:<?= $i * 100 ?>ms;">

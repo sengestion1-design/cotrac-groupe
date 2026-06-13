@@ -25,7 +25,7 @@ $mois_fr = ['January'=>'janvier','February'=>'février','March'=>'mars','April'=
             'September'=>'septembre','October'=>'octobre','November'=>'novembre','December'=>'décembre'];
 $date_fmt = strtr(date('d F Y', strtotime($actu['created_at'])), $mois_fr);
 
-$has_img = !empty($actu['image']) && file_exists(__DIR__ . '/uploads/actualites/' . $actu['image']);
+$has_img = !empty($actu['image']);
 
 // Formatage contenu : \n\n → paragraphes, titres de section en gras
 function format_actu(string $txt): string {

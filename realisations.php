@@ -161,7 +161,7 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
 
             <!-- Image ou fond degrades colore selon le pole -->
             <div class="projet-img">
-              <?php if (!empty($projet['image']) && file_exists(UPLOAD_DIR . $projet['image'])): ?>
+              <?php if (!empty($projet['image'])): ?>
                 <img src="<?= SITE_URL ?>/uploads/projets/<?= e($projet['image']) ?>"
                      alt="<?= e($projet['titre']) ?>"
                      loading="lazy"
