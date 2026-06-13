@@ -11,7 +11,12 @@ require_once 'includes/header.php';
      PAGE HERO
 ═══════════════════════════════════════════════════════════ -->
 <?php $_industrie_hero_bg = cms_bg_url(cms('industrie','hero','bg_image','')); ?>
-<section class="page-hero" <?= $_industrie_hero_bg ? 'style="background-image:url(\''.e($_industrie_hero_bg).'\');background-size:cover;background-position:center;"' : '' ?>>
+<section class="page-hero" style="position:relative;overflow:hidden;min-height:420px;<?= $_industrie_hero_bg ? 'background-image:url(\''.e($_industrie_hero_bg).'\');background-size:cover;background-position:center;' : '' ?>">
+  <?php if (!$_industrie_hero_bg): ?>
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 5%;z-index:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.85) 50%,rgba(10,30,70,0.65));z-index:1;"></div>
+  <?php endif; ?>
+  <div style="position:relative;z-index:2;width:100%;">
   <div class="container grid-2col" style="gap:48px;align-items:center;">
     <div>
       <nav class="breadcrumb">
@@ -47,6 +52,7 @@ require_once 'includes/header.php';
       </div>
     </div>
   </div>
+  </div><!-- /z-index wrapper -->
 </section>
 
 

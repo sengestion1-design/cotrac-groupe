@@ -9,7 +9,10 @@ require_once 'includes/header.php';
 <!-- ═══════════════════════════════════════════════════════════
      PAGE HERO
 ═══════════════════════════════════════════════════════════ -->
-<section class="page-hero">
+<section class="page-hero" style="position:relative;overflow:hidden;min-height:420px;">
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 5%;z-index:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.85) 50%,rgba(10,30,70,0.65));z-index:1;"></div>
+  <div style="position:relative;z-index:2;width:100%;">
   <div class="container grid-2col" style="gap:48px;align-items:center;">
     <div>
       <nav class="breadcrumb">
@@ -49,6 +52,7 @@ require_once 'includes/header.php';
       </div>
     </div>
   </div>
+  </div><!-- /z-index wrapper -->
 </section>
 
 
