@@ -453,7 +453,7 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Localisation -->
         <div class="contact-info-card" style="padding:0;overflow:hidden;">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3858.5!2d-17.4677!3d14.7392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xec172f5b3c5b065%3A0x8b1c1c1c1c1c1c1c!2sOuest%20Foire%2C%20Dakar%2C%20S%C3%A9n%C3%A9gal!5e0!3m2!1sfr!2ssn!4v1700000000000"
+            src="https://maps.google.com/maps?q=Ouest+Foire+route+aeroport+Dakar+Senegal&t=&z=15&ie=UTF8&iwloc=&output=embed"
             width="100%" height="240" style="border:0;display:block;" allowfullscreen="" loading="lazy"
             referrerpolicy="no-referrer-when-downgrade" title="Localisation COTRAC"></iframe>
           <a href="https://maps.google.com/?q=Ouest+Foire+Dakar+Senegal" target="_blank" rel="noopener noreferrer"
