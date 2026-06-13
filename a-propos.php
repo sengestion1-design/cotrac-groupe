@@ -1143,10 +1143,15 @@ require_once __DIR__ . '/includes/header.php';
 </style>
 
 <!-- ══ CTA ══ -->
-<section class="stats-section">
-  <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;">
-
-    <!-- Gauche : contact info -->
+<section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
+  <!-- Photo pleine largeur en fond -->
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
+  <!-- Overlay sombre pour lisibilité -->
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
+  <!-- Contenu -->
+  <div class="container" style="position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;padding-top:4rem;padding-bottom:4rem;">
+    <!-- Gauche -->
     <div class="animate-fade-up delay-1">
       <span class="section-tag orange"><?= t('apropos_cta_tag') ?></span>
       <h2 class="section-title light" style="margin-top:10px;"><?= t('apropos_cta_titre') ?></h2>
@@ -1168,7 +1173,6 @@ require_once __DIR__ . '/includes/header.php';
         </div>
       </div>
     </div>
-
     <!-- Droite : carte action -->
     <div class="animate-fade-up delay-2" style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:36px 32px;backdrop-filter:blur(6px);text-align:center;">
       <div style="background:#f7941d;border-radius:14px;width:56px;height:56px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;"><?= icon('handshake','#fff','1.4rem') ?></div>
@@ -1199,7 +1203,6 @@ require_once __DIR__ . '/includes/header.php';
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
