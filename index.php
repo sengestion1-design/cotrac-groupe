@@ -13,7 +13,14 @@ $db = getDB();
 ═══════════════════════════════════════════════════════════ -->
 <?php $_index_hero_bg = cms_bg_url(cms('index','hero','bg_image','')); ?>
 <section class="hero">
-  <div class="hero-parallax-bg" <?= $_index_hero_bg ? 'style="background-image:url(\''.e($_index_hero_bg).'\');background-size:cover;background-position:center;"' : '' ?>></div>
+  <?php if ($_index_hero_bg): ?>
+  <div class="hero-parallax-bg" style="background-image:url('<?= e($_index_hero_bg) ?>');background-size:cover;background-position:center;"></div>
+  <?php else: ?>
+  <div class="hero-parallax-bg" style="background:none;">
+    <img src="<?= SITE_URL ?>/assets/images/plan.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;">
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.82) 45%,rgba(10,30,70,0.55));z-index:1;"></div>
+  </div>
+  <?php endif; ?>
   <div class="hero-blob hero-blob-1"></div>
   <div class="hero-blob hero-blob-2"></div>
   <div class="container">
