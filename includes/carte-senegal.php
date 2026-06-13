@@ -28,7 +28,7 @@
       <div class="carto-map-container" id="carto-map-container">
 
         <img
-          src="<?= SITE_URL ?>/PHOTOCOTRAC/senegal2.PNG"
+          src="<?= SITE_URL ?>/PHOTOCOTRAC/senegal2.PNG?v=2"
           alt="Carte du Sénégal - 14 régions COTRAC"
           class="carto-img"
           id="carto-img"
