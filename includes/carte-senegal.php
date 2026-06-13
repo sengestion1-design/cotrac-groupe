@@ -1,7 +1,4 @@
-<!-- ══════════════════════════════════════════════════════════════
-   COTRAC — Carte SVG Interactive du Sénégal — 14 Régions
-   Include : <?php require_once __DIR__ . '/includes/carte-senegal.php'; ?>
-══════════════════════════════════════════════════════════════ -->
+<!-- COTRAC - Carte SVG Interactive du Senegal - 14 Regions -->
 
 <section class="carto-section" id="section-carte">
   <div class="container" style="text-align:center;">
