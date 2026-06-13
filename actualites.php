@@ -12,11 +12,11 @@ $actualites = $db->query("SELECT * FROM actualites WHERE actif=1 ORDER BY create
 
 <!-- ===================== PAGE HERO ===================== -->
 <?php $_actu_hero_bg = cms_bg_url(cms('actualites','hero','bg_image','')); ?>
-<section class="page-hero" style="position:relative;overflow:hidden;<?= $_actu_hero_bg ? 'background-image:url(\''.e($_actu_hero_bg).'\');background-size:cover;background-position:center;' : '' ?>">
+<section class="page-hero" style="position:relative;overflow:hidden;min-height:420px;<?= $_actu_hero_bg ? 'background-image:url(\''.e($_actu_hero_bg).'\');background-size:cover;background-position:center;' : '' ?>">
   <!-- Photo de fond cotrac2 + overlay -->
   <?php if (!$_actu_hero_bg): ?>
   <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt=""
-       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.85) 50%,rgba(10,30,70,0.65));z-index:1;"></div>
   <?php endif; ?>
   <div style="position:relative;z-index:2;width:100%;">
