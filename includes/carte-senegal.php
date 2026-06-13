@@ -66,7 +66,7 @@
 
           <!-- Kedougou (extreme sud-est, jaune) -->
           <ellipse class="region" id="reg-kedougou" data-name="Kédougou"
-            cx="700" cy="450" rx="85" ry="80"/>
+            cx="660" cy="490" rx="75" ry="65"/>
 
           <!-- Diourbel (centre, vert fonce) -->
           <ellipse class="region" id="reg-diourbel" data-name="Diourbel"
@@ -155,35 +155,27 @@
   isolation: isolate;
 }
 
-/* Image PNG = la vraie carte en niveaux de gris */
+/* Image PNG = la vraie carte, fond blanc rendu transparent par CSS */
 .carto-img {
   display: block;
   width: 100%;
   height: auto;
   user-select: none;
   -webkit-user-drag: none;
-  filter: grayscale(1) brightness(0.6) contrast(1.2);
-}
-/* Calque bleu COTRAC par-dessus l'image (mix-blend-mode) */
-.carto-map-container::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: #1a6bb5;
+  /* mix-blend-mode screen : le blanc devient transparent, les couleurs restent */
   mix-blend-mode: multiply;
-  pointer-events: none;
-  z-index: 1;
+  filter: grayscale(1) brightness(0.55) contrast(1.3);
 }
-/* SVG au-dessus du calque bleu */
-.carto-svg-overlay {
-  z-index: 2;
+/* Fond bleu COTRAC sous l'image */
+.carto-map-container {
+  background: #1a6bb5 !important;
 }
-
 /* SVG overlay : exactement superpose sur l'image */
 .carto-svg-overlay {
   position: absolute;
   inset: 0;
   width: 100%;
+  z-index: 2;
   height: 100%;
 }
 
