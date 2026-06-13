@@ -453,9 +453,9 @@ require_once __DIR__ . '/includes/header.php';
         <!-- Localisation -->
         <div class="contact-info-card" style="padding:0;overflow:hidden;">
           <iframe
-            src="https://maps.google.com/maps?q=Ouest+Foire+route+aeroport+Dakar+Senegal&t=&z=15&ie=UTF8&iwloc=&output=embed"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-17.4900%2C14.7250%2C-17.4450%2C14.7550&layer=mapnik&marker=14.7392%2C-17.4677"
             width="100%" height="240" style="border:0;display:block;" allowfullscreen="" loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade" title="Localisation COTRAC"></iframe>
+            title="Localisation COTRAC — Ouest Foire, Dakar"></iframe>
           <a href="https://maps.google.com/?q=Ouest+Foire+Dakar+Senegal" target="_blank" rel="noopener noreferrer"
              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:var(--bleu-light);color:var(--bleu);font-size:0.82rem;font-weight:600;text-decoration:none;transition:background .2s;"
              onmouseover="this.style.background='#d4e6f7'" onmouseout="this.style.background='var(--bleu-light)'">
