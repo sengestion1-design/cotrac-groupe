@@ -297,25 +297,33 @@ require_once __DIR__ . '/includes/header.php';
 
 <!-- ══ CHIFFRES CLÉS ══ -->
 <section class="stats-section">
-  <div class="container" style="text-align:center;">
-    <span class="section-tag"><?= icon('star') ?> <?= t('apropos_stats_tag') ?></span>
-    <h2 class="section-title" style="color:#fff;"><?= t('apropos_stats_titre') ?></h2>
-    <div class="stats-grid">
-      <div class="stat-card">
-        <span class="stat-value counter" data-target="10">0</span>
-        <div class="stat-label"><?= t('apropos_stats_ans') ?></div>
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 380px;gap:48px;align-items:center;">
+      <div style="text-align:center;">
+        <span class="section-tag"><?= icon('star') ?> <?= t('apropos_stats_tag') ?></span>
+        <h2 class="section-title" style="color:#fff;"><?= t('apropos_stats_titre') ?></h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-value counter" data-target="10">0</span>
+            <div class="stat-label"><?= t('apropos_stats_ans') ?></div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value counter" data-target="25">0</span>
+            <div class="stat-label"><?= t('apropos_stats_projets') ?></div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value counter" data-target="4">0</span>
+            <div class="stat-label"><?= t('apropos_stats_poles') ?></div>
+          </div>
+          <div class="stat-card">
+            <span class="stat-value counter" data-target="15">0</span>
+            <div class="stat-label"><?= t('apropos_stats_partenaires') ?></div>
+          </div>
+        </div>
       </div>
-      <div class="stat-card">
-        <span class="stat-value counter" data-target="25">0</span>
-        <div class="stat-label"><?= t('apropos_stats_projets') ?></div>
-      </div>
-      <div class="stat-card">
-        <span class="stat-value counter" data-target="4">0</span>
-        <div class="stat-label"><?= t('apropos_stats_poles') ?></div>
-      </div>
-      <div class="stat-card">
-        <span class="stat-value counter" data-target="15">0</span>
-        <div class="stat-label"><?= t('apropos_stats_partenaires') ?></div>
+      <div style="border-radius:20px;overflow:hidden;height:320px;box-shadow:0 0 0 4px rgba(247,148,29,0.5),0 12px 40px rgba(0,0,0,0.4);">
+        <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
+             style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
     </div>
   </div>
