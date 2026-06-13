@@ -882,7 +882,9 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
 ═══════════════════════════════════════════════════════════ -->
 <?php
 $_carte = __DIR__ . '/includes/carte-senegal.php';
-if (file_exists($_carte)) { require_once $_carte; }
+if (file_exists($_carte)) {
+    try { require_once $_carte; } catch (\Throwable $e) { /* silencieux */ }
+}
 unset($_carte);
 ?>
 
