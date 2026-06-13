@@ -1669,6 +1669,18 @@ table tr:hover td { background: var(--gris-clair); }
 .stats-section .section-sub { color: rgba(255,255,255,0.75); }
 .stats-section .text-center { margin-bottom: 56px; }
 
+@media (max-width: 900px) {
+  .stats-photos-layout {
+    grid-template-columns: 1fr !important;
+    gap: 24px !important;
+  }
+  .stats-photos-layout > div:first-child,
+  .stats-photos-layout > div:last-child {
+    height: 200px !important;
+    transform: none !important;
+  }
+}
+
 /* Section text-center : marge correcte */
 .text-center { margin-bottom: 0; }
 .section .text-center,

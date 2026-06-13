@@ -245,7 +245,7 @@ $db = getDB();
       </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:center;margin-top:40px;">
+    <div class="stats-photos-layout" style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:center;margin-top:40px;">
 
       <!-- Photo gauche — décalée vers le haut -->
       <div style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d, 0 12px 40px rgba(0,0,0,0.35);transform:translateY(-20px);">
