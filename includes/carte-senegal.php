@@ -145,42 +145,31 @@
   border-radius: 50%;
 }
 
-/* Wrapper 3D : perspective sur la carte entiere */
+/* Wrapper 3D : porte la perspective ET le transform */
 .carto-3d-wrap {
-  perspective: 1000px;
-  perspective-origin: 50% 40%;
+  perspective: 900px;
+  perspective-origin: 50% 30%;
+  /* Effet plateau incline au repos */
+  transform: rotateX(6deg) scale(0.97);
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.23,1,0.32,1), box-shadow 0.55s ease;
+  will-change: transform;
+  border-radius: 22px;
+  box-shadow:
+    0 30px 70px rgba(26,107,181,0.38),
+    0 10px 24px rgba(0,0,0,0.18);
 }
+/* hover géré par JS — pas de règle CSS ici */
 
-/* Conteneur relatif pour superposer SVG sur image */
+/* Conteneur : clip + fond, PAS de transform */
 .carto-map-container {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  background: #0a1e3d;
-  display: inline-block;
+  background: #1a6bb5;
+  display: block;
   width: 100%;
   isolation: isolate;
-  /* Effet plateau 3D au repos */
-  transform: rotateX(8deg) rotateY(-2deg) scale(0.97);
-  transform-style: preserve-3d;
-  box-shadow:
-    0 24px 60px rgba(26,107,181,0.35),
-    0 8px 20px rgba(0,0,0,0.2),
-    0 2px 6px rgba(0,0,0,0.1);
-  transition: transform 0.5s cubic-bezier(0.23,1,0.32,1), box-shadow 0.5s ease;
-  will-change: transform;
-}
-.carto-map-container:hover,
-.carto-map-container.flat {
-  transform: rotateX(0deg) rotateY(0deg) scale(1);
-  box-shadow:
-    0 8px 32px rgba(26,107,181,0.25),
-    0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* Fond bleu COTRAC sous l'image */
-.carto-map-container {
-  background: #1a6bb5 !important;
 }
 
 /* Image PNG = la vraie carte, fond blanc rendu transparent par CSS */
@@ -338,24 +327,25 @@
   });
 
   /* ---- Tilt 3D carte entiere au mouvement souris ---- */
-  var mapContainer = document.getElementById('carto-map-container');
-  if (mapContainer && window.innerWidth > 768) {
-    mapContainer.addEventListener('mousemove', function (e) {
-      var rect = mapContainer.getBoundingClientRect();
+  /* Le wrapper 3D porte le transform; le container interieur gere juste le clip */
+  var wrap3d = document.querySelector('.carto-3d-wrap');
+  if (wrap3d && window.innerWidth > 768) {
+    wrap3d.addEventListener('mousemove', function (e) {
+      var rect = wrap3d.getBoundingClientRect();
       var cx   = rect.left + rect.width  / 2;
       var cy   = rect.top  + rect.height / 2;
       var dx   = (e.clientX - cx) / (rect.width  / 2);
       var dy   = (e.clientY - cy) / (rect.height / 2);
-      var rotX = -dy * 6;   /* max 6deg vertical */
-      var rotY =  dx * 5;   /* max 5deg horizontal */
-      mapContainer.style.transform =
-        'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale(1.01)';
-      mapContainer.style.boxShadow =
-        (-dx*12) + 'px ' + (-dy*12+24) + 'px 60px rgba(26,107,181,0.4)';
+      var rotX = -dy * 8;
+      var rotY =  dx * 6;
+      wrap3d.style.transform =
+        'perspective(900px) rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale(1.02)';
+      wrap3d.style.boxShadow =
+        (-dx * 14) + 'px ' + (-dy * 14 + 28) + 'px 60px rgba(26,107,181,0.45)';
     });
-    mapContainer.addEventListener('mouseleave', function () {
-      mapContainer.style.transform = 'rotateX(8deg) rotateY(-2deg) scale(0.97)';
-      mapContainer.style.boxShadow = '';
+    wrap3d.addEventListener('mouseleave', function () {
+      wrap3d.style.transform = '';
+      wrap3d.style.boxShadow = '';
     });
   }
 })();
