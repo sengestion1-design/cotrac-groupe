@@ -966,7 +966,6 @@ require_once __DIR__ . '/includes/header.php';
                  alt="Logo <?= $sigle ?>" loading="lazy">
           </picture>
         </div>
-        <div class="partenaire-inst-pole"><?= $pole ?></div>
       </div>
       <?php endforeach; ?>
     </div>
