@@ -453,10 +453,17 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Localisation -->
         <div class="contact-info-card" style="padding:0;overflow:hidden;">
-          <iframe
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-17.4900%2C14.7250%2C-17.4450%2C14.7550&layer=mapnik&marker=14.7392%2C-17.4677"
-            width="100%" height="240" style="border:0;display:block;" allowfullscreen="" loading="lazy"
-            title="Localisation COTRAC — Ouest Foire, Dakar"></iframe>
+          <a href="https://maps.google.com/?q=Ouest+Foire+Route+Aeroport+Dakar+Senegal" target="_blank" rel="noopener noreferrer" style="display:block;position:relative;height:240px;overflow:hidden;text-decoration:none;">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?center=14.7392,-17.4677&zoom=15&size=600x240&maptype=roadmap&markers=color:orange%7C14.7392,-17.4677&language=fr"
+                 onerror="this.parentNode.style.background='#e8f0fe';this.style.display='none'"
+                 alt="Carte Ouest Foire Dakar" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a4a8a 0%,#0d2a4f 100%);">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f7941d" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <p style="color:#fff;font-weight:700;margin:10px 0 4px;font-size:0.95rem;">Ouest Foire, route de l'aéroport</p>
+              <p style="color:rgba(255,255,255,0.7);font-size:0.8rem;margin:0;">Dakar, Sénégal</p>
+              <span style="margin-top:14px;background:#f7941d;color:#fff;padding:7px 18px;border-radius:20px;font-size:0.78rem;font-weight:600;">Voir sur Google Maps →</span>
+            </div>
+          </a>
           <a href="https://maps.google.com/?q=Ouest+Foire+Dakar+Senegal" target="_blank" rel="noopener noreferrer"
              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:var(--bleu-light);color:var(--bleu);font-size:0.82rem;font-weight:600;text-decoration:none;transition:background .2s;"
              onmouseover="this.style.background='#d4e6f7'" onmouseout="this.style.background='var(--bleu-light)'">
