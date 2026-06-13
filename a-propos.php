@@ -39,7 +39,7 @@ require_once __DIR__ . '/includes/header.php';
   color: #fff;
   padding: 4rem 0;
 }
-.stats-section .section-tag { color: rgba(255,255,255,.7); border-color: rgba(255,255,255,.3); }
+.stats-section .section-tag { color: #fff; border-color: rgba(255,255,255,.6); background: rgba(255,255,255,.15); }
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
