@@ -163,8 +163,8 @@
   user-select: none;
   -webkit-user-drag: none;
   /* mix-blend-mode screen : le blanc devient transparent, les couleurs restent */
-  mix-blend-mode: multiply;
-  filter: grayscale(1) brightness(0.55) contrast(1.3);
+  mix-blend-mode: screen;
+  filter: grayscale(1) brightness(1.8) contrast(0.7) invert(1);
 }
 /* Fond bleu COTRAC sous l'image */
 .carto-map-container {
