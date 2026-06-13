@@ -48,7 +48,7 @@ $db = getDB();
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16z"/></svg>
             Appeler maintenant
           </a>
-          <a href="<?= SITE_URL ?>/realisations.php" style="color:rgba(255,255,255,.7);font-size:.85rem;font-weight:600;text-decoration:none;letter-spacing:.02em;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.7)'"><?= t('index_hero_btn_realisations') ?> →</a>
+          <a href="<?= SITE_URL ?>/realisations.php" class="hero-link-text"><?= t('index_hero_btn_realisations') ?> →</a>
         </div>
 
         <!-- Agréments -->

@@ -477,11 +477,34 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   display: block;
 }
 
+/* Lien texte hero */
+.hero-link-text {
+  color: rgba(255,255,255,.80);
+  font-size: .85rem; font-weight: 600;
+  text-decoration: none; letter-spacing: .02em;
+  border-bottom: 1px solid rgba(255,255,255,.35);
+  padding-bottom: 2px;
+  transition: color .2s, border-color .2s;
+}
+.hero-link-text:hover { color: #fff; border-color: rgba(255,255,255,.7); }
+
 /* Responsive hero */
 @media (max-width: 900px) {
   .hero-title { font-size: clamp(1.9rem, 6vw, 2.8rem); }
   .hero-slider { height: 140px; }
   .hero-slider-card { width: 180px; height: 140px; }
+}
+@media (max-width: 640px) {
+  /* Photo mobile : descendre légèrement pour garder les visages dans le cadre portrait */
+  .hero-parallax-bg img { object-position: center 35% !important; }
+  /* CTAs en colonne pleine largeur */
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-actions .btn,
+  .hero-actions a { text-align: center; justify-content: center; }
+  .hero-link-text { align-self: center; }
 }
 @media (max-width: 480px) {
   .hero-stats { flex-wrap: wrap; gap: 6px; }

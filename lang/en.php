@@ -596,9 +596,9 @@ return [
     // ── Index — Hero ────────────────────────────────────────────
     'index_hero_badge'            => 'Reference Senegalese Company since 2015',
     'index_hero_titre'            => 'Let\'s Build the Future of <span>Senegal</span> Together',
-    'index_hero_sous_titre'       => 'COTRAC operates across 4 poles of excellence - Civil Engineering, HV/LV electrical networks, road and bridge construction, industrial engineering and HVAC - to design, build and deliver durable infrastructure that transforms Senegal.',
+    'index_hero_sous_titre'       => 'Civil engineering, HV/LV electrical networks, roads and bridges — <strong>COTRAC</strong> designs and delivers your infrastructure projects across Senegal and West Africa.',
     'index_hero_btn_realisations' => 'View our projects',
-    'index_hero_btn_contact'      => 'Contact us',
+    'index_hero_btn_contact'      => 'Discuss your project',
     'index_hero_stat_ans'         => 'Years of experience',
     'index_hero_stat_projets'     => 'Completed projects',
     'index_hero_stat_poles'       => 'Business divisions',
