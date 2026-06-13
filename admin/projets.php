@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $pole           = in_array($_POST['pole'] ?? '', array_keys($poles_labels)) ? $_POST['pole'] : 'btp';
         $statut         = in_array($_POST['statut'] ?? '', ['termine','en_cours']) ? $_POST['statut'] : 'en_cours';
         $nature_travaux = trim($_POST['nature_travaux'] ?? '');
+        $lieu           = trim($_POST['lieu'] ?? '');
         $edit_id        = isset($_POST['edit_id']) && is_numeric($_POST['edit_id']) ? (int)$_POST['edit_id'] : 0;
 
         if (!$titre) {
@@ -83,16 +84,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $old->execute([$edit_id]);
                         $oldImg = $old->fetchColumn();
                         if ($oldImg && file_exists(UPLOAD_DIR . $oldImg)) @unlink(UPLOAD_DIR . $oldImg);
-                        $stmt = $db->prepare("UPDATE projets SET titre=?, description=?, client=?, pole=?, statut=?, nature_travaux=?, image=? WHERE id=?");
-                        $stmt->execute([$titre, $description, $client, $pole, $statut, $nature_travaux, $image_name, $edit_id]);
+                        $stmt = $db->prepare("UPDATE projets SET titre=?, description=?, client=?, pole=?, statut=?, nature_travaux=?, lieu=?, image=? WHERE id=?");
+                        $stmt->execute([$titre, $description, $client, $pole, $statut, $nature_travaux, $lieu, $image_name, $edit_id]);
                     } else {
-                        $stmt = $db->prepare("UPDATE projets SET titre=?, description=?, client=?, pole=?, statut=?, nature_travaux=? WHERE id=?");
-                        $stmt->execute([$titre, $description, $client, $pole, $statut, $nature_travaux, $edit_id]);
+                        $stmt = $db->prepare("UPDATE projets SET titre=?, description=?, client=?, pole=?, statut=?, nature_travaux=?, lieu=? WHERE id=?");
+                        $stmt->execute([$titre, $description, $client, $pole, $statut, $nature_travaux, $lieu, $edit_id]);
                     }
                     $message_retour = 'Projet modifié avec succès.';
                 } else {
-                    $stmt = $db->prepare("INSERT INTO projets (titre, description, client, pole, statut, nature_travaux, image, actif) VALUES (?,?,?,?,?,?,?,1)");
-                    $stmt->execute([$titre, $description, $client, $pole, $statut, $nature_travaux, $image_name]);
+                    $stmt = $db->prepare("INSERT INTO projets (titre, description, client, pole, statut, nature_travaux, lieu, image, actif) VALUES (?,?,?,?,?,?,?,?,1)");
+                    $stmt->execute([$titre, $description, $client, $pole, $statut, $nature_travaux, $lieu, $image_name]);
                     $message_retour = 'Projet ajouté avec succès.';
                 }
                 $type_retour = 'success';
@@ -215,6 +216,14 @@ $current_page = 'projets';
                      value="<?= e($edit_projet['nature_travaux'] ?? '') ?>"
                      placeholder="Ex : Gros œuvre, charpente, électricité">
             </div>
+            <div class="form-group">
+              <label for="lieu">Localisation</label>
+              <input type="text" id="lieu" name="lieu"
+                     value="<?= e($edit_projet['lieu'] ?? '') ?>"
+                     placeholder="Ex : Dakar, Thiès, Louga…">
+            </div>
+          </div>
+          <div class="form-row">
             <div class="form-group">
               <label for="image">
                 Image du projet
