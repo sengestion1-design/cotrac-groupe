@@ -1091,19 +1091,20 @@ require_once __DIR__ . '/includes/header.php';
   background: #fff;
   border: 1px solid var(--border);
   border-radius: 16px;
-  padding: 24px 16px 20px;
+  padding: 20px;
   text-align: center;
   transition: var(--transition);
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  height: 100px;
 }
 .partenaire-inst-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(26,107,181,0.12); border-color: rgba(26,107,181,0.2); }
 .partenaire-inst-logo {
-  width: 120px;
-  height: 56px;
+  width: 180px;
+  height: 70px;
   display: flex; align-items: center; justify-content: center;
-  margin: 0 auto 12px;
+  margin: 0 auto;
 }
 .partenaire-inst-logo img {
   max-width: 100%;
