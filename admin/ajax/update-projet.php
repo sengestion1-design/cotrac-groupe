@@ -10,7 +10,7 @@ $projet_id = (int)($_POST['projet_id'] ?? 0);
 $field     = $_POST['field'] ?? '';
 $value     = $_POST['value'] ?? '';
 
-$allowed_fields = ['titre','client','nature_travaux','statut','pole','description'];
+$allowed_fields = ['titre','client','nature_travaux','statut','pole','description','video_url'];
 if ($projet_id <= 0 || !in_array($field, $allowed_fields)) {
     http_response_code(400); echo json_encode(['ok'=>false,'error'=>'Paramètre invalide']); exit;
 }

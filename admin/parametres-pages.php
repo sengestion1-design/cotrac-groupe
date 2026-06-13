@@ -119,7 +119,8 @@ $csrf = csrf_token();
 
       <!-- BLOC PROJETS (onglet realisations uniquement) -->
       <?php if ($active_slug === 'realisations'):
-        $projets_all = $db->query("SELECT id, titre, pole, image, statut, client, nature_travaux, actif FROM projets ORDER BY ordre ASC, id DESC")->fetchAll();
+        try { $db->exec("ALTER TABLE projets ADD COLUMN IF NOT EXISTS video_url VARCHAR(500) DEFAULT NULL"); } catch(Exception $e){}
+        $projets_all = $db->query("SELECT id, titre, pole, image, video_url, statut, client, nature_travaux, actif FROM projets ORDER BY ordre ASC, id DESC")->fetchAll();
         $poles_lbl = ['btp'=>'BTP','energie'=>'Énergie','routes'=>'Routes','industrie'=>'Industrie'];
         $poles_col = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','industrie'=>'#8e44ad'];
       ?>
@@ -155,6 +156,16 @@ $csrf = csrf_token();
               <input type="file" accept="image/*" style="display:none;"
                      onchange="uploadProjetImage(this, <?= $proj['id'] ?>)">
             </label>
+            <!-- Indicateur vidéo -->
+            <?php if (!empty($proj['video_url'])): ?>
+            <span id="vid-badge-<?= $proj['id'] ?>" style="position:absolute;top:8px;right:8px;background:rgba(240,128,20,.9);color:#fff;border-radius:6px;padding:3px 8px;font-size:.7rem;font-weight:700;display:flex;align-items:center;gap:4px;">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Vidéo
+            </span>
+            <?php else: ?>
+            <span id="vid-badge-<?= $proj['id'] ?>" style="display:none;position:absolute;top:8px;right:8px;background:rgba(240,128,20,.9);color:#fff;border-radius:6px;padding:3px 8px;font-size:.7rem;font-weight:700;align-items:center;gap:4px;">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg> Vidéo
+            </span>
+            <?php endif; ?>
             <!-- Badge pôle -->
             <span style="position:absolute;top:8px;left:8px;background:<?= e($pole_color) ?>;color:#fff;border-radius:6px;padding:3px 8px;font-size:.7rem;font-weight:700;"><?= e($pole_label) ?></span>
           </div>
@@ -169,6 +180,23 @@ $csrf = csrf_token();
             <input type="text" value="<?= e($proj['nature_travaux'] ?? '') ?>" placeholder="Nature des travaux"
                    style="width:100%;border:1px solid #e2e8f0;border-radius:6px;padding:6px 8px;font-size:.82rem;margin-bottom:6px;box-sizing:border-box;"
                    onchange="updateProjet(<?= $proj['id'] ?>, 'nature_travaux', this.value)">
+            <!-- Vidéo -->
+            <div style="margin-bottom:8px;">
+              <label style="display:flex;align-items:center;gap:6px;background:#fff7ed;border:1.5px dashed #f7941d;border-radius:8px;padding:7px 10px;font-size:.78rem;color:#c05621;cursor:pointer;font-weight:600;" title="Formats acceptés : MP4, MOV (max 200 Mo)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+                <span id="vid-label-<?= $proj['id'] ?>"><?= !empty($proj['video_url']) ? 'Changer la vidéo' : 'Ajouter une vidéo (MP4/MOV)' ?></span>
+                <input type="file" accept="video/mp4,video/quicktime,.mov,.mp4" style="display:none;"
+                       onchange="uploadProjetVideo(this, <?= $proj['id'] ?>)">
+              </label>
+              <?php if (!empty($proj['video_url'])): ?>
+              <div style="margin-top:4px;display:flex;align-items:center;gap:8px;" id="vid-info-<?= $proj['id'] ?>">
+                <span style="font-size:.72rem;color:#718096;"><?= e($proj['video_url']) ?></span>
+                <button onclick="supprimerVideo(<?= $proj['id'] ?>)" style="background:none;border:none;color:#e53e3e;font-size:.72rem;cursor:pointer;padding:0;">✕ Supprimer</button>
+              </div>
+              <?php else: ?>
+              <div style="margin-top:4px;display:none;" id="vid-info-<?= $proj['id'] ?>"></div>
+              <?php endif; ?>
+            </div>
             <div style="display:flex;gap:8px;align-items:center;">
               <select onchange="updateProjet(<?= $proj['id'] ?>, 'statut', this.value)"
                       style="flex:1;border:1px solid #e2e8f0;border-radius:6px;padding:5px 8px;font-size:.8rem;">
@@ -874,6 +902,61 @@ function updateProjet(projetId, field, value) {
     })
     .catch(function(){ showToast('Erreur réseau', 'error'); });
   }, 600);
+}
+
+// ---- Projets : upload vidéo ----
+function uploadProjetVideo(input, projetId) {
+  if (!input.files || !input.files[0]) return;
+  var file = input.files[0];
+  var label = document.getElementById('vid-label-' + projetId);
+  if (label) label.textContent = 'Upload en cours...';
+  var fd = new FormData();
+  fd.append('csrf_token', CSRF_TOKEN);
+  fd.append('projet_id', projetId);
+  fd.append('video', file);
+  fetch('ajax/upload-projet-video.php', { method:'POST', body: fd })
+    .then(function(r){ return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        if (label) label.textContent = 'Changer la vidéo';
+        var badge = document.getElementById('vid-badge-' + projetId);
+        if (badge) { badge.style.display = 'flex'; }
+        var info = document.getElementById('vid-info-' + projetId);
+        if (info) {
+          info.style.display = 'flex';
+          info.innerHTML = '<span style="font-size:.72rem;color:#718096;">' + data.filename + '</span>'
+            + '<button onclick="supprimerVideo(' + projetId + ')" style="background:none;border:none;color:#e53e3e;font-size:.72rem;cursor:pointer;padding:0;">✕ Supprimer</button>';
+        }
+        showToast('Vidéo uploadée !', 'success');
+      } else {
+        if (label) label.textContent = 'Ajouter une vidéo (MP4/MOV)';
+        showToast('Erreur : ' + (data.error || 'inconnue'), 'error');
+      }
+    })
+    .catch(function(){ if(label) label.textContent='Ajouter une vidéo (MP4/MOV)'; showToast('Erreur réseau', 'error'); });
+}
+
+// ---- Projets : supprimer vidéo ----
+function supprimerVideo(projetId) {
+  if (!confirm('Supprimer la vidéo de ce projet ?')) return;
+  var body = new URLSearchParams();
+  body.append('csrf_token', CSRF_TOKEN);
+  body.append('projet_id', projetId);
+  body.append('field', 'video_url');
+  body.append('value', '');
+  fetch('ajax/update-projet.php', { method:'POST', headers:{'Content-Type':'application/x-www-form-urlencoded'}, body: body.toString() })
+    .then(function(r){ return r.json(); })
+    .then(function(data) {
+      if (data.ok) {
+        var badge = document.getElementById('vid-badge-' + projetId);
+        if (badge) badge.style.display = 'none';
+        var info = document.getElementById('vid-info-' + projetId);
+        if (info) { info.style.display = 'none'; info.innerHTML = ''; }
+        var label = document.getElementById('vid-label-' + projetId);
+        if (label) label.textContent = 'Ajouter une vidéo (MP4/MOV)';
+        showToast('Vidéo supprimée', 'success');
+      } else { showToast('Erreur : ' + (data.error || ''), 'error'); }
+    });
 }
 
 /* ---------- Modifier image galerie ---------- */

@@ -10,6 +10,7 @@ $db = getDB();
 
 // Migration auto : ajout colonnes si absentes
 try {
+    $db->exec("ALTER TABLE projets ADD COLUMN IF NOT EXISTS video_url VARCHAR(500) DEFAULT NULL");
     $db->exec("ALTER TABLE projets ADD COLUMN IF NOT EXISTS annee VARCHAR(10) DEFAULT NULL");
     // montant volontairement non affiché
     $db->exec("ALTER TABLE projets ADD COLUMN IF NOT EXISTS lieu VARCHAR(150) DEFAULT NULL");
@@ -184,6 +185,16 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
               <span class="projet-badge <?= $est_termine ? 'badge-termine' : 'badge-encours' ?>">
                 <?= $est_termine ? t('real_badge_termine') : t('real_badge_encours') ?>
               </span>
+              <!-- Bouton play vidéo -->
+              <?php if (!empty($projet['video_url'])): ?>
+              <?php $vid_src = str_starts_with($projet['video_url'],'http') ? $projet['video_url'] : SITE_URL.'/uploads/projets/'.e($projet['video_url']); ?>
+              <button onclick="ouvrirVideo('<?= $vid_src ?>','<?= e(addslashes($projet['titre'])) ?>');event.stopPropagation();"
+                      style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(240,128,20,.92);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.35);transition:transform .2s,background .2s;"
+                      onmouseover="this.style.transform='translate(-50%,-50%) scale(1.12)'"
+                      onmouseout="this.style.transform='translate(-50%,-50%)'">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </button>
+              <?php endif; ?>
             </div>
 
             <!-- Corps de la carte -->
@@ -248,6 +259,93 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
     <?php endif; ?>
   </div>
 </section>
+
+<!-- ===================== SECTION VIDÉOS ===================== -->
+<?php
+$projets_video = array_filter($projets, fn($p) => !empty($p['video_url']));
+if (!empty($projets_video)): ?>
+<section class="section" style="background:#fff;padding-top:56px;padding-bottom:56px;">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:40px;">
+      <span class="section-tag">Nos Chantiers</span>
+      <h2 class="section-title">Nos Travaux en <span style="color:var(--orange)">Vidéo</span></h2>
+      <p class="section-sub">Découvrez nos chantiers en action</p>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:24px;">
+      <?php foreach ($projets_video as $pv):
+        $vid_src = str_starts_with($pv['video_url'],'http') ? $pv['video_url'] : SITE_URL.'/uploads/projets/'.e($pv['video_url']);
+        $pole_color = $poles_colors[$pv['pole']] ?? '#f7941d';
+        $pole_label = $poles_labels[$pv['pole']] ?? '';
+      ?>
+      <div style="border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);background:#0a1628;cursor:pointer;position:relative;"
+           onclick="ouvrirVideo('<?= $vid_src ?>','<?= e(addslashes($pv['titre'])) ?>')">
+        <!-- Thumbnail vidéo -->
+        <div style="position:relative;height:210px;overflow:hidden;">
+          <?php if (!empty($pv['image'])): ?>
+          <img src="<?= SITE_URL ?>/uploads/projets/<?= e($pv['image']) ?>" alt="<?= e($pv['titre']) ?>"
+               style="width:100%;height:100%;object-fit:cover;opacity:.75;">
+          <?php else: ?>
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,<?= $pole_color ?>44,<?= $pole_color ?>88);display:flex;align-items:center;justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <?php endif; ?>
+          <!-- Overlay gradient -->
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,.8) 0%,transparent 60%);"></div>
+          <!-- Bouton play centré -->
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;background:rgba(240,128,20,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.4);transition:transform .2s;"
+               onmouseover="this.style.transform='translate(-50%,-50%) scale(1.1)'"
+               onmouseout="this.style.transform='translate(-50%,-50%)'">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          </div>
+          <!-- Badge pole -->
+          <span style="position:absolute;top:10px;left:10px;background:<?= $pole_color ?>;color:#fff;border-radius:6px;padding:3px 10px;font-size:.7rem;font-weight:700;"><?= e($pole_label) ?></span>
+        </div>
+        <!-- Titre -->
+        <div style="padding:14px 16px;">
+          <h3 style="color:#fff;font-size:.95rem;font-weight:700;margin:0 0 4px;"><?= e($pv['titre']) ?></h3>
+          <?php if (!empty($pv['client'])): ?>
+          <p style="color:rgba(255,255,255,.55);font-size:.8rem;margin:0;"><?= e($pv['client']) ?></p>
+          <?php endif; ?>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+<!-- Modal vidéo lightbox -->
+<div id="videoModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.88);align-items:center;justify-content:center;"
+     onclick="if(event.target===this)fermerVideo()">
+  <div style="position:relative;width:min(900px,95vw);max-height:90vh;">
+    <button onclick="fermerVideo()" style="position:absolute;top:-40px;right:0;background:none;border:none;color:#fff;font-size:1.8rem;cursor:pointer;line-height:1;">✕</button>
+    <div id="videoModalTitle" style="color:#fff;font-weight:700;font-size:1rem;margin-bottom:12px;"></div>
+    <video id="videoModalPlayer" controls style="width:100%;border-radius:12px;max-height:70vh;background:#000;" playsinline>
+      Votre navigateur ne supporte pas la lecture vidéo.
+    </video>
+  </div>
+</div>
+<script>
+function ouvrirVideo(src, titre) {
+  var modal = document.getElementById('videoModal');
+  var player = document.getElementById('videoModalPlayer');
+  var titleEl = document.getElementById('videoModalTitle');
+  if (titleEl) titleEl.textContent = titre || '';
+  player.src = src;
+  player.load();
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+function fermerVideo() {
+  var modal = document.getElementById('videoModal');
+  var player = document.getElementById('videoModalPlayer');
+  player.pause();
+  player.src = '';
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermerVideo(); });
+</script>
 
 <!-- ===================== ATTESTATIONS & CERTIFICATIONS ===================== -->
 <section class="section bg-gris" style="padding-top:48px;">
