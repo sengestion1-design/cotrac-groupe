@@ -128,9 +128,9 @@ document.addEventListener('DOMContentLoaded', () => {
         counterObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.5 });
+  }, { threshold: 0.1 });
 
-  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+  document.querySelectorAll('.counter, .stat-value[data-target]').forEach(el => counterObserver.observe(el));
 
   function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);

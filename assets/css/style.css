@@ -2687,3 +2687,42 @@ ul.services-list { padding: 0; list-style: none; }
   100% { opacity:1; transform:translateY(0) scale(1); }
 }
 
+
+/* ============================================================
+   RESET GLOBAL ANIMATIONS OPACITÉ — forcer visibilité
+   Toutes les classes qui mettent opacity:0 sont annulées.
+   Les effets hover/tilt/shimmer continuent de fonctionner.
+   ============================================================ */
+.animate-fade-up,
+.animate-fade-left,
+.animate-fade-right,
+.animate-zoom-in,
+.stagger-item,
+.reveal,
+.section-enter-left,
+.section-enter-right,
+.hero-left,
+.hero-badge,
+.hero-title,
+.pole-card,
+.temoignage-card,
+.partenaire-item,
+.stat-card,
+.hero-stats .stat-card,
+.hero-stats .stat-card.bounce-ready,
+.page-hero-title,
+.page-hero-desc,
+.breadcrumb {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+/* Garder les transitions hover normales */
+.pole-card:hover,
+.projet-card:hover,
+.temoignage-card:hover,
+.btn:hover {
+  transform: translateY(-6px) !important;
+}
+
