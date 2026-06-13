@@ -517,8 +517,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* Responsive hero */
 @media (max-width: 900px) {
   .hero-title { font-size: clamp(1.9rem, 6vw, 2.8rem); }
-  .hero-slider { height: 190px; }
-  .hero-slider-card { width: 250px; height: 190px; }
+  .hero-slider { height: 240px; }
+  .hero-slider-card { width: 180px; height: 240px; }
 }
 @media (max-width: 640px) {
   /* Photo mobile : descendre légèrement pour garder les visages dans le cadre portrait */
@@ -2381,8 +2381,8 @@ ul.services-list { padding: 0; list-style: none; }
 
 /* -- Slider cards taille mobile -- */
 @media (max-width: 480px) {
-  .hero-slider, .hero-slider-track { height: 160px; }
-  .hero-slider-card { width: 200px !important; height: 160px !important; }
+  .hero-slider, .hero-slider-track { height: 240px; }
+  .hero-slider-card { width: 180px !important; height: 240px !important; }
 }
 
 /* -- Section-title taille mobile -- */
