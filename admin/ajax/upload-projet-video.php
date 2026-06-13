@@ -54,8 +54,15 @@ try {
     $old = $db->prepare("SELECT video_url FROM projets WHERE id=?");
     $old->execute([$projet_id]);
     $oldVal = $old->fetchColumn();
-    if ($oldVal && !str_starts_with($oldVal, 'http') && file_exists($upload_dir . $oldVal)) {
-        @unlink($upload_dir . $oldVal);
+    if ($oldVal && !str_starts_with($oldVal, 'http')) {
+        $safeOld = basename($oldVal);
+        if (preg_match('/^[A-Za-z0-9._-]+\.(mp4|webm|ogg)$/i', $safeOld)) {
+            $oldPath = realpath($upload_dir . $safeOld);
+            $baseDir = realpath($upload_dir);
+            if ($oldPath && $baseDir && str_starts_with($oldPath, $baseDir)) {
+                @unlink($oldPath);
+            }
+        }
     }
 
     $db->prepare("UPDATE projets SET video_url=? WHERE id=?")->execute([$filename, $projet_id]);

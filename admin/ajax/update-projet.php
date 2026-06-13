@@ -22,6 +22,9 @@ if ($field === 'statut' && !in_array($value, ['termine','en_cours'])) {
 if ($field === 'pole' && !in_array($value, ['btp','energie','routes','industrie'])) {
     echo json_encode(['ok'=>false,'error'=>'Pôle invalide']); exit;
 }
+if ($field === 'video_url' && $value !== '' && !preg_match('/^[A-Za-z0-9._-]+\.(mp4|webm|ogg)$/i', $value)) {
+    echo json_encode(['ok'=>false,'error'=>'Nom de fichier vidéo invalide']); exit;
+}
 
 $value = mb_substr(strip_tags(trim($value)), 0, 500);
 

@@ -187,8 +187,13 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
               </span>
               <!-- Bouton play vidéo -->
               <?php if (!empty($projet['video_url'])): ?>
-              <?php $vid_src = str_starts_with($projet['video_url'],'http') ? $projet['video_url'] : SITE_URL.'/uploads/projets/'.e($projet['video_url']); ?>
-              <button onclick="ouvrirVideo('<?= $vid_src ?>','<?= e(addslashes($projet['titre'])) ?>');event.stopPropagation();"
+              <?php
+                $vid_filename = basename($projet['video_url']);
+                $vid_src = SITE_URL . '/uploads/projets/' . $vid_filename;
+              ?>
+              <button class="play-btn-card"
+                      data-src="<?= e($vid_src) ?>"
+                      data-titre="<?= e($projet['titre']) ?>"
                       style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(240,128,20,.92);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.35);transition:transform .2s,background .2s;"
                       onmouseover="this.style.transform='translate(-50%,-50%) scale(1.12)'"
                       onmouseout="this.style.transform='translate(-50%,-50%)'">
@@ -273,12 +278,13 @@ if (!empty($projets_video)): ?>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:24px;">
       <?php foreach ($projets_video as $pv):
-        $vid_src = str_starts_with($pv['video_url'],'http') ? $pv['video_url'] : SITE_URL.'/uploads/projets/'.e($pv['video_url']);
+        $vid_fn = basename($pv['video_url']);
+        $vid_src = SITE_URL . '/uploads/projets/' . $vid_fn;
         $pole_color = $poles_colors[$pv['pole']] ?? '#f7941d';
         $pole_label = $poles_labels[$pv['pole']] ?? '';
       ?>
       <div style="border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);background:#0a1628;cursor:pointer;position:relative;"
-           onclick="ouvrirVideo('<?= $vid_src ?>','<?= e(addslashes($pv['titre'])) ?>')">
+      <div class="play-btn-card" style="border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);background:#0a1628;cursor:pointer;position:relative;" data-src="<?= e($vid_src) ?>" data-titre="<?= e($pv['titre']) ?>">
         <!-- Thumbnail vidéo -->
         <div style="position:relative;height:210px;overflow:hidden;">
           <?php if (!empty($pv['image'])): ?>
@@ -345,6 +351,12 @@ function fermerVideo() {
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermerVideo(); });
+document.addEventListener('click', function(e) {
+  var el = e.target.closest('.play-btn-card');
+  if (!el) return;
+  e.stopPropagation();
+  ouvrirVideo(el.dataset.src, el.dataset.titre);
+});
 </script>
 
 <!-- ===================== ATTESTATIONS & CERTIFICATIONS ===================== -->
