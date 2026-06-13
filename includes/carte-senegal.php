@@ -154,13 +154,15 @@
   width: 100%;
 }
 
-/* Image PNG = la vraie carte */
+/* Image PNG = la vraie carte, teintee en bleu uniforme */
 .carto-img {
   display: block;
   width: 100%;
   height: auto;
   user-select: none;
   -webkit-user-drag: none;
+  /* Teinte bleue COTRAC : grayscale puis hue-rotate + saturate */
+  filter: grayscale(1) sepia(1) hue-rotate(185deg) saturate(3) brightness(0.75);
 }
 
 /* SVG overlay : exactement superpose sur l'image */
