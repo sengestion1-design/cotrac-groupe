@@ -453,8 +453,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   /* ---- A — Particules flottantes canvas (hero) ---- */
   (function initParticles() {
+    try {
     const hero = document.querySelector('.hero');
-    if (!hero) return;
+    if (!hero || hero.offsetHeight === 0) return;
     const canvas = document.createElement('canvas');
     canvas.id = 'hero-particles';
     hero.insertBefore(canvas, hero.firstChild);
@@ -509,6 +510,7 @@ document.addEventListener('DOMContentLoaded', () => {
     resize();
     pts = Array.from({ length: COUNT }, makeParticle);
     requestAnimationFrame(tick);
+    } catch(e) { /* particules non critiques */ }
   })();
 
   /* ---- D — Skeleton loading images projets ---- */
@@ -537,13 +539,15 @@ document.addEventListener('DOMContentLoaded', () => {
   (function initStatsBounce() {
     const cards = document.querySelectorAll('.hero-stats .stat-card');
     if (!cards.length) return;
-    cards.forEach(c => { c.style.animationPlayState = 'running'; });
+    // Ajouter la classe qui active opacity:0 + animation seulement si JS tourne
+    cards.forEach(c => c.classList.add('bounce-ready'));
     const last = cards[cards.length - 1];
     last.addEventListener('animationend', () => {
       cards.forEach(c => {
         c.style.opacity   = '1';
         c.style.transform = 'none';
         c.style.animation = 'none';
+        c.classList.remove('bounce-ready');
       });
     }, { once: true });
   })();

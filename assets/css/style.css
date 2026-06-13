@@ -2672,11 +2672,10 @@ ul.services-list { padding: 0; list-style: none; }
 .projet-img img.img-loaded { opacity: 1; }
 
 /* C — Stats cascade bounce */
-.hero-stats .stat-card {
+.hero-stats .stat-card.bounce-ready {
   opacity: 0;
   transform: translateY(32px) scale(0.94);
   animation: statBounce 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards;
-  animation-play-state: paused;
 }
 .hero-stats .stat-card:nth-child(1) { animation-delay: 0.60s; }
 .hero-stats .stat-card:nth-child(2) { animation-delay: 0.75s; }
