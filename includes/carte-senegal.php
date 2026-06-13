@@ -24,7 +24,8 @@
       <!-- Tooltip -->
       <div class="carto-tooltip" id="carto-tooltip"></div>
 
-      <!-- Carte : image PNG + zones cliquables SVG superposées -->
+      <!-- Carte : wrapper 3D + image PNG + zones cliquables SVG -->
+      <div class="carto-3d-wrap">
       <div class="carto-map-container" id="carto-map-container">
 
         <!-- Image de référence officielle -->
@@ -105,7 +106,8 @@
             cx="375" cy="470" rx="85" ry="52"/>
 
         </svg>
-      </div>
+      </div><!-- /.carto-map-container -->
+      </div><!-- /.carto-3d-wrap -->
 
       <div class="carto-counter">
         <span class="carto-count">14</span> régions &middot;
@@ -143,16 +145,42 @@
   border-radius: 50%;
 }
 
+/* Wrapper 3D : perspective sur la carte entiere */
+.carto-3d-wrap {
+  perspective: 1000px;
+  perspective-origin: 50% 40%;
+}
+
 /* Conteneur relatif pour superposer SVG sur image */
 .carto-map-container {
   position: relative;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 4px 32px rgba(26,107,181,0.15);
   background: #0a1e3d;
   display: inline-block;
   width: 100%;
   isolation: isolate;
+  /* Effet plateau 3D au repos */
+  transform: rotateX(8deg) rotateY(-2deg) scale(0.97);
+  transform-style: preserve-3d;
+  box-shadow:
+    0 24px 60px rgba(26,107,181,0.35),
+    0 8px 20px rgba(0,0,0,0.2),
+    0 2px 6px rgba(0,0,0,0.1);
+  transition: transform 0.5s cubic-bezier(0.23,1,0.32,1), box-shadow 0.5s ease;
+  will-change: transform;
+}
+.carto-map-container:hover,
+.carto-map-container.flat {
+  transform: rotateX(0deg) rotateY(0deg) scale(1);
+  box-shadow:
+    0 8px 32px rgba(26,107,181,0.25),
+    0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Fond bleu COTRAC sous l'image */
+.carto-map-container {
+  background: #1a6bb5 !important;
 }
 
 /* Image PNG = la vraie carte, fond blanc rendu transparent par CSS */
@@ -184,45 +212,55 @@
   fill: transparent;
   stroke: transparent;
   cursor: pointer;
-  transition: fill 0.2s ease, filter 0.2s ease;
-}
-#section-carte .region:hover {
-  fill: rgba(247, 148, 29, 0.45);
-  stroke: #f7941d;
-  stroke-width: 2;
-  filter: drop-shadow(0 4px 12px rgba(247,148,29,0.5));
-}
-#section-carte .region.clicked {
-  fill: rgba(26, 107, 181, 0.55);
-  stroke: #1a6bb5;
-  stroke-width: 2.5;
-  filter: drop-shadow(0 8px 20px rgba(26,107,181,0.55));
-  transform: scale(1.04);
+  transition: fill 0.22s ease, filter 0.22s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
   transform-box: fill-box;
   transform-origin: center;
 }
+#section-carte .region:hover {
+  fill: rgba(247, 148, 29, 0.4);
+  stroke: #f7941d;
+  stroke-width: 2;
+  filter: drop-shadow(0 6px 16px rgba(247,148,29,0.6));
+  transform: scale(1.05);
+}
+#section-carte .region.clicked {
+  fill: rgba(255,255,255, 0.22);
+  stroke: #fff;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 18px rgba(255,255,255,0.8)) drop-shadow(0 0 6px rgba(247,148,29,0.9));
+  transform: scale(1.07);
+  animation: region-pulse 1.8s ease-in-out infinite;
+}
+@keyframes region-pulse {
+  0%, 100% { filter: drop-shadow(0 0 18px rgba(255,255,255,0.8)) drop-shadow(0 0 6px rgba(247,148,29,0.9)); }
+  50%       { filter: drop-shadow(0 0 28px rgba(255,255,255,1))   drop-shadow(0 0 14px rgba(247,148,29,1)); }
+}
 
-/* Tooltip */
+/* Tooltip avec bounce */
+@keyframes tooltip-bounce {
+  0%   { transform: translateY(8px) scale(0.85); opacity:0; }
+  60%  { transform: translateY(-3px) scale(1.05); opacity:1; }
+  100% { transform: translateY(0) scale(1); opacity:1; }
+}
 .carto-tooltip {
   position: fixed;
-  background: #1a3a5c;
+  background: linear-gradient(135deg, #1a3a5c, #1a6bb5);
   color: #fff;
   font-family: 'Poppins', sans-serif;
   font-size: .78rem;
   font-weight: 600;
-  padding: 7px 14px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
   pointer-events: none;
   white-space: nowrap;
   opacity: 0;
-  transform: translateY(6px);
+  transform: translateY(8px);
   transition: opacity 0.15s ease, transform 0.15s ease;
   z-index: 9999;
   box-shadow: 0 4px 16px rgba(0,0,0,0.25);
 }
 .carto-tooltip.visible {
-  opacity: 1;
-  transform: translateY(0);
+  animation: tooltip-bounce 0.35s cubic-bezier(0.34,1.56,0.64,1) forwards;
 }
 
 /* Compteur */
@@ -298,5 +336,27 @@
       setTimeout(hideTooltip, 2000);
     }, { passive: false });
   });
+
+  /* ---- Tilt 3D carte entiere au mouvement souris ---- */
+  var mapContainer = document.getElementById('carto-map-container');
+  if (mapContainer && window.innerWidth > 768) {
+    mapContainer.addEventListener('mousemove', function (e) {
+      var rect = mapContainer.getBoundingClientRect();
+      var cx   = rect.left + rect.width  / 2;
+      var cy   = rect.top  + rect.height / 2;
+      var dx   = (e.clientX - cx) / (rect.width  / 2);
+      var dy   = (e.clientY - cy) / (rect.height / 2);
+      var rotX = -dy * 6;   /* max 6deg vertical */
+      var rotY =  dx * 5;   /* max 5deg horizontal */
+      mapContainer.style.transform =
+        'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) scale(1.01)';
+      mapContainer.style.boxShadow =
+        (-dx*12) + 'px ' + (-dy*12+24) + 'px 60px rgba(26,107,181,0.4)';
+    });
+    mapContainer.addEventListener('mouseleave', function () {
+      mapContainer.style.transform = 'rotateX(8deg) rotateY(-2deg) scale(0.97)';
+      mapContainer.style.boxShadow = '';
+    });
+  }
 })();
 </script>
