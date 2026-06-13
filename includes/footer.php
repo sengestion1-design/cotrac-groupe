@@ -52,12 +52,8 @@
         <ul>
           <li><a href="#">RCCM : SN DKR 2018-B-19682</a></li>
           <li><a href="#">NINEA : 006932504 2V2</a></li>
-          <li><a href="#">SARL - Capital 5 000 000 FCFA</a></li>
-          <li><a href="#">Créée en 2015</a></li>
+          <li><a href="#">SARL — Créée en 2015</a></li>
         </ul>
-        <div style="margin-top:20px;">
-          <span class="section-tag" style="margin-bottom:0;"><?= t('footer_aligne') ?></span>
-        </div>
       </div>
 
     </div>

@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Attribuer automatiquement les classes d'animation aux éléments de page
   document.querySelectorAll(
-    '.animate-fade-up, .animate-fade-left, .animate-fade-right, .animate-zoom-in, .section-tag, .admin-stat, .projet-card:not([data-pole])'
+    '.animate-fade-up, .animate-fade-left, .animate-fade-right, .animate-zoom-in, .section-tag, .admin-stat, .projet-card:not([data-pole]), .reveal, .temoignage-card, .partenaire-item, .pole-card'
   ).forEach(el => revealObserver.observe(el));
 
   // Auto-animate sections et contenus courants
