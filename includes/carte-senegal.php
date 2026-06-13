@@ -220,7 +220,7 @@
 }
 
 /* ─── Régions ─── */
-.region {
+#section-carte .region {
   fill: #1a6bb5;
   stroke: #fff;
   stroke-width: 2;
@@ -236,15 +236,15 @@
     transform 0.22s ease;
 }
 
-.region:hover,
-.region.hovered {
+#section-carte .region:hover,
+#section-carte .region.hovered {
   fill: #f7941d;
   filter: url(#region-shadow-hover);
   transform: scale(1.03);
 }
 
 /* Animation reveal */
-.region.revealed {
+#section-carte .region.revealed {
   animation: regionReveal 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 }
 
