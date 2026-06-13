@@ -451,7 +451,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: relative;
   overflow: hidden;
   margin-top: 0;
-  height: 160px;
+  height: 240px;
   width: 100%;
 }
 .hero-slider::before,
@@ -472,13 +472,13 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   flex-wrap: nowrap;
   gap: 12px;
   width: max-content;
-  height: 160px;
+  height: 240px;
   animation: heroSlide 30s linear infinite;
 }
 
 .hero-slider-card {
-  width: 220px;
-  height: 160px;
+  width: 320px;
+  height: 240px;
   border-radius: 14px;
   overflow: hidden;
   flex-shrink: 0;
@@ -517,8 +517,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 /* Responsive hero */
 @media (max-width: 900px) {
   .hero-title { font-size: clamp(1.9rem, 6vw, 2.8rem); }
-  .hero-slider { height: 140px; }
-  .hero-slider-card { width: 180px; height: 140px; }
+  .hero-slider { height: 190px; }
+  .hero-slider-card { width: 250px; height: 190px; }
 }
 @media (max-width: 640px) {
   /* Photo mobile : descendre légèrement pour garder les visages dans le cadre portrait */
@@ -2381,8 +2381,8 @@ ul.services-list { padding: 0; list-style: none; }
 
 /* -- Slider cards taille mobile -- */
 @media (max-width: 480px) {
-  .hero-slider, .hero-slider-track { height: 120px; }
-  .hero-slider-card { width: 150px !important; height: 120px !important; }
+  .hero-slider, .hero-slider-track { height: 160px; }
+  .hero-slider-card { width: 200px !important; height: 160px !important; }
 }
 
 /* -- Section-title taille mobile -- */
