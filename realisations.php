@@ -69,7 +69,13 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
 }
 </style>
 
-<section class="page-hero" <?= $_real_hero_bg ? 'style="background-image:url(\''.e($_real_hero_bg).'\');background-size:cover;background-position:center;"' : '' ?>>
+<section class="page-hero" style="position:relative;overflow:hidden;min-height:420px;<?= $_real_hero_bg ? 'background-image:url(\''.e($_real_hero_bg).'\');background-size:cover;background-position:center;' : '' ?>">
+  <?php if (!$_real_hero_bg): ?>
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt=""
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 5%;z-index:0;">
+  <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.85) 50%,rgba(10,30,70,0.65));z-index:1;"></div>
+  <?php endif; ?>
+  <div style="position:relative;z-index:2;width:100%;">
   <div class="container real-hero-grid">
     <div>
       <nav class="breadcrumb" aria-label="Fil d'Ariane">
@@ -103,6 +109,7 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
       </div>
     </div>
   </div>
+  </div><!-- /z-index wrapper -->
 </section>
 
 <!-- ===================== FILTRES ===================== -->
