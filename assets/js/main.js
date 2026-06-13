@@ -44,12 +44,19 @@ document.addEventListener('DOMContentLoaded', () => {
         revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
 
   // Attribuer automatiquement les classes d'animation aux éléments de page
   document.querySelectorAll(
-    '.animate-fade-up, .animate-fade-left, .animate-fade-right, .animate-zoom-in, .section-tag, .admin-stat, .projet-card:not([data-pole]), .reveal, .temoignage-card, .partenaire-item, .pole-card'
+    '.animate-fade-up, .animate-fade-left, .animate-fade-right, .animate-zoom-in, .section-tag, .admin-stat, .projet-card:not([data-pole]), .reveal'
   ).forEach(el => revealObserver.observe(el));
+
+  // Fallback sécurité : forcer visible après 3s si pas encore déclenché
+  setTimeout(() => {
+    document.querySelectorAll(
+      '.animate-fade-up:not(.visible), .animate-fade-left:not(.visible), .animate-fade-right:not(.visible), .animate-zoom-in:not(.visible), .reveal:not(.visible), .stagger-item:not(.visible)'
+    ).forEach(el => el.classList.add('visible'));
+  }, 3000);
 
   // Auto-animate sections et contenus courants
   document.querySelectorAll('.section-header:not(.animate-fade-up)').forEach(el => {
@@ -337,7 +344,7 @@ document.addEventListener('DOMContentLoaded', () => {
         staggerObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.10, rootMargin: '0px 0px -20px 0px' });
+  }, { threshold: 0.05, rootMargin: '0px 0px 0px 0px' });
 
   document.querySelectorAll('.pole-card, .valeur-card, .service-item, .projet-card, .tl-item, .equipe-card, .equipement-card, .avantage-item, .etape-card').forEach((el, i) => {
     el.classList.add('stagger-item');
