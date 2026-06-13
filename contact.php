@@ -1,4 +1,5 @@
 <?php
+header("Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: https:; frame-src 'self' https://www.openstreetmap.org https://www.google.com https://maps.google.com;");
 require_once __DIR__ . '/lang/lang.php';
 /* =========================================================
    TRAITEMENT DU FORMULAIRE (avant tout output HTML)
