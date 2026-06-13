@@ -149,20 +149,34 @@
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 4px 32px rgba(26,107,181,0.15);
-  background: #fff;
+  background: #0a1e3d;
   display: inline-block;
   width: 100%;
+  isolation: isolate;
 }
 
-/* Image PNG = la vraie carte, teintee en bleu uniforme */
+/* Image PNG = la vraie carte en niveaux de gris */
 .carto-img {
   display: block;
   width: 100%;
   height: auto;
   user-select: none;
   -webkit-user-drag: none;
-  /* Teinte bleue COTRAC : grayscale puis hue-rotate + saturate */
-  filter: grayscale(1) sepia(1) hue-rotate(185deg) saturate(3) brightness(0.75);
+  filter: grayscale(1) brightness(0.6) contrast(1.2);
+}
+/* Calque bleu COTRAC par-dessus l'image (mix-blend-mode) */
+.carto-map-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: #1a6bb5;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 1;
+}
+/* SVG au-dessus du calque bleu */
+.carto-svg-overlay {
+  z-index: 2;
 }
 
 /* SVG overlay : exactement superpose sur l'image */
