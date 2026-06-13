@@ -16,7 +16,7 @@ $actualites = $db->query("SELECT * FROM actualites WHERE actif=1 ORDER BY create
   <!-- Photo de fond cotrac2 + overlay -->
   <?php if (!$_actu_hero_bg): ?>
   <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt=""
-       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;z-index:0;">
+       style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 5%;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.85) 50%,rgba(10,30,70,0.65));z-index:1;"></div>
   <?php endif; ?>
   <div style="position:relative;z-index:2;width:100%;">
