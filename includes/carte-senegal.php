@@ -46,117 +46,85 @@
             </filter>
           </defs>
 
-          <!-- Saint-Louis (nord, grande bande horizontale) -->
-          <path
-            class="region"
-            id="reg-saint-louis"
-            data-name="Saint-Louis"
-            d="M 290 20 L 560 20 L 580 30 L 590 55 L 585 90 L 565 115 L 540 130 L 510 140 L 480 145 L 450 142 L 420 135 L 395 125 L 370 118 L 345 125 L 320 135 L 300 145 L 278 138 L 262 120 L 255 95 L 258 65 L 270 40 Z"
-          />
+          <!-- Saint-Louis (nord, grande bande) -->
+          <path class="region" id="reg-saint-louis" data-name="Saint-Louis"
+            d="M 268 12 L 295 10 L 322 10 L 380 12 L 435 14 L 490 16 L 530 18 L 558 22
+               L 565 35 L 570 52 L 565 72 L 552 90 L 535 105 L 512 115 L 488 120
+               L 462 122 L 438 118 L 415 112 L 395 108 L 375 112 L 355 118 L 335 122
+               L 318 128 L 305 138 L 292 148 L 278 152 L 262 148 L 248 135 L 238 118
+               L 232 100 L 235 80 L 245 62 L 258 45 Z"/>
 
-          <!-- Matam (nord-est, grand) -->
-          <path
-            class="region"
-            id="reg-matam"
-            data-name="Matam"
-            d="M 560 20 L 720 20 L 740 35 L 755 60 L 752 95 L 738 125 L 715 148 L 688 162 L 658 170 L 625 172 L 595 165 L 568 152 L 548 138 L 535 120 L 530 98 L 535 72 L 548 48 Z"
-          />
+          <!-- Matam (nord-est) -->
+          <path class="region" id="reg-matam" data-name="Matam"
+            d="M 558 22 L 598 20 L 638 18 L 678 18 L 715 20 L 742 26 L 758 40
+               L 765 58 L 762 80 L 752 100 L 735 118 L 712 132 L 685 142 L 658 148
+               L 630 148 L 602 142 L 578 132 L 562 118 L 552 100 L 548 80 L 552 60
+               L 558 42 Z"/>
 
-          <!-- Louga (centre-nord, grande) -->
-          <path
-            class="region"
-            id="reg-louga"
-            data-name="Louga"
-            d="M 178 95 L 210 85 L 245 82 L 278 88 L 310 100 L 338 118 L 350 140 L 348 168 L 338 192 L 318 210 L 292 222 L 262 228 L 232 225 L 205 215 L 182 198 L 165 178 L 158 155 L 160 128 Z"
-          />
+          <!-- Louga (centre-nord) -->
+          <path class="region" id="reg-louga" data-name="Louga"
+            d="M 165 108 L 192 100 L 222 96 L 255 98 L 285 108 L 312 122 L 330 138
+               L 338 158 L 335 178 L 322 196 L 305 210 L 282 220 L 258 225 L 232 222
+               L 208 214 L 188 202 L 172 186 L 162 168 L 158 148 L 160 128 L 162 118 Z"/>
 
-          <!-- Tambacounda (est, tres grande region) -->
-          <path
-            class="region"
-            id="reg-tambacounda"
-            data-name="Tambacounda"
-            d="M 490 165 L 535 160 L 570 168 L 605 182 L 638 202 L 665 228 L 682 258 L 688 292 L 682 328 L 665 358 L 640 380 L 608 395 L 572 402 L 535 398 L 500 385 L 470 365 L 448 340 L 432 310 L 425 278 L 425 245 L 432 215 L 448 190 L 468 175 Z"
-          />
+          <!-- Tambacounda (est, tres grande) -->
+          <path class="region" id="reg-tambacounda" data-name="Tambacounda"
+            d="M 462 152 L 495 148 L 528 148 L 558 155 L 585 168 L 608 185 L 628 208
+               L 642 232 L 650 260 L 652 290 L 645 320 L 630 348 L 608 370 L 582 385
+               L 552 392 L 520 390 L 492 380 L 468 362 L 450 340 L 438 315 L 432 288
+               L 432 260 L 438 232 L 450 208 L 448 195 L 445 178 L 452 162 Z"/>
 
-          <!-- Kedougou (extreme sud-est, coin) -->
-          <path
-            class="region"
-            id="reg-kedougou"
-            data-name="Kédougou"
-            d="M 640 380 L 670 368 L 700 355 L 725 338 L 742 315 L 752 288 L 752 260 L 742 235 L 725 215 L 705 202 L 688 195 L 688 258 L 682 292 L 665 328 L 648 358 Z"
-          />
+          <!-- Kedougou (extreme sud-est) -->
+          <path class="region" id="reg-kedougou" data-name="Kédougou"
+            d="M 652 290 L 668 278 L 688 265 L 708 252 L 728 242 L 748 238 L 762 245
+               L 768 262 L 765 282 L 755 302 L 738 320 L 718 335 L 695 345 L 670 350
+               L 648 348 L 632 338 L 628 320 L 632 305 L 642 295 Z"/>
 
           <!-- Diourbel (centre, petit) -->
-          <path
-            class="region"
-            id="reg-diourbel"
-            data-name="Diourbel"
-            d="M 232 225 L 268 222 L 300 228 L 322 242 L 332 262 L 328 282 L 312 298 L 290 308 L 265 310 L 242 302 L 225 285 L 218 265 L 220 245 Z"
-          />
+          <path class="region" id="reg-diourbel" data-name="Diourbel"
+            d="M 228 222 L 258 218 L 285 222 L 305 235 L 315 252 L 312 272 L 298 286
+               L 280 295 L 258 298 L 238 292 L 222 278 L 215 260 L 218 242 Z"/>
 
           <!-- Thies (ouest) -->
-          <path
-            class="region"
-            id="reg-thies"
-            data-name="Thiès"
-            d="M 148 175 L 182 168 L 210 172 L 228 190 L 232 215 L 218 238 L 202 255 L 180 265 L 155 268 L 132 258 L 115 240 L 110 218 L 118 198 Z"
-          />
+          <path class="region" id="reg-thies" data-name="Thiès"
+            d="M 138 178 L 165 172 L 192 175 L 212 188 L 222 208 L 218 230 L 205 248
+               L 186 260 L 162 265 L 138 258 L 118 242 L 110 222 L 116 202 Z"/>
 
-          <!-- Dakar (presqu'ile, tres petit coin ouest) -->
-          <path
-            class="region"
-            id="reg-dakar"
-            data-name="Dakar"
-            d="M 90 195 L 115 185 L 125 198 L 128 218 L 120 235 L 105 245 L 88 242 L 75 228 L 72 212 Z"
-          />
+          <!-- Dakar (presqu'ile, tres petite) -->
+          <path class="region" id="reg-dakar" data-name="Dakar"
+            d="M 92 198 L 112 192 L 125 200 L 128 218 L 122 232 L 108 242 L 92 238
+               L 78 225 L 75 210 Z"/>
 
-          <!-- Kaolack (centre) -->
-          <path
-            class="region"
-            id="reg-kaolack"
-            data-name="Kaolack"
-            d="M 262 308 L 298 305 L 328 315 L 348 335 L 352 360 L 340 382 L 318 395 L 292 400 L 265 392 L 245 375 L 238 350 L 242 325 Z"
-          />
+          <!-- Kaolack (centre-ouest, bord Gambie) -->
+          <path class="region" id="reg-kaolack" data-name="Kaolack"
+            d="M 168 295 L 195 288 L 222 285 L 245 292 L 262 308 L 268 328 L 262 348
+               L 248 362 L 228 370 L 205 368 L 185 355 L 172 338 L 165 318 Z"/>
 
           <!-- Kaffrine (centre) -->
-          <path
-            class="region"
-            id="reg-kaffrine"
-            data-name="Kaffrine"
-            d="M 330 282 L 365 278 L 398 288 L 420 308 L 425 335 L 415 358 L 395 375 L 368 382 L 340 378 L 318 362 L 312 338 L 318 312 Z"
-          />
+          <path class="region" id="reg-kaffrine" data-name="Kaffrine"
+            d="M 298 272 L 330 268 L 362 272 L 390 285 L 412 305 L 420 328 L 415 352
+               L 400 368 L 378 378 L 352 380 L 328 372 L 308 355 L 298 332 L 295 308
+               L 298 288 Z"/>
 
           <!-- Fatick (centre-ouest, Sine-Saloum) -->
-          <path
-            class="region"
-            id="reg-fatick"
-            data-name="Fatick"
-            d="M 155 268 L 195 265 L 228 272 L 248 290 L 252 315 L 240 338 L 218 352 L 192 358 L 165 352 L 142 335 L 132 312 L 135 288 Z"
-          />
+          <path class="region" id="reg-fatick" data-name="Fatick"
+            d="M 138 258 L 165 252 L 192 255 L 215 268 L 228 288 L 225 312 L 212 328
+               L 195 338 L 172 340 L 150 330 L 132 312 L 128 290 L 132 272 Z"/>
 
-          <!-- Ziguinchor (sud-ouest, Casamance) -->
-          <path
-            class="region"
-            id="reg-ziguinchor"
-            data-name="Ziguinchor"
-            d="M 95 442 L 130 432 L 162 430 L 190 438 L 208 458 L 210 482 L 195 500 L 168 512 L 138 515 L 108 508 L 85 490 L 75 468 Z"
-          />
+          <!-- Ziguinchor (sud-ouest Casamance) -->
+          <path class="region" id="reg-ziguinchor" data-name="Ziguinchor"
+            d="M 62 432 L 92 425 L 125 422 L 155 428 L 175 442 L 180 462 L 172 480
+               L 155 492 L 130 498 L 102 495 L 78 480 L 65 462 L 62 445 Z"/>
 
           <!-- Sedhiou (sud, Casamance centre) -->
-          <path
-            class="region"
-            id="reg-sedhiou"
-            data-name="Sédhiou"
-            d="M 205 430 L 242 425 L 275 430 L 298 448 L 305 472 L 295 495 L 272 510 L 245 515 L 218 508 L 200 490 L 195 465 Z"
-          />
+          <path class="region" id="reg-sedhiou" data-name="Sédhiou"
+            d="M 178 422 L 212 415 L 248 418 L 275 432 L 285 452 L 278 472 L 260 485
+               L 235 490 L 208 485 L 188 470 L 180 450 Z"/>
 
           <!-- Kolda (sud-est, Casamance est) -->
-          <path
-            class="region"
-            id="reg-kolda"
-            data-name="Kolda"
-            d="M 298 428 L 338 422 L 375 428 L 405 445 L 420 468 L 418 495 L 400 515 L 372 525 L 342 525 L 312 515 L 292 495 L 288 468 Z"
-          />
+          <path class="region" id="reg-kolda" data-name="Kolda"
+            d="M 288 415 L 325 408 L 362 412 L 395 428 L 415 450 L 415 475 L 398 492
+               L 372 500 L 342 500 L 315 490 L 295 472 L 285 450 Z"/>
 
         </svg>
       </div><!-- /.carto-map-container -->
