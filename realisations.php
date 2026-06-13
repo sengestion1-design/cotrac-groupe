@@ -267,50 +267,47 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
 
 <!-- ===================== SECTION VIDÉOS ===================== -->
 <?php
-$projets_video = array_filter($projets, fn($p) => !empty($p['video_url']));
-if (!empty($projets_video)): ?>
-<section class="section" style="background:#fff;padding-top:56px;padding-bottom:56px;">
+try { $db->exec("CREATE TABLE IF NOT EXISTS videos_chantiers (id INT AUTO_INCREMENT PRIMARY KEY, titre VARCHAR(255) NOT NULL, description VARCHAR(500) DEFAULT NULL, fichier VARCHAR(300) NOT NULL, thumbnail VARCHAR(300) DEFAULT NULL, sort_order INT DEFAULT 0, actif TINYINT(1) DEFAULT 1, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"); } catch(Exception $e){}
+$videos_chantiers = $db->query("SELECT * FROM videos_chantiers WHERE actif=1 ORDER BY sort_order ASC, id DESC")->fetchAll();
+if (!empty($videos_chantiers)): ?>
+<section class="section" style="background:#f8fafd;padding-top:56px;padding-bottom:56px;">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px;">
       <span class="section-tag">Nos Chantiers</span>
       <h2 class="section-title">Nos Travaux en <span style="color:var(--orange)">Vidéo</span></h2>
       <p class="section-sub">Découvrez nos chantiers en action</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(340px,100%),1fr));gap:24px;">
-      <?php foreach ($projets_video as $pv):
-        $vid_fn = basename($pv['video_url']);
-        $vid_src = SITE_URL . '/uploads/projets/' . $vid_fn;
-        $pole_color = $poles_colors[$pv['pole']] ?? '#f7941d';
-        $pole_label = $poles_labels[$pv['pole']] ?? '';
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:24px;">
+      <?php foreach ($videos_chantiers as $vc):
+        $vid_fn  = basename($vc['fichier']);
+        $vid_src = SITE_URL . '/uploads/videos/' . $vid_fn;
+        $thumb   = !empty($vc['thumbnail']) ? SITE_URL . '/uploads/videos/' . basename($vc['thumbnail']) : '';
       ?>
-      <div style="border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);background:#0a1628;cursor:pointer;position:relative;"
-      <div class="play-btn-card" style="border-radius:16px;overflow:hidden;box-shadow:0 2px 16px rgba(0,0,0,.07);background:#0a1628;cursor:pointer;position:relative;" data-src="<?= e($vid_src) ?>" data-titre="<?= e($pv['titre']) ?>">
-        <!-- Thumbnail vidéo -->
-        <div style="position:relative;height:210px;overflow:hidden;">
-          <?php if (!empty($pv['image'])): ?>
-          <img src="<?= SITE_URL ?>/uploads/projets/<?= e($pv['image']) ?>" alt="<?= e($pv['titre']) ?>"
-               style="width:100%;height:100%;object-fit:cover;opacity:.75;">
+      <div class="play-btn-card" style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.1);background:#0a1628;cursor:pointer;position:relative;transition:transform .25s,box-shadow .25s;"
+           data-src="<?= e($vid_src) ?>" data-titre="<?= e($vc['titre']) ?>"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,.18)'"
+           onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,.1)'">
+        <!-- Thumbnail -->
+        <div style="position:relative;height:200px;overflow:hidden;">
+          <?php if ($thumb): ?>
+          <img src="<?= e($thumb) ?>" alt="<?= e($vc['titre']) ?>" style="width:100%;height:100%;object-fit:cover;opacity:.8;">
           <?php else: ?>
-          <div style="width:100%;height:100%;background:linear-gradient(135deg,<?= $pole_color ?>44,<?= $pole_color ?>88);display:flex;align-items:center;justify-content:center;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a3a5c,#1a6bb5);display:flex;align-items:center;justify-content:center;">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
           </div>
           <?php endif; ?>
-          <!-- Overlay gradient -->
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,.8) 0%,transparent 60%);"></div>
-          <!-- Bouton play centré -->
-          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;background:rgba(240,128,20,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.4);transition:transform .2s;"
-               onmouseover="this.style.transform='translate(-50%,-50%) scale(1.1)'"
-               onmouseout="this.style.transform='translate(-50%,-50%)'">
+          <!-- Overlay -->
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,.75) 0%,transparent 55%);"></div>
+          <!-- Bouton play -->
+          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;background:rgba(240,128,20,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.4);">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           </div>
-          <!-- Badge pole -->
-          <span style="position:absolute;top:10px;left:10px;background:<?= $pole_color ?>;color:#fff;border-radius:6px;padding:3px 10px;font-size:.7rem;font-weight:700;"><?= e($pole_label) ?></span>
         </div>
         <!-- Titre -->
-        <div style="padding:14px 16px;">
-          <h3 style="color:#fff;font-size:.95rem;font-weight:700;margin:0 0 4px;"><?= e($pv['titre']) ?></h3>
-          <?php if (!empty($pv['client'])): ?>
-          <p style="color:rgba(255,255,255,.55);font-size:.8rem;margin:0;"><?= e($pv['client']) ?></p>
+        <div style="padding:14px 16px 16px;">
+          <h3 style="color:#fff;font-size:.95rem;font-weight:700;margin:0 0 4px;line-height:1.4;"><?= e($vc['titre']) ?></h3>
+          <?php if (!empty($vc['description'])): ?>
+          <p style="color:rgba(255,255,255,.5);font-size:.8rem;margin:0;line-height:1.5;"><?= e($vc['description']) ?></p>
           <?php endif; ?>
         </div>
       </div>
