@@ -17,7 +17,7 @@ $db = getDB();
   <div class="hero-parallax-bg" style="background-image:url('<?= e($_index_hero_bg) ?>');background-size:cover;background-position:center;"></div>
   <?php else: ?>
   <div class="hero-parallax-bg" style="background:none;">
-    <img src="<?= SITE_URL ?>/assets/images/plan.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0;">
+    <img src="<?= SITE_URL ?>/assets/images/plan.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;z-index:0;">
     <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.82) 45%,rgba(10,30,70,0.55));z-index:1;"></div>
   </div>
   <?php endif; ?>
@@ -43,13 +43,12 @@ $db = getDB();
         </p>
 
         <div class="hero-actions">
-          <a href="<?= SITE_URL ?>/realisations.php" class="btn btn-primary"><?= t('index_hero_btn_realisations') ?></a>
-          <a href="<?= SITE_URL ?>/contact.php" class="btn btn-outline"><?= t('index_hero_btn_contact') ?></a>
-          <a href="tel:+221338279639" class="btn-appel">
-            <span class="btn-appel-pulse"></span>
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16z"/></svg>
+          <a href="<?= SITE_URL ?>/contact.php" class="btn btn-primary"><?= t('index_hero_btn_contact') ?></a>
+          <a href="tel:+221338279639" class="btn btn-outline" style="display:inline-flex;align-items:center;gap:8px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.35 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.5 16z"/></svg>
             Appeler maintenant
           </a>
+          <a href="<?= SITE_URL ?>/realisations.php" style="color:rgba(255,255,255,.7);font-size:.85rem;font-weight:600;text-decoration:none;letter-spacing:.02em;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;transition:color .2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.7)'"><?= t('index_hero_btn_realisations') ?> →</a>
         </div>
 
         <!-- Agréments -->
@@ -67,12 +66,12 @@ $db = getDB();
             <span class="stat-label"><?= t('index_hero_stat_ans') ?></span>
           </div>
           <div class="stat-card">
-            <span class="stat-value" data-target="15" data-suffix="+">15+</span>
+            <span class="stat-value" data-target="25" data-suffix="+">25+</span>
             <span class="stat-label"><?= t('index_hero_stat_projets') ?></span>
           </div>
           <div class="stat-card">
-            <span class="stat-value" data-target="5" data-suffix="">5</span>
-            <span class="stat-label"><?= t('index_hero_stat_poles') ?></span>
+            <span class="stat-value" data-target="14" data-suffix="">14</span>
+            <span class="stat-label">Régions couvertes</span>
           </div>
           <div class="stat-card">
             <span class="stat-value" data-target="15" data-suffix="+">15+</span>
