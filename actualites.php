@@ -58,7 +58,7 @@ $actualites = $db->query("SELECT * FROM actualites WHERE actif=1 ORDER BY create
       </div>
 
     <?php else: ?>
-      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:28px;">
+      <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(min(340px, 100%),1fr)); gap:28px;">
         <?php foreach ($actualites as $i => $actu):
           $has_img  = !empty($actu['image']) && file_exists(__DIR__ . '/uploads/actualites/' . $actu['image']);
           $date_fmt = date('d F Y', strtotime($actu['created_at']));

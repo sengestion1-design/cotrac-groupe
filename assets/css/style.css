@@ -2154,3 +2154,189 @@ ul.services-list { padding: 0; list-style: none; }
   .cta-actions { flex-direction: column; align-items: center; }
   .cta-actions .btn { width: 100%; text-align: center; justify-content: center; }
 }
+
+/* ============================================================
+   CORRECTIFS RESPONSIVE GLOBAL — audit 5 agents
+   ============================================================ */
+
+/* -- Classes utilitaires grids responsive (remplacent les inline) -- */
+.grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+}
+.cta-grid-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+}
+
+/* -- Hero blobs réduits sur mobile -- */
+@media (max-width: 768px) {
+  .hero-blob-1 { width: 280px; height: 280px; top: -100px; right: -80px; }
+  .hero-blob-2 { width: 200px; height: 200px; }
+}
+@media (max-width: 480px) {
+  .hero-blob-1, .hero-blob-2 { display: none; }
+}
+
+/* -- Masques sliders réduits sur mobile -- */
+@media (max-width: 480px) {
+  .hero-slider::before, .hero-slider::after { width: 32px; }
+  .partenaires-track::before, .partenaires-track::after { width: 28px; }
+}
+
+/* -- Hero title : corriger l'annulation du breakpoint mobile par le premium -- */
+@media (max-width: 640px) {
+  .hero-title { font-size: clamp(1.7rem, 7vw, 2.2rem) !important; }
+}
+@media (max-width: 480px) {
+  .hero-title { font-size: clamp(1.5rem, 8vw, 1.9rem) !important; }
+}
+
+/* -- Hamburger visible dès 1024px (tablettes) -- */
+@media (max-width: 1024px) {
+  .hamburger { display: flex !important; }
+  .nav { display: none !important; }
+  .nav.open { display: flex !important; }
+}
+
+/* -- Grids hero 2 colonnes inline → 1 colonne sur mobile -- */
+@media (max-width: 768px) {
+  .grid-2col,
+  .cta-grid-2col,
+  /* cibler les grids inline sur les pages */
+  .page-hero .container[style*="grid-template-columns"],
+  section > .container[style*="1fr 1fr"],
+  section > div[style*="1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 28px !important;
+  }
+  .grid-2col { gap: 24px; }
+  .cta-grid-2col { gap: 28px; }
+}
+
+/* -- Grids 3 colonnes inline → auto sur mobile -- */
+@media (max-width: 768px) {
+  div[style*="repeat(3,1fr)"],
+  div[style*="repeat(3, 1fr)"] {
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)) !important;
+  }
+}
+@media (max-width: 480px) {
+  div[style*="repeat(3,1fr)"],
+  div[style*="repeat(3, 1fr)"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* -- Stats grid overflow fix ≤360px -- */
+@media (max-width: 480px) {
+  .stats-grid { gap: 16px; }
+}
+@media (max-width: 360px) {
+  .stats-grid { grid-template-columns: 1fr; }
+}
+
+/* -- Font size stats sur mobile -- */
+@media (max-width: 480px) {
+  .stat-value { font-size: clamp(1.2rem, 4vw, 1.5rem); }
+  .stat-label { white-space: normal; }
+}
+
+/* -- Section padding réduit sur mobile -- */
+@media (max-width: 640px) {
+  .section { padding: 48px 0; }
+  .page-hero { padding: 3rem 0 2.5rem; }
+  .stats-section { padding: 2.5rem 0; }
+}
+
+/* -- CTA min-height auto sur mobile (évite content tronqué avec overflow:hidden) -- */
+@media (max-width: 768px) {
+  section[style*="min-height:420px"],
+  section[style*="min-height: 420px"] {
+    min-height: auto !important;
+    padding-top: 48px !important;
+    padding-bottom: 48px !important;
+  }
+}
+
+/* -- Tableau : wrapper scroll horizontal -- */
+.table-wrap { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+@media (max-width: 480px) {
+  .specs-table th, .specs-table td { padding: 8px 10px; font-size: .8rem; }
+}
+
+/* -- Grid actualités : minmax sécurisé -- */
+@media (max-width: 380px) {
+  div[style*="minmax(340px"],
+  div[style*="minmax(300px"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* -- Lightbox flèches taille réduite mobile -- */
+@media (max-width: 560px) {
+  .lb-prev, .lb-next { width: 40px !important; height: 40px !important; }
+}
+
+/* -- Stats-photos-layout (index chiffres) -- */
+@media (max-width: 900px) {
+  .stats-photos-layout {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .stats-photos-layout > div { transform: none !important; height: 220px !important; }
+}
+
+/* -- Photo hauteurs fixes réduites mobile -- */
+@media (max-width: 600px) {
+  img[style*="height:420px"],
+  img[style*="height: 420px"] { height: 240px !important; }
+  img[style*="height:320px"],
+  img[style*="height: 320px"] { height: 200px !important; }
+}
+
+/* -- CTA carte padding réduit mobile -- */
+@media (max-width: 480px) {
+  div[style*="padding:36px 32px"],
+  div[style*="padding: 36px 32px"],
+  div[style*="padding:44px 36px"],
+  div[style*="padding: 44px 36px"] {
+    padding: 24px 18px !important;
+  }
+}
+
+/* -- Flex stats dans CTA : wrap sur très petit écran -- */
+@media (max-width: 380px) {
+  div[style*="justify-content:space-around"] { flex-wrap: wrap; gap: 12px; }
+  div[style*="width:1px"] { display: none; }
+}
+
+/* -- Header logo réduit mobile -- */
+@media (max-width: 480px) {
+  .header-inner { height: 60px; }
+  .logo img { height: 40px !important; }
+  .logo-text .name { font-size: 1rem !important; }
+  .hero { padding-top: calc(60px + 20px); }
+  .page-hero { padding-top: calc(60px + 40px); }
+  .nav { top: 60px; }
+}
+
+/* -- Slider cards taille mobile -- */
+@media (max-width: 480px) {
+  .hero-slider, .hero-slider-track { height: 120px; }
+  .hero-slider-card { width: 150px !important; height: 120px !important; }
+}
+
+/* -- Section-title taille mobile -- */
+@media (max-width: 480px) {
+  .section-title { font-size: 1.5rem; }
+}
