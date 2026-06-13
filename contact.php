@@ -453,15 +453,23 @@ require_once __DIR__ . '/includes/header.php';
 
         <!-- Localisation -->
         <div class="contact-info-card" style="padding:0;overflow:hidden;">
-          <a href="https://maps.google.com/?q=Ouest+Foire+Route+Aeroport+Dakar+Senegal" target="_blank" rel="noopener noreferrer" style="display:block;position:relative;height:240px;overflow:hidden;text-decoration:none;">
-            <img src="https://maps.googleapis.com/maps/api/staticmap?center=14.7392,-17.4677&zoom=15&size=600x240&maptype=roadmap&markers=color:orange%7C14.7392,-17.4677&language=fr"
-                 onerror="this.parentNode.style.background='#e8f0fe';this.style.display='none'"
-                 alt="Carte Ouest Foire Dakar" style="width:100%;height:100%;object-fit:cover;display:block;">
-            <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#1a4a8a 0%,#0d2a4f 100%);">
-              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#f7941d" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <a href="https://maps.google.com/?q=Ouest+Foire+Route+Aeroport+Dakar+Senegal" target="_blank" rel="noopener noreferrer"
+             style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:240px;text-decoration:none;background:linear-gradient(135deg,#1a4a8a 0%,#0d2a4f 100%);position:relative;overflow:hidden;">
+            <!-- Grille routes simulée CSS uniquement -->
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;opacity:0.15;">
+              <line x1="0" y1="80" x2="100%" y2="90" stroke="#fff" stroke-width="3"/>
+              <line x1="0" y1="140" x2="100%" y2="135" stroke="#fff" stroke-width="2"/>
+              <line x1="180" y1="0" x2="175" y2="100%" stroke="#fff" stroke-width="2"/>
+              <line x1="380" y1="0" x2="390" y2="100%" stroke="#fff" stroke-width="1.5"/>
+              <line x1="0" y1="50" x2="60%" y2="70" stroke="#fff" stroke-width="1"/>
+              <line x1="40%" y1="0" x2="50%" y2="100%" stroke="#fff" stroke-width="1"/>
+            </svg>
+            <!-- Contenu centré -->
+            <div style="position:relative;z-index:1;text-align:center;">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="#f7941d" stroke="#fff" stroke-width="1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3" fill="#fff"/></svg>
               <p style="color:#fff;font-weight:700;margin:10px 0 4px;font-size:0.95rem;">Ouest Foire, route de l'aéroport</p>
-              <p style="color:rgba(255,255,255,0.7);font-size:0.8rem;margin:0;">Dakar, Sénégal</p>
-              <span style="margin-top:14px;background:#f7941d;color:#fff;padding:7px 18px;border-radius:20px;font-size:0.78rem;font-weight:600;">Voir sur Google Maps →</span>
+              <p style="color:rgba(255,255,255,0.65);font-size:0.8rem;margin:0 0 16px;">Dakar, Sénégal</p>
+              <span style="background:#f7941d;color:#fff;padding:8px 20px;border-radius:20px;font-size:0.78rem;font-weight:600;display:inline-block;">Ouvrir dans Google Maps →</span>
             </div>
           </a>
           <a href="https://maps.google.com/?q=Ouest+Foire+Dakar+Senegal" target="_blank" rel="noopener noreferrer"
