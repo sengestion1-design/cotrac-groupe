@@ -2340,6 +2340,85 @@ ul.services-list { padding: 0; list-style: none; }
   .lb-prev, .lb-next { width: 40px !important; height: 40px !important; }
 }
 
+/* ============================================================
+   ANIMATIONS PREMIUM — 6 effets scroll/transition
+   ============================================================ */
+
+/* ---- 1. Progress bar — glow pulsé orange ---- */
+#scroll-progress {
+  box-shadow: 0 0 8px 0 rgba(240,128,20,0.5);
+}
+@keyframes progress-glow {
+  0%, 100% { box-shadow: 0 0 6px rgba(240,128,20,0.4); }
+  50%       { box-shadow: 0 0 14px rgba(240,128,20,0.75); }
+}
+#scroll-progress { animation: progress-glow 2s ease-in-out infinite; }
+
+/* ---- 2. Header scroll — réduction hauteur + logo ---- */
+.header-inner {
+  transition: height 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.header.scrolled .header-inner { height: 56px; }
+.header.scrolled .logo img { height: 38px; transition: height 0.35s cubic-bezier(0.4,0,0.2,1); }
+.logo img { transition: height 0.35s cubic-bezier(0.4,0,0.2,1); }
+.header.scrolled { background: rgba(255,255,255,0.98); }
+
+/* ---- 3. Section entrance — slide gauche/droite alternés ---- */
+.section-enter-left {
+  opacity: 0;
+  transform: translateX(-56px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.section-enter-right {
+  opacity: 0;
+  transform: translateX(56px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1), transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.section-enter-left.visible,
+.section-enter-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ---- 6. Back-to-top ---- */
+#back-to-top {
+  position: fixed;
+  bottom: 32px;
+  right: 28px;
+  width: 48px;
+  height: 48px;
+  background: var(--bleu);
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 900;
+  box-shadow: 0 4px 20px rgba(21,88,168,0.35);
+  opacity: 0;
+  transform: translateY(16px) scale(0.85);
+  transition: opacity 0.35s cubic-bezier(0.4,0,0.2,1),
+              transform 0.35s cubic-bezier(0.4,0,0.2,1),
+              background 0.2s;
+  pointer-events: none;
+}
+#back-to-top.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+#back-to-top:hover {
+  background: var(--orange);
+  transform: translateY(-3px) scale(1.08);
+  box-shadow: 0 8px 28px rgba(240,128,20,0.4);
+}
+#back-to-top svg { width: 20px; height: 20px; stroke: #fff; fill: none; stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (max-width: 480px) {
+  #back-to-top { bottom: 20px; right: 16px; width: 42px; height: 42px; }
+}
+
 /* -- Stats-photos-layout (index chiffres) -- */
 @media (max-width: 900px) {
   .stats-photos-layout {
@@ -2533,4 +2612,23 @@ ul.services-list { padding: 0; list-style: none; }
 .reveal.delay-2 { transition-delay: 0.2s; }
 .reveal.delay-3 { transition-delay: 0.3s; }
 .reveal.delay-4 { transition-delay: 0.4s; }
+
+
+/* ---- Badge hero — slide-in depuis la gauche ---- */
+.hero-badge--animate {
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: badgeSlideIn 0.65s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s forwards;
+}
+@keyframes badgeSlideIn {
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* ---- Tilt 3D — reset propre à la sortie ---- */
+.pole-card,
+.projet-card,
+.temoignage-card {
+  will-change: transform;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease !important;
+}
 

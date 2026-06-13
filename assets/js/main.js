@@ -265,6 +265,59 @@ document.addEventListener('DOMContentLoaded', () => {
     slider.innerHTML += slider.innerHTML;
   }
 
+  /* ---- 2. Header sticky animé — hauteur + logo ---- */
+  // Déjà géré par .header.scrolled en CSS, le toggle est en haut du fichier.
+  // On enrichit : border-bottom subtil qui disparaît au scroll
+  if (header) {
+    const onScroll = () => {
+      if (window.scrollY > 40) {
+        header.style.borderBottomColor = 'transparent';
+      } else {
+        header.style.borderBottomColor = '';
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  /* ---- 3. Section entrance — slide gauche/droite alternés ---- */
+  const sectionEnterObs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        sectionEnterObs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.10, rootMargin: '0px 0px -60px 0px' });
+
+  // Cibler les sections principales (hors hero)
+  document.querySelectorAll('section:not(.hero):not(.page-hero):not(.hero-section)').forEach((sec, i) => {
+    // Ne pas re-animer si déjà géré par stagger/reveal
+    if (!sec.classList.contains('stagger-item') && !sec.classList.contains('animate-fade-up')) {
+      sec.classList.add(i % 2 === 0 ? 'section-enter-left' : 'section-enter-right');
+      sectionEnterObs.observe(sec);
+    }
+  });
+
+  /* ---- 6. Back-to-top ---- */
+  const btt = document.createElement('button');
+  btt.id = 'back-to-top';
+  btt.setAttribute('aria-label', 'Retour en haut');
+  const bttSvg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  bttSvg.setAttribute('viewBox', '0 0 24 24');
+  const bttPoly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
+  bttPoly.setAttribute('points', '18 15 12 9 6 15');
+  bttSvg.appendChild(bttPoly);
+  btt.appendChild(bttSvg);
+  document.body.appendChild(btt);
+
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 320);
+  }, { passive: true });
+
+  btt.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
   /* ---- Scroll progress bar ---- */
   const progressBar = document.createElement('div');
   progressBar.id = 'scroll-progress';
@@ -376,5 +429,26 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => ripple.remove(), 600);
     });
   });
+
+  /* ---- Tilt 3D sur les cartes (desktop uniquement) ---- */
+  if (window.innerWidth > 768) {
+    document.querySelectorAll('.pole-card, .projet-card, .temoignage-card').forEach(card => {
+      card.addEventListener('mousemove', function(e) {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientY - r.top  - r.height / 2) / (r.height / 2);
+        const y = (e.clientX - r.left - r.width  / 2) / (r.width  / 2);
+        card.style.transform = `perspective(700px) rotateX(${-x * 6}deg) rotateY(${y * 6}deg) translateY(-6px)`;
+      });
+      card.addEventListener('mouseleave', function() {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  /* ---- Badge hero : slide-in depuis la gauche ---- */
+  const heroBadge = document.querySelector('.hero-badge');
+  if (heroBadge) {
+    heroBadge.classList.add('hero-badge--animate');
+  }
 
 });
