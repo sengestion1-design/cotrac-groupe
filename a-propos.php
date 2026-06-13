@@ -1093,7 +1093,6 @@ require_once __DIR__ . '/includes/header.php';
   border-radius: 16px;
   padding: 24px 16px 20px;
   text-align: center;
-  overflow: hidden;
   transition: var(--transition);
   display: flex;
   flex-direction: column;
