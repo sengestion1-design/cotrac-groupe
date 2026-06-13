@@ -1085,6 +1085,8 @@ require_once __DIR__ . '/includes/header.php';
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  max-width: 640px;
+  margin: 0 auto;
 }
 .partenaire-inst-card {
   background: #fff;
