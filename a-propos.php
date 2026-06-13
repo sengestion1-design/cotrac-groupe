@@ -1098,11 +1098,12 @@ require_once __DIR__ . '/includes/header.php';
   align-items: center;
   justify-content: center;
   height: 100px;
+  overflow: hidden;
 }
 .partenaire-inst-card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(26,107,181,0.12); border-color: rgba(26,107,181,0.2); }
 .partenaire-inst-logo {
-  width: 180px;
-  height: 70px;
+  width: 140px;
+  height: 60px;
   display: flex; align-items: center; justify-content: center;
   margin: 0 auto;
 }
