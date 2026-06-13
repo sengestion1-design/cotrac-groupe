@@ -519,6 +519,10 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .hero-title { font-size: clamp(1.9rem, 6vw, 2.8rem); }
   .hero-slider { height: 240px; }
   .hero-slider-card { width: 180px; height: 240px; }
+  .hero-slider-track { animation-duration: 18s; }
+}
+@media (max-width: 480px) {
+  .hero-slider-track { animation-duration: 12s; }
 }
 @media (max-width: 640px) {
   /* Photo mobile : descendre légèrement pour garder les visages dans le cadre portrait */
