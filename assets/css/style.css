@@ -2838,6 +2838,8 @@ ul.services-list { padding: 0; list-style: none; }
 .stats-lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.6); margin: 6px 0 4px; }
 .stats-desc { font-size: 0.8rem; color: #fff; line-height: 1.4; }
 
+/* Desktop : 15+ Partenaires sur 2 colonnes */
+.stats-item-part { grid-column: span 2; }
 @media (max-width: 768px) {
   /* Stats section : assez de place */
   .stats-section { padding: 48px 0 60px !important; }

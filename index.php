@@ -278,7 +278,7 @@ $photos = array_merge($photos, $photos);
           <div class="stats-lbl"><?= t('index_stats_experts_label') ?></div>
           <div class="stats-desc">Mobilisables sous 72h</div>
         </div>
-        <div class="stats-chiffre-item stats-item-part" style="border-top:1px solid rgba(255,255,255,0.15);grid-column:span 2;">
+        <div class="stats-chiffre-item stats-item-part" style="border-top:1px solid rgba(255,255,255,0.15);">
           <div class="stats-val"><span class="counter" data-target="15">0</span>+</div>
           <div class="stats-lbl"><?= t('index_stats_part_label') ?></div>
           <div class="stats-desc"><?= t('index_stats_part_desc') ?></div>
