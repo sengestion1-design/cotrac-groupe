@@ -1838,38 +1838,10 @@ table tr:hover td { background: var(--gris-clair); }
 }
 .valeur-icon .ico { width: 1.8rem; height: 1.8rem; background-color: var(--bleu); }
 
-/* Service items : layout flex horizontal */
-.service-item {
-  display: flex;
-  gap: 20px;
-  align-items: flex-start;
-  background: #fff;
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 24px 28px;
-  transition: var(--transition);
-  margin-bottom: 16px;
-}
-.service-item:last-child { margin-bottom: 0; }
-.service-item:hover { box-shadow: var(--shadow); border-color: var(--bleu-light); transform: translateX(4px); }
-.service-item .service-icon { flex-shrink: 0; margin-bottom: 0; margin-top: 2px; }
-.service-item .service-body { flex: 1; }
-.service-item h3 {
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: var(--texte);
-  margin-bottom: 10px;
-  display: block;
-}
-.service-item p { color: #4b5563; line-height: 1.75; font-size: 0.92rem; }
+/* Service items : layout grille (pas de flex vertical ici) */
 ul.services-list { padding: 0; list-style: none; }
 
 /* Page hero sous-pages */
-.page-hero {
-  padding: calc(72px + 56px) 0 64px;
-  position: relative;
-  overflow: hidden;
-}
 .page-hero::before {
   content: '';
   position: absolute; inset: 0;
