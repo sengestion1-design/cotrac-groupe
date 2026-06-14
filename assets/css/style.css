@@ -2829,7 +2829,7 @@ ul.services-list { padding: 0; list-style: none; }
 }
 .stats-chiffres-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr !important;
   gap: 0;
   text-align: center;
 }
