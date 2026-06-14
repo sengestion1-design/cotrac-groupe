@@ -158,7 +158,9 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
             $color_pole = $poles_colors[$pole] ?? '#f7941d';
             $est_termine = ($projet['statut'] === 'termine');
           ?>
-          <article class="projet-card animate-fade-up" data-pole="<?= e($pole) ?>">
+          <article class="projet-card animate-fade-up" data-pole="<?= e($pole) ?>"
+            onclick="window.location='<?= SITE_URL ?>/projet?id=<?= $projet['id'] ?>'"
+            style="cursor:pointer;">
 
             <!-- Image ou fond degrades colore selon le pole -->
             <div class="projet-img">
@@ -194,6 +196,7 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
               <button class="play-btn-card"
                       data-src="<?= e($vid_src) ?>"
                       data-titre="<?= e($projet['titre']) ?>"
+                      onclick="event.stopPropagation()"
                       style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:56px;height:56px;background:rgba(240,128,20,.92);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,.35);transition:transform .2s,background .2s;"
                       onmouseover="this.style.transform='translate(-50%,-50%) scale(1.12)'"
                       onmouseout="this.style.transform='translate(-50%,-50%)'">
