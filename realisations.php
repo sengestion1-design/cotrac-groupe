@@ -265,6 +265,132 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
   </div>
 </section>
 
+<!-- ===================== SECTION GALERIE CHANTIERS ===================== -->
+<?php
+try { $db->exec("CREATE TABLE IF NOT EXISTS galerie_photos (id INT AUTO_INCREMENT PRIMARY KEY, fichier VARCHAR(300) NOT NULL, legende VARCHAR(300) DEFAULT '', onglet VARCHAR(50) DEFAULT 'btp', actif TINYINT(1) DEFAULT 1, sort_order INT DEFAULT 0)"); } catch(Exception $e){}
+// Ajouter colonne actif si absente
+try { $db->exec("ALTER TABLE galerie_photos ADD COLUMN IF NOT EXISTS actif TINYINT(1) DEFAULT 1"); } catch(Exception $e){}
+$galerie_chantiers = $db->query("SELECT * FROM galerie_photos WHERE onglet='chantiers' AND actif=1 ORDER BY sort_order ASC, id ASC")->fetchAll();
+if (!empty($galerie_chantiers)): ?>
+<style>
+.gal-chantiers-section { background: #fff; }
+.gal-chantiers-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 32px;
+}
+@media (max-width: 900px) { .gal-chantiers-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 560px) { .gal-chantiers-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+.gal-chantiers-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  cursor: pointer;
+  border: 2px solid rgba(255,255,255,.9);
+  box-shadow: 0 4px 18px rgba(0,0,0,.1);
+  transition: transform .25s, box-shadow .25s;
+  background: #0b1d3a;
+}
+.gal-chantiers-item:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(26,107,181,.25); }
+.gal-chantiers-item img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .35s; }
+.gal-chantiers-item:hover img { transform: scale(1.06); }
+.gal-chantiers-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,26,60,.7) 0%, transparent 55%);
+  opacity: 0; transition: opacity .25s;
+  display: flex; align-items: flex-end; padding: 12px;
+}
+.gal-chantiers-item:hover .gal-chantiers-overlay { opacity: 1; }
+.gal-chantiers-legende { color:#fff; font-size:.82rem; font-weight:600; line-height:1.3; }
+/* Lightbox */
+#gal-lightbox {
+  display:none; position:fixed; inset:0; z-index:9999;
+  background:rgba(5,15,40,.95); align-items:center; justify-content:center;
+}
+#gal-lightbox.active { display:flex; }
+#gal-lightbox img { max-width:90vw; max-height:85vh; border-radius:10px; box-shadow:0 30px 80px rgba(0,0,0,.6); }
+#gal-lb-close { position:absolute; top:20px; right:28px; color:#fff; font-size:2rem; cursor:pointer; line-height:1; background:none; border:none; }
+#gal-lb-prev, #gal-lb-next {
+  position:absolute; top:50%; transform:translateY(-50%);
+  color:#fff; font-size:2.2rem; cursor:pointer; background:rgba(255,255,255,.12);
+  border:none; border-radius:50%; width:52px; height:52px;
+  display:flex; align-items:center; justify-content:center;
+  transition: background .2s;
+}
+#gal-lb-prev:hover, #gal-lb-next:hover { background:rgba(26,107,181,.7); }
+#gal-lb-prev { left:20px; }
+#gal-lb-next { right:20px; }
+#gal-lb-caption { position:absolute; bottom:24px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.8); font-size:.9rem; text-align:center; }
+#gal-lb-counter { position:absolute; top:24px; left:50%; transform:translateX(-50%); color:rgba(255,255,255,.6); font-size:.82rem; }
+</style>
+
+<section class="section gal-chantiers-section">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">Photos</span>
+      <h2 class="section-title">Galerie <span style="color:var(--orange)">Chantiers</span></h2>
+      <p class="section-sub">Nos chantiers en images</p>
+    </div>
+    <div class="gal-chantiers-grid">
+      <?php foreach ($galerie_chantiers as $idx => $ph):
+        $src = str_starts_with($ph['fichier'], 'assets/') ? SITE_URL.'/'.$ph['fichier'] : SITE_URL.'/uploads/galerie/'.basename($ph['fichier']);
+      ?>
+      <div class="gal-chantiers-item" data-lb-index="<?= $idx ?>" data-lb-src="<?= e($src) ?>" data-lb-caption="<?= e($ph['legende']) ?>">
+        <img src="<?= e($src) ?>" alt="<?= e($ph['legende']) ?>" loading="lazy">
+        <div class="gal-chantiers-overlay">
+          <?php if ($ph['legende']): ?>
+          <span class="gal-chantiers-legende"><?= e($ph['legende']) ?></span>
+          <?php endif; ?>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="gal-lightbox" onclick="if(event.target===this)galLbClose()">
+  <button id="gal-lb-close" onclick="galLbClose()">✕</button>
+  <button id="gal-lb-prev" onclick="galLbMove(-1)">&#8249;</button>
+  <img id="gal-lb-img" src="" alt="">
+  <button id="gal-lb-next" onclick="galLbMove(1)">&#8250;</button>
+  <div id="gal-lb-caption"></div>
+  <div id="gal-lb-counter"></div>
+</div>
+<script>
+(function(){
+  var items = Array.from(document.querySelectorAll('.gal-chantiers-item'));
+  var lb = document.getElementById('gal-lightbox');
+  var lbImg = document.getElementById('gal-lb-img');
+  var lbCap = document.getElementById('gal-lb-caption');
+  var lbCount = document.getElementById('gal-lb-counter');
+  var current = 0;
+  function open(idx) {
+    current = idx;
+    var el = items[current];
+    lbImg.src = el.dataset.lbSrc;
+    lbCap.textContent = el.dataset.lbCaption || '';
+    lbCount.textContent = (current+1) + ' / ' + items.length;
+    lb.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function galLbClose() { lb.classList.remove('active'); document.body.style.overflow = ''; }
+  function galLbMove(dir) { current = (current + dir + items.length) % items.length; open(current); }
+  items.forEach(function(el, i){ el.addEventListener('click', function(){ open(i); }); });
+  document.addEventListener('keydown', function(e){
+    if (!lb.classList.contains('active')) return;
+    if (e.key==='ArrowRight') galLbMove(1);
+    if (e.key==='ArrowLeft') galLbMove(-1);
+    if (e.key==='Escape') galLbClose();
+  });
+  window.galLbClose = galLbClose;
+  window.galLbMove = galLbMove;
+})();
+</script>
+<?php endif; ?>
+
 <!-- ===================== SECTION VIDÉOS ===================== -->
 <?php
 try { $db->exec("CREATE TABLE IF NOT EXISTS videos_chantiers (id INT AUTO_INCREMENT PRIMARY KEY, titre VARCHAR(255) NOT NULL, description VARCHAR(500) DEFAULT NULL, fichier VARCHAR(300) NOT NULL, thumbnail VARCHAR(300) DEFAULT NULL, sort_order INT DEFAULT 0, actif TINYINT(1) DEFAULT 1, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"); } catch(Exception $e){}

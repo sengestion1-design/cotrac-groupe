@@ -269,7 +269,7 @@ $active_tab = $_GET['tab'] ?? 'equipements';
             <div class="form-group">
               <label>Onglet / Catégorie</label>
               <select name="onglet">
-                <?php foreach (['engins'=>'Engins & Véhicules','btp'=>'BTP & Travaux','logistique'=>'Logistique'] as $k=>$l): ?>
+                <?php foreach (['engins'=>'Engins & Véhicules','btp'=>'BTP & Travaux','logistique'=>'Logistique','chantiers'=>'Galerie Chantiers'] as $k=>$l): ?>
                 <option value="<?= $k ?>" <?= ($galerie_edit['onglet'] ?? 'btp') === $k ? 'selected' : '' ?>><?= $l ?></option>
                 <?php endforeach; ?>
               </select>
@@ -317,8 +317,8 @@ $active_tab = $_GET['tab'] ?? 'equipements';
         <?php else: ?>
         <div class="gal-grid-admin">
           <?php
-          $onglet_labels = ['engins'=>'Engins & Véhicules','btp'=>'BTP & Travaux','logistique'=>'Logistique'];
-          $onglet_colors = ['engins'=>'#1a6bb5','btp'=>'#f7941d','logistique'=>'#8e44ad'];
+          $onglet_labels = ['engins'=>'Engins & Véhicules','btp'=>'BTP & Travaux','logistique'=>'Logistique','chantiers'=>'Galerie Chantiers'];
+          $onglet_colors = ['engins'=>'#1a6bb5','btp'=>'#f7941d','logistique'=>'#8e44ad','chantiers'=>'#28a745'];
           foreach ($galerie_all as $gp):
             $gp_url = str_starts_with($gp['fichier'], 'assets/') ? SITE_URL.'/'.$gp['fichier'] : SITE_URL.'/uploads/galerie/'.$gp['fichier'];
             $ocol = $onglet_colors[$gp['onglet']] ?? '#1a6bb5';
