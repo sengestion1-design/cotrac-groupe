@@ -2811,7 +2811,25 @@ ul.services-list { padding: 0; list-style: none; }
   }
   .hero-waves { display: none !important; }
   .hero-slider-wrap { display: none !important; }
-  .hero { overflow: visible !important; padding-bottom: 32px !important; }
+  .hero { overflow: hidden !important; padding-bottom: 32px !important; }
+  /* Empêche le parallax bg de déborder en bas */
+  .hero-parallax-bg { inset: 0 !important; }
+}
+
+/* Stats section mobile : grille 2 col, dernière stat pleine largeur */
+@media (max-width: 768px) {
+  .stats-chiffres-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  /* 15+ Partenaires → pleine largeur sur mobile */
+  .stats-item-part {
+    grid-column: 1 / -1 !important;
+    border-top: 1px solid rgba(255,255,255,0.12) !important;
+  }
+  /* 100+ experts → pas de border-right sur mobile */
+  .stats-item-100 {
+    border-right: none !important;
+  }
 }
 
 /* Stats section : layout desktop (photos + chiffres) */
