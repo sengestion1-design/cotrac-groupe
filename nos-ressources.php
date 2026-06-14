@@ -132,8 +132,9 @@ require_once 'includes/header.php';
 .res-equip-name { font-size:.9rem;font-weight:700;color:#1a202c;line-height:1.3; }
 .res-equip-desc { font-size:.76rem;color:#718096;margin-top:3px; }
 .res-equip-qty { flex-shrink:0;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap; }
-.res-equip-photo { width:100px;height:80px;border-radius:10px;overflow:hidden;flex-shrink:0; }
+.res-equip-photo { width:120px;height:90px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#e8f0fb;display:flex;align-items:center;justify-content:center; }
 .res-equip-photo img { width:100%;height:100%;object-fit:cover; }
+.res-equip-photo img[data-broken] { display:none; }
 
 .lightbox-overlay { display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);align-items:center;justify-content:center; }
 .lightbox-overlay.open { display:flex; }
@@ -277,7 +278,8 @@ require_once 'includes/header.php';
           ?>
           <div class="res-equip-photo">
             <img src="<?= e($eq_img_url) ?>"
-                 alt="<?= e($eq['nom']) ?>" loading="lazy">
+                 alt="<?= e($eq['nom']) ?>" loading="lazy"
+                 onerror="this.style.display='none';this.parentNode.innerHTML+='<svg width=\'36\' height=\'36\' viewBox=\'0 0 24 24\' fill=\'none\' stroke=\'#1a6bb5\' stroke-width=\'1.4\'><rect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\'/><circle cx=\'8.5\' cy=\'8.5\' r=\'1.5\'/><polyline points=\'21 15 16 10 5 21\'/></svg>';">
           </div>
           <?php else: ?>
           <div class="res-equip-icon" style="background:<?= e($eq['couleur']) ?>18; color:<?= e($eq['couleur']) ?>;">
