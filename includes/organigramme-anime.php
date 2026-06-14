@@ -222,20 +222,17 @@
   width: 2px;
   background: linear-gradient(to bottom, #1a6bb5, #c3d9f0);
   flex-shrink: 0;
-  /* animation draw */
   transform-origin: top center;
-  transform: scaleY(0);
-  opacity: 0;
 }
 .orga-connector--h {
   height: 2px;
   background: linear-gradient(to right, transparent, #1a6bb5 20%, #1a6bb5 80%, transparent);
   align-self: stretch;
-  /* animation draw */
   transform-origin: center left;
-  transform: scaleX(0);
-  opacity: 0;
 }
+/* Connecteurs masqués seulement si JS a activé le mode animé */
+.js-orga-ready .orga-connector--v { transform: scaleY(0); opacity: 0; }
+.js-orga-ready .orga-connector--h { transform: scaleX(0); opacity: 0; }
 .orga-connector--v.line-drawn {
   animation: drawV 0.35s ease forwards;
 }
@@ -249,8 +246,12 @@
   to { transform: scaleX(1); opacity: 1; }
 }
 
-/* ─── Nœuds — état initial ─── */
+/* ─── Nœuds — visibles par défaut, animation si JS disponible ─── */
 .orga-animate {
+  opacity: 1;
+  transform: none;
+}
+.js-orga-ready .orga-animate {
   opacity: 0;
   transform: scale(0.82) translateY(8px);
 }
@@ -419,6 +420,9 @@
   var section    = document.getElementById('section-orga');
   var animItems  = section ? section.querySelectorAll('.orga-animate') : [];
   var triggered  = false;
+
+  /* Activer l'animation progressive seulement si JS tourne */
+  if (section) section.classList.add('js-orga-ready');
 
   function revealAll() {
     if (triggered) return;
