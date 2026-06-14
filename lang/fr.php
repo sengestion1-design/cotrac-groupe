@@ -612,7 +612,7 @@ return [
     // ── Index — Pôles ────────────────────────────────────────────
     'index_poles_tag'             => 'Ce que nous faisons',
     'index_poles_titre'           => 'Nos 5 Pôles d\'Activités',
-    'index_poles_desc'            => 'De la conception à la livraison, COTRAC maîtrise l\'ensemble de la chaîne de valeur dans quatre domaines stratégiques pour le développement du Sénégal.',
+    'index_poles_desc'            => 'De la conception à la livraison, COTRAC maîtrise l\'ensemble de la chaîne de valeur dans cinq domaines stratégiques pour le développement du Sénégal.',
     'pole_btp_titre'              => 'BTP - Études & Réalisations',
     'pole_btp_desc'               => 'Construction de bâtiments résidentiels, commerciaux et industriels. Études techniques, terrassements, fondations, gros œuvre et second œuvre. Nous livrons des ouvrages solides dans le respect des normes et des délais contractuels.',
     'pole_btp_tag1'               => 'Construction',

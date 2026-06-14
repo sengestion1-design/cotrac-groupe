@@ -124,13 +124,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const counterObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        animateCounter(entry.target);
+        if (!entry.target.dataset.animated) {
+          entry.target.dataset.animated = '1';
+          animateCounter(entry.target);
+        }
         counterObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
+  }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
 
-  document.querySelectorAll('.counter, .stat-value[data-target]').forEach(el => counterObserver.observe(el));
+  document.querySelectorAll('.counter, .stat-value[data-target]').forEach(el => {
+    counterObserver.observe(el);
+  });
+
+  /* Fallback : forcer les compteurs si toujours à 0 après 3s */
+  setTimeout(function() {
+    document.querySelectorAll('.counter, .stat-value[data-target]').forEach(el => {
+      if (!el.dataset.animated) {
+        el.dataset.animated = '1';
+        animateCounter(el);
+      }
+    });
+  }, 3000);
 
   function animateCounter(el) {
     const target = parseInt(el.dataset.target, 10);
@@ -418,7 +433,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       }
     });
-  }, { threshold: 0.4 });
+  }, { threshold: 0.05 });
 
   document.querySelectorAll('.hero-stats').forEach(el => statsObserver.observe(el));
 

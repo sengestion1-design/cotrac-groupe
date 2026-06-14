@@ -697,7 +697,7 @@ try {
 <?php } ?>
     </div>
 
-    <div class="text-center" style="margin-top:48px;">
+    <div class="text-center" style="margin-top:40px;">
       <a href="<?= SITE_URL ?>/realisations.php" class="btn btn-primary">
         <?= t('index_real_btn_tous') ?>
       </a>
@@ -705,11 +705,10 @@ try {
   </div>
 </section>
 
-
 <!-- ═══════════════════════════════════════════════════════════
      SECTION : PARTENAIRES
 ═══════════════════════════════════════════════════════════ -->
-<section class="section section-sm">
+<section class="section section-sm" style="padding-top:40px;">
   <div class="container">
     <div class="text-center">
       <span class="section-tag"><?= t('index_part_tag') ?></span>

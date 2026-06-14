@@ -611,7 +611,7 @@ return [
     // ── Index — Divisions ────────────────────────────────────────
     'index_poles_tag'             => 'What we do',
     'index_poles_titre'           => 'Our 4 Business Divisions',
-    'index_poles_desc'            => 'From design to delivery, COTRAC masters the entire value chain across four strategic areas for Senegal\'s development.',
+    'index_poles_desc'            => 'From design to delivery, COTRAC masters the entire value chain across five strategic areas for Senegal\'s development.',
     'pole_btp_titre'              => 'Civil Engineering - Studies & Projects',
     'pole_btp_desc'               => 'Construction of residential, commercial and industrial buildings. Technical studies, earthworks, foundations, structural and finishing works. We deliver solid structures on time and to standard.',
     'pole_btp_tag1'               => 'Construction',
