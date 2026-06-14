@@ -513,6 +513,45 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 .hero-link-text:hover { color: #fff; border-color: rgba(255,255,255,.7); }
 
+/* Mini stats section vidéo */
+.video-mini-stats {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin-top: 36px;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+.vms-item { text-align: center; }
+.vms-val {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #f7941d;
+  font-family: 'Poppins', sans-serif;
+  line-height: 1;
+}
+.vms-label {
+  font-size: .72rem;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  margin-top: 4px;
+}
+.vms-sep {
+  width: 1px;
+  height: 36px;
+  background: rgba(255,255,255,0.18);
+  flex-shrink: 0;
+}
+@media (max-width: 480px) {
+  .video-mini-stats {
+    gap: 16px;
+  }
+  .vms-val { font-size: 1.5rem; }
+  .vms-label { font-size: .65rem; }
+  .vms-sep { height: 28px; }
+}
+
 /* Responsive hero */
 @media (max-width: 900px) {
   .hero-title { font-size: clamp(1.9rem, 6vw, 2.8rem); }

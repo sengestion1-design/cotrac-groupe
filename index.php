@@ -432,20 +432,20 @@ $photos = array_merge($photos, $photos);
       </div>
 
       <!-- Mini stats -->
-      <div style="display:flex;gap:32px;margin-top:40px;flex-wrap:wrap;justify-content:center;">
-        <div style="text-align:center;">
-          <div style="font-size:2rem;font-weight:800;color:#f7941d;font-family:'Poppins',sans-serif;">10+</div>
-          <div style="font-size:.75rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.08em;"><?= t('index_video_stat_ans') ?></div>
+      <div class="video-mini-stats">
+        <div class="vms-item">
+          <div class="vms-val">10+</div>
+          <div class="vms-label"><?= t('index_video_stat_ans') ?></div>
         </div>
-        <div style="width:1px;background:rgba(255,255,255,0.15);"></div>
-        <div style="text-align:center;">
-          <div style="font-size:2rem;font-weight:800;color:#f7941d;font-family:'Poppins',sans-serif;">15+</div>
-          <div style="font-size:.75rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.08em;"><?= t('index_video_stat_projets') ?></div>
+        <div class="vms-sep"></div>
+        <div class="vms-item">
+          <div class="vms-val">15+</div>
+          <div class="vms-label"><?= t('index_video_stat_projets') ?></div>
         </div>
-        <div style="width:1px;background:rgba(255,255,255,0.15);"></div>
-        <div style="text-align:center;">
-          <div style="font-size:2rem;font-weight:800;color:#f7941d;font-family:'Poppins',sans-serif;">14</div>
-          <div style="font-size:.75rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.08em;"><?= t('index_video_stat_regions') ?></div>
+        <div class="vms-sep"></div>
+        <div class="vms-item">
+          <div class="vms-val">14</div>
+          <div class="vms-label"><?= t('index_video_stat_regions') ?></div>
         </div>
       </div>
     </div>
