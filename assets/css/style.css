@@ -2780,3 +2780,36 @@ ul.services-list { padding: 0; list-style: none; }
   transform: translateY(-6px) !important;
 }
 
+/* ============================================================
+   FIX MOBILE HERO STATS — doit rester EN DERNIER pour écraser
+   toutes les règles dupliquées plus haut dans le fichier
+   ============================================================ */
+@media (max-width: 640px) {
+  .hero-stats {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 6px !important;
+    flex-wrap: unset !important;
+    overflow: visible !important;
+    width: 100% !important;
+    margin-top: 20px !important;
+    margin-bottom: 4px !important;
+  }
+  .stat-card {
+    flex: none !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    border-radius: 10px !important;
+    padding: 12px 8px !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .stat-label {
+    white-space: normal !important;
+    font-size: .65rem !important;
+    line-height: 1.3 !important;
+  }
+  .hero-waves { display: none !important; }
+  .hero-slider-wrap { border-top: 2px solid rgba(26,107,181,0.1); }
+}
+
