@@ -74,8 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (!in_array($ext, ['jpg','jpeg','png','webp'])) {
                     $message = 'Format invalide. Utilisez JPG, PNG ou WebP.';
                     $type_msg = 'error'; $upload_error = true;
-                } elseif ($_FILES['photo']['size'] > 8*1024*1024) {
-                    $message = 'Photo trop lourde (max 8 Mo).';
+                } elseif ($_FILES['photo']['size'] > 10*1024*1024) {
+                    $message = 'Photo trop lourde (max 10 Mo).';
                     $type_msg = 'error'; $upload_error = true;
                 } else {
                     $upload_dir = __DIR__ . '/../uploads/equipements/';
@@ -467,7 +467,7 @@ $active_tab = $_GET['tab'] ?? 'equipements';
               <?php endif; ?>
               <input type="file" name="photo" accept="image/jpeg,image/png,image/webp"
                      style="border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:.875rem;">
-              <span style="font-size:.75rem;color:#a0aec0;margin-top:4px;">JPG, PNG ou WebP — max 8 Mo</span>
+              <span style="font-size:.75rem;color:#a0aec0;margin-top:4px;">JPG, PNG ou WebP — max 10 Mo</span>
             </div>
           </div>
 
