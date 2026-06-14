@@ -1,7 +1,7 @@
 <!-- ══════════════════════════════════════════════════════════════
-   COTRAC — Organigramme Animé — Page À Propos
-   Include : <?php require_once __DIR__ . '/includes/organigramme-anime.php'; ?>
-   Nœuds : fade+scale cascade, connecteurs CSS, hover élévation
+   COTRAC - Organigramme Anime - Page A Propos
+   Include via : require_once includes/organigramme-anime.php
+   Noeuds : fade+scale cascade, connecteurs CSS, hover elevation
 ══════════════════════════════════════════════════════════════ -->
 
 <section class="orga-section" id="section-orga">
