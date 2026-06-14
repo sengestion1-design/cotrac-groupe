@@ -299,6 +299,8 @@ if (!empty($videos_chantiers)): ?>
 .video-player-wrap video {
   display: block;
   width: 100%;
+  max-height: 280px;
+  object-fit: cover;
   background: #000;
 }
 /* Grille multi-players */
