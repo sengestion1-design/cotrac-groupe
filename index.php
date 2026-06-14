@@ -806,6 +806,138 @@ try {
 <?php } ?>
     </div>
 
+    <!-- Vidéos SEN'EAU -->
+    <div class="seneau-videos-wrap">
+      <div class="seneau-videos-header animate-fade-up">
+        <?= icon('play','#1a6bb5','1rem') ?>
+        <span>Vidéos de chantier — <strong>SEN'EAU</strong></span>
+      </div>
+      <div class="seneau-videos-grid">
+
+        <!-- Vidéo 1 : Station Bayakh -->
+        <div class="seneau-video-card animate-fade-up delay-1">
+          <div class="svp-player" id="svp1">
+            <video preload="metadata"
+              poster="<?= SITE_URL ?>/assets/images/seneau1-poster.jpg"
+              style="display:block;width:100%;background:#000;">
+              <source src="<?= SITE_URL ?>/assets/videos/seneau1.mp4" type="video/mp4">
+            </video>
+            <div class="svp-overlay" onclick="svpPlay(this)">
+              <button class="svp-btn" aria-label="Lire">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="svp-info">
+            <span class="svp-tag">SEN'EAU</span>
+            <h4 class="svp-titre">Station Bayakh — Travaux hydrauliques</h4>
+            <p class="svp-desc">Réhabilitation et mise en service des équipements hydrauliques à la station de Bayakh.</p>
+          </div>
+        </div>
+
+        <!-- Vidéo 2 : Station F3 -->
+        <div class="seneau-video-card animate-fade-up delay-2">
+          <div class="svp-player" id="svp2">
+            <video preload="metadata"
+              poster="<?= SITE_URL ?>/assets/images/seneauF3-poster.jpg"
+              style="display:block;width:100%;background:#000;">
+              <source src="<?= SITE_URL ?>/assets/videos/seneauF3.mp4" type="video/mp4">
+            </video>
+            <div class="svp-overlay" onclick="svpPlay(this)">
+              <button class="svp-btn" aria-label="Lire">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><polygon points="5,3 19,12 5,21"/></svg>
+              </button>
+            </div>
+          </div>
+          <div class="svp-info">
+            <span class="svp-tag">SEN'EAU</span>
+            <h4 class="svp-titre">Bayakh Station F3 — Installation équipements</h4>
+            <p class="svp-desc">Installation et raccordement des équipements hydrauliques à la station F3 de Bayakh.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <style>
+    .seneau-videos-wrap { margin-top: 48px; }
+    .seneau-videos-header {
+      display: flex; align-items: center; gap: 10px;
+      font-size: .9rem; color: var(--gris);
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid rgba(26,107,181,.1);
+    }
+    .seneau-videos-header strong { color: var(--bleu); }
+    .seneau-videos-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .seneau-video-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 16px rgba(0,0,0,.07);
+      transition: transform .25s, box-shadow .25s;
+    }
+    .seneau-video-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 36px rgba(26,107,181,.13);
+    }
+    .svp-player {
+      position: relative;
+      background: #000;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+    }
+    .svp-player video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    .svp-overlay {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.28);
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .svp-overlay:hover { background: rgba(0,0,0,.18); }
+    .svp-btn {
+      width: 62px; height: 62px; border-radius: 50%;
+      background: rgba(26,107,181,.92);
+      border: 3px solid rgba(255,255,255,.6);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 24px rgba(26,107,181,.5);
+      transition: transform .2s, background .2s;
+    }
+    .svp-btn:hover { transform: scale(1.1); background: #1a6bb5; }
+    .svp-info { padding: 18px 20px 20px; }
+    .svp-tag {
+      display: inline-block;
+      font-size: .72rem; font-weight: 700;
+      color: #1a6bb5; background: rgba(26,107,181,.1);
+      border-radius: 50px; padding: 3px 12px;
+      margin-bottom: 10px; letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+    .svp-titre {
+      font-size: .96rem; font-weight: 700;
+      color: var(--texte); margin-bottom: 6px; line-height: 1.4;
+    }
+    .svp-desc { font-size: .82rem; color: var(--gris); line-height: 1.6; }
+    @media (max-width: 700px) {
+      .seneau-videos-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+    </style>
+    <script>
+    function svpPlay(overlay) {
+      var video = overlay.previousElementSibling;
+      overlay.style.display = 'none';
+      video.controls = true;
+      video.play();
+    }
+    </script>
+
     <div class="text-center" style="margin-top:40px;">
       <a href="<?= SITE_URL ?>/realisations.php" class="btn btn-primary">
         <?= t('index_real_btn_tous') ?>
