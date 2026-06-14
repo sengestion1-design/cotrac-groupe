@@ -78,8 +78,8 @@ require_once __DIR__ . '/includes/header.php';
 .stat-label { font-size: .9rem; opacity: .85; margin-top: .5rem; }
 
 /* ── Timeline ── */
-.timeline-section { padding: 5rem 0; background: var(--gris-clair); }
-.timeline { position: relative; max-width: 860px; margin: 3rem auto 0; }
+.timeline-section { padding: 2.5rem 0; background: var(--gris-clair); }
+.timeline { position: relative; max-width: 860px; margin: 1.5rem auto 0; }
 .timeline::before {
   content: '';
   position: absolute;
@@ -92,21 +92,21 @@ require_once __DIR__ . '/includes/header.php';
 .tl-item {
   display: flex;
   justify-content: flex-end;
-  padding-right: calc(50% + 2.5rem);
-  margin-bottom: 2.5rem;
+  padding-right: calc(50% + 2rem);
+  margin-bottom: 1.2rem;
   position: relative;
 }
 .tl-item:nth-child(even) {
   justify-content: flex-start;
   padding-right: 0;
-  padding-left: calc(50% + 2.5rem);
+  padding-left: calc(50% + 2rem);
 }
 .tl-dot {
   position: absolute;
   left: 50%;
   top: 1rem;
   transform: translate(-50%, -50%);
-  width: 18px; height: 18px;
+  width: 14px; height: 14px;
   background: var(--orange);
   border-radius: 50%;
   border: 3px solid #fff;
@@ -114,14 +114,14 @@ require_once __DIR__ . '/includes/header.php';
 }
 .tl-box {
   background: #fff;
-  border-radius: 12px;
-  padding: 1.2rem 1.4rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,.08);
-  max-width: 320px;
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,.07);
+  max-width: 300px;
 }
-.tl-year { font-size: .8rem; font-weight: 700; color: var(--bleu); text-transform: uppercase; letter-spacing: .08em; }
-.tl-title { font-size: 1rem; font-weight: 700; margin: .3rem 0 .4rem; color: var(--texte); }
-.tl-desc { font-size: .9rem; color: #6b7280; line-height: 1.6; }
+.tl-year { font-size: .75rem; font-weight: 700; color: var(--bleu); text-transform: uppercase; letter-spacing: .08em; }
+.tl-title { font-size: .92rem; font-weight: 700; margin: .2rem 0 .3rem; color: var(--texte); }
+.tl-desc { font-size: .82rem; color: #6b7280; line-height: 1.5; }
 
 @media (max-width: 640px) {
   .timeline { padding-left: 8px; }
@@ -414,7 +414,7 @@ require_once __DIR__ . '/includes/header.php';
 
 <!-- ══ TIMELINE ══ -->
 <section class="timeline-section">
-  <div class="container" style="text-align:center;">
+  <div class="container" style="text-align:center;padding-bottom:0;">
     <span class="section-tag"><?= icon('calendar') ?> <?= t('apropos_tl_tag') ?></span>
     <h2 class="section-title"><?= t('apropos_tl_titre') ?></h2>
   </div>
