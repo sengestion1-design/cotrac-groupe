@@ -2811,5 +2811,8 @@ ul.services-list { padding: 0; list-style: none; }
   }
   .hero-waves { display: none !important; }
   .hero-slider-wrap { border-top: 2px solid rgba(26,107,181,0.1); }
+  .hero { overflow: visible !important; padding-bottom: 32px !important; }
+  /* Cacher la bande slider sur mobile — elle cause le chevauchement */
+  .hero-slider-wrap { display: none !important; }
 }
 
