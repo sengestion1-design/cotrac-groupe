@@ -315,7 +315,7 @@ require_once 'includes/header.php';
     // Charger galerie depuis DB, fallback statique si vide
     $galerie_db = [];
     try {
-        $galerie_db = $db->query("SELECT * FROM galerie_photos WHERE actif=1 ORDER BY sort_order ASC, id ASC")->fetchAll();
+        $galerie_db = $db->query("SELECT * FROM galerie_photos WHERE actif=1 AND onglet IN ('engins','btp','logistique') ORDER BY sort_order ASC, id ASC")->fetchAll();
     } catch (Exception $e) {}
 
     $galerie_static = [
