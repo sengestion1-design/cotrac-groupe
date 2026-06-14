@@ -118,12 +118,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <?php
   if (is_dir($upload_dir)) {
       $files = array_diff(scandir($upload_dir), ['.', '..']);
+      $allowed_ext = ['jpg','jpeg','png','webp','gif'];
+      $files = array_filter($files, fn($f) => in_array(strtolower(pathinfo($f, PATHINFO_EXTENSION)), $allowed_ext));
       if ($files) {
           echo '<table><tr><th>Fichier</th><th>Taille</th><th>Date</th><th>Aperçu</th></tr>';
           foreach ($files as $f) {
               $fpath = $upload_dir . $f;
-              $url = SITE_URL . '/uploads/equipements/' . $f;
-              echo "<tr><td>$f</td><td>" . round(filesize($fpath)/1024) . " Ko</td><td>" . date('Y-m-d H:i', filemtime($fpath)) . "</td><td><img src='$url' style='height:50px;object-fit:cover;border-radius:4px;' onerror=\"this.outerHTML='<span style=color:red>introuvable</span>'\"></td></tr>";
+              $url = SITE_URL . '/uploads/equipements/' . htmlspecialchars($f, ENT_QUOTES, 'UTF-8');
+              $f_safe = htmlspecialchars($f, ENT_QUOTES, 'UTF-8');
+              $url_safe = htmlspecialchars(SITE_URL . '/uploads/equipements/' . $f, ENT_QUOTES, 'UTF-8');
+              $size = round(filesize($fpath)/1024);
+              $date = date('Y-m-d H:i', filemtime($fpath));
+              echo '<tr><td>' . $f_safe . '</td><td>' . $size . ' Ko</td><td>' . $date . '</td><td><img src="' . $url_safe . '" style="height:50px;object-fit:cover;border-radius:4px;" onerror="this.outerHTML=\'<span style=&quot;color:red&quot;>introuvable</span>\'"></td></tr>';
           }
           echo '</table>';
       } else {
