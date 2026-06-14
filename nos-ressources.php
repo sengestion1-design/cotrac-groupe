@@ -133,7 +133,7 @@ require_once 'includes/header.php';
 .res-equip-desc { font-size:.76rem;color:#718096;margin-top:3px; }
 .res-equip-qty { flex-shrink:0;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap; }
 .res-equip-photo { width:100%;aspect-ratio:1/1;border-radius:0;overflow:hidden;flex-shrink:0;background:#f0f4fa;display:flex;align-items:center;justify-content:center; }
-.res-equip-photo img { width:100%;height:100%;object-fit:contain;padding:8px; }
+.res-equip-photo img { width:100%;height:100%;object-fit:cover; }
 .res-equip-photo img[data-broken] { display:none; }
 
 .lightbox-overlay { display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.92);align-items:center;justify-content:center; }
