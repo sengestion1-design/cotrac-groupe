@@ -120,19 +120,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
         $thumb_name   = null;
 
         // Upload vidéo
-        if (!empty($_FILES['fichier']['name']) && $_FILES['fichier']['error'] === UPLOAD_ERR_OK) {
-            $ext = strtolower(pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION));
-            if (!in_array($ext, ['mp4','webm','ogg','mov'], true)) {
-                $msg = 'Format vidéo non supporté (MP4, MOV, WEBM).'; $msg_type = 'error';
-            } elseif ($_FILES['fichier']['size'] > 500 * 1024 * 1024) {
-                $msg = 'Vidéo trop lourde (max 500 Mo).'; $msg_type = 'error';
+        if (!empty($_FILES['fichier']['name'])) {
+            $upload_err = $_FILES['fichier']['error'];
+            if ($upload_err === UPLOAD_ERR_INI_SIZE || $upload_err === UPLOAD_ERR_FORM_SIZE) {
+                $msg = 'Fichier trop lourd pour le serveur. Limite actuelle : ' . ini_get('upload_max_filesize') . '. Compressez la vidéo avant upload.'; $msg_type = 'error';
+            } elseif ($upload_err !== UPLOAD_ERR_OK) {
+                $msg = 'Erreur upload PHP (code ' . $upload_err . ').'; $msg_type = 'error';
             } else {
-                $save_ext = ($ext === 'mov') ? 'mp4' : $ext;
-                $fichier_name = 'vid_' . uniqid() . '.' . $save_ext;
-                if (!move_uploaded_file($_FILES['fichier']['tmp_name'], $upload_dir . $fichier_name)) {
-                    $fichier_name = null; $msg = 'Erreur upload vidéo.'; $msg_type = 'error';
+                $ext = strtolower(pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION));
+                if (!in_array($ext, ['mp4','webm','ogg','mov'], true)) {
+                    $msg = 'Format vidéo non supporté (MP4, MOV, WEBM).'; $msg_type = 'error';
+                } elseif ($_FILES['fichier']['size'] > 500 * 1024 * 1024) {
+                    $msg = 'Vidéo trop lourde (max 500 Mo).'; $msg_type = 'error';
+                } else {
+                    $save_ext = ($ext === 'mov') ? 'mp4' : $ext;
+                    $fichier_name = 'vid_' . uniqid() . '.' . $save_ext;
+                    if (!move_uploaded_file($_FILES['fichier']['tmp_name'], $upload_dir . $fichier_name)) {
+                        $fichier_name = null; $msg = 'Erreur déplacement fichier. Vérifiez les permissions du dossier uploads/videos/.'; $msg_type = 'error';
+                    }
                 }
             }
+        } elseif (!empty($_SERVER['CONTENT_LENGTH']) && empty($_POST)) {
+            $msg = 'Upload bloqué par le serveur (POST trop lourd). Limite post_max_size : ' . ini_get('post_max_size') . '. Compressez la vidéo.'; $msg_type = 'error';
         }
 
         // Upload thumbnail
@@ -165,14 +174,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
                     if ($oldT && file_exists($upload_dir . basename($oldT))) @unlink($upload_dir . basename($oldT));
                     $db->prepare("UPDATE videos_chantiers SET thumbnail=? WHERE id=?")->execute([$thumb_name, $edit_id]);
                 }
-                $msg = 'Vidéo mise à jour.'; $msg_type = 'success';
+                header('Location: videos.php?msg=maj&type=success'); exit;
             } else {
                 // Ajouter
                 if (!$fichier_name) { $msg = 'Le fichier vidéo est obligatoire.'; $msg_type = 'error'; }
                 else {
                     $db->prepare("INSERT INTO videos_chantiers (titre, description, fichier, thumbnail, actif) VALUES (?,?,?,?,1)")
                        ->execute([$titre, $desc, $fichier_name, $thumb_name]);
-                    $msg = 'Vidéo ajoutée avec succès.'; $msg_type = 'success';
+                    header('Location: videos.php?msg=ajoute&type=success'); exit;
                 }
             }
         }
@@ -180,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
 }
 
 if (isset($_GET['msg'])) {
-    $msgs = ['supprime'=>'Supprimé avec succès.','maj'=>'Mise à jour effectuée.','csrf'=>'Erreur de sécurité.'];
+    $msgs = ['supprime'=>'Supprimé avec succès.','maj'=>'Vidéo mise à jour.','ajoute'=>'Vidéo ajoutée avec succès.','csrf'=>'Erreur de sécurité.'];
     $msg = $msgs[$_GET['msg']] ?? 'Action effectuée.';
     $msg_type = $_GET['type'] ?? 'success';
 }
