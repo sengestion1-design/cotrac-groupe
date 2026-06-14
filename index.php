@@ -252,7 +252,7 @@ $photos = array_merge($photos, $photos);
     <div class="stats-photos-layout stats-desktop-layout">
 
       <!-- Photo gauche -->
-      <div style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d,0 12px 40px rgba(0,0,0,0.35);transform:translateY(-20px);">
+      <div class="stats-photo-side" style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d,0 12px 40px rgba(0,0,0,0.35);transform:translateY(-20px);">
         <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt="Équipe COTRAC" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
 
@@ -286,7 +286,7 @@ $photos = array_merge($photos, $photos);
       </div>
 
       <!-- Photo droite -->
-      <div style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d,0 12px 40px rgba(0,0,0,0.35);transform:translateY(20px);">
+      <div class="stats-photo-side" style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d,0 12px 40px rgba(0,0,0,0.35);transform:translateY(20px);">
         <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-photo.jpg" alt="COTRAC sur chantier" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
 

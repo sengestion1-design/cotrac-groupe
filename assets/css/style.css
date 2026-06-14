@@ -2856,9 +2856,8 @@ ul.services-list { padding: 0; list-style: none; }
     grid-template-columns: 1fr !important;
     gap: 0 !important;
   }
-  /* Masquer les 2 photos (1er et 3e enfant du grid) */
-  .stats-desktop-layout > div:first-child,
-  .stats-desktop-layout > div:last-child {
+  /* Masquer les 2 photos latérales */
+  .stats-photo-side {
     display: none !important;
   }
   .stats-chiffres-grid {
