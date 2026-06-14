@@ -65,7 +65,8 @@ $galerie_id    = 'galerie_' . substr(md5($galerie_titre), 0, 6);
 /* ---- Grille galerie ---- */
 .galerie-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
   gap: 10px;
 }
 .galerie-grid .galerie-item:first-child { grid-column: span 2; }
@@ -75,8 +76,15 @@ $galerie_id    = 'galerie_' . substr(md5($galerie_titre), 0, 6);
   overflow: hidden;
   border-radius: 10px;
   cursor: pointer;
-  aspect-ratio: 4/3;
   background: var(--gris-clair);
+}
+
+@media (max-width: 900px) {
+  .galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+  .galerie-grid .galerie-item:first-child { grid-column: span 2; }
+}
+@media (max-width: 560px) {
+  .galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; }
 }
 
 .galerie-item img {
