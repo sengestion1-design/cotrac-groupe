@@ -248,49 +248,46 @@ $photos = array_merge($photos, $photos);
       </p>
     </div>
 
-    <div class="stats-photos-layout" style="display:grid;grid-template-columns:1fr 2fr 1fr;gap:32px;align-items:center;margin-top:40px;">
+    <!-- Desktop : photo gauche + stats centre + photo droite -->
+    <div class="stats-photos-layout stats-desktop-layout">
 
-      <!-- Photo gauche — décalée vers le haut -->
-      <div style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d, 0 12px 40px rgba(0,0,0,0.35);transform:translateY(-20px);">
-        <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png"
-             alt="Équipe COTRAC" loading="lazy"
-             style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      <!-- Photo gauche -->
+      <div style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d,0 12px 40px rgba(0,0,0,0.35);transform:translateY(-20px);">
+        <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt="Équipe COTRAC" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
 
-      <!-- Chiffres au centre avec séparateurs -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;text-align:center;">
-        <div style="padding:16px 12px;border-right:1px solid rgba(255,255,255,0.15);">
-          <div style="font-size:3.5rem;font-weight:800;color:#f7941d;line-height:1;"><span class="counter" data-target="10">0</span>+</div>
-          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin:6px 0 4px;"><?= t('index_stats_ans_label') ?></div>
-          <div style="font-size:0.8rem;color:#fff;"><?= t('index_stats_ans_desc') ?></div>
+      <!-- Stats centre -->
+      <div class="stats-chiffres-grid">
+        <div class="stats-chiffre-item" style="border-right:1px solid rgba(255,255,255,0.15);">
+          <div class="stats-val"><span class="counter" data-target="10">0</span>+</div>
+          <div class="stats-lbl"><?= t('index_stats_ans_label') ?></div>
+          <div class="stats-desc"><?= t('index_stats_ans_desc') ?></div>
         </div>
-        <div style="padding:16px 12px;border-right:1px solid rgba(255,255,255,0.15);">
-          <div style="font-size:3.5rem;font-weight:800;color:#f7941d;line-height:1;"><span class="counter" data-target="15">0</span>+</div>
-          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin:6px 0 4px;"><?= t('index_stats_projets_label') ?></div>
-          <div style="font-size:0.8rem;color:#fff;"><?= t('index_stats_projets_desc') ?></div>
+        <div class="stats-chiffre-item" style="border-right:1px solid rgba(255,255,255,0.15);">
+          <div class="stats-val"><span class="counter" data-target="15">0</span>+</div>
+          <div class="stats-lbl"><?= t('index_stats_projets_label') ?></div>
+          <div class="stats-desc"><?= t('index_stats_projets_desc') ?></div>
         </div>
-        <div style="padding:16px 12px;">
-          <div style="font-size:3.5rem;font-weight:800;color:#f7941d;line-height:1;"><span class="counter" data-target="5">0</span></div>
-          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin:6px 0 4px;"><?= t('index_stats_poles_label') ?></div>
-          <div style="font-size:0.8rem;color:#fff;"><?= t('index_stats_poles_desc') ?></div>
+        <div class="stats-chiffre-item">
+          <div class="stats-val"><span class="counter" data-target="5">0</span></div>
+          <div class="stats-lbl"><?= t('index_stats_poles_label') ?></div>
+          <div class="stats-desc"><?= t('index_stats_poles_desc') ?></div>
         </div>
-        <div style="padding:16px 12px;border-top:1px solid rgba(255,255,255,0.15);border-right:1px solid rgba(255,255,255,0.15);grid-column:span 1;">
-          <div style="font-size:3.5rem;font-weight:800;color:#f7941d;line-height:1;"><span class="counter" data-target="100">0</span>+</div>
-          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin:6px 0 4px;"><?= t('index_stats_experts_label') ?></div>
-          <div style="font-size:0.8rem;color:#fff;">Mobilisables sous 72h</div>
+        <div class="stats-chiffre-item" style="border-top:1px solid rgba(255,255,255,0.15);border-right:1px solid rgba(255,255,255,0.15);">
+          <div class="stats-val"><span class="counter" data-target="100">0</span>+</div>
+          <div class="stats-lbl"><?= t('index_stats_experts_label') ?></div>
+          <div class="stats-desc">Mobilisables sous 72h</div>
         </div>
-        <div style="padding:16px 12px;border-top:1px solid rgba(255,255,255,0.15);grid-column:span 2;">
-          <div style="font-size:3.5rem;font-weight:800;color:#f7941d;line-height:1;"><span class="counter" data-target="15">0</span>+</div>
-          <div style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.12em;color:rgba(255,255,255,0.6);margin:6px 0 4px;"><?= t('index_stats_part_label') ?></div>
-          <div style="font-size:0.8rem;color:#fff;"><?= t('index_stats_part_desc') ?></div>
+        <div class="stats-chiffre-item" style="border-top:1px solid rgba(255,255,255,0.15);grid-column:span 2;">
+          <div class="stats-val"><span class="counter" data-target="15">0</span>+</div>
+          <div class="stats-lbl"><?= t('index_stats_part_label') ?></div>
+          <div class="stats-desc"><?= t('index_stats_part_desc') ?></div>
         </div>
       </div>
 
-      <!-- Photo droite — décalée vers le bas -->
-      <div style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d, 0 12px 40px rgba(0,0,0,0.35);transform:translateY(20px);">
-        <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-photo.jpg"
-             alt="COTRAC sur chantier" loading="lazy"
-             style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+      <!-- Photo droite -->
+      <div style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d,0 12px 40px rgba(0,0,0,0.35);transform:translateY(20px);">
+        <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-photo.jpg" alt="COTRAC sur chantier" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
 
     </div>
