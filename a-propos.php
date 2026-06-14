@@ -61,14 +61,21 @@ require_once __DIR__ . '/includes/header.php';
 .stats-section .section-tag { color: #fff; border-color: rgba(255,255,255,.6); background: rgba(255,255,255,.15); }
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
   margin-top: 2.5rem;
   text-align: center;
+  background: rgba(255,255,255,0.12);
+  border-radius: 16px;
+  overflow: hidden;
 }
-.stat-card { padding: 1.5rem; }
-.stat-value { font-size: 2.8rem; font-weight: 800; color: var(--orange); display: block; }
-.stat-label { font-size: .95rem; opacity: .85; margin-top: .4rem; }
+.stat-card {
+  padding: 1.8rem 1.5rem;
+  background: rgba(255,255,255,0.06);
+}
+.stat-card:hover { background: rgba(255,255,255,0.12); }
+.stat-value { font-size: 2.8rem; font-weight: 800; color: var(--orange); display: block; line-height: 1; }
+.stat-label { font-size: .9rem; opacity: .85; margin-top: .5rem; }
 
 /* ── Timeline ── */
 .timeline-section { padding: 5rem 0; background: var(--gris-clair); }
