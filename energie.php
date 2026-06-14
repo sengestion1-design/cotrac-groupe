@@ -31,7 +31,7 @@ require_once 'includes/header.php';
   align-items: center;
 }
 
-/* ── Galerie chantier : grille pro uniforme ── */
+/* ── Galerie chantier : grille uniforme sans span ── */
 .energie-galerie-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -48,6 +48,9 @@ require_once 'includes/header.php';
   border: 2px solid rgba(255,255,255,.9);
   box-shadow: 0 4px 18px rgba(0,0,0,.12);
   transition: box-shadow .3s, transform .3s;
+  /* hauteur contrôlée par la grille uniquement */
+  min-height: 0;
+  min-width: 0;
 }
 .energie-galerie-grid .galerie-item:hover {
   box-shadow: 0 8px 32px rgba(26,107,181,.25);
@@ -70,11 +73,10 @@ require_once 'includes/header.php';
   text-shadow: 0 1px 4px rgba(0,0,0,.6);
   letter-spacing: .02em;
 }
-/* première photo plus large */
-.energie-galerie-grid .gi-wide  { grid-column: span 2; }
-/* supprimer les spans verticaux qui causaient les superpositions */
-.energie-galerie-grid .gi-tall  { grid-column: span 1; }
-.energie-galerie-grid .gi-big   { grid-column: span 2; }
+/* aucun span — toutes les photos même taille */
+.energie-galerie-grid .gi-wide,
+.energie-galerie-grid .gi-tall,
+.energie-galerie-grid .gi-big { grid-column: span 1; grid-row: span 1; }
 
 /* ── Vidéo player style macOS — taille réduite ── */
 .energie-video-wrap {
@@ -122,8 +124,6 @@ require_once 'includes/header.php';
 
 @media (max-width: 900px) {
   .energie-galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
-  .energie-galerie-grid .gi-wide,
-  .energie-galerie-grid .gi-big { grid-column: span 2; }
 }
 @media (max-width: 768px) {
   .energie-hero-grid,
@@ -131,8 +131,6 @@ require_once 'includes/header.php';
   .energie-hero-stats { grid-template-columns: 1fr 1fr; }
   .energie-cta-grid { gap: 24px; }
   .energie-galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
-  .energie-galerie-grid .gi-wide,
-  .energie-galerie-grid .gi-big { grid-column: span 2; }
   .energie-video-wrap { max-width: 100%; }
 }
 </style>
