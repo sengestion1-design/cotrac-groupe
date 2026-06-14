@@ -268,11 +268,7 @@ $photos = array_merge($photos, $photos);
           <div class="stats-lbl"><?= t('index_stats_projets_label') ?></div>
           <div class="stats-desc"><?= t('index_stats_projets_desc') ?></div>
         </div>
-        <div class="stats-chiffre-item">
-          <div class="stats-val"><span class="counter" data-target="5">0</span></div>
-          <div class="stats-lbl"><?= t('index_stats_poles_label') ?></div>
-          <div class="stats-desc"><?= t('index_stats_poles_desc') ?></div>
-        </div>
+
         <div class="stats-chiffre-item stats-item-100" style="border-top:1px solid rgba(255,255,255,0.15);border-right:1px solid rgba(255,255,255,0.15);">
           <div class="stats-val"><span class="counter" data-target="100">0</span>+</div>
           <div class="stats-lbl"><?= t('index_stats_experts_label') ?></div>
