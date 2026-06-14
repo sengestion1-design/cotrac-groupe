@@ -299,7 +299,7 @@ if (!empty($videos_chantiers)): ?>
 .video-player-wrap video {
   display: block;
   width: 100%;
-  max-height: 280px;
+  height: 240px;
   object-fit: cover;
   background: #000;
 }
@@ -397,7 +397,7 @@ if (!empty($videos_chantiers)): ?>
 <style>
 .real-vid-wrap {
   position: relative; background: #000;
-  aspect-ratio: 16/9; overflow: hidden;
+  height: 240px; overflow: hidden;
 }
 .real-vid-wrap video { display:block;width:100%;height:100%;object-fit:cover; }
 .real-vid-ov {
