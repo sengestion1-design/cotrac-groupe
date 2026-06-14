@@ -67,40 +67,38 @@ require_once 'includes/header.php';
 .energie-galerie-grid .gi-tall  { grid-row: span 2; }
 .energie-galerie-grid .gi-big   { grid-column: span 2; grid-row: span 2; }
 
-/* ── Vidéo encadrée pro ── */
+/* ── Vidéo player style macOS ── */
 .energie-video-wrap {
-  margin-top: 32px;
-  background: #0a1e46;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 12px 48px rgba(0,0,0,.25);
+  margin: 32px auto 0;
   max-width: 860px;
-  margin-left: auto;
-  margin-right: auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  border: 1px solid rgba(255,255,255,.08);
 }
 .energie-video-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 20px;
-  background: rgba(255,255,255,.05);
-  border-bottom: 1px solid rgba(255,255,255,.1);
+  gap: 8px;
+  padding: 13px 18px;
+  background: #1c2a3e;
+  border-bottom: 1px solid rgba(0,0,0,.3);
 }
 .energie-video-dot {
-  width: 10px; height: 10px; border-radius: 50%;
+  width: 12px; height: 12px; border-radius: 50%;
+  flex-shrink: 0;
 }
 .energie-video-title {
-  color: rgba(255,255,255,.8);
+  color: rgba(255,255,255,.75);
   font-size: .82rem;
   font-weight: 600;
-  margin-left: 6px;
-  letter-spacing: .03em;
+  margin-left: 8px;
+  letter-spacing: .02em;
 }
 .energie-video-wrap video {
   display: block;
   width: 100%;
-  max-height: 440px;
-  object-fit: cover;
+  background: #000;
 }
 
 /* Normes */
@@ -343,28 +341,21 @@ require_once 'includes/header.php';
 
     </div>
 
-    <!-- Vidéo style carte pro -->
-    <div style="margin-top:32px;text-align:center;">
-      <h3 class="section-title" style="font-size:1.25rem;margin-bottom:20px;">
-        <?= t('energie_video_titre') ?>
-      </h3>
-      <div class="video-card animate-fade-up" style="max-width:640px;margin:0 auto;"
-           onclick="this.querySelector('video').paused ? this.querySelector('video').play() : this.querySelector('video').pause(); this.querySelector('.video-card-play').style.opacity = this.querySelector('video').paused ? '1' : '0';">
-        <div class="video-card-thumb" style="aspect-ratio:16/9;">
-          <video
-            src="<?= SITE_URL ?>/assets/videos/energie-pose-poteau.mov"
-            preload="metadata"
-            poster="<?= SITE_URL ?>/assets/images/energie/pose-poteau-grue.jpg"
-            style="width:100%;height:100%;object-fit:cover;display:block;opacity:.85;">
-          </video>
-          <div class="video-card-play">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" style="margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <div class="video-card-title">
-            <h3><?= t('energie_video_titre') ?></h3>
-          </div>
-        </div>
+    <!-- Vidéo player style macOS encadré -->
+    <div class="energie-video-wrap animate-fade-up">
+      <div class="energie-video-header">
+        <span class="energie-video-dot" style="background:#ff5f57;"></span>
+        <span class="energie-video-dot" style="background:#febc2e;"></span>
+        <span class="energie-video-dot" style="background:#28c840;"></span>
+        <span class="energie-video-title"><?= t('energie_video_titre') ?></span>
       </div>
+      <video
+        src="<?= SITE_URL ?>/assets/videos/energie-pose-poteau.mov"
+        controls
+        preload="metadata"
+        poster="<?= SITE_URL ?>/assets/images/energie/pose-poteau-grue.jpg">
+        <?= t('energie_video_fallback') ?>
+      </video>
     </div>
   </div>
 </section>

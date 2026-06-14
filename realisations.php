@@ -271,92 +271,46 @@ try { $db->exec("CREATE TABLE IF NOT EXISTS videos_chantiers (id INT AUTO_INCREM
 $videos_chantiers = $db->query("SELECT * FROM videos_chantiers WHERE actif=1 ORDER BY sort_order ASC, id DESC")->fetchAll();
 if (!empty($videos_chantiers)): ?>
 <style>
-/* ── Section vidéos chantiers ── */
-.videos-grid {
+/* ── Player vidéo style macOS ── */
+.video-player-wrap {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,.35);
+  border: 1px solid rgba(0,0,0,.15);
+  max-width: 860px;
+  margin: 0 auto;
+}
+.video-player-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 18px;
+  background: #1c2a3e;
+  border-bottom: 1px solid rgba(0,0,0,.3);
+}
+.video-player-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+.video-player-title {
+  color: rgba(255,255,255,.75);
+  font-size: .82rem;
+  font-weight: 600;
+  margin-left: 8px;
+  letter-spacing: .02em;
+}
+.video-player-wrap video {
+  display: block;
+  width: 100%;
+  background: #000;
+}
+/* Grille multi-players */
+.videos-players-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 24px;
   margin-top: 8px;
 }
-.video-card {
-  border-radius: 16px;
-  overflow: hidden;
-  background: #0d1f3c;
-  cursor: pointer;
-  position: relative;
-  box-shadow: 0 6px 28px rgba(0,0,0,.18);
-  transition: transform .25s, box-shadow .25s;
-}
-.video-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 16px 48px rgba(0,0,0,.28);
-}
-.video-card-thumb {
-  position: relative;
-  aspect-ratio: 16/9;
-  overflow: hidden;
-}
-.video-card-thumb img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  display: block;
-  opacity: .82;
-  transition: opacity .3s, transform .4s;
-}
-.video-card:hover .video-card-thumb img {
-  opacity: .65;
-  transform: scale(1.04);
-}
-.video-card-thumb .vc-bg {
-  width: 100%; height: 100%;
-  background: linear-gradient(135deg, #1a3a5c 0%, #1a6bb5 100%);
-  display: flex; align-items: center; justify-content: center;
-}
-/* Overlay gradient bas */
-.video-card-thumb::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(8,18,36,.72) 0%, rgba(8,18,36,.1) 50%, transparent 100%);
-  pointer-events: none;
-}
-/* Bouton play centré */
-.video-card-play {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px; height: 60px;
-  background: var(--orange, #f7941d);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 4px 20px rgba(247,148,29,.5);
-  transition: transform .2s, box-shadow .2s;
-  z-index: 2;
-}
-.video-card:hover .video-card-play {
-  transform: translate(-50%, -50%) scale(1.12);
-  box-shadow: 0 8px 32px rgba(247,148,29,.65);
-}
-/* Titre en bas sur fond sombre */
-.video-card-title {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 10px 14px 12px;
-  z-index: 2;
-}
-.video-card-title h3 {
-  color: #fff;
-  font-size: .88rem;
-  font-weight: 700;
-  margin: 0;
-  line-height: 1.35;
-  text-shadow: 0 1px 6px rgba(0,0,0,.5);
-}
-@media (max-width: 900px) {
-  .videos-grid { grid-template-columns: repeat(2, 1fr); }
-}
-@media (max-width: 560px) {
-  .videos-grid { grid-template-columns: 1fr; }
-}
+.videos-players-grid .video-player-wrap { max-width: 100%; }
+@media (max-width: 900px) { .videos-players-grid { grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 560px) { .videos-players-grid { grid-template-columns: 1fr; } }
 </style>
 
 <section class="section" style="background:#f4f7fb;">
@@ -366,28 +320,27 @@ if (!empty($videos_chantiers)): ?>
       <h2 class="section-title">Nos Travaux en <span style="color:var(--orange)">Vidéo</span></h2>
       <p class="section-sub">Découvrez nos chantiers en action</p>
     </div>
-    <div class="videos-grid">
+    <div class="videos-players-grid">
       <?php foreach ($videos_chantiers as $vc):
         $vid_fn  = basename($vc['fichier']);
         $vid_src = SITE_URL . '/uploads/videos/' . $vid_fn;
         $thumb   = !empty($vc['thumbnail']) ? SITE_URL . '/uploads/videos/' . basename($vc['thumbnail']) : '';
       ?>
-      <div class="video-card" data-src="<?= e($vid_src) ?>" data-titre="<?= e($vc['titre']) ?>">
-        <div class="video-card-thumb">
-          <?php if ($thumb): ?>
-            <img src="<?= e($thumb) ?>" alt="<?= e($vc['titre']) ?>" loading="lazy">
-          <?php else: ?>
-            <div class="vc-bg">
-              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-            </div>
-          <?php endif; ?>
-          <div class="video-card-play">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" style="margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-          </div>
-          <div class="video-card-title">
-            <h3><?= e($vc['titre']) ?></h3>
-          </div>
+      <div class="video-player-wrap animate-fade-up">
+        <div class="video-player-header">
+          <span class="video-player-dot" style="background:#ff5f57;"></span>
+          <span class="video-player-dot" style="background:#febc2e;"></span>
+          <span class="video-player-dot" style="background:#28c840;"></span>
+          <span class="video-player-title"><?= e($vc['titre']) ?></span>
         </div>
+        <video
+          src="<?= e($vid_src) ?>"
+          controls
+          preload="metadata"
+          <?php if ($thumb): ?>poster="<?= e($thumb) ?>"<?php endif; ?>
+          playsinline>
+          Votre navigateur ne supporte pas la lecture vidéo.
+        </video>
       </div>
       <?php endforeach; ?>
     </div>
