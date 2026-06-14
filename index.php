@@ -822,7 +822,7 @@ try {
               style="display:block;width:100%;background:#000;">
               <source src="<?= SITE_URL ?>/assets/videos/seneau1.mp4" type="video/mp4">
             </video>
-            <div class="svp-overlay" onclick="svpPlay(this)">
+            <div class="svp-overlay">
               <button class="svp-btn" aria-label="Lire">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><polygon points="5,3 19,12 5,21"/></svg>
               </button>
@@ -843,7 +843,7 @@ try {
               style="display:block;width:100%;background:#000;">
               <source src="<?= SITE_URL ?>/assets/videos/seneauF3.mp4" type="video/mp4">
             </video>
-            <div class="svp-overlay" onclick="svpPlay(this)">
+            <div class="svp-overlay">
               <button class="svp-btn" aria-label="Lire">
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><polygon points="5,3 19,12 5,21"/></svg>
               </button>
@@ -930,12 +930,30 @@ try {
     }
     </style>
     <script>
-    function svpPlay(overlay) {
-      var video = overlay.previousElementSibling;
+    function svpPlay(el) {
+      // el peut être l'overlay ou le bouton enfant
+      var overlay = el.classList.contains('svp-overlay') ? el : el.closest('.svp-overlay');
+      if (!overlay) return;
+      var player = overlay.closest('.svp-player');
+      if (!player) return;
+      var video = player.querySelector('video');
+      if (!video) return;
       overlay.style.display = 'none';
       video.controls = true;
       video.play();
     }
+    // Délégation sur le bouton aussi
+    document.addEventListener('DOMContentLoaded', function() {
+      document.querySelectorAll('.svp-btn').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+          e.stopPropagation();
+          svpPlay(btn.closest('.svp-overlay'));
+        });
+      });
+      document.querySelectorAll('.svp-overlay').forEach(function(ov) {
+        ov.addEventListener('click', function() { svpPlay(ov); });
+      });
+    });
     </script>
 
     <div class="text-center" style="margin-top:40px;">
