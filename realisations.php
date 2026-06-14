@@ -277,8 +277,6 @@ if (!empty($videos_chantiers)): ?>
   overflow: hidden;
   box-shadow: 0 20px 60px rgba(0,0,0,.35);
   border: 1px solid rgba(0,0,0,.15);
-  max-width: 860px;
-  margin: 0 auto;
 }
 .video-player-header {
   display: flex;
