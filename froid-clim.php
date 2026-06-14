@@ -224,7 +224,7 @@ require_once 'includes/header.php';
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
-  <div class="container cta-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:56px;align-items:center;">
+  <div class="container cta-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;align-items:center;">
 
     <div class="animate-fade-up delay-1">
       <span class="section-tag orange">Devis gratuit</span>

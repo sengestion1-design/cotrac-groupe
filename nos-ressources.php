@@ -94,7 +94,7 @@ require_once 'includes/header.php';
 <style>
 .res-hero {
   background: linear-gradient(135deg,#0f4d8a 0%,#1a3c6e 100%);
-  padding: 72px 0 56px; color:#fff;
+  padding: 48px 0 32px; color:#fff;
 }
 .res-hero .breadcrumb { display:flex;align-items:center;gap:6px;font-size:.82rem;opacity:.7;margin-bottom:16px; }
 .res-hero .breadcrumb a { color:#fff;text-decoration:none; }
@@ -106,7 +106,7 @@ require_once 'includes/header.php';
 .res-filter-btn { border:2px solid #e2e8f0;background:#fff;border-radius:999px;padding:7px 20px;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s;color:#4a5568; }
 .res-filter-btn:hover,.res-filter-btn.active { background:var(--bleu);border-color:var(--bleu);color:#fff; }
 
-.res-cat-header { display:flex;align-items:center;gap:14px;margin:48px 0 20px; }
+.res-cat-header { display:flex;align-items:center;gap:14px;margin:24px 0 20px; }
 .res-cat-bar { width:5px;height:36px;border-radius:3px; }
 .res-cat-title { font-size:1.35rem;font-weight:800;color:#1a202c;margin:0; }
 .res-cat-count { background:#f0f4f8;color:#718096;border-radius:999px;padding:3px 10px;font-size:.75rem;font-weight:600; }
@@ -119,7 +119,7 @@ require_once 'includes/header.php';
 .res-card-label { font-size:.82rem;font-weight:700;color:#fff;border-radius:6px;padding:3px 10px;display:inline-block;margin-bottom:6px; }
 .res-card-title { font-size:.95rem;font-weight:700;color:#1a202c;margin:0; }
 
-.res-stats { display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-bottom:48px; }
+.res-stats { display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:16px;margin-bottom:24px; }
 .res-stat-card { background:#fff;border-radius:14px;padding:24px 20px;text-align:center;box-shadow:0 2px 12px rgba(0,0,0,.07);border-top:4px solid var(--bleu); }
 .res-stat-val { font-size:2rem;font-weight:800;color:var(--bleu);line-height:1; }
 .res-stat-label { font-size:.78rem;color:#718096;margin-top:6px;text-transform:uppercase;letter-spacing:.06em; }
@@ -362,7 +362,7 @@ require_once 'includes/header.php';
     $onglets_presents = array_unique(array_column($galerie, 2));
     $onglet_labels = ['engins'=>'Engins & Véhicules','btp'=>'BTP & Travaux','logistique'=>'Logistique'];
     ?>
-    <div style="margin-top:56px;" id="galerie">
+    <div style="margin-top:24px;" id="galerie">
       <div class="res-cat-header">
         <div class="res-cat-bar" style="background:#1a6bb5;"></div>
         <h2 class="res-cat-title">Galerie Photos</h2>

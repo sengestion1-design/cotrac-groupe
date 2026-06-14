@@ -304,7 +304,7 @@ require_once 'includes/header.php';
     </div>
 
     <!-- Vidéo chantier -->
-    <div style="margin-top:48px;text-align:center;">
+    <div style="margin-top:24px;text-align:center;">
       <h3 class="section-title" style="font-size:1.3rem;margin-bottom:20px;">
         <?= t('energie_video_titre') ?>
       </h3>
@@ -336,7 +336,7 @@ require_once 'includes/header.php';
 
     <div class="energie-normes-grid">
 
-      <div class="valeur-card animate-fade-up delay-1" style="text-align:center;padding:36px 24px;">
+      <div class="valeur-card animate-fade-up delay-1" style="text-align:center;padding:24px 24px;">
         <div style="font-size:2.4rem;margin-bottom:16px;"><span class="ico ico-globe"><!--globe--></span></div>
         <h3 style="color:#1a6bb5;font-weight:800;font-size:1.3rem;margin-bottom:12px;">IEC</h3>
         <p style="color:var(--gris);line-height:1.7;font-size:0.94rem;">
@@ -344,7 +344,7 @@ require_once 'includes/header.php';
         </p>
       </div>
 
-      <div class="valeur-card animate-fade-up delay-2" style="text-align:center;padding:36px 24px;">
+      <div class="valeur-card animate-fade-up delay-2" style="text-align:center;padding:24px 24px;">
         <div style="font-size:2.4rem;margin-bottom:16px;"><span class="ico ico-certificate"><!--cert--></span></div>
         <h3 style="color:#1a6bb5;font-weight:800;font-size:1.3rem;margin-bottom:12px;">IEEE</h3>
         <p style="color:var(--gris);line-height:1.7;font-size:0.94rem;">
@@ -352,7 +352,7 @@ require_once 'includes/header.php';
         </p>
       </div>
 
-      <div class="valeur-card animate-fade-up delay-3" style="text-align:center;padding:36px 24px;">
+      <div class="valeur-card animate-fade-up delay-3" style="text-align:center;padding:24px 24px;">
         <div style="font-size:2.4rem;margin-bottom:16px;"><span class="ico ico-senegal"><!--sn--></span></div>
         <h3 style="color:#1a6bb5;font-weight:800;font-size:1.3rem;margin-bottom:12px;">SENELEC</h3>
         <p style="color:var(--gris);line-height:1.7;font-size:0.94rem;">
@@ -447,7 +447,7 @@ require 'includes/galerie.php';
         </div>
       </div>
     </div>
-    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:44px 36px;text-align:center;backdrop-filter:blur(8px);">
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:28px 28px;text-align:center;backdrop-filter:blur(8px);">
       <div style="width:64px;height:64px;background:rgba(240,128,20,0.2);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;"><?= icon('zap','','1.8rem') ?></div>
       <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin-bottom:12px;"><?= t('energie_cta_card_titre') ?></h3>
       <p style="color:rgba(255,255,255,0.65);font-size:.88rem;line-height:1.7;margin-bottom:28px;">

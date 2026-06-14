@@ -58,7 +58,7 @@ $actualites = $db->query("SELECT * FROM actualites WHERE actif=1 ORDER BY create
   <div class="container">
 
     <?php if (empty($actualites)): ?>
-      <div style="text-align:center; padding:80px 0;">
+      <div style="text-align:center; padding:48px 0;">
         <div style="font-size:3rem; margin-bottom:16px;">📰</div>
         <h3 style="color:var(--gris-dark); margin-bottom:8px;"><?= t('actu_vide_titre') ?></h3>
         <p style="color:var(--gris);"><?= t('actu_vide_desc') ?></p>

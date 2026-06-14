@@ -270,7 +270,7 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
 try { $db->exec("CREATE TABLE IF NOT EXISTS videos_chantiers (id INT AUTO_INCREMENT PRIMARY KEY, titre VARCHAR(255) NOT NULL, description VARCHAR(500) DEFAULT NULL, fichier VARCHAR(300) NOT NULL, thumbnail VARCHAR(300) DEFAULT NULL, sort_order INT DEFAULT 0, actif TINYINT(1) DEFAULT 1, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"); } catch(Exception $e){}
 $videos_chantiers = $db->query("SELECT * FROM videos_chantiers WHERE actif=1 ORDER BY sort_order ASC, id DESC")->fetchAll();
 if (!empty($videos_chantiers)): ?>
-<section class="section" style="background:#f8fafd;padding-top:56px;padding-bottom:56px;">
+<section class="section" style="background:#f8fafd;padding-top:28px;padding-bottom:28px;">
   <div class="container">
     <div style="text-align:center;margin-bottom:40px;">
       <span class="section-tag">Nos Chantiers</span>
@@ -357,9 +357,9 @@ document.addEventListener('click', function(e) {
 </script>
 
 <!-- ===================== ATTESTATIONS & CERTIFICATIONS ===================== -->
-<section class="section bg-gris" style="padding-top:48px;">
+<section class="section bg-gris" style="padding-top:24px;">
   <div class="container">
-    <div style="text-align:center; margin-bottom:48px;">
+    <div style="text-align:center; margin-bottom:24px;">
       <span class="section-tag"><?= t('real_tag_attest') ?></span>
       <h2 class="section-title"><?= t('real_titre_attest') ?></h2>
       <p class="section-sub">
@@ -463,7 +463,7 @@ document.addEventListener('click', function(e) {
     </div>
 
     <!-- Droite : carte CTA avec fond -->
-    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:44px 36px;text-align:center;backdrop-filter:blur(8px);">
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:24px 36px;text-align:center;backdrop-filter:blur(8px);">
       <div style="width:64px;height:64px;background:rgba(240,128,20,0.2);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;">
         <?= icon('briefcase','','1.8rem') ?>
       </div>

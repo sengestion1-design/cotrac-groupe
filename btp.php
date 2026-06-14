@@ -34,7 +34,7 @@ require_once 'includes/header.php';
 .btp-cta-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 56px;
+  gap: 32px;
   align-items: center;
 }
 /* Images service : hauteur fixe réduite sur mobile */
@@ -141,7 +141,7 @@ require_once 'includes/header.php';
     </div>
 
     <!-- Service 1 : Construction de bâtiments -->
-    <div class="section-2col animate-fade-up delay-1" style="margin-bottom:56px;">
+    <div class="section-2col animate-fade-up delay-1" style="margin-bottom:24px;">
       <!-- Photo gauche -->
       <div>
         <?php $_btp_c1 = cms_img_url(cms('btp','services_cards','card1_icon','assets/images/equipe/gilet-cotrac2.jpg')); ?>
@@ -188,7 +188,7 @@ require_once 'includes/header.php';
     </div>
 
     <!-- Service 2 : Rénovation et réhabilitation -->
-    <div class="section-2col animate-fade-up delay-2" style="margin-bottom:56px;">
+    <div class="section-2col animate-fade-up delay-2" style="margin-bottom:24px;">
       <!-- Photo gauche -->
       <div>
         <?php $_btp_c2 = cms_img_url(cms('btp','services_cards','card2_icon','assets/images/equipe/equipe-inspection.jpg')); ?>
@@ -235,7 +235,7 @@ require_once 'includes/header.php';
     </div>
 
     <!-- Service 3 : Études et maîtrise d'œuvre -->
-    <div class="section-2col animate-fade-up delay-1" style="margin-bottom:56px;">
+    <div class="section-2col animate-fade-up delay-1" style="margin-bottom:24px;">
       <!-- Photo gauche -->
       <div>
         <?php $_btp_c3 = cms_img_url(cms('btp','services_cards','card3_icon','assets/images/equipe/ingenieure-plans.jpg')); ?>

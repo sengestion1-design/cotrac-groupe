@@ -276,7 +276,7 @@ require 'includes/galerie.php';
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
-  <div class="container grid-2col" style="gap:64px;align-items:center;">
+  <div class="container grid-2col" style="gap:32px;align-items:center;">
     <div>
       <span class="section-tag orange" style="margin-bottom:20px;display:inline-block;"><?= t('routes_cta_tag') ?></span>
       <h2 class="section-title light" style="margin-bottom:16px;"><?= t('routes_cta_titre') ?></h2>
@@ -300,7 +300,7 @@ require 'includes/galerie.php';
         </div>
       </div>
     </div>
-    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:44px 36px;text-align:center;backdrop-filter:blur(8px);">
+    <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.13);border-radius:20px;padding:28px 28px;text-align:center;backdrop-filter:blur(8px);">
       <div style="width:64px;height:64px;background:rgba(240,128,20,0.2);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;"><?= icon('map-pin','','1.8rem') ?></div>
       <h3 style="color:#fff;font-size:1.3rem;font-weight:700;margin-bottom:12px;"><?= t('routes_cta_card_titre') ?></h3>
       <p style="color:rgba(255,255,255,0.65);font-size:.88rem;line-height:1.7;margin-bottom:28px;">

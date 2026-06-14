@@ -102,7 +102,7 @@ $couleurs = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','industri
 </section>
 
 <!-- FILTRES -->
-<section class="section" style="padding-bottom:0;padding-top:56px;">
+<section class="section" style="padding-bottom:0;padding-top:28px;">
   <div class="container">
     <div class="galerie-filters" role="tablist">
       <?php
@@ -201,7 +201,7 @@ $couleurs = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','industri
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
-    <div class="container" style="text-align:center;padding-top:4rem;padding-bottom:4rem;">
+    <div class="container" style="text-align:center;padding-top:2rem;padding-bottom:2rem;">
       <span class="section-tag"><?= t('galerie_cta_tag') ?></span>
       <h2 class="section-title" style="color:#fff;margin:12px 0 16px;"><?= t('galerie_cta_titre') ?></h2>
       <p style="color:rgba(255,255,255,.75);max-width:520px;margin:0 auto 28px;"><?= t('galerie_cta_desc') ?></p>
@@ -262,7 +262,7 @@ $couleurs = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','industri
 .galerie-page-caption{color:#fff;font-size:.78rem;font-weight:500;margin:0;text-shadow:0 1px 4px rgba(0,0,0,.5);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
 
 /* ── Vide ── */
-.galerie-empty{text-align:center;padding:80px 20px;color:#94a3b8;}
+.galerie-empty{text-align:center;padding:48px 20px;color:#94a3b8;}
 .galerie-empty-icon{width:80px;height:80px;background:#f0f4f8;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;color:#cbd5e1;}
 .galerie-empty h3{color:#475569;font-size:1.15rem;margin-bottom:8px;}
 

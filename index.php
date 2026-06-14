@@ -291,7 +291,7 @@ $photos = array_merge($photos, $photos);
 ═══════════════════════════════════════════════════════════ -->
 <section class="section">
   <div class="container">
-    <div class="hero-layout" style="gap:48px;">
+    <div class="hero-layout" style="gap:24px;">
 
       <!-- Texte -->
       <div class="hero-left animate-fade-up delay-1">
@@ -448,7 +448,7 @@ $photos = array_merge($photos, $photos);
 ═══════════════════════════════════════════════════════════ -->
 <section class="section" style="background:var(--gris-clair);">
   <div class="container">
-    <div class="text-center" style="margin-bottom:48px;">
+    <div class="text-center" style="margin-bottom:28px;">
       <span class="section-tag"><?= icon('star') ?> <?= t('index_temoig_tag') ?></span>
       <h2 class="section-title"><?= t('index_temoig_titre') ?></h2>
       <p class="section-sub"><?= t('index_temoig_desc') ?></p>
@@ -882,7 +882,7 @@ unset($_carte);
   <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
-  <div class="container cta-grid" style="position:relative;z-index:2;padding-top:4rem;padding-bottom:4rem;">
+  <div class="container cta-grid" style="position:relative;z-index:2;padding-top:2rem;padding-bottom:2rem;">
 
     <!-- Gauche : contact info -->
     <div class="animate-fade-up delay-1">
@@ -945,7 +945,7 @@ unset($_carte);
 .cta-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 56px;
+  gap: 32px;
   align-items: center;
 }
 @media (max-width: 768px) {
