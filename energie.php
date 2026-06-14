@@ -31,23 +31,79 @@ require_once 'includes/header.php';
   align-items: center;
 }
 
-/* Galerie ligne 1 (2fr 1fr) et ligne 4 (1fr 2fr) */
-.energie-galerie-l1,
-.energie-galerie-l4 {
+/* ── Galerie chantier : grille masonry pro ── */
+.energie-galerie-grid {
   display: grid;
-  gap: 16px;
-  margin-bottom: 16px;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 200px;
+  gap: 10px;
+  margin-top: 8px;
 }
-.energie-galerie-l1 { grid-template-columns: 2fr 1fr; }
-.energie-galerie-l4 { grid-template-columns: 1fr 2fr; }
+.energie-galerie-grid .galerie-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  cursor: pointer;
+  background: var(--gris-clair);
+}
+.energie-galerie-grid .galerie-item img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  transition: transform .4s ease;
+}
+.energie-galerie-grid .galerie-item:hover img { transform: scale(1.07); }
+.energie-galerie-grid .galerie-item-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,22,40,.65) 0%, transparent 55%);
+  opacity: 0; transition: opacity .3s;
+  display: flex; align-items: flex-end; padding: 12px;
+}
+.energie-galerie-grid .galerie-item:hover .galerie-item-overlay { opacity: 1; }
+.energie-galerie-grid .galerie-caption {
+  color: #fff; font-size: .75rem; font-weight: 500;
+  text-shadow: 0 1px 4px rgba(0,0,0,.5);
+}
+/* items featured */
+.energie-galerie-grid .gi-wide  { grid-column: span 2; }
+.energie-galerie-grid .gi-tall  { grid-row: span 2; }
+.energie-galerie-grid .gi-big   { grid-column: span 2; grid-row: span 2; }
 
-/* Hauteur fixe galerie sur desktop */
-.energie-galerie-l1,
-.energie-galerie-l4 { height: 320px; }
-.energie-galerie-l1 > .galerie-item,
-.energie-galerie-l4 > .galerie-item { aspect-ratio: unset; height: 100%; }
+/* ── Vidéo encadrée pro ── */
+.energie-video-wrap {
+  margin-top: 32px;
+  background: #0a1e46;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 48px rgba(0,0,0,.25);
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.energie-video-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  background: rgba(255,255,255,.05);
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+.energie-video-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+}
+.energie-video-title {
+  color: rgba(255,255,255,.8);
+  font-size: .82rem;
+  font-weight: 600;
+  margin-left: 6px;
+  letter-spacing: .03em;
+}
+.energie-video-wrap video {
+  display: block;
+  width: 100%;
+  max-height: 440px;
+  object-fit: cover;
+}
 
-/* Normes & lignes galerie égales */
+/* Normes */
 .energie-normes-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -55,32 +111,20 @@ require_once 'includes/header.php';
   max-width: 900px;
   margin: 0 auto;
 }
-.energie-galerie-3col {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 16px;
-  margin-bottom: 16px;
-}
 
+@media (max-width: 900px) {
+  .energie-galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+  .energie-galerie-grid .gi-big { grid-column: span 2; }
+}
 @media (max-width: 768px) {
   .energie-hero-grid,
-  .energie-cta-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-  .energie-hero-stats {
-    grid-template-columns: 1fr 1fr; /* garde 2 col pour les stats chiffres */
-  }
-  .energie-galerie-l1,
-  .energie-galerie-l4 {
-    grid-template-columns: 1fr;
-    height: auto;
-  }
-  .energie-galerie-l1 > .galerie-item,
-  .energie-galerie-l4 > .galerie-item {
-    height: 220px;
-  }
+  .energie-cta-grid { grid-template-columns: 1fr; gap: 32px; }
+  .energie-hero-stats { grid-template-columns: 1fr 1fr; }
   .energie-cta-grid { gap: 24px; }
+  .energie-galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+  .energie-galerie-grid .gi-wide,
+  .energie-galerie-grid .gi-big { grid-column: span 2; }
+  .energie-galerie-grid .gi-tall { grid-row: span 1; }
 }
 </style>
 
@@ -239,80 +283,78 @@ require_once 'includes/header.php';
       </p>
     </div>
 
-    <!-- Ligne 1 : grande + petite, hauteur fixe -->
     <?php
     $_e_g1 = cms_img_url(cms('energie','services_cards','card1_icon','assets/images/energie/pose-poteau-grue.jpg'));
     $_e_g2 = cms_img_url(cms('energie','services_cards','card2_icon','assets/images/energie/lampadaire-solaire.jpg'));
-    ?>
-    <div class="energie-galerie-l1">
-      <div class="galerie-item animate-fade-up delay-1">
-        <img src="<?= e($_e_g1) ?>" alt="<?= t('energie_galerie_alt1') ?>" loading="lazy">
-        <div class="galerie-caption"><?= t('energie_galerie_cap1') ?></div>
-      </div>
-      <div class="galerie-item animate-fade-up delay-2">
-        <img src="<?= e($_e_g2) ?>" alt="<?= t('energie_galerie_alt2') ?>" loading="lazy">
-        <div class="galerie-caption"><?= t('energie_galerie_cap2') ?></div>
-      </div>
-    </div>
-
-    <!-- Ligne 2 : 3 égales -->
-    <?php
     $_e_g3 = cms_img_url(cms('energie','services_cards','card3_icon','assets/images/energie/ligne-hta-transformateur.jpg'));
     $_e_g4 = cms_img_url(cms('energie','services_cards','card4_icon','assets/images/energie/armoire-coupure-hta.jpg'));
     ?>
-    <div class="energie-galerie-3col">
-      <div class="galerie-item animate-fade-up delay-1">
-        <img src="<?= e($_e_g3) ?>" alt="<?= t('energie_galerie_alt3') ?>" loading="lazy">
-        <div class="galerie-caption"><?= t('energie_galerie_cap3') ?></div>
+
+    <!-- Grille masonry pro : 4 colonnes, hauteurs variables -->
+    <div class="energie-galerie-grid">
+
+      <!-- Grande image vedette -->
+      <div class="galerie-item gi-big animate-fade-up delay-1">
+        <img src="<?= e($_e_g1) ?>" alt="<?= t('energie_galerie_alt1') ?>" loading="lazy">
+        <div class="galerie-item-overlay"><span class="energie-galerie-caption"><?= t('energie_galerie_cap1') ?></span></div>
       </div>
+
+      <!-- Colonne droite : 2 petites empilées -->
       <div class="galerie-item animate-fade-up delay-2">
-        <img src="<?= e($_e_g4) ?>" alt="<?= t('energie_galerie_alt4') ?>" loading="lazy">
-        <div class="galerie-caption"><?= t('energie_galerie_cap4') ?></div>
+        <img src="<?= e($_e_g2) ?>" alt="<?= t('energie_galerie_alt2') ?>" loading="lazy">
+        <div class="galerie-item-overlay"><span class="energie-galerie-caption"><?= t('energie_galerie_cap2') ?></span></div>
       </div>
       <div class="galerie-item animate-fade-up delay-3">
-        <img src="<?= SITE_URL ?>/assets/images/energie/poste-transformation.jpg" alt="<?= t('energie_galerie_alt5') ?>" loading="lazy">
-        <div class="galerie-caption"><?= t('energie_galerie_cap5') ?></div>
+        <img src="<?= e($_e_g3) ?>" alt="<?= t('energie_galerie_alt3') ?>" loading="lazy">
+        <div class="galerie-item-overlay"><span class="energie-galerie-caption"><?= t('energie_galerie_cap3') ?></span></div>
       </div>
-    </div>
 
-    <!-- Ligne 3 : 3 égales -->
-    <div class="energie-galerie-3col">
+      <!-- Rang 2 : 4 égales -->
       <div class="galerie-item animate-fade-up delay-1">
-        <img src="<?= SITE_URL ?>/assets/images/energie/tranchee-cable-bt.jpg" alt="<?= t('energie_galerie_alt6') ?>" loading="lazy">
-        <div class="galerie-caption"><?= t('energie_galerie_cap6') ?></div>
+        <img src="<?= e($_e_g4) ?>" alt="<?= t('energie_galerie_alt4') ?>" loading="lazy">
+        <div class="galerie-item-overlay"><span class="energie-galerie-caption"><?= t('energie_galerie_cap4') ?></span></div>
       </div>
       <div class="galerie-item animate-fade-up delay-2">
+        <img src="<?= SITE_URL ?>/assets/images/energie/poste-transformation.jpg" alt="<?= t('energie_galerie_alt5') ?>" loading="lazy">
+        <div class="galerie-item-overlay"><span class="energie-galerie-caption"><?= t('energie_galerie_cap5') ?></span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-3">
+        <img src="<?= SITE_URL ?>/assets/images/energie/tranchee-cable-bt.jpg" alt="<?= t('energie_galerie_alt6') ?>" loading="lazy">
+        <div class="galerie-item-overlay"><span class="energie-galerie-caption"><?= t('energie_galerie_cap6') ?></span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-1">
         <img src="<?= SITE_URL ?>/assets/images/energie/tetes-cable-hta.jpg" alt="<?= t('energie_galerie_alt7') ?>" loading="lazy">
-        <div class="galerie-caption"><?= t('energie_galerie_cap7') ?></div>
+        <div class="galerie-item-overlay"><span class="energie-galerie-caption"><?= t('energie_galerie_cap7') ?></span></div>
+      </div>
+
+      <!-- Rang 3 : large + 2 petites -->
+      <div class="galerie-item gi-wide animate-fade-up delay-2">
+        <img src="<?= SITE_URL ?>/assets/images/energie/pose-poteau-equipe.jpg" alt="<?= t('energie_galerie_alt10') ?>" loading="lazy">
+        <div class="galerie-item-overlay"><span class="energie-galerie-caption"><?= t('energie_galerie_cap10') ?></span></div>
       </div>
       <div class="galerie-item animate-fade-up delay-3">
         <img src="<?= SITE_URL ?>/assets/images/energie/tranchee-fourreaux.jpg" alt="<?= t('energie_galerie_alt8') ?>" loading="lazy">
-        <div class="galerie-caption"><?= t('energie_galerie_cap8') ?></div>
+        <div class="galerie-item-overlay"><span class="energie-galerie-caption"><?= t('energie_galerie_cap8') ?></span></div>
       </div>
-    </div>
-
-    <!-- Ligne 4 : petite + grande, hauteur fixe -->
-    <div class="energie-galerie-l4">
       <div class="galerie-item animate-fade-up delay-1">
-        <img src="<?= SITE_URL ?>/assets/images/energie/support-mesure.jpg" alt="<?= t('energie_galerie_alt9') ?>" loading="lazy" style="object-position:center center;">
-        <div class="galerie-caption"><?= t('energie_galerie_cap9') ?></div>
+        <img src="<?= SITE_URL ?>/assets/images/energie/support-mesure.jpg" alt="<?= t('energie_galerie_alt9') ?>" loading="lazy">
+        <div class="galerie-item-overlay"><span class="energie-galerie-caption"><?= t('energie_galerie_cap9') ?></span></div>
       </div>
-      <div class="galerie-item animate-fade-up delay-2">
-        <img src="<?= SITE_URL ?>/assets/images/energie/pose-poteau-equipe.jpg" alt="<?= t('energie_galerie_alt10') ?>" loading="lazy">
-        <div class="galerie-caption"><?= t('energie_galerie_cap10') ?></div>
-      </div>
+
     </div>
 
-    <!-- Vidéo chantier -->
-    <div style="margin-top:24px;text-align:center;">
-      <h3 class="section-title" style="font-size:1.3rem;margin-bottom:20px;">
-        <?= t('energie_video_titre') ?>
-      </h3>
+    <!-- Vidéo encadrée pro -->
+    <div class="energie-video-wrap animate-fade-up">
+      <div class="energie-video-header">
+        <span class="energie-video-dot" style="background:#ff5f57;"></span>
+        <span class="energie-video-dot" style="background:#febc2e;"></span>
+        <span class="energie-video-dot" style="background:#28c840;"></span>
+        <span class="energie-video-title"><?= t('energie_video_titre') ?></span>
+      </div>
       <video
         src="<?= SITE_URL ?>/assets/videos/energie-pose-poteau.mov"
         controls
         preload="metadata"
-        style="max-width:780px;width:100%;border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);"
         poster="<?= SITE_URL ?>/assets/images/energie/pose-poteau-grue.jpg">
         <?= t('energie_video_fallback') ?>
       </video>

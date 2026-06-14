@@ -13,7 +13,7 @@ $galerie_id    = 'galerie_' . substr(md5($galerie_titre), 0, 6);
 <!-- ═══════════════════════════════════════════════════════════
      GALERIE PHOTOS
 ═══════════════════════════════════════════════════════════ -->
-<section class="section" style="background:#fff; padding-bottom:80px;">
+<section class="section" style="background:#fff;">
   <div class="container">
 
     <div class="section-header animate-fade-up" style="margin-bottom:36px;">
@@ -66,19 +66,18 @@ $galerie_id    = 'galerie_' . substr(md5($galerie_titre), 0, 6);
 .galerie-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
+  gap: 10px;
 }
-.galerie-grid .galerie-item:first-child { grid-column: span 2; grid-row: span 2; }
+.galerie-grid .galerie-item:first-child { grid-column: span 2; }
 
 .galerie-item {
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 10px;
   cursor: pointer;
   aspect-ratio: 4/3;
   background: var(--gris-clair);
 }
-.galerie-item:first-child { aspect-ratio: unset; }
 
 .galerie-item img {
   width: 100%; height: 100%; object-fit: cover; display: block;
