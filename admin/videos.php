@@ -5,8 +5,10 @@ security_headers();
 if (!isset($_SESSION['admin_logged'])) { header('Location: login.php'); exit; }
 
 $db = getDB();
-$upload_dir = __DIR__ . '/../uploads/videos/';
-if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
+$upload_dir  = __DIR__ . '/../uploads/videos/';
+$galerie_dir = __DIR__ . '/../uploads/galerie/';
+if (!is_dir($upload_dir))  mkdir($upload_dir,  0755, true);
+if (!is_dir($galerie_dir)) mkdir($galerie_dir, 0755, true);
 
 // Migration auto
 try {
@@ -20,11 +22,67 @@ try {
         actif TINYINT(1) DEFAULT 1,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
+    $db->exec("CREATE TABLE IF NOT EXISTS galerie_photos (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        fichier VARCHAR(300) NOT NULL,
+        legende VARCHAR(300) DEFAULT '',
+        onglet VARCHAR(50) DEFAULT 'chantiers',
+        actif TINYINT(1) DEFAULT 1,
+        sort_order INT DEFAULT 0,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    )");
+    $db->exec("ALTER TABLE galerie_photos ADD COLUMN IF NOT EXISTS actif TINYINT(1) DEFAULT 1");
+    $db->exec("ALTER TABLE galerie_photos ADD COLUMN IF NOT EXISTS created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP");
 } catch (Exception $e) {}
 
+$active_tab = $_GET['tab'] ?? 'videos';
 $msg = '';
 $msg_type = '';
 
+// ======= GALERIE CHANTIERS =======
+// Suppression photo
+if (isset($_GET['delete_photo']) && is_numeric($_GET['delete_photo'])) {
+    if (empty($_GET['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_GET['csrf_token'])) { header('Location: videos.php?tab=galerie&msg=csrf&type=error'); exit; }
+    $id = (int)$_GET['delete_photo'];
+    $row = $db->prepare("SELECT fichier FROM galerie_photos WHERE id=?"); $row->execute([$id]);
+    $f = $row->fetchColumn();
+    if ($f && file_exists($galerie_dir . basename($f))) @unlink($galerie_dir . basename($f));
+    $db->prepare("DELETE FROM galerie_photos WHERE id=?")->execute([$id]);
+    header('Location: videos.php?tab=galerie&msg=supprime&type=success'); exit;
+}
+// Toggle photo
+if (isset($_GET['toggle_photo']) && is_numeric($_GET['toggle_photo'])) {
+    if (empty($_GET['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_GET['csrf_token'])) { header('Location: videos.php?tab=galerie&msg=csrf&type=error'); exit; }
+    $db->prepare("UPDATE galerie_photos SET actif = NOT actif WHERE id=?")->execute([(int)$_GET['toggle_photo']]);
+    header('Location: videos.php?tab=galerie&msg=maj&type=success'); exit;
+}
+// Ajout photo
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'add_photo') {
+    if (!csrf_verify()) { header('Location: videos.php?tab=galerie&msg=csrf&type=error'); exit; }
+    $legende = mb_substr(trim($_POST['legende'] ?? ''), 0, 300);
+    if (empty($_FILES['photo']['name']) || $_FILES['photo']['error'] !== UPLOAD_ERR_OK) {
+        $msg = 'Veuillez sélectionner une photo.'; $msg_type = 'error';
+    } else {
+        $ext = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+        if (!in_array($ext, ['jpg','jpeg','png','webp'], true)) {
+            $msg = 'Format non supporté (JPG, PNG, WEBP).'; $msg_type = 'error';
+        } elseif ($_FILES['photo']['size'] > 10 * 1024 * 1024) {
+            $msg = 'Photo trop lourde (max 10 Mo).'; $msg_type = 'error';
+        } else {
+            $fname = 'chantier_' . uniqid() . '.' . $ext;
+            if (move_uploaded_file($_FILES['photo']['tmp_name'], $galerie_dir . $fname)) {
+                $db->prepare("INSERT INTO galerie_photos (fichier, legende, onglet, actif) VALUES (?,?,'chantiers',1)")
+                   ->execute([$fname, $legende]);
+                $msg = 'Photo ajoutée.'; $msg_type = 'success';
+            } else {
+                $msg = 'Erreur upload.'; $msg_type = 'error';
+            }
+        }
+    }
+    $active_tab = 'galerie';
+}
+
+// ======= VIDÉOS =======
 // ---- Suppression ----
 if (isset($_GET['delete']) && is_numeric($_GET['delete'])) {
     if (empty($_GET['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_GET['csrf_token'])) { header('Location: videos.php?msg=csrf&type=error'); exit; }
@@ -121,9 +179,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     }
 }
 
-if (isset($_GET['msg'])) { $msg = $_GET['msg'] === 'supprime' ? 'Vidéo supprimée.' : 'Mise à jour effectuée.'; $msg_type = $_GET['type'] ?? 'success'; }
+if (isset($_GET['msg'])) {
+    $msgs = ['supprime'=>'Supprimé avec succès.','maj'=>'Mise à jour effectuée.','csrf'=>'Erreur de sécurité.'];
+    $msg = $msgs[$_GET['msg']] ?? 'Action effectuée.';
+    $msg_type = $_GET['type'] ?? 'success';
+}
 
-$videos = $db->query("SELECT * FROM videos_chantiers ORDER BY sort_order ASC, id DESC")->fetchAll();
+$videos  = $db->query("SELECT * FROM videos_chantiers ORDER BY sort_order ASC, id DESC")->fetchAll();
+$galerie = $db->query("SELECT * FROM galerie_photos WHERE onglet='chantiers' ORDER BY sort_order ASC, id DESC")->fetchAll();
 $nb_messages = (int)$db->query("SELECT COUNT(*) FROM messages WHERE lu=0")->fetchColumn();
 
 $edit_data = null;
@@ -149,11 +212,25 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
   <main class="admin-main">
 <div class="admin-topbar">
   <div style="display:flex;align-items:center;gap:12px;">
-    <h1 style="margin:0;font-size:1.2rem;font-weight:700;color:#1a202c;">Vidéos Chantiers</h1>
-    <span style="background:#fff3e0;color:#c05621;font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:20px;"><?= count($videos) ?> vidéo(s)</span>
+    <h1 style="margin:0;font-size:1.2rem;font-weight:700;color:#1a202c;">Médias Chantiers</h1>
   </div>
+  <?php if ($active_tab === 'videos'): ?>
   <button onclick="document.getElementById('formAjout').style.display=document.getElementById('formAjout').style.display==='none'?'block':'none'"
           class="btn btn-primary btn-sm">+ Ajouter une vidéo</button>
+  <?php else: ?>
+  <button onclick="document.getElementById('formPhoto').style.display=document.getElementById('formPhoto').style.display==='none'?'block':'none'"
+          class="btn btn-primary btn-sm">+ Ajouter une photo</button>
+  <?php endif; ?>
+</div>
+
+<!-- Onglets -->
+<div style="display:flex;gap:0;border-bottom:2px solid #e2e8f0;margin:0 24px 0;">
+  <a href="?tab=videos" style="padding:10px 22px;font-size:.88rem;font-weight:600;text-decoration:none;border-bottom:3px solid <?= $active_tab==='videos' ? '#1a6bb5' : 'transparent' ?>;color:<?= $active_tab==='videos' ? '#1a6bb5' : '#718096' ?>;margin-bottom:-2px;">
+    🎬 Vidéos <span style="font-size:.72rem;background:#f0f7ff;color:#1a6bb5;border-radius:20px;padding:1px 7px;margin-left:4px;"><?= count($videos) ?></span>
+  </a>
+  <a href="?tab=galerie" style="padding:10px 22px;font-size:.88rem;font-weight:600;text-decoration:none;border-bottom:3px solid <?= $active_tab==='galerie' ? '#28a745' : 'transparent' ?>;color:<?= $active_tab==='galerie' ? '#28a745' : '#718096' ?>;margin-bottom:-2px;">
+    📸 Galerie Chantiers <span style="font-size:.72rem;background:#f0fff4;color:#276749;border-radius:20px;padding:1px 7px;margin-left:4px;"><?= count($galerie) ?></span>
+  </a>
 </div>
 
 <?php if ($msg): ?>
@@ -162,6 +239,73 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
 </div>
 <?php endif; ?>
 
+<?php if ($active_tab === 'galerie'): ?>
+<!-- ===== GALERIE CHANTIERS ===== -->
+<div id="formPhoto" style="display:none;margin:16px 24px 24px;background:#fff;border-radius:12px;border:1px solid #e2e8f0;padding:24px;">
+  <h3 style="margin:0 0 16px;font-size:1rem;font-weight:700;">Ajouter une photo chantier</h3>
+  <form method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
+    <input type="hidden" name="action" value="add_photo">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;">
+      <div>
+        <label style="font-size:.82rem;font-weight:600;color:#4a5568;display:block;margin-bottom:4px;">Photo * — JPG, PNG, WEBP, max 10 Mo</label>
+        <input type="file" name="photo" accept="image/jpeg,image/png,image/webp" required
+               style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:.85rem;box-sizing:border-box;background:#f8fafd;">
+      </div>
+      <div>
+        <label style="font-size:.82rem;font-weight:600;color:#4a5568;display:block;margin-bottom:4px;">Légende (optionnelle)</label>
+        <input type="text" name="legende" maxlength="300" placeholder="Ex: Chantier SOBOA — Dakar 2024"
+               style="width:100%;border:1px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:.9rem;box-sizing:border-box;">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;">
+      <button type="submit" class="btn btn-primary btn-sm">Ajouter</button>
+      <button type="button" onclick="document.getElementById('formPhoto').style.display='none'"
+              style="background:#f7fafc;border:1px solid #e2e8f0;border-radius:8px;padding:6px 16px;font-size:.85rem;cursor:pointer;">Annuler</button>
+    </div>
+  </form>
+</div>
+
+<div style="padding:0 24px 40px;">
+  <?php if (empty($galerie)): ?>
+  <div style="text-align:center;padding:60px 20px;color:#a0aec0;">
+    <div style="font-size:3rem;margin-bottom:12px;">📷</div>
+    <p>Aucune photo. Cliquez sur "+ Ajouter une photo" pour commencer.</p>
+  </div>
+  <?php else: ?>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-top:16px;">
+    <?php foreach ($galerie as $ph):
+      $src = SITE_URL . '/uploads/galerie/' . basename($ph['fichier']);
+    ?>
+    <div style="border-radius:12px;overflow:hidden;border:1.5px solid <?= $ph['actif'] ? '#e2e8f0' : '#fde8e8' ?>;background:#fff;position:relative;">
+      <div style="aspect-ratio:4/3;overflow:hidden;background:#0b1d3a;">
+        <img src="<?= e($src) ?>" style="width:100%;height:100%;object-fit:cover;display:block;" loading="lazy">
+      </div>
+      <div style="padding:8px 10px;">
+        <?php if ($ph['legende']): ?>
+        <div style="font-size:.78rem;font-weight:600;color:#1a202c;margin-bottom:6px;line-height:1.3;"><?= e($ph['legende']) ?></div>
+        <?php endif; ?>
+        <div style="display:flex;gap:5px;flex-wrap:wrap;">
+          <a href="?tab=galerie&toggle_photo=<?= $ph['id'] ?>&csrf_token=<?= csrf_token() ?>"
+             style="font-size:.7rem;padding:3px 8px;border-radius:6px;text-decoration:none;background:#f0f7ff;color:#1a6bb5;font-weight:600;">
+            <?= $ph['actif'] ? 'Masquer' : 'Afficher' ?>
+          </a>
+          <a href="?tab=galerie&delete_photo=<?= $ph['id'] ?>&csrf_token=<?= csrf_token() ?>"
+             onclick="return confirm('Supprimer cette photo ?')"
+             style="font-size:.7rem;padding:3px 8px;border-radius:6px;text-decoration:none;background:#fff5f5;color:#c53030;font-weight:600;">Supprimer</a>
+        </div>
+      </div>
+      <?php if (!$ph['actif']): ?>
+      <div style="position:absolute;top:8px;right:8px;background:#c53030;color:#fff;font-size:.65rem;font-weight:700;padding:2px 7px;border-radius:10px;">Masquée</div>
+      <?php endif; ?>
+    </div>
+    <?php endforeach; ?>
+  </div>
+  <?php endif; ?>
+</div>
+
+<?php else: ?>
+<!-- ===== VIDÉOS ===== -->
 <!-- Formulaire ajout/édition -->
 <div id="formAjout" style="<?= $edit_data ? 'display:block' : 'display:none' ?>;margin:0 24px 24px;background:#fff;border-radius:12px;border:1px solid #e2e8f0;padding:24px;">
   <h3 style="margin:0 0 16px;font-size:1rem;font-weight:700;"><?= $edit_data ? 'Modifier la vidéo' : 'Ajouter une vidéo' ?></h3>
@@ -253,6 +397,8 @@ if (isset($_GET['edit']) && is_numeric($_GET['edit'])) {
   </div>
   <?php endif; ?>
 </div>
+
+<?php endif; // fin onglet galerie/videos ?>
 
   </main>
 </div>
