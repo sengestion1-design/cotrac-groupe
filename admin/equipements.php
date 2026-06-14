@@ -60,22 +60,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Gestion upload photo
         $image_name = null;
+        $upload_error = false;
         if (!empty($_FILES['photo']['name'])) {
-            $ext = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
-            if (in_array($ext, ['jpg','jpeg','png','webp']) && $_FILES['photo']['size'] <= 3*1024*1024) {
-                $upload_dir = __DIR__ . '/../uploads/equipements/';
-                if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
-                $image_name = 'eq_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
-                move_uploaded_file($_FILES['photo']['tmp_name'], $upload_dir . $image_name);
+            $upload_err_code = $_FILES['photo']['error'];
+            if ($upload_err_code === UPLOAD_ERR_INI_SIZE || $upload_err_code === UPLOAD_ERR_FORM_SIZE) {
+                $message = 'Photo trop lourde. Limite serveur : ' . ini_get('upload_max_filesize') . '.';
+                $type_msg = 'error'; $upload_error = true;
+            } elseif ($upload_err_code !== UPLOAD_ERR_OK) {
+                $message = 'Erreur upload (code ' . $upload_err_code . ').';
+                $type_msg = 'error'; $upload_error = true;
             } else {
-                $message = 'Format ou taille invalide (max 3 Mo, JPG/PNG/WebP).';
-                $type_msg = 'error';
+                $ext = strtolower(pathinfo($_FILES['photo']['name'], PATHINFO_EXTENSION));
+                if (!in_array($ext, ['jpg','jpeg','png','webp'])) {
+                    $message = 'Format invalide. Utilisez JPG, PNG ou WebP.';
+                    $type_msg = 'error'; $upload_error = true;
+                } elseif ($_FILES['photo']['size'] > 8*1024*1024) {
+                    $message = 'Photo trop lourde (max 8 Mo).';
+                    $type_msg = 'error'; $upload_error = true;
+                } else {
+                    $upload_dir = __DIR__ . '/../uploads/equipements/';
+                    if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
+                    $image_name = 'eq_' . time() . '_' . bin2hex(random_bytes(4)) . '.' . $ext;
+                    if (!move_uploaded_file($_FILES['photo']['tmp_name'], $upload_dir . $image_name)) {
+                        $message = 'Erreur : impossible de sauvegarder la photo sur le serveur.';
+                        $type_msg = 'error'; $upload_error = true; $image_name = null;
+                    }
+                }
             }
         }
 
         if (!$nom) {
             $message = 'Le nom est obligatoire.';
             $type_msg = 'error';
+        } elseif ($upload_error) {
+            // message déjà défini, ne pas écraser
         } elseif ($edit_id) {
             if ($image_name) {
                 $db->prepare("UPDATE equipements SET nom=?, description=?, quantite=?, categorie=?, couleur=?, image=? WHERE id=?")
@@ -449,7 +467,7 @@ $active_tab = $_GET['tab'] ?? 'equipements';
               <?php endif; ?>
               <input type="file" name="photo" accept="image/jpeg,image/png,image/webp"
                      style="border:1.5px solid #e2e8f0;border-radius:8px;padding:8px 12px;font-size:.875rem;">
-              <span style="font-size:.75rem;color:#a0aec0;margin-top:4px;">JPG, PNG ou WebP — max 3 Mo</span>
+              <span style="font-size:.75rem;color:#a0aec0;margin-top:4px;">JPG, PNG ou WebP — max 8 Mo</span>
             </div>
           </div>
 
