@@ -849,7 +849,7 @@ return [
     'cert_ninea_titre'            => 'Tax Identification Number',
     'cert_ninea_desc'             => 'National tax identifier issued by the Directorate of Taxes and Domains.',
     'cert_sarl_titre'             => 'Legal form',
-    'cert_sarl_ref'               => 'Capital: 5,000,000 CFA',
+    'cert_sarl_ref'               => 'LLC',
     'cert_sarl_desc'              => 'Limited liability company incorporated under OHADA law.',
     'cert_btp_titre'              => 'Civil Engineering Qualification',
     'cert_btp_ref'                => 'Special Works Category',

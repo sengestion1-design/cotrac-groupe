@@ -850,7 +850,7 @@ return [
     'cert_ninea_titre'            => 'Numéro d\'Identification',
     'cert_ninea_desc'             => 'Identifiant fiscal national attribué par la Direction des Impôts et Domaines.',
     'cert_sarl_titre'             => 'Forme juridique',
-    'cert_sarl_ref'               => 'Capital : 5 000 000 FCFA',
+    'cert_sarl_ref'               => 'SARL',
     'cert_sarl_desc'              => 'Société à Responsabilité Limitée, constituée conformément au droit OHADA.',
     'cert_btp_titre'              => 'Qualification BTP',
     'cert_btp_ref'                => 'Catégorie Travaux Spéciaux',

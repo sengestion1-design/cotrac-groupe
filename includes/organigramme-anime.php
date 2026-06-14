@@ -449,10 +449,15 @@
           obs.unobserve(entry.target);
         }
       });
-    }, { threshold: 0.12 });
+    }, { threshold: 0.05, rootMargin: '0px 0px -50px 0px' });
     obs.observe(section);
   } else {
     revealAll();
   }
+
+  /* Fallback : si après 2s l'animation n'a pas démarré (ex: IONOS CDN cache), on force */
+  setTimeout(function() {
+    if (!triggered) revealAll();
+  }, 2000);
 })();
 </script>

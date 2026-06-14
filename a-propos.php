@@ -182,6 +182,8 @@ require_once __DIR__ . '/includes/header.php';
 .section-2col .col-text p { color: #6b7280; line-height: 1.8; margin-bottom: 1rem; }
 @media (max-width: 768px) {
   .section-2col { grid-template-columns: 1fr; gap: 2rem; }
+  .section-2col .col-img { order: -1; }
+  .section-2col img { max-height: 280px; object-fit: cover; }
 }
 
 /* ── Stats section responsive (1fr 380px → 1col sous 900px) ── */
