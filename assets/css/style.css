@@ -954,31 +954,31 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    ============================================================ */
 .services-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 16px;
-  margin-top: 32px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 28px;
 }
 .service-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   background: linear-gradient(135deg, #e8f0fb, #cddcf7);
-  border-radius: 12px;
-  margin-bottom: 14px;
+  border-radius: 10px;
+  margin-bottom: 10px;
   flex-shrink: 0;
 }
 .service-icon .ico {
-  width: 1.6rem;
-  height: 1.6rem;
+  width: 1.4rem;
+  height: 1.4rem;
   background-color: var(--bleu);
 }
 .service-item {
   background: var(--blanc);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 20px 22px;
+  padding: 16px 18px;
   transition: var(--transition);
   box-shadow: 0 2px 8px rgba(26,107,181,0.05);
 }
@@ -988,25 +988,25 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   transform: translateY(-3px);
 }
 .service-item h3 {
-  font-size: 1rem;
+  font-size: .92rem;
   font-weight: 700;
   color: var(--texte);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 .service-item h3 .icon { font-size: 1.3rem; }
 .service-item ul { padding-left: 0; }
 .service-item ul li {
-  font-size: 0.88rem;
+  font-size: 0.82rem;
   color: #4b5563;
-  padding: 6px 0;
+  padding: 4px 0;
   border-bottom: 1px solid var(--border);
   display: flex;
   align-items: flex-start;
-  gap: 8px;
-  line-height: 1.6;
+  gap: 6px;
+  line-height: 1.5;
 }
 .service-item ul li:last-child { border-bottom: none; }
 .service-item ul li::before {
@@ -1788,6 +1788,10 @@ table tr:hover td { background: var(--gris-clair); }
     height: 200px !important;
     transform: none !important;
   }
+  .services-list { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .services-list { grid-template-columns: 1fr; }
 }
 
 /* Section text-center : marge correcte */
