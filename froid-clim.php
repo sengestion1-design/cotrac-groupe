@@ -261,19 +261,53 @@ require_once 'includes/header.php';
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin-top:40px;">
       <?php
       $secteurs = [
-        ['emoji'=>'🚢', 'nom'=>'Pêche industrielle',    'desc'=>'Chalutiers-congélateurs, cales de conservation, lignes Fréon / Ammoniac embarquées'],
-        ['emoji'=>'🥩', 'nom'=>'Agroalimentaire',        'desc'=>'Chambres froides, tunnels de congélation, entrepôts frigorifiques'],
-        ['emoji'=>'🏭', 'nom'=>'Industrie',              'desc'=>'Sphères de stockage, lignes ammoniac, ICS MBAO'],
-        ['emoji'=>'🏢', 'nom'=>'Tertiaire / VMC',        'desc'=>'Fabrication de gaines, extraction de cuisines, ventilation mécanique contrôlée'],
-        ['emoji'=>'❄️', 'nom'=>'Stockage froid',         'desc'=>'Réhabilitation de chambres froides, panneaux ISOCAB grandes portées'],
-        ['emoji'=>'🔧', 'nom'=>'Naval / Armement',       'desc'=>'ARMEMENT SOPASEN, lignes de réfrigération à bord, isolation anti-condensation'],
+        [
+          'paths' => '<path d="M2 20h20"/><path d="M6 20V10l6-7 6 7v10"/><path d="M10 20v-5h4v5"/><path d="M3 10h18"/>',
+          'nom'   => 'Pêche industrielle',
+          'desc'  => 'Chalutiers-congélateurs, cales de conservation, lignes Fréon / Ammoniac embarquées',
+          'color' => '#0891b2',
+        ],
+        [
+          'paths' => '<path d="M3 9h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z"/><path d="M3 9l2.45-4.9A2 2 0 0 1 7.24 3h9.52a2 2 0 0 1 1.8 1.1L21 9"/><path d="M12 3v6"/>',
+          'nom'   => 'Agroalimentaire',
+          'desc'  => 'Chambres froides, tunnels de congélation, entrepôts frigorifiques',
+          'color' => '#27ae60',
+        ],
+        [
+          'paths' => '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/>',
+          'nom'   => 'Industrie',
+          'desc'  => 'Sphères de stockage, lignes ammoniac, ICS MBAO',
+          'color' => '#8e44ad',
+        ],
+        [
+          'paths' => '<path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/>',
+          'nom'   => 'Tertiaire / VMC',
+          'desc'  => 'Fabrication de gaines, extraction de cuisines, ventilation mécanique contrôlée',
+          'color' => '#1a6bb5',
+        ],
+        [
+          'paths' => '<path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="4"/>',
+          'nom'   => 'Stockage froid',
+          'desc'  => 'Réhabilitation de chambres froides, panneaux ISOCAB grandes portées',
+          'color' => '#0891b2',
+        ],
+        [
+          'paths' => '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+          'nom'   => 'Naval / Armement',
+          'desc'  => 'ARMEMENT SOPASEN, lignes de réfrigération à bord, isolation anti-condensation',
+          'color' => '#f7941d',
+        ],
       ];
       foreach ($secteurs as $s):
       ?>
-      <div style="background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 20px;text-align:center;transition:var(--transition);"
-           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 36px rgba(8,145,178,0.12)'"
+      <div style="background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px 20px;text-align:center;transition:transform .25s,box-shadow .25s;"
+           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 36px rgba(8,145,178,0.13)'"
            onmouseout="this.style.transform='';this.style.boxShadow=''">
-        <div style="font-size:2.2rem;margin-bottom:10px;"><?= $s['emoji'] ?></div>
+        <div style="width:54px;height:54px;border-radius:14px;background:<?= $s['color'] ?>1a;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="<?= $s['color'] ?>" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+            <?= $s['paths'] ?>
+          </svg>
+        </div>
         <h3 style="font-size:.95rem;font-weight:700;color:var(--texte);margin-bottom:6px;"><?= $s['nom'] ?></h3>
         <p style="font-size:.78rem;color:var(--gris);line-height:1.5;"><?= $s['desc'] ?></p>
       </div>
