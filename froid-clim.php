@@ -258,7 +258,7 @@ require_once 'includes/header.php';
       <p class="section-sub">De la pêche industrielle aux entrepôts frigorifiques, nos équipes interviennent partout où la maîtrise du froid est critique.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin-top:40px;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px;">
       <?php
       $secteurs = [
         [
