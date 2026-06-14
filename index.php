@@ -377,70 +377,7 @@ $photos = array_merge($photos, $photos);
 </section>
 
 
-<!-- ═══════════════════════════════════════════════════════════
-     SECTION : VIDÉO CHANTIER
-═══════════════════════════════════════════════════════════ -->
-<?php if (cms_active('index','video_chantier')): ?>
-<section class="section" style="background:#0a1628;padding:0;overflow:hidden;">
-  <div style="position:relative;height:580px;overflow:hidden;">
-
-    <!-- Vidéo -->
-    <?php
-    $_vid_src_raw = cms('index','video_chantier','video_src','assets/videos/cotrac-chantier.mp4');
-    $_vid_src = cms_img_url($_vid_src_raw);
-    $_vid_poster_raw = cms('index','video_chantier','poster_img','');
-    $_vid_poster = cms_bg_url($_vid_poster_raw);
-    ?>
-    <video
-      id="cotrac-video"
-      autoplay muted loop playsinline
-      <?= $_vid_poster ? 'poster="'.e($_vid_poster).'"' : '' ?>
-      style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.52;">
-      <source src="<?= e($_vid_src) ?>" type="video/mp4">
-    </video>
-
-    <!-- Overlay contenu centré -->
-    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;">
-      <span style="background:rgba(247,148,29,0.18);border:1px solid rgba(247,148,29,0.4);color:#f7941d;font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:6px 16px;border-radius:50px;margin-bottom:20px;">
-        <?= icon('play','#f7941d','.8rem') ?> <?= t('index_video_badge') ?>
-      </span>
-      <h2 style="color:#fff;font-size:clamp(1.8rem,4vw,3rem);font-weight:800;line-height:1.2;margin-bottom:18px;max-width:700px;font-family:'Poppins',sans-serif;">
-        <?= t('index_video_titre') ?>
-      </h2>
-      <p style="color:rgba(255,255,255,0.82);font-size:1.05rem;line-height:1.7;max-width:540px;margin-bottom:32px;">
-        <?= t('index_video_desc') ?>
-      </p>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;justify-content:center;">
-        <a href="<?= SITE_URL ?>/realisations.php" class="btn btn-primary">
-          <?= icon('arrow-right','','.9rem') ?> <?= t('index_video_btn_real') ?>
-        </a>
-        <a href="<?= SITE_URL ?>/contact.php" class="btn btn-outline" style="border-color:rgba(255,255,255,0.5);color:#fff;">
-          <?= icon('mail','','.9rem') ?> <?= t('index_video_btn_contact') ?>
-        </a>
-      </div>
-
-      <!-- Mini stats -->
-      <div class="video-mini-stats">
-        <div class="vms-item">
-          <div class="vms-val">10+</div>
-          <div class="vms-label"><?= t('index_video_stat_ans') ?></div>
-        </div>
-        <div class="vms-sep"></div>
-        <div class="vms-item">
-          <div class="vms-val">15+</div>
-          <div class="vms-label"><?= t('index_video_stat_projets') ?></div>
-        </div>
-        <div class="vms-sep"></div>
-        <div class="vms-item">
-          <div class="vms-val">14</div>
-          <div class="vms-label"><?= t('index_video_stat_regions') ?></div>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-<?php endif; ?>
+<!-- section video_chantier fusionnée avec la section player macOS ci-dessous -->
 
 
 <!-- ═══════════════════════════════════════════════════════════
@@ -607,9 +544,11 @@ $photos = array_merge($photos, $photos);
   background: rgba(255,255,255,.15);
 }
 @media (max-width: 640px) {
-  .index-video-points { flex-direction: column; gap: 16px; }
+  .index-video-points { flex-direction: column; gap: 12px; margin-top: 20px; }
   .ivp-sep { display: none; }
   .index-video-wrap { border-radius: 10px; }
+  .ivp-item { font-size: .84rem; padding: 0 12px; }
+  .index-video-play-btn { width: 60px; height: 60px; }
 }
 </style>
 
