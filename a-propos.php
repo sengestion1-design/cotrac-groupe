@@ -117,13 +117,14 @@ require_once __DIR__ . '/includes/header.php';
 .tl-desc { font-size: .9rem; color: #6b7280; line-height: 1.6; }
 
 @media (max-width: 640px) {
-  .timeline::before { left: 14px; }
+  .timeline { padding-left: 8px; }
+  .timeline::before { left: 20px; }
   .tl-item, .tl-item:nth-child(even) {
     justify-content: flex-start;
-    padding-left: 3rem;
+    padding-left: 3.5rem;
     padding-right: 0;
   }
-  .tl-dot { left: 14px; }
+  .tl-dot { left: 20px; transform: translate(-50%, -50%); }
   .tl-box { max-width: 100%; }
 }
 
@@ -181,9 +182,9 @@ require_once __DIR__ . '/includes/header.php';
 .section-2col img { width: 100%; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,.12); }
 .section-2col .col-text p { color: #6b7280; line-height: 1.8; margin-bottom: 1rem; }
 @media (max-width: 768px) {
-  .section-2col { grid-template-columns: 1fr; gap: 2rem; }
+  .section-2col { grid-template-columns: 1fr; gap: 1.5rem; }
   .section-2col .col-img { order: -1; }
-  .section-2col img { max-height: 280px; object-fit: cover; }
+  .section-2col img { max-height: 240px; object-fit: cover; width: 100%; }
 }
 
 /* ── Stats section responsive (1fr 380px → 1col sous 900px) ── */
@@ -1174,9 +1175,9 @@ require_once __DIR__ . '/includes/header.php';
 /* ── Partenaires institutionnels ── */
 .partenaires-inst-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  max-width: 640px;
+  max-width: 900px;
   margin: 0 auto;
 }
 .partenaire-inst-card {
@@ -1222,8 +1223,8 @@ require_once __DIR__ . '/includes/header.php';
   display: inline-block;
   margin-top: 4px;
 }
-@media (max-width: 768px) { .partenaires-inst-grid { grid-template-columns: 1fr 1fr; } }
-@media (max-width: 480px) { .partenaires-inst-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .partenaires-inst-grid { grid-template-columns: repeat(2, 1fr); max-width: 100%; } }
+@media (max-width: 480px) { .partenaires-inst-grid { grid-template-columns: repeat(2, 1fr); } }
 </style>
 
 <!-- DEBUG-MARKER-5 -->
