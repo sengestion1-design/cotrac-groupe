@@ -124,7 +124,9 @@ require_once 'includes/header.php';
 .res-stat-val { font-size:2rem;font-weight:800;color:var(--bleu);line-height:1; }
 .res-stat-label { font-size:.78rem;color:#718096;margin-top:6px;text-transform:uppercase;letter-spacing:.06em; }
 
-.res-equip-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px;margin-bottom:8px; }
+.res-equip-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:8px; }
+@media(max-width:900px){.res-equip-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:560px){.res-equip-grid{grid-template-columns:repeat(2,1fr);}}
 .res-equip-card { display:flex;flex-direction:column;align-items:stretch;background:#fff;border-radius:12px;overflow:hidden;padding:0;box-shadow:0 2px 10px rgba(0,0,0,.06);border:1px solid #e8eef5;transition:transform .2s,box-shadow .2s; }
 .res-equip-card:hover { transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12); }
 .res-equip-icon { width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0; }
