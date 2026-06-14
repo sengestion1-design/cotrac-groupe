@@ -343,9 +343,95 @@ if (!empty($videos_chantiers)): ?>
         </video>
       </div>
       <?php endforeach; ?>
+
+      <!-- SEN'EAU vidéo 1 : Station Bayakh -->
+      <div class="video-player-wrap animate-fade-up">
+        <div class="video-player-header">
+          <span class="video-player-dot" style="background:#ff5f57;"></span>
+          <span class="video-player-dot" style="background:#febc2e;"></span>
+          <span class="video-player-dot" style="background:#28c840;"></span>
+          <span class="video-player-title">SEN'EAU — Station Bayakh</span>
+        </div>
+        <div class="real-vid-wrap" id="se1wrap">
+          <video preload="metadata"
+            poster="<?= SITE_URL ?>/assets/images/seneau1-poster.jpg"
+            style="display:block;width:100%;height:100%;object-fit:cover;">
+            <source src="<?= SITE_URL ?>/assets/videos/seneau1.mp4" type="video/mp4">
+          </video>
+          <div class="real-vid-ov" id="se1ov">
+            <button class="real-vid-btn" aria-label="Lire">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><polygon points="5,3 19,12 5,21"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SEN'EAU vidéo 2 : Station F3 -->
+      <div class="video-player-wrap animate-fade-up">
+        <div class="video-player-header">
+          <span class="video-player-dot" style="background:#ff5f57;"></span>
+          <span class="video-player-dot" style="background:#febc2e;"></span>
+          <span class="video-player-dot" style="background:#28c840;"></span>
+          <span class="video-player-title">SEN'EAU — Bayakh Station F3</span>
+        </div>
+        <div class="real-vid-wrap" id="se2wrap">
+          <video preload="metadata"
+            poster="<?= SITE_URL ?>/assets/images/seneauF3-poster.jpg"
+            style="display:block;width:100%;height:100%;object-fit:cover;">
+            <source src="<?= SITE_URL ?>/assets/videos/seneauF3.mp4" type="video/mp4">
+          </video>
+          <div class="real-vid-ov" id="se2ov">
+            <button class="real-vid-btn" aria-label="Lire">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff"><polygon points="5,3 19,12 5,21"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
+
+<style>
+.real-vid-wrap {
+  position: relative; background: #000;
+  aspect-ratio: 16/9; overflow: hidden;
+}
+.real-vid-wrap video { display:block;width:100%;height:100%;object-fit:cover; }
+.real-vid-ov {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.28); cursor: pointer;
+  transition: background .2s;
+}
+.real-vid-ov:hover { background: rgba(0,0,0,.16); }
+.real-vid-btn {
+  width: 62px; height: 62px; border-radius: 50%;
+  background: rgba(26,107,181,.92);
+  border: 3px solid rgba(255,255,255,.6);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 24px rgba(26,107,181,.5);
+  transition: transform .2s, background .2s;
+}
+.real-vid-btn:hover { transform: scale(1.1); background: #1a6bb5; }
+</style>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.real-vid-ov').forEach(function(ov) {
+    function play() {
+      var video = ov.previousElementSibling;
+      ov.style.display = 'none';
+      video.controls = true;
+      video.play();
+    }
+    ov.addEventListener('click', play);
+    var btn = ov.querySelector('.real-vid-btn');
+    if (btn) btn.addEventListener('click', function(e) { e.stopPropagation(); play(); });
+  });
+});
+</script>
+
 <?php endif; ?>
 
 <!-- Modal vidéo lightbox -->
