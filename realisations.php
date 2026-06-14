@@ -354,10 +354,10 @@ if (!empty($videos_chantiers)): ?>
           <span class="video-player-dot" style="background:#28c840;"></span>
           <span class="video-player-title">SEN'EAU — Station Bayakh</span>
         </div>
-        <div class="real-vid-wrap" id="se1wrap">
+        <div style="position:relative;">
           <video preload="metadata"
             poster="<?= SITE_URL ?>/assets/images/seneau1-poster.jpg"
-            style="display:block;width:100%;height:100%;object-fit:cover;">
+            playsinline>
             <source src="<?= SITE_URL ?>/assets/videos/seneau1.mp4" type="video/mp4">
           </video>
           <div class="real-vid-ov" id="se1ov">
@@ -376,10 +376,10 @@ if (!empty($videos_chantiers)): ?>
           <span class="video-player-dot" style="background:#28c840;"></span>
           <span class="video-player-title">SEN'EAU — Bayakh Station F3</span>
         </div>
-        <div class="real-vid-wrap" id="se2wrap">
+        <div style="position:relative;">
           <video preload="metadata"
             poster="<?= SITE_URL ?>/assets/images/seneauF3-poster.jpg"
-            style="display:block;width:100%;height:100%;object-fit:cover;">
+            playsinline>
             <source src="<?= SITE_URL ?>/assets/videos/seneauF3.mp4" type="video/mp4">
           </video>
           <div class="real-vid-ov" id="se2ov">
@@ -395,11 +395,6 @@ if (!empty($videos_chantiers)): ?>
 </section>
 
 <style>
-.real-vid-wrap {
-  position: relative; background: #000;
-  height: 240px; overflow: hidden;
-}
-.real-vid-wrap video { display:block;width:100%;height:100%;object-fit:cover; }
 .real-vid-ov {
   position: absolute; inset: 0;
   display: flex; align-items: center; justify-content: center;
