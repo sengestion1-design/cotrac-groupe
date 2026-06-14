@@ -270,45 +270,123 @@ $poles_colors = ['btp'=>'#f7941d','energie'=>'#27ae60','routes'=>'#1a6bb5','indu
 try { $db->exec("CREATE TABLE IF NOT EXISTS videos_chantiers (id INT AUTO_INCREMENT PRIMARY KEY, titre VARCHAR(255) NOT NULL, description VARCHAR(500) DEFAULT NULL, fichier VARCHAR(300) NOT NULL, thumbnail VARCHAR(300) DEFAULT NULL, sort_order INT DEFAULT 0, actif TINYINT(1) DEFAULT 1, created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP)"); } catch(Exception $e){}
 $videos_chantiers = $db->query("SELECT * FROM videos_chantiers WHERE actif=1 ORDER BY sort_order ASC, id DESC")->fetchAll();
 if (!empty($videos_chantiers)): ?>
-<section class="section" style="background:#f8fafd;padding-top:28px;padding-bottom:28px;">
+<style>
+/* ── Section vidéos chantiers ── */
+.videos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 8px;
+}
+.video-card {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0d1f3c;
+  cursor: pointer;
+  position: relative;
+  box-shadow: 0 6px 28px rgba(0,0,0,.18);
+  transition: transform .25s, box-shadow .25s;
+}
+.video-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(0,0,0,.28);
+}
+.video-card-thumb {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+}
+.video-card-thumb img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: .82;
+  transition: opacity .3s, transform .4s;
+}
+.video-card:hover .video-card-thumb img {
+  opacity: .65;
+  transform: scale(1.04);
+}
+.video-card-thumb .vc-bg {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, #1a3a5c 0%, #1a6bb5 100%);
+  display: flex; align-items: center; justify-content: center;
+}
+/* Overlay gradient bas */
+.video-card-thumb::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(8,18,36,.72) 0%, rgba(8,18,36,.1) 50%, transparent 100%);
+  pointer-events: none;
+}
+/* Bouton play centré */
+.video-card-play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 60px; height: 60px;
+  background: var(--orange, #f7941d);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(247,148,29,.5);
+  transition: transform .2s, box-shadow .2s;
+  z-index: 2;
+}
+.video-card:hover .video-card-play {
+  transform: translate(-50%, -50%) scale(1.12);
+  box-shadow: 0 8px 32px rgba(247,148,29,.65);
+}
+/* Titre en bas sur fond sombre */
+.video-card-title {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 10px 14px 12px;
+  z-index: 2;
+}
+.video-card-title h3 {
+  color: #fff;
+  font-size: .88rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.35;
+  text-shadow: 0 1px 6px rgba(0,0,0,.5);
+}
+@media (max-width: 900px) {
+  .videos-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+  .videos-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<section class="section" style="background:#f4f7fb;">
   <div class="container">
-    <div style="text-align:center;margin-bottom:40px;">
+    <div class="text-center">
       <span class="section-tag">Nos Chantiers</span>
       <h2 class="section-title">Nos Travaux en <span style="color:var(--orange)">Vidéo</span></h2>
       <p class="section-sub">Découvrez nos chantiers en action</p>
     </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(320px,100%),1fr));gap:24px;">
+    <div class="videos-grid">
       <?php foreach ($videos_chantiers as $vc):
         $vid_fn  = basename($vc['fichier']);
         $vid_src = SITE_URL . '/uploads/videos/' . $vid_fn;
         $thumb   = !empty($vc['thumbnail']) ? SITE_URL . '/uploads/videos/' . basename($vc['thumbnail']) : '';
       ?>
-      <div class="play-btn-card" style="border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.1);background:#0a1628;cursor:pointer;position:relative;transition:transform .25s,box-shadow .25s;"
-           data-src="<?= e($vid_src) ?>" data-titre="<?= e($vc['titre']) ?>"
-           onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 36px rgba(0,0,0,.18)'"
-           onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,.1)'">
-        <!-- Thumbnail -->
-        <div style="position:relative;height:200px;overflow:hidden;">
+      <div class="video-card" onclick="ouvrirVideo('<?= e($vid_src) ?>', '<?= e($vc['titre']) ?>')">
+        <div class="video-card-thumb">
           <?php if ($thumb): ?>
-          <img src="<?= e($thumb) ?>" alt="<?= e($vc['titre']) ?>" style="width:100%;height:100%;object-fit:cover;opacity:.8;">
+            <img src="<?= e($thumb) ?>" alt="<?= e($vc['titre']) ?>" loading="lazy">
           <?php else: ?>
-          <div style="width:100%;height:100%;background:linear-gradient(135deg,#1a3a5c,#1a6bb5);display:flex;align-items:center;justify-content:center;">
-            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          </div>
+            <div class="vc-bg">
+              <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.25)" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
           <?php endif; ?>
-          <!-- Overlay -->
-          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(10,22,40,.75) 0%,transparent 55%);"></div>
-          <!-- Bouton play -->
-          <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:64px;height:64px;background:rgba(240,128,20,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 24px rgba(0,0,0,.4);">
-            <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          <div class="video-card-play">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="#fff" style="margin-left:3px"><polygon points="5 3 19 12 5 21 5 3"/></svg>
           </div>
-        </div>
-        <!-- Titre -->
-        <div style="padding:14px 16px 16px;">
-          <h3 style="color:#fff;font-size:.95rem;font-weight:700;margin:0 0 4px;line-height:1.4;"><?= e($vc['titre']) ?></h3>
-          <?php if (!empty($vc['description'])): ?>
-          <p style="color:rgba(255,255,255,.5);font-size:.8rem;margin:0;line-height:1.5;"><?= e($vc['description']) ?></p>
-          <?php endif; ?>
+          <div class="video-card-title">
+            <h3><?= e($vc['titre']) ?></h3>
+          </div>
         </div>
       </div>
       <?php endforeach; ?>
