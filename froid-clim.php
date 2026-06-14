@@ -2,7 +2,7 @@
 require_once __DIR__ . '/lang/lang.php';
 require_once __DIR__ . '/config/database.php';
 $page_title = 'Génie Industriel Froid & Climatisation | COTRAC';
-$page_desc  = 'COTRAC installe et maintient vos systèmes de froid industriel et de climatisation au Sénégal : chambres froides, groupes froids, split-systems, VRV/VRF, centrales de traitement d\'air et maintenance préventive.';
+$page_desc  = 'COTRAC réalise l\'isolation cryogénique et frigorifique, la fabrication de chambres froides, de gaines VMC et de portes de chambres froides au Sénégal. Expertise nautique, industrielle et agroalimentaire.';
 require_once 'includes/header.php';
 ?>
 
@@ -16,35 +16,35 @@ require_once 'includes/header.php';
   <div class="container grid-2col" style="gap:48px;align-items:center;">
     <div>
       <nav class="breadcrumb">
-        <a href="<?= SITE_URL ?>/index.php"><?= t('nav_accueil') ?></a>
+        <a href="<?= SITE_URL ?>/index.php">Accueil</a>
         <span class="sep">›</span>
-        <a href="<?= SITE_URL ?>/index.php#poles"><?= t('nav_poles') ?></a>
+        <a href="<?= SITE_URL ?>/index.php#poles">Pôles</a>
         <span class="sep">›</span>
-        <span>Génie Industriel Froid & Climatisation</span>
+        <span>Froid &amp; Climatisation</span>
       </nav>
       <h1 class="page-hero-title animate-fade-up">
-        Génie Industriel<br><span style="color:#f7941d;">Froid & Climatisation</span>
+        Froid &amp; Climatisation<br><span style="color:#f7941d;">Génie Industriel</span>
       </h1>
       <p class="page-hero-desc animate-fade-up delay-1">
-        Installation, maintenance et conception de systèmes frigorifiques industriels et de climatisation pour l'industrie agroalimentaire, pharmaceutique, hôtelière et tertiaire au Sénégal.
+        Isolation cryogénique et frigorifique, chambres froides, gaines VMC et portes isothermes — COTRAC intervient de l'industrie navale aux entrepôts agroalimentaires, clé en main.
       </p>
       <div class="animate-fade-up delay-2" style="display:flex;gap:14px;margin-top:28px;flex-wrap:wrap;">
-        <a href="<?= SITE_URL ?>/contact.php" class="btn btn-primary">Demander un devis</a>
-        <a href="<?= SITE_URL ?>/realisations.php" class="btn btn-outline" style="border-color:rgba(255,255,255,0.5);color:#fff;">Nos réalisations</a>
+        <a href="<?= SITE_URL ?>/contact" class="btn btn-primary">Demander un devis</a>
+        <a href="<?= SITE_URL ?>/realisations" class="btn btn-outline" style="border-color:rgba(255,255,255,0.5);color:#fff;">Nos réalisations</a>
       </div>
     </div>
     <div class="animate-fade-up delay-2" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:16px;">
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
         <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">-40°C</div>
-        <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;">Temp. minimale</div>
+        <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;">Tunnels congélation</div>
+      </div>
+      <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
+        <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">-18°C</div>
+        <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;">Cales conservation</div>
       </div>
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
         <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">1 T/j</div>
-        <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;">Capacité froid</div>
-      </div>
-      <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
-        <div style="font-size:2.2rem;font-weight:800;color:#f7941d;line-height:1;">24/7</div>
-        <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;">Maintenance</div>
+        <div style="font-size:.74rem;color:rgba(255,255,255,0.72);margin-top:5px;text-transform:uppercase;letter-spacing:.08em;">Capacité VMC</div>
       </div>
       <div style="background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.15);border-radius:14px;padding:22px 18px;text-align:center;backdrop-filter:blur(6px);">
         <div style="font-size:1.5rem;font-weight:800;color:#f7941d;line-height:1;">Clé en main</div>
@@ -63,68 +63,69 @@ require_once 'includes/header.php';
   <div class="container">
     <div class="text-center">
       <span class="section-tag">Nos domaines</span>
-      <h2 class="section-title">Froid Industriel & Climatisation</h2>
-      <p class="section-sub">De la conception à la maintenance, nous couvrons l'ensemble des besoins en génie froid et climatisation pour les secteurs industriel, commercial et tertiaire.</p>
+      <h2 class="section-title">Froid Industriel &amp; Climatisation</h2>
+      <p class="section-sub">De l'isolation cryogénique à la fabrication de gaines VMC, nous couvrons l'ensemble des besoins en génie froid pour l'industrie navale, agroalimentaire et le tertiaire.</p>
     </div>
 
     <div class="poles-grid" style="margin-top:40px;">
 
-      <!-- Chambres froides -->
-      <div class="pole-card animate-fade-up delay-1">
-        <div class="pole-icon">
+      <!-- Isolation cryogénique & frigorifique -->
+      <div class="pole-card animate-fade-up delay-1" style="border-top-color:#0891b2;">
+        <div class="pole-icon" style="background:rgba(8,145,178,0.1);">
           <span class="ico ico-industrie"></span>
         </div>
-        <h3 class="pole-title">Chambres Froides</h3>
-        <p class="pole-desc">Conception et installation de chambres froides positives et négatives pour l'industrie agroalimentaire, pharmaceutique et hôtelière. Panneaux PUR deux faces et panneaux ISOCAB grandes portées.</p>
+        <h3 class="pole-title">Isolation Cryogénique &amp; Frigorifique</h3>
+        <p class="pole-desc">Injection de mousse P.U.R dans une jaquette en tôle galva aluminium ou inox. Interventions sur l'ICS MBAO, les sphères de stockage et les lignes d'ammoniac, ainsi que les installations ARMEMENT SOPASEN (lignes Fréon/Ammoniac à bord des chalutiers-congélateurs et chambres froides de stockage).</p>
         <div class="pole-tags">
-          <span class="tag">Chambre positive</span>
-          <span class="tag">Chambre négative</span>
-          <span class="tag">Surgélation</span>
-          <span class="tag">HACCP</span>
+          <span class="tag">Mousse P.U.R</span>
+          <span class="tag">Tôle galva / inox</span>
+          <span class="tag">Ammoniac</span>
+          <span class="tag">ICS MBAO</span>
         </div>
       </div>
 
-      <!-- Groupes froids & Réfrigération -->
+      <!-- Isolation anti-condensation navale -->
       <div class="pole-card animate-fade-up delay-2">
         <div class="pole-icon">
           <span class="ico ico-energie"></span>
         </div>
-        <h3 class="pole-title">Groupes Froids & Réfrigération</h3>
-        <p class="pole-desc">Installation de groupes froids industriels, évaporateurs, condenseurs et systèmes de réfrigération complets. Fluides frigorigènes R404A, R448A, R134a et gaz naturels (NH3, CO2).</p>
+        <h3 class="pole-title">Isolation Navale Anti-Condensation</h3>
+        <p class="pole-desc">Injection de mousse P.U.R dans les doubles parois des tunnels de congélation (-40°C) et des cales de conservation (-18°C/-20°C) à bord des chalutiers. Traitement complet des lignes de Fréon ou d'Ammoniac pour les chalutiers-congélateurs.</p>
         <div class="pole-tags">
-          <span class="tag">Groupe froid</span>
-          <span class="tag">Évaporateur</span>
-          <span class="tag">Condenseur</span>
-          <span class="tag">R404A / R448A</span>
+          <span class="tag">-40°C tunnels</span>
+          <span class="tag">-18°C / -20°C cales</span>
+          <span class="tag">Chalutiers-congélateurs</span>
+          <span class="tag">Fréon / Ammoniac</span>
         </div>
       </div>
 
-      <!-- Climatisation & CVC -->
+      <!-- Climatisation / VMC / Extraction de cuisines -->
       <div class="pole-card animate-fade-up delay-3">
         <div class="pole-icon">
           <span class="ico ico-routes"></span>
         </div>
-        <h3 class="pole-title">Climatisation & CVC</h3>
-        <p class="pole-desc">Installation de systèmes split, multi-splits, VRV/VRF et centrales de traitement d'air (CTA) pour bureaux, hôtels, centres commerciaux et unités industrielles.</p>
+        <h3 class="pole-title">Climatisation / VMC / Extraction de Cuisines</h3>
+        <p class="pole-desc">Fabrication de gaine métallique en tôle galvanisée de 6 à 15/10ème, assemblage cadre METU ou similaire. Capacité de production : 1 T/jour. Fabrication de gaine cylindrique agrafée en tronçons de 1 à 6 m et toutes pièces de transformation : coudes, réductions, piqûages.</p>
         <div class="pole-tags">
-          <span class="tag">Split System</span>
-          <span class="tag">VRV / VRF</span>
-          <span class="tag">Centrale CTA</span>
-          <span class="tag">Gainable</span>
+          <span class="tag">Gaine tôle galvanisée</span>
+          <span class="tag">Cadre METU</span>
+          <span class="tag">Gaine cylindrique</span>
+          <span class="tag">Coudes / Réductions</span>
         </div>
       </div>
 
-      <!-- Maintenance & SAV -->
-      <div class="pole-card animate-fade-up delay-4" style="border-top-color:#0891b2;">
-        <div class="pole-icon" style="background:rgba(8,145,178,0.1);">
+      <!-- Chambres froides -->
+      <div class="pole-card animate-fade-up delay-4">
+        <div class="pole-icon">
           <span class="ico ico-target"></span>
         </div>
-        <h3 class="pole-title">Maintenance & SAV</h3>
-        <p class="pole-desc">Contrats de maintenance préventive et curative 24h/24 pour vos installations frigorifiques et de climatisation. Intervention rapide, pièces d'origine, suivi des paramètres par télésurveillance.</p>
+        <h3 class="pole-title">Chambres Froides Négatives &amp; Positives</h3>
+        <p class="pole-desc">Petites unités : fabrication de panneaux P.U.R deux faces tôle galvanisée 6/10ème nervurées, type industriel, longueur max 4 m, épaisseur max 200 mm. Grandes unités : importation panneaux ISOCAB jusqu'à 12 m — réhabilitation de chambre froide.</p>
         <div class="pole-tags">
-          <span class="tag">Maintenance préventive</span>
-          <span class="tag">Dépannage 24/7</span>
-          <span class="tag">Télésurveillance</span>
+          <span class="tag">Panneaux P.U.R</span>
+          <span class="tag">ISOCAB 12 m</span>
+          <span class="tag">Chambre positive</span>
+          <span class="tag">Chambre négative</span>
         </div>
       </div>
 
@@ -147,18 +148,18 @@ require_once 'includes/header.php';
 
       <?php
       $prestations = [
-        ['icon'=>'zap',   'titre'=>'Installations frigorifiques clé en main',
-         'desc'=>'Étude thermique, fourniture matériel, installation, mise en service et formation des techniciens sur site.'],
-        ['icon'=>'wrench','titre'=>'Isolation thermique & calorifugeage',
-         'desc'=>'Isolation des réseaux de tuyauteries et équipements avec laine de verre, mousse PUR et revêtements aluminium.'],
-        ['icon'=>'globe', 'titre'=>'Panneaux isothermes',
-         'desc'=>'Panneaux PUR deux faces tôle galvanisée jusqu\'à 4 m de hauteur. Panneaux ISOCAB grandes portées jusqu\'à 12 m sans support intermédiaire.'],
-        ['icon'=>'target','titre'=>'Faux plafonds techniques',
-         'desc'=>'Faux plafonds isolants PUR 20 mm deux faces aluminium (60×60, 120×120, 200×120 cm) et faux plafonds acoustiques pour zones de production.'],
-        ['icon'=>'users', 'titre'=>'Climatisation tertiaire & industrielle',
-         'desc'=>'Conception et pose de systèmes CVC pour surfaces commerciales, immeubles de bureaux, hôtels et salles blanches.'],
-        ['icon'=>'map-pin','titre'=>'Télésurveillance & contrôle',
-         'desc'=>'Tableaux de contrôle automatisés, alarmes de température, enregistreurs de données et supervision à distance pour vos installations froides.'],
+        ['icon'=>'zap',    'titre'=>'Injection mousse P.U.R — Jaquette galva / inox',
+         'desc'=>'Isolation cryogénique et frigorifique par injection de mousse polyuréthane rigide (P.U.R) dans une jaquette en tôle galva aluminium ou inox. Résultat : isolation continue sans pont thermique.'],
+        ['icon'=>'globe',  'titre'=>'Lignes ammoniac &amp; Fréon — SOPASEN',
+         'desc'=>'Installation et isolation des lignes de Fréon ou d\'Ammoniac à bord des chalutiers-congélateurs et sur les chambres froides de stockage ARMEMENT SOPASEN.'],
+        ['icon'=>'wrench', 'titre'=>'Tunnels de congélation (-40°C)',
+         'desc'=>'Injection P.U.R dans les doubles parois des tunnels de congélation atteignant -40°C à bord des chalutiers. Étanchéité thermique garantissant la qualité des produits de la mer.'],
+        ['icon'=>'map-pin','titre'=>'Cales de conservation (-18°C / -20°C)',
+         'desc'=>'Isolation des cales de conservation maintenues entre -18°C et -20°C : injection P.U.R en double paroi à bord des navires chalutiers.'],
+        ['icon'=>'target', 'titre'=>'Fabrication de gaines VMC &amp; extraction',
+         'desc'=>'Gaines métalliques en tôle galvanisée 6 à 15/10ème, cadres METU — capacité 1 T/jour. Gaines cylindriques agrafées, tronçons 1 à 6 m, coudes, réductions, piqûages.'],
+        ['icon'=>'users',  'titre'=>'Portes de chambres froides &amp; rideaux lanières',
+         'desc'=>'Portes positives pivotantes (80 à 120 mm, passage 1,90 m × 0,90 m), bâti à sceller, faces inox, fermeture FERMOD, joint double lèvre 19 mm. Portes négatives avec résistance chauffante dans le seuil.'],
       ];
       foreach ($prestations as $p):
       ?>
@@ -175,25 +176,97 @@ require_once 'includes/header.php';
 
 
 <!-- ═══════════════════════════════════════════════════════════
-     SECTION : SECTEURS CLIENTS
+     SECTION : PORTES DE CHAMBRES FROIDES — DÉTAIL TECHNIQUE
 ═══════════════════════════════════════════════════════════ -->
 <section class="section">
   <div class="container">
     <div class="text-center">
+      <span class="section-tag">Portes isothermes</span>
+      <h2 class="section-title">Portes de Chambres Froides &amp; Rideaux à Lanières</h2>
+      <p class="section-sub">Fabrication et pose de portes positives et négatives sur mesure, conformes aux exigences des installations agroalimentaires et industrielles.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px;margin-top:44px;align-items:start;">
+
+      <!-- Portes positives -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:32px 28px;">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+          <div style="background:rgba(26,107,181,0.1);border-radius:12px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><?= icon('zap','#1a6bb5','1.2rem') ?></div>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--texte);margin:0;">Portes Positives Pivotantes</h3>
+        </div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
+          <?php
+          $specs_pos = [
+            'Épaisseur standard : 80 mm à 120 mm',
+            'Passage : 1,90 m × 0,90 m',
+            'Bâti à sceller',
+            'Habillage inox sur les 2 faces vues',
+            '2 faces tôles pré-laquées avec chant inox',
+            '2 charnières avec ou sans rampe (selon poids)',
+            'Fermeture 1 point à clé FERMOD',
+            'Joint double lèvre épaisseur 19 mm',
+          ];
+          foreach ($specs_pos as $spec):
+          ?>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--gris);">
+            <span style="color:#1a6bb5;font-size:1rem;flex-shrink:0;margin-top:1px;">✓</span>
+            <?= $spec ?>
+          </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+
+      <!-- Portes négatives -->
+      <div style="background:#fff;border:1px solid var(--border);border-radius:18px;padding:32px 28px;">
+        <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+          <div style="background:rgba(8,145,178,0.1);border-radius:12px;width:48px;height:48px;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><?= icon('zap','#0891b2','1.2rem') ?></div>
+          <h3 style="font-size:1.05rem;font-weight:700;color:var(--texte);margin:0;">Portes Négatives &amp; Rideaux à Lanières</h3>
+        </div>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
+          <?php
+          $specs_neg = [
+            'Résistance chauffante intégrée dans le seuil à sceller',
+            'Résistance chauffante dans le cadre de porte',
+            'Empêche le givrage du joint et du seuil',
+            'Rideaux à lanières PVC transparentes',
+            'Isolation thermique renforcée pour températures négatives',
+            'Versions sur mesure disponibles',
+          ];
+          foreach ($specs_neg as $spec):
+          ?>
+          <li style="display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--gris);">
+            <span style="color:#0891b2;font-size:1rem;flex-shrink:0;margin-top:1px;">✓</span>
+            <?= $spec ?>
+          </li>
+          <?php endforeach; ?>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION : SECTEURS CLIENTS
+═══════════════════════════════════════════════════════════ -->
+<section class="section bg-gris">
+  <div class="container">
+    <div class="text-center">
       <span class="section-tag">Secteurs clients</span>
       <h2 class="section-title">Qui nous accompagnons</h2>
-      <p class="section-sub">Nos équipes interviennent dans tous les secteurs nécessitant une maîtrise rigoureuse de la température et du confort thermique.</p>
+      <p class="section-sub">De la pêche industrielle aux entrepôts frigorifiques, nos équipes interviennent partout où la maîtrise du froid est critique.</p>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:20px;margin-top:40px;">
       <?php
       $secteurs = [
-        ['emoji'=>'🥩', 'nom'=>'Agroalimentaire',     'desc'=>'Abattoirs, poissonneries, laiteries, entrepôts frigorifiques'],
-        ['emoji'=>'💊', 'nom'=>'Pharmaceutique',      'desc'=>'Stockage médicaments, laboratoires, chaîne du froid'],
-        ['emoji'=>'🏨', 'nom'=>'Hôtellerie',          'desc'=>'Chambres froides cuisine, climatisation chambres & salles'],
-        ['emoji'=>'🏢', 'nom'=>'Tertiaire',            'desc'=>'Bureaux, centres commerciaux, salles de réunion'],
-        ['emoji'=>'🏭', 'nom'=>'Industrie',            'desc'=>'Unités de production, entrepôts logistiques, salles blanches'],
-        ['emoji'=>'⚗️',  'nom'=>'Recherche & Santé',  'desc'=>'Hôpitaux, cliniques, centres de recherche'],
+        ['emoji'=>'🚢', 'nom'=>'Pêche industrielle',    'desc'=>'Chalutiers-congélateurs, cales de conservation, lignes Fréon / Ammoniac embarquées'],
+        ['emoji'=>'🥩', 'nom'=>'Agroalimentaire',        'desc'=>'Chambres froides, tunnels de congélation, entrepôts frigorifiques'],
+        ['emoji'=>'🏭', 'nom'=>'Industrie',              'desc'=>'Sphères de stockage, lignes ammoniac, ICS MBAO'],
+        ['emoji'=>'🏢', 'nom'=>'Tertiaire / VMC',        'desc'=>'Fabrication de gaines, extraction de cuisines, ventilation mécanique contrôlée'],
+        ['emoji'=>'❄️', 'nom'=>'Stockage froid',         'desc'=>'Réhabilitation de chambres froides, panneaux ISOCAB grandes portées'],
+        ['emoji'=>'🔧', 'nom'=>'Naval / Armement',       'desc'=>'ARMEMENT SOPASEN, lignes de réfrigération à bord, isolation anti-condensation'],
       ];
       foreach ($secteurs as $s):
       ?>
@@ -230,7 +303,7 @@ require_once 'includes/header.php';
       <span class="section-tag orange">Devis gratuit</span>
       <h2 class="section-title light" style="margin-top:10px;">Un projet froid ou climatisation ?</h2>
       <p style="color:rgba(255,255,255,0.82);line-height:1.8;margin-bottom:28px;">
-        Notre bureau d'études analyse votre besoin et vous propose une solution adaptée — chambre froide, groupe froid, climatisation ou maintenance — en forfait ou en régie.
+        Notre équipe analyse votre besoin — isolation cryogénique, chambre froide, gaine VMC ou portes isothermes — et vous propose une solution clé en main adaptée à votre secteur.
       </p>
       <div style="display:flex;flex-direction:column;gap:14px;">
         <a href="tel:+221338279639" style="display:flex;align-items:center;gap:14px;color:#fff;text-decoration:none;font-weight:500;">
@@ -251,25 +324,25 @@ require_once 'includes/header.php';
         Dimensionnement thermique, choix des équipements, chiffrage — notre équipe vous répond sous 48h.
       </p>
       <div style="display:flex;flex-direction:column;gap:12px;">
-        <a href="<?= SITE_URL ?>/contact.php" class="btn btn-primary" style="width:100%;justify-content:center;">
+        <a href="<?= SITE_URL ?>/contact" class="btn btn-primary" style="width:100%;justify-content:center;">
           <?= icon('mail','','.9rem') ?> Demander un devis
         </a>
-        <a href="<?= SITE_URL ?>/realisations.php" class="btn btn-outline" style="width:100%;justify-content:center;border-color:rgba(255,255,255,0.4);color:#fff;">
+        <a href="<?= SITE_URL ?>/realisations" class="btn btn-outline" style="width:100%;justify-content:center;border-color:rgba(255,255,255,0.4);color:#fff;">
           <?= icon('target','','.9rem') ?> Voir nos réalisations
         </a>
       </div>
       <div style="display:flex;justify-content:space-around;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,0.12);">
         <div style="text-align:center;">
-          <div style="font-size:1.2rem;font-weight:800;color:#f7941d;">48h</div>
-          <div style="font-size:.72rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.07em;">Réponse</div>
+          <div style="font-size:1.2rem;font-weight:800;color:#f7941d;">-40°C</div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.07em;">Congélation</div>
         </div>
         <div style="text-align:center;">
-          <div style="font-size:1.2rem;font-weight:800;color:#f7941d;">Gratuit</div>
-          <div style="font-size:.72rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.07em;">Étude</div>
+          <div style="font-size:1.2rem;font-weight:800;color:#f7941d;">1 T/j</div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.07em;">Capacité VMC</div>
         </div>
         <div style="text-align:center;">
-          <div style="font-size:1.2rem;font-weight:800;color:#f7941d;">24/7</div>
-          <div style="font-size:.72rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.07em;">SAV</div>
+          <div style="font-size:1.2rem;font-weight:800;color:#f7941d;">Clé en main</div>
+          <div style="font-size:.72rem;color:rgba(255,255,255,0.6);text-transform:uppercase;letter-spacing:.07em;">Installation</div>
         </div>
       </div>
     </div>
