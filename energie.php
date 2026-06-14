@@ -31,11 +31,11 @@ require_once 'includes/header.php';
   align-items: center;
 }
 
-/* ── Galerie chantier : grille pro avec bordures ── */
+/* ── Galerie chantier : grille pro uniforme ── */
 .energie-galerie-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 220px 220px 220px;
+  grid-auto-rows: 210px;
   gap: 12px;
   margin-top: 8px;
 }
@@ -70,10 +70,11 @@ require_once 'includes/header.php';
   text-shadow: 0 1px 4px rgba(0,0,0,.6);
   letter-spacing: .02em;
 }
-/* items featured */
+/* première photo plus large */
 .energie-galerie-grid .gi-wide  { grid-column: span 2; }
-.energie-galerie-grid .gi-tall  { grid-row: span 2; }
-.energie-galerie-grid .gi-big   { grid-column: span 2; grid-row: span 2; }
+/* supprimer les spans verticaux qui causaient les superpositions */
+.energie-galerie-grid .gi-tall  { grid-column: span 1; }
+.energie-galerie-grid .gi-big   { grid-column: span 2; }
 
 /* ── Vidéo player style macOS — taille réduite ── */
 .energie-video-wrap {
@@ -120,27 +121,18 @@ require_once 'includes/header.php';
 }
 
 @media (max-width: 900px) {
-  .energie-galerie-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: none;
-    grid-auto-rows: 180px;
-  }
-  .energie-galerie-grid .gi-big { grid-column: span 2; grid-row: span 1; }
-  .energie-galerie-grid .gi-tall { grid-row: span 1; }
+  .energie-galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
+  .energie-galerie-grid .gi-wide,
+  .energie-galerie-grid .gi-big { grid-column: span 2; }
 }
 @media (max-width: 768px) {
   .energie-hero-grid,
   .energie-cta-grid { grid-template-columns: 1fr; gap: 32px; }
   .energie-hero-stats { grid-template-columns: 1fr 1fr; }
   .energie-cta-grid { gap: 24px; }
-  .energie-galerie-grid {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: none;
-    grid-auto-rows: 150px;
-  }
+  .energie-galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
   .energie-galerie-grid .gi-wide,
-  .energie-galerie-grid .gi-big { grid-column: span 2; grid-row: span 1; }
-  .energie-galerie-grid .gi-tall { grid-row: span 1; }
+  .energie-galerie-grid .gi-big { grid-column: span 2; }
   .energie-video-wrap { max-width: 100%; }
 }
 </style>
