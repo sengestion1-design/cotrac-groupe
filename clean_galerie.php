@@ -1,12 +1,24 @@
 <?php
+session_start();
 require_once __DIR__ . '/config/database.php';
+if (!isset($_SESSION['admin_logged'])) { header('Location: /admin/login.php'); exit; }
 $db = getDB();
+
+// CSRF
+if (session_status() === PHP_SESSION_ACTIVE && empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (empty($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        die('Token invalide.');
+    }
+}
 
 // Lister toutes les entrées
 $rows = $db->query("SELECT id, legende, onglet, fichier, actif FROM galerie_photos ORDER BY id")->fetchAll();
 
 echo "<h2>Entrées galerie_photos</h2>";
-echo "<form method='POST'>";
+echo "<form method='POST'><input type='hidden' name='csrf_token' value='" . htmlspecialchars($_SESSION['csrf_token']) . "'>";
 echo "<table border='1' cellpadding='6' style='border-collapse:collapse;font-size:13px;'>";
 echo "<tr><th>ID</th><th>Onglet</th><th>Légende</th><th>Fichier</th><th>Actif</th><th>Supprimer</th></tr>";
 
