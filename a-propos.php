@@ -870,6 +870,7 @@ require_once __DIR__ . '/includes/header.php';
 }
 </style>
 <?php endif; ?>
+<!-- DEBUG-MARKER-1 -->
 
 <!-- ══ VALEURS ══ -->
 <section class="section" style="background:var(--gris-clair);">
@@ -907,6 +908,7 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 </section>
 
+<!-- DEBUG-MARKER-2 -->
 <!-- ══ CERTIFICATIONS ══ -->
 <section class="section">
   <div class="container">
@@ -975,6 +977,7 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 </section>
 
+<!-- DEBUG-MARKER-3 -->
 <!-- ══ ZONES D'INTERVENTION ══ -->
 <section class="section" style="background:var(--gris-clair);">
   <div class="container">
@@ -1025,6 +1028,7 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 </section>
 
+<!-- DEBUG-MARKER-4 -->
 <!-- ══ PARTENAIRES ══ -->
 <section class="section">
   <div class="container">
@@ -1220,6 +1224,7 @@ require_once __DIR__ . '/includes/header.php';
 @media (max-width: 480px) { .partenaires-inst-grid { grid-template-columns: 1fr; } }
 </style>
 
+<!-- DEBUG-MARKER-5 -->
 <!-- ══ CTA ══ -->
 <section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
   <!-- Photo pleine largeur en fond -->
