@@ -11,7 +11,7 @@
       Organisation
     </span>
     <h2 class="section-title" style="margin-top:12px;">Notre <span style="color:var(--orange,#f7941d);">Structure</span></h2>
-    <p class="section-sub" style="max-width:560px;margin:0 auto 56px;">
+    <p class="section-sub" style="max-width:560px;margin:0 auto 24px;">
       Une organisation agile et structurée pour garantir l'excellence sur chaque projet,
       de la conception à la livraison.
     </p>
@@ -182,7 +182,7 @@
 <style>
 /* ─── Section ─── */
 .orga-section {
-  padding: 5rem 0;
+  padding: 2.5rem 0;
   background: #fff;
 }
 
@@ -192,7 +192,7 @@
   margin: 0 auto;
   font-family: 'Poppins', sans-serif;
   overflow-x: auto;
-  padding: 0 8px 24px;
+  padding: 0 8px 8px;
 }
 
 /* ─── Niveaux ─── */
