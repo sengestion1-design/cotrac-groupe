@@ -56,7 +56,7 @@ require_once __DIR__ . '/includes/header.php';
 .stats-section {
   background: var(--bleu);
   color: #fff;
-  padding: 4rem 0;
+  padding: 2.5rem 0;
 }
 .stats-section .section-tag { color: #fff; border-color: rgba(255,255,255,.6); background: rgba(255,255,255,.15); }
 .stats-grid {
@@ -140,7 +140,7 @@ require_once __DIR__ . '/includes/header.php';
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 2rem;
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
 }
 .equipe-card {
   background: #fff;
@@ -161,7 +161,7 @@ require_once __DIR__ . '/includes/header.php';
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1.5rem;
-  margin-top: 2.5rem;
+  margin-top: 1.5rem;
 }
 .valeur-card {
   background: #fff;
@@ -478,7 +478,7 @@ require_once __DIR__ . '/includes/header.php';
     <p class="section-sub"><?= t('apropos_equipe_desc') ?></p>
 
     <!-- Photo d'équipe complète -->
-    <div style="margin:0 auto 48px;max-width:860px;border-radius:20px;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,0.14);">
+    <div style="margin:0 auto 28px;max-width:860px;border-radius:20px;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,0.14);">
       <img src="<?= SITE_URL ?>/assets/images/equipe/equipe-bureau.jpg"
            alt="Équipe COTRAC en réunion de travail"
            style="width:100%;height:420px;object-fit:cover;object-position:center top;display:block;" class="equipe-photo-full">
@@ -688,7 +688,7 @@ require_once __DIR__ . '/includes/header.php';
 /* ═══════════════ ORGANIGRAMME V2 ═══════════════ */
 .org2-wrap {
   max-width: 1200px;
-  margin: 56px auto 0;
+  margin: 24px auto 0;
   font-family: 'Poppins', sans-serif;
   overflow-x: auto;
   padding: 0 16px 8px;
@@ -922,7 +922,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- ══ CERTIFICATIONS ══ -->
 <section class="section">
   <div class="container">
-    <div class="text-center" style="margin-bottom:48px;">
+    <div class="text-center" style="margin-bottom:24px;">
       <span class="section-tag"><?= icon('certificate') ?> <?= t('apropos_cert_tag') ?></span>
       <h2 class="section-title"><?= t('apropos_cert_titre') ?></h2>
       <p class="section-sub"><?= t('apropos_cert_desc') ?></p>
@@ -991,7 +991,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- ══ ZONES D'INTERVENTION ══ -->
 <section class="section" style="background:var(--gris-clair);">
   <div class="container">
-    <div class="text-center" style="margin-bottom:48px;">
+    <div class="text-center" style="margin-bottom:24px;">
       <span class="section-tag"><?= icon('location') ?> <?= t('apropos_zones_tag') ?></span>
       <h2 class="section-title"><?= t('apropos_zones_titre') ?></h2>
       <p class="section-sub"><?= t('apropos_zones_desc') ?></p>
@@ -1042,7 +1042,7 @@ require_once __DIR__ . '/includes/header.php';
 <!-- ══ PARTENAIRES ══ -->
 <section class="section">
   <div class="container">
-    <div class="text-center" style="margin-bottom:48px;">
+    <div class="text-center" style="margin-bottom:24px;">
       <span class="section-tag"><?= icon('handshake') ?> <?= t('apropos_part_tag') ?></span>
       <h2 class="section-title"><?= t('apropos_part_titre') ?></h2>
       <p class="section-sub"><?= t('apropos_part_desc') ?></p>
