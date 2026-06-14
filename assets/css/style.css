@@ -43,8 +43,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
 /* ---- Utilitaires ---- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-.section { padding: 52px 0; }
-.section-sm { padding: 36px 0; }
+.section { padding: 44px 0; }
+.section-sm { padding: 28px 0; }
 .text-center { text-align: center; }
 .text-bleu { color: var(--bleu); }
 .text-orange { color: var(--orange); }
@@ -721,7 +721,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    ============================================================ */
 .stats-section {
   background: linear-gradient(135deg, #0d1f3c 0%, var(--bleu-dark) 50%, #1a5fa0 100%);
-  padding: 80px 0;
+  padding: 48px 0;
 }
 .stats-grid {
   display: grid;
@@ -912,7 +912,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    ============================================================ */
 .page-hero {
   background: linear-gradient(135deg, #0d1f3c 0%, var(--bleu-dark) 50%, var(--bleu) 100%);
-  padding: calc(72px + 56px) 0 72px;
+  padding: calc(64px + 48px) 0 52px;
   position: relative;
   overflow: hidden;
 }
@@ -954,19 +954,19 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
    ============================================================ */
 .services-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
-  margin-top: 48px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+  margin-top: 32px;
 }
 .service-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 52px;
-  height: 52px;
+  width: 44px;
+  height: 44px;
   background: linear-gradient(135deg, #e8f0fb, #cddcf7);
-  border-radius: 14px;
-  margin-bottom: 20px;
+  border-radius: 12px;
+  margin-bottom: 14px;
   flex-shrink: 0;
 }
 .service-icon .ico {
@@ -978,7 +978,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   background: var(--blanc);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 28px;
+  padding: 20px 22px;
   transition: var(--transition);
   box-shadow: 0 2px 8px rgba(26,107,181,0.05);
 }
