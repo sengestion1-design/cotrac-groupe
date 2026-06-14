@@ -66,25 +66,32 @@ $galerie_id    = 'galerie_' . substr(md5($galerie_titre), 0, 6);
 .galerie-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
-  gap: 10px;
+  grid-auto-rows: 210px;
+  gap: 12px;
 }
 .galerie-grid .galerie-item:first-child { grid-column: span 2; }
 
 .galerie-item {
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   background: var(--gris-clair);
+  border: 2px solid rgba(255,255,255,.9);
+  box-shadow: 0 4px 18px rgba(0,0,0,.12);
+  transition: box-shadow .3s, transform .3s;
+}
+.galerie-item:hover {
+  box-shadow: 0 8px 32px rgba(26,107,181,.25);
+  transform: translateY(-2px);
 }
 
 @media (max-width: 900px) {
-  .galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+  .galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 170px; }
   .galerie-grid .galerie-item:first-child { grid-column: span 2; }
 }
 @media (max-width: 560px) {
-  .galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 130px; }
+  .galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 140px; }
 }
 
 .galerie-item img {
