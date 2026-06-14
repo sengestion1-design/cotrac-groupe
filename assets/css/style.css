@@ -2829,50 +2829,29 @@ ul.services-list { padding: 0; list-style: none; }
 }
 .stats-chiffres-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1fr;
   gap: 0;
   text-align: center;
 }
-.stats-chiffre-item { padding: 16px 12px; }
-.stats-val { font-size: 3.5rem; font-weight: 800; color: #f7941d; line-height: 1; }
-.stats-lbl { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.6); margin: 6px 0 4px; }
-.stats-desc { font-size: 0.8rem; color: #fff; line-height: 1.4; }
+.stats-chiffre-item {
+  padding: 20px 16px;
+  border-right: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+}
+.stats-chiffres-grid .stats-chiffre-item:nth-child(even) {
+  border-right: none;
+}
+.stats-chiffres-grid .stats-chiffre-item:nth-child(3),
+.stats-chiffres-grid .stats-chiffre-item:nth-child(4) {
+  border-bottom: none;
+}
+.stats-val { font-size: 3rem; font-weight: 800; color: #f7941d; line-height: 1; }
+.stats-lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.6); margin-top: 6px; }
 
-/* Desktop : 15+ Partenaires sur 2 colonnes */
-.stats-item-part { grid-column: span 2; }
 @media (max-width: 768px) {
-  /* Stats section : assez de place */
-  .stats-section { padding: 48px 0 60px !important; }
-
-  /* Layout : 1 colonne, photos cachées */
-  .stats-desktop-layout {
-    grid-template-columns: 1fr !important;
-    gap: 0 !important;
-  }
+  .stats-section { padding: 48px 0 56px !important; }
+  .stats-desktop-layout { grid-template-columns: 1fr !important; gap: 0 !important; }
   .stats-photo-side { display: none !important; }
-
-  /* Grille chiffres : 2 colonnes */
-  .stats-chiffres-grid {
-    grid-template-columns: 1fr 1fr !important;
-  }
-
-  /* Tous les items : reset borders, padding uniforme */
-  .stats-chiffre-item {
-    padding: 20px 10px !important;
-    border: none !important;
-    border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-  }
-
-  /* Séparateur vertical col gauche */
-  .stats-chiffres-grid .stats-chiffre-item:nth-child(odd) {
-    border-right: 1px solid rgba(255,255,255,0.1) !important;
-  }
-
-  /* 15+ Partenaires : pleine largeur */
-  .stats-item-part {
-    grid-column: 1 / -1 !important;
-    border-right: none !important;
-  }
-
-  .stats-val { font-size: 2.5rem !important; }
+  .stats-val { font-size: 2.4rem !important; }
+  .stats-chiffre-item { padding: 22px 12px !important; }
 }

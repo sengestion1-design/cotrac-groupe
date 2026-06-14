@@ -256,28 +256,23 @@ $photos = array_merge($photos, $photos);
         <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt="Équipe COTRAC" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
 
-      <!-- Stats centre -->
+      <!-- Stats centre : 2x2 -->
       <div class="stats-chiffres-grid">
-        <div class="stats-chiffre-item" style="border-right:1px solid rgba(255,255,255,0.15);">
+        <div class="stats-chiffre-item">
           <div class="stats-val"><span class="counter" data-target="10">0</span>+</div>
           <div class="stats-lbl"><?= t('index_stats_ans_label') ?></div>
-          <div class="stats-desc"><?= t('index_stats_ans_desc') ?></div>
         </div>
-        <div class="stats-chiffre-item" style="border-right:1px solid rgba(255,255,255,0.15);">
+        <div class="stats-chiffre-item">
           <div class="stats-val"><span class="counter" data-target="15">0</span>+</div>
           <div class="stats-lbl"><?= t('index_stats_projets_label') ?></div>
-          <div class="stats-desc"><?= t('index_stats_projets_desc') ?></div>
         </div>
-
-        <div class="stats-chiffre-item stats-item-100" style="border-top:1px solid rgba(255,255,255,0.15);border-right:1px solid rgba(255,255,255,0.15);">
+        <div class="stats-chiffre-item">
           <div class="stats-val"><span class="counter" data-target="100">0</span>+</div>
           <div class="stats-lbl"><?= t('index_stats_experts_label') ?></div>
-          <div class="stats-desc">Mobilisables sous 72h</div>
         </div>
-        <div class="stats-chiffre-item stats-item-part" style="border-top:1px solid rgba(255,255,255,0.15);">
+        <div class="stats-chiffre-item">
           <div class="stats-val"><span class="counter" data-target="15">0</span>+</div>
           <div class="stats-lbl"><?= t('index_stats_part_label') ?></div>
-          <div class="stats-desc"><?= t('index_stats_part_desc') ?></div>
         </div>
       </div>
 
