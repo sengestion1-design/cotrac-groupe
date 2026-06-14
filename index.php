@@ -467,15 +467,42 @@ $photos = array_merge($photos, $photos);
         <span class="index-video-dot" style="background:#28c840;"></span>
         <span class="index-video-title">COTRAC — Chantiers &amp; Réalisations</span>
       </div>
-      <video
-        controls
-        preload="metadata"
-        poster="<?= SITE_URL ?>/assets/images/video-cotrac-poster.jpg"
-        style="display:block;width:100%;background:#000;max-height:480px;">
-        <source src="<?= SITE_URL ?>/assets/videos/videocotrac.mp4" type="video/mp4">
-        Votre navigateur ne supporte pas la lecture vidéo.
-      </video>
+      <div class="index-video-player" id="cotrac-video-player">
+        <video
+          id="cotrac-home-video"
+          preload="metadata"
+          poster="<?= SITE_URL ?>/assets/images/video-cotrac-poster.jpg"
+          style="display:block;width:100%;background:#000;">
+          <source src="<?= SITE_URL ?>/assets/videos/videocotrac.mp4" type="video/mp4">
+        </video>
+        <!-- Overlay play button -->
+        <div class="index-video-overlay" id="cotrac-video-overlay">
+          <button class="index-video-play-btn" id="cotrac-play-btn" aria-label="Lire la vidéo">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><polygon points="5,3 19,12 5,21"/></svg>
+          </button>
+          <div class="index-video-overlay-label">Regarder la vidéo</div>
+        </div>
+      </div>
     </div>
+    <script>
+    (function(){
+      var btn    = document.getElementById('cotrac-play-btn');
+      var overlay= document.getElementById('cotrac-video-overlay');
+      var video  = document.getElementById('cotrac-home-video');
+      if (!btn || !video) return;
+      function play() {
+        overlay.style.opacity = '0';
+        overlay.style.pointerEvents = 'none';
+        video.controls = true;
+        video.play();
+      }
+      btn.addEventListener('click', play);
+      overlay.addEventListener('click', play);
+      video.addEventListener('play', function(){
+        overlay.style.display = 'none';
+      });
+    })();
+    </script>
 
     <!-- 3 points clés sous la vidéo -->
     <div class="index-video-points">
@@ -523,6 +550,37 @@ $photos = array_merge($photos, $photos);
   color: rgba(255,255,255,.7);
   font-size: .8rem; font-weight: 600;
   margin-left: 8px; letter-spacing: .02em;
+}
+.index-video-player {
+  position: relative;
+  background: #000;
+  line-height: 0;
+}
+.index-video-overlay {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 14px;
+  background: rgba(0,0,0,.32);
+  cursor: pointer;
+  transition: opacity .3s;
+}
+.index-video-play-btn {
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: rgba(247,148,29,.92);
+  border: 3px solid rgba(255,255,255,.5);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(247,148,29,.5);
+  transition: transform .2s, background .2s;
+}
+.index-video-play-btn:hover { transform: scale(1.1); background: #f7941d; }
+.index-video-overlay-label {
+  color: rgba(255,255,255,.9);
+  font-size: .88rem; font-weight: 600;
+  letter-spacing: .06em; text-transform: uppercase;
+  text-shadow: 0 1px 6px rgba(0,0,0,.6);
 }
 .index-video-points {
   display: flex;
