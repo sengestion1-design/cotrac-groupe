@@ -372,7 +372,7 @@ if (!empty($videos_chantiers)): ?>
         $vid_src = SITE_URL . '/uploads/videos/' . $vid_fn;
         $thumb   = !empty($vc['thumbnail']) ? SITE_URL . '/uploads/videos/' . basename($vc['thumbnail']) : '';
       ?>
-      <div class="video-card" onclick="ouvrirVideo('<?= e($vid_src) ?>', '<?= e($vc['titre']) ?>')">
+      <div class="video-card" data-src="<?= e($vid_src) ?>" data-titre="<?= e($vc['titre']) ?>">
         <div class="video-card-thumb">
           <?php if ($thumb): ?>
             <img src="<?= e($thumb) ?>" alt="<?= e($vc['titre']) ?>" loading="lazy">
@@ -427,8 +427,8 @@ function fermerVideo() {
 }
 document.addEventListener('keydown', function(e){ if(e.key==='Escape') fermerVideo(); });
 document.addEventListener('click', function(e) {
-  var el = e.target.closest('.play-btn-card');
-  if (!el) return;
+  var el = e.target.closest('.play-btn-card, .video-card');
+  if (!el || !el.dataset.src) return;
   e.stopPropagation();
   ouvrirVideo(el.dataset.src, el.dataset.titre);
 });
