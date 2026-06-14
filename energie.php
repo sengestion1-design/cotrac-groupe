@@ -31,66 +31,74 @@ require_once 'includes/header.php';
   align-items: center;
 }
 
-/* ── Galerie chantier : grille masonry pro ── */
+/* ── Galerie chantier : grille pro avec bordures ── */
 .energie-galerie-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 200px;
-  gap: 10px;
+  grid-template-rows: 220px 220px 220px;
+  gap: 12px;
   margin-top: 8px;
 }
 .energie-galerie-grid .galerie-item {
   position: relative;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   background: var(--gris-clair);
+  border: 2px solid rgba(255,255,255,.9);
+  box-shadow: 0 4px 18px rgba(0,0,0,.12);
+  transition: box-shadow .3s, transform .3s;
+}
+.energie-galerie-grid .galerie-item:hover {
+  box-shadow: 0 8px 32px rgba(26,107,181,.25);
+  transform: translateY(-2px);
 }
 .energie-galerie-grid .galerie-item img {
   width: 100%; height: 100%; object-fit: cover; display: block;
   transition: transform .4s ease;
 }
-.energie-galerie-grid .galerie-item:hover img { transform: scale(1.07); }
+.energie-galerie-grid .galerie-item:hover img { transform: scale(1.06); }
 .energie-galerie-grid .galerie-item-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, rgba(10,22,40,.65) 0%, transparent 55%);
+  background: linear-gradient(to top, rgba(10,22,40,.7) 0%, transparent 55%);
   opacity: 0; transition: opacity .3s;
-  display: flex; align-items: flex-end; padding: 12px;
+  display: flex; align-items: flex-end; padding: 14px;
 }
 .energie-galerie-grid .galerie-item:hover .galerie-item-overlay { opacity: 1; }
-.energie-galerie-grid .galerie-caption {
-  color: #fff; font-size: .75rem; font-weight: 500;
-  text-shadow: 0 1px 4px rgba(0,0,0,.5);
+.energie-galerie-grid .energie-galerie-caption {
+  color: #fff; font-size: .78rem; font-weight: 600;
+  text-shadow: 0 1px 4px rgba(0,0,0,.6);
+  letter-spacing: .02em;
 }
 /* items featured */
 .energie-galerie-grid .gi-wide  { grid-column: span 2; }
 .energie-galerie-grid .gi-tall  { grid-row: span 2; }
 .energie-galerie-grid .gi-big   { grid-column: span 2; grid-row: span 2; }
 
-/* ── Vidéo player style macOS ── */
+/* ── Vidéo player style macOS — taille réduite ── */
 .energie-video-wrap {
-  margin: 32px auto 0;
-  max-width: 860px;
+  margin: 28px auto 0;
+  max-width: 560px;
   border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,.35);
-  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  border: 1px solid rgba(255,255,255,.1);
 }
 .energie-video-header {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 13px 18px;
+  padding: 11px 16px;
   background: #1c2a3e;
   border-bottom: 1px solid rgba(0,0,0,.3);
 }
 .energie-video-dot {
-  width: 12px; height: 12px; border-radius: 50%;
+  width: 11px; height: 11px; border-radius: 50%;
   flex-shrink: 0;
 }
 .energie-video-title {
   color: rgba(255,255,255,.75);
-  font-size: .82rem;
+  font-size: .78rem;
   font-weight: 600;
   margin-left: 8px;
   letter-spacing: .02em;
@@ -98,6 +106,7 @@ require_once 'includes/header.php';
 .energie-video-wrap video {
   display: block;
   width: 100%;
+  max-height: 320px;
   background: #000;
 }
 
@@ -111,18 +120,28 @@ require_once 'includes/header.php';
 }
 
 @media (max-width: 900px) {
-  .energie-galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 180px; }
-  .energie-galerie-grid .gi-big { grid-column: span 2; }
+  .energie-galerie-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;
+    grid-auto-rows: 180px;
+  }
+  .energie-galerie-grid .gi-big { grid-column: span 2; grid-row: span 1; }
+  .energie-galerie-grid .gi-tall { grid-row: span 1; }
 }
 @media (max-width: 768px) {
   .energie-hero-grid,
   .energie-cta-grid { grid-template-columns: 1fr; gap: 32px; }
   .energie-hero-stats { grid-template-columns: 1fr 1fr; }
   .energie-cta-grid { gap: 24px; }
-  .energie-galerie-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 150px; }
+  .energie-galerie-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: none;
+    grid-auto-rows: 150px;
+  }
   .energie-galerie-grid .gi-wide,
-  .energie-galerie-grid .gi-big { grid-column: span 2; }
+  .energie-galerie-grid .gi-big { grid-column: span 2; grid-row: span 1; }
   .energie-galerie-grid .gi-tall { grid-row: span 1; }
+  .energie-video-wrap { max-width: 100%; }
 }
 </style>
 
