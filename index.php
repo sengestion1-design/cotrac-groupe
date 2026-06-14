@@ -444,6 +444,118 @@ $photos = array_merge($photos, $photos);
 
 
 <!-- ═══════════════════════════════════════════════════════════
+     SECTION : VIDÉO COTRAC — NOS ÉQUIPES EN ACTION
+═══════════════════════════════════════════════════════════ -->
+<section class="section" style="background:#0b1d3a;">
+  <div class="container">
+
+    <div class="text-center" style="margin-bottom:36px;">
+      <span class="section-tag orange" style="margin-bottom:12px;display:inline-block;">
+        <?= icon('play','#f7941d','.8rem') ?> Nos équipes en action
+      </span>
+      <h2 class="section-title light">COTRAC sur le terrain</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.72);max-width:580px;margin:0 auto;">
+        Découvrez nos équipes à l'œuvre sur les chantiers électriques, BTP et infrastructures au Sénégal.
+      </p>
+    </div>
+
+    <!-- Player style macOS -->
+    <div class="index-video-wrap animate-fade-up">
+      <div class="index-video-header">
+        <span class="index-video-dot" style="background:#ff5f57;"></span>
+        <span class="index-video-dot" style="background:#febc2e;"></span>
+        <span class="index-video-dot" style="background:#28c840;"></span>
+        <span class="index-video-title">COTRAC — Chantiers &amp; Réalisations</span>
+      </div>
+      <video
+        controls
+        preload="metadata"
+        poster="<?= SITE_URL ?>/assets/images/video-cotrac-poster.jpg"
+        style="display:block;width:100%;background:#000;max-height:480px;">
+        <source src="<?= SITE_URL ?>/assets/videos/videocotrac.mp4" type="video/mp4">
+        Votre navigateur ne supporte pas la lecture vidéo.
+      </video>
+    </div>
+
+    <!-- 3 points clés sous la vidéo -->
+    <div class="index-video-points">
+      <div class="ivp-item">
+        <?= icon('zap','#f7941d','1.2rem') ?>
+        <span>Réseaux électriques HTA/MT/BT</span>
+      </div>
+      <div class="ivp-sep"></div>
+      <div class="ivp-item">
+        <?= icon('hard-hat','#f7941d','1.2rem') ?>
+        <span>BTP &amp; Génie Civil</span>
+      </div>
+      <div class="ivp-sep"></div>
+      <div class="ivp-item">
+        <?= icon('map-pin','#f7941d','1.2rem') ?>
+        <span>14 régions au Sénégal</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.index-video-wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.5);
+  border: 1px solid rgba(255,255,255,.1);
+}
+.index-video-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 18px;
+  background: #1c2a3e;
+  border-bottom: 1px solid rgba(0,0,0,.4);
+}
+.index-video-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%; flex-shrink: 0;
+}
+.index-video-title {
+  color: rgba(255,255,255,.7);
+  font-size: .8rem; font-weight: 600;
+  margin-left: 8px; letter-spacing: .02em;
+}
+.index-video-points {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-top: 32px;
+  flex-wrap: wrap;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.ivp-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: rgba(255,255,255,.82);
+  font-size: .92rem;
+  font-weight: 500;
+  padding: 0 28px;
+}
+.ivp-sep {
+  width: 1px; height: 28px;
+  background: rgba(255,255,255,.15);
+}
+@media (max-width: 640px) {
+  .index-video-points { flex-direction: column; gap: 16px; }
+  .ivp-sep { display: none; }
+  .index-video-wrap { border-radius: 10px; }
+}
+</style>
+
+<!-- ═══════════════════════════════════════════════════════════
      SECTION : TÉMOIGNAGES CLIENTS
 ═══════════════════════════════════════════════════════════ -->
 <section class="section" style="background:var(--gris-clair);">
