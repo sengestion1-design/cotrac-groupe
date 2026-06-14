@@ -93,7 +93,7 @@ require_once __DIR__ . '/includes/header.php';
   display: flex;
   justify-content: flex-end;
   padding-right: calc(50% + 2rem);
-  margin-bottom: 1.2rem;
+  margin-bottom: 0.6rem;
   position: relative;
 }
 .tl-item:nth-child(even) {
