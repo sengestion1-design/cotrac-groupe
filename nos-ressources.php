@@ -132,7 +132,7 @@ require_once 'includes/header.php';
 .res-equip-name { font-size:.9rem;font-weight:700;color:#1a202c;line-height:1.3; }
 .res-equip-desc { font-size:.76rem;color:#718096;margin-top:3px; }
 .res-equip-qty { flex-shrink:0;font-size:.72rem;font-weight:700;padding:4px 10px;border-radius:20px;white-space:nowrap; }
-.res-equip-photo { width:120px;height:90px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#e8f0fb;display:flex;align-items:center;justify-content:center; }
+.res-equip-photo { width:180px;height:130px;border-radius:10px;overflow:hidden;flex-shrink:0;background:#e8f0fb;display:flex;align-items:center;justify-content:center; }
 .res-equip-photo img { width:100%;height:100%;object-fit:cover; }
 .res-equip-photo img[data-broken] { display:none; }
 
