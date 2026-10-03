@@ -10,7 +10,7 @@ require_once 'includes/header.php';
      PAGE HERO
 ═══════════════════════════════════════════════════════════ -->
 <section class="page-hero" style="position:relative;overflow:hidden;min-height:420px;">
-  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 5%;z-index:0;">
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 5%;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.85) 50%,rgba(10,30,70,0.65));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
   <div class="container grid-2col" style="gap:48px;align-items:center;">
@@ -248,6 +248,134 @@ require_once 'includes/header.php';
 
 
 <!-- ═══════════════════════════════════════════════════════════
+     SECTION : GALERIE CHANTIERS FROID & CLIMATISATION
+═══════════════════════════════════════════════════════════ -->
+<style>
+.clim-galerie-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px;width:100%; }
+@media (max-width:900px) { .clim-galerie-grid { grid-template-columns:repeat(2,1fr); } }
+@media (max-width:560px) { .clim-galerie-grid { grid-template-columns:1fr; } }
+.clim-galerie-grid .galerie-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 20px;
+  cursor: pointer;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: var(--gris-clair);
+  border: 2px solid rgba(26,107,181,.25);
+  box-shadow: 0 1px 4px rgba(26,107,181,.03);
+  transition: box-shadow .3s, transform .3s;
+}
+.clim-galerie-grid .galerie-item:hover { box-shadow: 0 2px 8px rgba(26,107,181,.08); transform: translateY(-2px); }
+.clim-galerie-grid .galerie-item img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .4s ease; }
+.clim-galerie-grid .galerie-item:hover img { transform: scale(1.06); }
+.clim-galerie-caption { margin:10px 2px 0; color:var(--gris); font-size:.86rem; font-weight:600; text-align:center; }
+</style>
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">Nos chantiers</span>
+      <h2 class="section-title">Froid & Climatisation en images</h2>
+      <p class="section-sub">Installation de climatiseurs, ventilation VMC, chambres froides et faux plafonds techniques — nos équipes COTRAC à l'œuvre au Sénégal.</p>
+    </div>
+
+    <div class="clim-galerie-grid">
+      <div class="elec-galerie-figure animate-fade-up delay-3">
+        <div class="galerie-item" onclick="climLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img src="<?= SITE_URL ?>/assets/images/froid-clim/clim-porte-chambre-froide.jpg" alt="Porte de chambre froide installée par COTRAC" loading="lazy">
+        </div>
+        <p class="clim-galerie-caption">Porte de chambre froide</p>
+      </div>
+      <div class="elec-galerie-figure animate-fade-up delay-1">
+        <div class="galerie-item" onclick="climLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img src="<?= SITE_URL ?>/assets/images/froid-clim/clim-chambre-froide-couloir.jpg" alt="Couloir de chambre froide industrielle avec évaporateur" loading="lazy">
+        </div>
+        <p class="clim-galerie-caption">Couloir de chambre froide</p>
+      </div>
+      <div class="elec-galerie-figure animate-fade-up delay-2">
+        <div class="galerie-item" onclick="climLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img src="<?= SITE_URL ?>/assets/images/froid-clim/clim-vmc-faux-plafond.jpg" alt="Réseau de gaines VMC installé en faux plafond technique" loading="lazy">
+        </div>
+        <p class="clim-galerie-caption">Gaines VMC en faux plafond</p>
+      </div>
+      <div class="elec-galerie-figure animate-fade-up delay-3">
+        <div class="galerie-item" onclick="climLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img src="<?= SITE_URL ?>/assets/images/froid-clim/clim-diffuseur-plafond-1.jpg" alt="Diffuseur d'air climatisé installé en plafond" loading="lazy">
+        </div>
+        <p class="clim-galerie-caption">Diffuseur d'air climatisé</p>
+      </div>
+      <div class="elec-galerie-figure animate-fade-up delay-1">
+        <div class="galerie-item" onclick="climLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img src="<?= SITE_URL ?>/assets/images/froid-clim/clim-diffuseur-plafond-2.jpg" alt="Système de ventilation et climatisation en plafond technique" loading="lazy">
+        </div>
+        <p class="clim-galerie-caption">Ventilation en plafond technique</p>
+      </div>
+      <div class="elec-galerie-figure animate-fade-up delay-2">
+        <div class="galerie-item" onclick="climLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img src="<?= SITE_URL ?>/assets/images/froid-clim/clim-porte-automatique.jpg" alt="Porte automatique de local technique climatisé" loading="lazy">
+        </div>
+        <p class="clim-galerie-caption">Porte automatique technique</p>
+      </div>
+      <div class="elec-galerie-figure animate-fade-up delay-3">
+        <div class="galerie-item" onclick="climLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+          <img src="<?= SITE_URL ?>/assets/images/froid-clim/clim-transport-cuve-industrielle.jpg" alt="Transport et levage d'une cuve industrielle sur site client" loading="lazy">
+        </div>
+        <p class="clim-galerie-caption">Transport de cuve industrielle</p>
+      </div>
+    </div>
+
+    <!-- Lightbox dédié à la galerie froid & climatisation -->
+    <div id="climLightbox" class="clim-lightbox" onclick="climLbClose(event)">
+      <button class="clim-lightbox-close" onclick="climLbClose(null, true)">&times;</button>
+      <img id="climLightboxImg" src="" alt="">
+    </div>
+    <style>
+    .clim-lightbox {
+      display: none; position: fixed; inset: 0; z-index: 99999;
+      background: rgba(10,22,40,.92);
+      align-items: center; justify-content: center;
+      backdrop-filter: blur(6px);
+      animation: climLbFade .2s ease;
+    }
+    .clim-lightbox.open { display: flex; }
+    .clim-lightbox img {
+      max-width: 97vw; max-height: 96vh; object-fit: contain;
+      border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,.5);
+      animation: climLbZoom .25s cubic-bezier(0.22,1,0.36,1);
+    }
+    .clim-lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      background: rgba(255,255,255,.12); border: none; color: #fff;
+      width: 44px; height: 44px; border-radius: 50%; font-size: 1.6rem; line-height: 1;
+      cursor: pointer; transition: background .2s;
+    }
+    .clim-lightbox-close:hover { background: rgba(255,255,255,.25); }
+    @keyframes climLbFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes climLbZoom { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
+    </style>
+    <script>
+    function climLbOpen(src, alt) {
+      const lb = document.getElementById('climLightbox');
+      document.getElementById('climLightboxImg').src = src;
+      document.getElementById('climLightboxImg').alt = alt || '';
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function climLbClose(e, force) {
+      if (force || !e || e.target.id === 'climLightbox') {
+        document.getElementById('climLightbox').classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') climLbClose(null, true);
+    });
+    </script>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
      SECTION : SECTEURS CLIENTS
 ═══════════════════════════════════════════════════════════ -->
 <section class="section bg-gris">
@@ -327,7 +455,7 @@ require_once 'includes/header.php';
 }
 </style>
 <section class="cta-section-inner" style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
-  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cta-fond.jpg" alt="Chantier COTRAC"
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
