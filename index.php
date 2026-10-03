@@ -4,6 +4,7 @@ require_once __DIR__ . '/config/database.php';
 $page_title = 'COTRAC - Compagnie des Travaux et Constructions | Dakar, Sénégal';
 $page_desc  = 'COTRAC est une entreprise sénégalaise spécialisée en BTP, réseaux électriques HTA/BT, construction de routes et pistes, et génie industrielle. Basée à Dakar depuis 2015, nous bâtissons l\'avenir du Sénégal avec excellence.';
 cms_load('index');
+require_once 'includes/images.php';
 require_once 'includes/header.php';
 $db = getDB();
 ?>
@@ -12,27 +13,23 @@ $db = getDB();
      SECTION HERO
 ═══════════════════════════════════════════════════════════ -->
 <?php $_index_hero_bg = cms_bg_url(cms('index','hero','bg_image','')); ?>
-<section class="hero">
+<section class="hero hero-photo-only">
   <?php if ($_index_hero_bg): ?>
-  <div class="hero-parallax-bg" style="background-image:url('<?= e($_index_hero_bg) ?>');background-size:cover;background-position:center;"></div>
+  <div class="hero-parallax-bg" style="background-image:url('<?= e($_index_hero_bg) ?>');background-size:cover;background-position:center 20%;"></div>
   <?php else: ?>
   <div class="hero-parallax-bg" style="background:none;">
-    <img src="<?= SITE_URL ?>/assets/images/plan.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;z-index:0;">
-    <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(5,18,45,0.90) 0%,rgba(10,30,70,0.78) 55%,rgba(10,30,70,0.45) 100%);z-index:1;"></div>
+    <img src="<?= SITE_URL ?>/assets/images/plan.webp?v=4" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
+    <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,18,45,0.35) 0%,rgba(8,25,58,0.25) 15%,rgba(9,28,64,0.17) 25%,rgba(10,30,70,0.10) 40%,rgba(10,30,70,0.20) 60%,rgba(10,30,70,0.32) 80%,rgba(10,30,70,0.45) 100%);z-index:1;"></div>
   </div>
   <?php endif; ?>
-  <div class="hero-blob hero-blob-1"></div>
-  <div class="hero-blob hero-blob-2"></div>
+</section>
+
+<!-- Contenu hero : sous la photo -->
+<section class="hero hero-content-only">
   <div class="container">
     <div class="hero-layout">
 
-      <!-- Texte hero : pleine largeur -->
       <div class="hero-left animate-fade-up">
-
-        <div class="hero-badge">
-          <span class="dot"></span>
-          <?= t('index_hero_badge') ?>
-        </div>
 
         <h1 class="hero-title">
           <?= t('index_hero_titre') ?>
@@ -52,6 +49,15 @@ $db = getDB();
           <span class="agrement-label">Agréé :</span>
           <span class="agrement-badge">✓ SENELEC</span>
           <span class="agrement-badge">✓ AGEROUTE</span>
+          <span class="agrement-badge">✓ ASER</span>
+          <span class="agrement-badge">✓ SN HLM</span>
+          <span class="agrement-badge">✓ PUDC</span>
+          <span class="agrement-badge">✓ SENICO</span>
+          <span class="agrement-badge">✓ SEN EAU</span>
+          <span class="agrement-badge">✓ PATISEN</span>
+          <span class="agrement-badge">✓ SICAP SA</span>
+          <span class="agrement-badge">✓ SOBOA</span>
+          <span class="agrement-badge">✓ GB FOODS</span>
           <span class="agrement-badge">✓ SARL depuis 2018</span>
         </div>
 
@@ -81,14 +87,54 @@ $db = getDB();
 
   </div>
 
-  <!-- Vagues SVG -->
-  <div class="hero-waves">
-    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,40 C240,80 480,0 720,40 C960,80 1200,0 1440,40 L1440,80 L0,80 Z" fill="#f4f7fb" opacity="0.6"/>
-      <path d="M0,55 C360,10 720,80 1080,30 C1260,10 1380,50 1440,55 L1440,80 L0,80 Z" fill="#f4f7fb"/>
-    </svg>
+</section>
+
+<!-- ═══ Récit d'un chantier : Tambacounda (image collante + étapes au défilement) ═══ -->
+<section class="story" id="story-tambacounda" aria-labelledby="story-titre">
+  <div class="container story-grid">
+    <div class="story-media">
+      <figure class="story-frame">
+        <img data-step="0" src="<?= SITE_URL ?>/assets/images/energie/tamba/poste-tamba-01.jpg" alt="Rencontre avec les autorités locales avant le démarrage du chantier" loading="lazy" class="is-active">
+        <img data-step="1" src="<?= SITE_URL ?>/assets/images/energie/tamba/poste-tamba-04.jpg" alt="Dressage d'un poteau béton par l'équipe COTRAC" loading="lazy">
+        <img data-step="2" src="<?= SITE_URL ?>/assets/images/energie/tamba/poste-tamba-03.jpg" alt="Technicien COTRAC en tête de poteau installant un luminaire" loading="lazy">
+        <video data-step="3" src="<?= SITE_URL ?>/assets/videos/tamba/poste-tamba-04.mp4" poster="<?= SITE_URL ?>/assets/images/energie/tamba/poste-tamba-video-04.jpg" muted playsinline loop preload="none" aria-label="Tirage du câble sur le tracé de la ligne"></video>
+        <img data-step="4" src="<?= SITE_URL ?>/assets/images/energie/tamba/poste-tamba-08.jpg" alt="Ligne électrique tirée sur poteaux béton, mise en service" loading="lazy">
+      </figure>
+      <p class="story-place">Tambacounda — cabine poste préfabriquée 36 kV, transformateur 400 kVA. Photos et vidéos prises sur le chantier.</p>
+    </div>
+    <div class="story-steps">
+      <h2 id="story-titre">Un chantier, du premier poteau à la mise sous tension</h2>
+      <p class="story-intro">Suivez une réalisation COTRAC telle qu'elle s'est déroulée, étape par étape.</p>
+      <div class="story-step is-active" data-step="0">
+        <span class="story-num" aria-hidden="true">1</span>
+        <h3>Rencontre avec les autorités locales</h3>
+        <p>Avant le premier coup de pelle, l'équipe présente le projet aux autorités et aux habitants : tracé, calendrier, sécurité. Un chantier bien accueilli avance vite.</p>
+      </div>
+      <div class="story-step" data-step="1">
+        <span class="story-num" aria-hidden="true">2</span>
+        <h3>Dressage des poteaux béton</h3>
+        <p>Chaque poteau est levé, aligné et scellé selon les normes SENELEC. Sur ce chantier, les équipes ont travaillé par fortes chaleurs, avec un contrôle qualité à chaque implantation.</p>
+      </div>
+      <div class="story-step" data-step="2">
+        <span class="story-num" aria-hidden="true">3</span>
+        <h3>Équipement en tête de poteau</h3>
+        <p>Armements, isolateurs et luminaires d'éclairage public sont posés à la nacelle ou à l'échelle, par des monteurs habilités travaux en hauteur.</p>
+      </div>
+      <div class="story-step" data-step="3">
+        <span class="story-num" aria-hidden="true">4</span>
+        <h3>Tirage des lignes</h3>
+        <p>Le câble est déroulé et tendu tronçon par tronçon jusqu'à la cabine poste préfabriquée 36 kV, équipée de son transformateur 400 kVA.</p>
+      </div>
+      <div class="story-step" data-step="4">
+        <span class="story-num" aria-hidden="true">5</span>
+        <h3>Raccordement et mise sous tension</h3>
+        <p>Essais, raccordement à la cabine, mise en service : le quartier est alimenté. Les équipes restent disponibles pour la maintenance.</p>
+      </div>
+      <div class="story-cta"><a href="<?= SITE_URL ?>/energie.php#ref-tambacounda" class="btn btn-outline-white">Voir toute la réalisation</a></div>
+    </div>
   </div>
 </section>
+<script src="<?= SITE_URL ?>/assets/js/home-story.js?v=1" defer></script>
 
 <!-- Bande photos défilante — hors hero pour lisibilité -->
 <?php
@@ -122,7 +168,7 @@ $photos = array_merge($photos, $photos);
 <!-- ═══════════════════════════════════════════════════════════
      SECTION : NOS 4 PÔLES D'ACTIVITÉS
 ═══════════════════════════════════════════════════════════ -->
-<section class="section bg-gris">
+<link rel="stylesheet" href="<?= SITE_URL ?>/assets/css/index-page.css?v=5"><section class="section bg-gris">
   <div class="container">
     <div class="text-center">
       <span class="section-tag"><?= t('index_poles_tag') ?></span>
@@ -136,6 +182,10 @@ $photos = array_merge($photos, $photos);
 
       <!-- BTP -->
       <div class="pole-card animate-fade-up delay-1">
+        <div class="pole-photo-wrap">
+          <img class="pole-photo" src="<?= SITE_URL ?>/assets/images/poles/reel/pole-btp.jpg"<?= cotrac_srcset('assets/images/poles/reel/pole-btp.jpg') ?> alt="Chantier BTP COTRAC" loading="lazy">
+        </div>
+        <div class="pole-body">
         <div class="pole-icon">
           <span class="ico ico-btp"><!--btp--></span>
         </div>
@@ -152,10 +202,15 @@ $photos = array_merge($photos, $photos);
         <a href="<?= SITE_URL ?>/btp.php" class="pole-link">
           <?= t('btn_en_savoir_plus') ?> <span>→</span>
         </a>
+        </div>
       </div>
 
       <!-- Énergie -->
       <div class="pole-card green animate-fade-up delay-2">
+        <div class="pole-photo-wrap">
+          <img class="pole-photo" src="<?= SITE_URL ?>/assets/images/poles/reel/pole-energie.jpg"<?= cotrac_srcset('assets/images/poles/reel/pole-energie.jpg') ?> alt="Poste électrique HTA/BT COTRAC" loading="lazy">
+        </div>
+        <div class="pole-body">
         <div class="pole-icon">
           <span class="ico ico-energie"><!--energie--></span>
         </div>
@@ -171,10 +226,15 @@ $photos = array_merge($photos, $photos);
         <a href="<?= SITE_URL ?>/energie.php" class="pole-link">
           <?= t('btn_en_savoir_plus') ?> <span>→</span>
         </a>
+        </div>
       </div>
 
       <!-- Routes -->
       <div class="pole-card animate-fade-up delay-3">
+        <div class="pole-photo-wrap">
+          <img class="pole-photo" src="<?= SITE_URL ?>/assets/images/poles/reel/pole-routes.jpg"<?= cotrac_srcset('assets/images/poles/reel/pole-routes.jpg') ?> alt="Travaux de terrassement COTRAC" loading="lazy">
+        </div>
+        <div class="pole-body">
         <div class="pole-icon">
           <span class="ico ico-routes"><!--routes--></span>
         </div>
@@ -191,10 +251,15 @@ $photos = array_merge($photos, $photos);
         <a href="<?= SITE_URL ?>/routes.php" class="pole-link">
           <?= t('btn_en_savoir_plus') ?> <span>→</span>
         </a>
+        </div>
       </div>
 
       <!-- Industrie -->
       <div class="pole-card purple animate-fade-up delay-4">
+        <div class="pole-photo-wrap">
+          <img class="pole-photo" src="<?= SITE_URL ?>/assets/images/poles/reel/pole-industrie.jpg"<?= cotrac_srcset('assets/images/poles/reel/pole-industrie.jpg') ?> alt="Technicien COTRAC génie industriel" loading="lazy">
+        </div>
+        <div class="pole-body">
         <div class="pole-icon">
           <span class="ico ico-industrie"><!--industrie--></span>
         </div>
@@ -210,9 +275,14 @@ $photos = array_merge($photos, $photos);
         <a href="<?= SITE_URL ?>/industrie.php" class="pole-link">
           <?= t('btn_en_savoir_plus') ?> <span>→</span>
         </a>
+        </div>
       </div>
 
       <div class="pole-card teal animate-fade-up delay-5">
+        <div class="pole-photo-wrap">
+          <img class="pole-photo" src="<?= SITE_URL ?>/assets/images/poles/reel/pole-froid-clim.jpg"<?= cotrac_srcset('assets/images/poles/reel/pole-froid-clim.jpg') ?> alt="Réseau de ventilation installé par COTRAC" loading="lazy">
+        </div>
+        <div class="pole-body">
         <div class="pole-icon">
           <span class="ico ico-froid"><!--froid--></span>
         </div>
@@ -228,6 +298,7 @@ $photos = array_merge($photos, $photos);
         <a href="<?= SITE_URL ?>/froid-clim.php" class="pole-link">
           <?= t('btn_en_savoir_plus') ?> <span>→</span>
         </a>
+        </div>
       </div>
 
     </div>
@@ -253,32 +324,35 @@ $photos = array_merge($photos, $photos);
 
       <!-- Photo gauche -->
       <div class="stats-photo-side" style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d,0 12px 40px rgba(0,0,0,0.35);transform:translateY(-20px);">
-        <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt="Équipe COTRAC" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        <picture>
+          <source srcset="<?= SITE_URL ?>/assets/images/equipe/cotrac2.webp" type="image/webp">
+          <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.jpg"<?= cotrac_srcset('assets/images/equipe/cotrac2.jpg') ?> alt="Équipe COTRAC" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        </picture>
       </div>
 
       <!-- Stats centre : 2x2 -->
       <div class="stats-chiffres-grid">
         <div class="stats-chiffre-item">
-          <div class="stats-val"><span class="counter" data-target="10">0</span>+</div>
+          <div class="stats-val"><span class="counter" data-target="10">10</span>+</div>
           <div class="stats-lbl"><?= t('index_stats_ans_label') ?></div>
         </div>
         <div class="stats-chiffre-item">
-          <div class="stats-val"><span class="counter" data-target="15">0</span>+</div>
+          <div class="stats-val"><span class="counter" data-target="25">25</span>+</div>
           <div class="stats-lbl"><?= t('index_stats_projets_label') ?></div>
         </div>
         <div class="stats-chiffre-item">
-          <div class="stats-val"><span class="counter" data-target="100">0</span>+</div>
+          <div class="stats-val"><span class="counter" data-target="100">100</span>+</div>
           <div class="stats-lbl"><?= t('index_stats_experts_label') ?></div>
         </div>
         <div class="stats-chiffre-item">
-          <div class="stats-val"><span class="counter" data-target="15">0</span>+</div>
+          <div class="stats-val"><span class="counter" data-target="15">15</span>+</div>
           <div class="stats-lbl"><?= t('index_stats_part_label') ?></div>
         </div>
       </div>
 
       <!-- Photo droite -->
       <div class="stats-photo-side" style="border-radius:20px;overflow:hidden;height:300px;box-shadow:0 0 0 4px #f7941d,0 12px 40px rgba(0,0,0,0.35);transform:translateY(20px);">
-        <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-photo.jpg" alt="COTRAC sur chantier" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-photo.jpg"<?= cotrac_srcset('assets/images/equipe/cotrac-photo.jpg') ?> alt="COTRAC sur chantier" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
       </div>
 
     </div>
@@ -309,19 +383,22 @@ $photos = array_merge($photos, $photos);
       </div>
 
       <!-- Grille de 3 photos -->
-      <div class="hero-right animate-fade-up delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
-        <div class="galerie-item" style="grid-column:span 2;aspect-ratio:16/7;">
-          <img src="<?= SITE_URL ?>/assets/images/equipe/notreequipe.png"
-               alt="<?= t('img_alt_equipe_terrain') ?>"
-               loading="lazy">
+      <div class="hero-right animate-fade-up delay-2" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;perspective:1000px;">
+        <div class="galerie-item parallax-item" data-parallax-speed="0.12" style="grid-column:span 2;aspect-ratio:16/7;">
+          <picture>
+            <source srcset="<?= SITE_URL ?>/assets/images/equipe/notreequipe.webp" type="image/webp">
+            <img src="<?= SITE_URL ?>/assets/images/equipe/notreequipe.jpg"<?= cotrac_srcset('assets/images/equipe/notreequipe.jpg') ?>
+                 alt="<?= t('img_alt_equipe_terrain') ?>"
+                 loading="lazy">
+          </picture>
         </div>
-        <div class="galerie-item" style="aspect-ratio:4/3;">
-          <img src="<?= SITE_URL ?>/assets/images/equipe/ingenieure-plans.jpg"
+        <div class="galerie-item parallax-item" data-parallax-speed="0.22" style="aspect-ratio:4/3;">
+          <img src="<?= SITE_URL ?>/assets/images/equipe/ingenieure-plans.jpg"<?= cotrac_srcset('assets/images/equipe/ingenieure-plans.jpg') ?>
                alt="<?= t('img_alt_ingenieure_plans') ?>"
                loading="lazy">
         </div>
-        <div class="galerie-item" style="aspect-ratio:4/3;">
-          <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg"
+        <div class="galerie-item parallax-item" data-parallax-speed="-0.18" style="aspect-ratio:4/3;">
+          <img src="<?= SITE_URL ?>/assets/images/equipe/cta-fond.jpg"
                alt="<?= t('img_alt_technicien_gilet') ?>"
                style="object-position:center top;"
                loading="lazy">
@@ -462,96 +539,6 @@ $photos = array_merge($photos, $photos);
   </div>
 </section>
 
-<style>
-.index-video-wrap {
-  max-width: 820px;
-  margin: 0 auto;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 24px 80px rgba(0,0,0,.5);
-  border: 1px solid rgba(255,255,255,.1);
-}
-.index-video-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 18px;
-  background: #1c2a3e;
-  border-bottom: 1px solid rgba(0,0,0,.4);
-}
-.index-video-dot {
-  width: 12px; height: 12px;
-  border-radius: 50%; flex-shrink: 0;
-}
-.index-video-title {
-  color: rgba(255,255,255,.7);
-  font-size: .8rem; font-weight: 600;
-  margin-left: 8px; letter-spacing: .02em;
-}
-.index-video-player {
-  position: relative;
-  background: #000;
-  line-height: 0;
-}
-.index-video-overlay {
-  position: absolute; inset: 0;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 14px;
-  background: rgba(0,0,0,.32);
-  cursor: pointer;
-  transition: opacity .3s;
-}
-.index-video-play-btn {
-  width: 80px; height: 80px;
-  border-radius: 50%;
-  background: rgba(247,148,29,.92);
-  border: 3px solid rgba(255,255,255,.5);
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 8px 32px rgba(247,148,29,.5);
-  transition: transform .2s, background .2s;
-}
-.index-video-play-btn:hover { transform: scale(1.1); background: #f7941d; }
-.index-video-overlay-label {
-  color: rgba(255,255,255,.9);
-  font-size: .88rem; font-weight: 600;
-  letter-spacing: .06em; text-transform: uppercase;
-  text-shadow: 0 1px 6px rgba(0,0,0,.6);
-}
-.index-video-points {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0;
-  margin-top: 32px;
-  flex-wrap: wrap;
-  max-width: 680px;
-  margin-left: auto;
-  margin-right: auto;
-}
-.ivp-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: rgba(255,255,255,.82);
-  font-size: .92rem;
-  font-weight: 500;
-  padding: 0 28px;
-}
-.ivp-sep {
-  width: 1px; height: 28px;
-  background: rgba(255,255,255,.15);
-}
-@media (max-width: 640px) {
-  .index-video-points { flex-direction: column; gap: 12px; margin-top: 20px; }
-  .ivp-sep { display: none; }
-  .index-video-wrap { border-radius: 10px; }
-  .ivp-item { font-size: .84rem; padding: 0 12px; }
-  .index-video-play-btn { width: 60px; height: 60px; }
-}
-</style>
-
 <!-- ═══════════════════════════════════════════════════════════
      SECTION : TÉMOIGNAGES CLIENTS
 ═══════════════════════════════════════════════════════════ -->
@@ -623,77 +610,6 @@ $photos = array_merge($photos, $photos);
   </div>
 </section>
 
-<style>
-.temoignage-card {
-  background: #fff;
-  border-radius: 18px;
-  padding: 32px 28px;
-  border: 1px solid var(--border);
-  box-shadow: 0 2px 16px rgba(26,107,181,0.06);
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  transition: var(--transition);
-  position: relative;
-}
-.temoignage-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 36px rgba(26,107,181,0.12);
-  border-color: rgba(26,107,181,0.2);
-}
-.temoignage-quote {
-  width: 44px; height: 44px;
-  background: rgba(247,148,29,0.1);
-  border-radius: 10px;
-  display: flex; align-items: center; justify-content: center;
-}
-.temoignage-text {
-  font-size: 0.92rem;
-  color: #4b5563;
-  line-height: 1.8;
-  font-style: italic;
-  flex: 1;
-}
-.temoignage-author {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding-top: 16px;
-  border-top: 1px solid var(--border);
-}
-.temoignage-logo {
-  width: 52px; height: 52px;
-  border-radius: 10px;
-  overflow: hidden;
-  flex-shrink: 0;
-  border: 1px solid var(--border);
-}
-.temoignage-logo img {
-  width: 100%; height: 100%;
-  object-fit: contain;
-  padding: 4px;
-}
-.temoignage-name {
-  font-size: 0.88rem;
-  font-weight: 700;
-  color: var(--texte);
-}
-.temoignage-company {
-  font-size: 0.78rem;
-  color: var(--gris);
-  margin-top: 2px;
-}
-.temoignage-stars {
-  color: #f7941d;
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-}
-@media (max-width: 900px) {
-  .temoignage-card { grid-column: span 1; }
-  section .container > div[style*="repeat(3"] { grid-template-columns: 1fr !important; }
-}
-</style>
-
 
 <!-- ═══════════════════════════════════════════════════════════
      SECTION : RÉALISATIONS RÉCENTES
@@ -719,6 +635,11 @@ try {
             'en cours'           => 'badge-info',
             default              => 'badge-warning',
         };
+        $statut_label = match(strtolower($p['statut'] ?? '')) {
+            'terminé', 'termine' => 'Terminé',
+            'en cours'           => 'En cours',
+            default              => $p['statut'] ?? t('projet_statut_en_cours'),
+        };
 ?>
       <?php
         $pole_photos = [
@@ -734,11 +655,11 @@ try {
       <div class="projet-card animate-fade-up">
         <div class="projet-img">
 <?php if ($has_img): ?>
-          <img src="<?= SITE_URL ?>/uploads/projets/<?= e($p['image']) ?>" alt="<?= e($p['titre']) ?>">
+          <img src="<?= SITE_URL ?>/uploads/projets/<?= e($p['image']) ?>"<?= cotrac_srcset('uploads/projets/' . e($p['image'])) ?> alt="<?= e($p['titre']) ?>" loading="lazy">
 <?php else: ?>
-          <img src="<?= SITE_URL ?>/assets/images/<?= $fallback ?>" alt="<?= e($p['titre']) ?>">
+          <img src="<?= SITE_URL ?>/assets/images/<?= $fallback ?>" alt="<?= e($p['titre']) ?>" loading="lazy">
 <?php endif; ?>
-          <span class="projet-badge <?= e($statut_class) ?>"><?= e($p['statut'] ?? t('projet_statut_en_cours')) ?></span>
+          <span class="projet-badge <?= e($statut_class) ?>"><?= e($statut_label) ?></span>
         </div>
         <div class="projet-body">
           <?php if (!empty($p['pole'])): ?>
@@ -763,7 +684,7 @@ try {
       <!-- Aucun projet en base : affichage de cards illustratives -->
       <div class="projet-card animate-fade-up delay-1">
         <div class="projet-img">
-          <img src="<?= SITE_URL ?>/assets/images/equipe/equipe-inspection.jpg" alt="<?= t('img_alt_chantier_elec') ?>">
+          <img src="<?= SITE_URL ?>/assets/images/equipe/equipe-inspection.jpg"<?= cotrac_srcset('assets/images/equipe/equipe-inspection.jpg') ?> alt="<?= t('img_alt_chantier_elec') ?>" loading="lazy">
           <span class="projet-badge badge-success"><?= t('projet_statut_termine') ?></span>
         </div>
         <div class="projet-body">
@@ -776,7 +697,7 @@ try {
       </div>
       <div class="projet-card animate-fade-up delay-2">
         <div class="projet-img">
-          <img src="<?= SITE_URL ?>/uploads/projets/pose-poteau-grue.jpg" alt="<?= t('img_alt_chantier_elec') ?>">
+          <img src="<?= SITE_URL ?>/uploads/projets/pose-poteau-grue.jpg"<?= cotrac_srcset('uploads/projets/pose-poteau-grue.jpg') ?> alt="<?= t('img_alt_chantier_elec') ?>" loading="lazy">
           <span class="projet-badge badge-success"><?= t('projet_statut_termine') ?></span>
         </div>
         <div class="projet-body">
@@ -789,7 +710,7 @@ try {
       </div>
       <div class="projet-card animate-fade-up delay-3">
         <div class="projet-img">
-          <img src="<?= SITE_URL ?>/uploads/projets/terrain-chantier.jpg" alt="<?= t('img_alt_chantier_indus') ?>">
+          <img src="<?= SITE_URL ?>/uploads/projets/terrain-chantier.jpg"<?= cotrac_srcset('uploads/projets/terrain-chantier.jpg') ?> alt="<?= t('img_alt_chantier_indus') ?>" loading="lazy">
           <span class="projet-badge badge-info"><?= t('projet_statut_en_cours') ?></span>
         </div>
         <div class="projet-body">
@@ -858,77 +779,6 @@ try {
 
       </div>
     </div>
-
-    <style>
-    .seneau-videos-wrap { margin-top: 48px; }
-    .seneau-videos-header {
-      display: flex; align-items: center; gap: 10px;
-      font-size: .9rem; color: var(--gris);
-      margin-bottom: 20px;
-      padding-bottom: 14px;
-      border-bottom: 2px solid rgba(26,107,181,.1);
-    }
-    .seneau-videos-header strong { color: var(--bleu); }
-    .seneau-videos-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-    .seneau-video-card {
-      background: #fff;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 2px 16px rgba(0,0,0,.07);
-      transition: transform .25s, box-shadow .25s;
-    }
-    .seneau-video-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 36px rgba(26,107,181,.13);
-    }
-    .svp-player {
-      position: relative;
-      background: #000;
-      aspect-ratio: 16/9;
-      overflow: hidden;
-    }
-    .svp-player video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-    .svp-overlay {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      background: rgba(0,0,0,.28);
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .svp-overlay:hover { background: rgba(0,0,0,.18); }
-    .svp-btn {
-      width: 62px; height: 62px; border-radius: 50%;
-      background: rgba(26,107,181,.92);
-      border: 3px solid rgba(255,255,255,.6);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 6px 24px rgba(26,107,181,.5);
-      transition: transform .2s, background .2s;
-    }
-    .svp-btn:hover { transform: scale(1.1); background: #1a6bb5; }
-    .svp-info { padding: 18px 20px 20px; }
-    .svp-tag {
-      display: inline-block;
-      font-size: .72rem; font-weight: 700;
-      color: #1a6bb5; background: rgba(26,107,181,.1);
-      border-radius: 50px; padding: 3px 12px;
-      margin-bottom: 10px; letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-    .svp-titre {
-      font-size: .96rem; font-weight: 700;
-      color: var(--texte); margin-bottom: 6px; line-height: 1.4;
-    }
-    .svp-desc { font-size: .82rem; color: var(--gris); line-height: 1.6; }
-    @media (max-width: 700px) {
-      .seneau-videos-grid { grid-template-columns: 1fr; gap: 16px; }
-    }
-    </style>
     <script>
     function svpPlay(el) {
       // el peut être l'overlay ou le bouton enfant
@@ -1036,7 +886,7 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
       <article class="actu-home-card animate-fade-up" style="transition-delay:<?= $i * 100 ?>ms;">
         <div class="actu-home-card-img">
           <?php if ($has_img): ?>
-            <img src="<?= SITE_URL ?>/uploads/actualites/<?= e($actu['image']) ?>"
+            <img src="<?= SITE_URL ?>/uploads/actualites/<?= e($actu['image']) ?>"<?= cotrac_srcset('uploads/actualites/' . e($actu['image'])) ?>
                  alt="<?= e($actu['titre']) ?>" loading="lazy">
           <?php else: ?>
             <div class="actu-home-card-placeholder">
@@ -1065,62 +915,6 @@ $mois_fr_home = ['January'=>'janvier','February'=>'février','March'=>'mars','Ap
 
   </div>
 </section>
-
-<style>
-.actu-home-card {
-  background: #fff;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 2px 16px rgba(0,0,0,.06);
-  border: 1px solid var(--border);
-  transition: transform .25s, box-shadow .25s;
-  display: flex; flex-direction: column;
-}
-.actu-home-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 36px rgba(26,107,181,.13);
-}
-.actu-home-card-img {
-  position: relative; height: 190px; overflow: hidden;
-  background: linear-gradient(135deg, #e8f1fb, #d4e6f7);
-}
-.actu-home-card-img img {
-  width:100%; height:100%; object-fit:cover; display:block;
-  transition: transform .4s ease;
-}
-.actu-home-card:hover .actu-home-card-img img { transform: scale(1.05); }
-.actu-home-card-placeholder {
-  width:100%; height:100%;
-  display:flex; align-items:center; justify-content:center;
-  color: var(--bleu); opacity:.3;
-}
-.actu-home-card-overlay {
-  position:absolute; inset:0;
-  background: linear-gradient(to top, rgba(10,22,40,.25), transparent);
-}
-.actu-home-card-body {
-  padding: 20px; display:flex; flex-direction:column; flex:1;
-}
-.actu-home-card-date {
-  display:inline-flex; align-items:center; gap:5px;
-  font-size:.72rem; color:var(--gris); margin-bottom:10px;
-  text-transform:capitalize;
-}
-.actu-home-card-title {
-  font-size:.98rem; font-weight:700; color:var(--texte);
-  line-height:1.4; margin-bottom:8px;
-}
-.actu-home-card-excerpt {
-  font-size:.84rem; color:var(--gris); line-height:1.6; flex:1; margin-bottom:16px;
-}
-.actu-home-card-link {
-  display:inline-flex; align-items:center; gap:6px;
-  font-size:.82rem; font-weight:600; color:var(--bleu);
-  text-decoration:none; margin-top:auto;
-  transition: gap .2s, color .2s;
-}
-.actu-home-card-link:hover { color:var(--orange); gap:10px; }
-</style>
 <?php endif; ?>
 
 <!-- ═══════════════════════════════════════════════════════════
@@ -1138,7 +932,7 @@ unset($_carte);
      CTA FINAL
 ═══════════════════════════════════════════════════════════ -->
 <section style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
-  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cta-fond.jpg" alt="Chantier COTRAC" loading="lazy"
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div class="container cta-grid" style="position:relative;z-index:2;padding-top:2rem;padding-bottom:2rem;">
@@ -1177,7 +971,7 @@ unset($_carte);
         <a href="<?= SITE_URL ?>/contact.php" class="btn btn-primary" style="width:100%;justify-content:center;">
           <?= icon('mail','','.9rem') ?> <?= t('index_cta_btn_devis') ?>
         </a>
-        <a href="<?= SITE_URL ?>/a-propos.php" class="btn btn-outline" style="width:100%;justify-content:center;">
+        <a href="<?= SITE_URL ?>/a-propos.php" class="btn btn-outline-white" style="width:100%;justify-content:center;">
           <?= icon('users','','.9rem') ?> <?= t('index_cta_btn_apropos') ?>
         </a>
       </div>
@@ -1199,19 +993,4 @@ unset($_carte);
 
   </div>
 </section>
-
-<style>
-.cta-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 32px;
-  align-items: center;
-}
-@media (max-width: 768px) {
-  .cta-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-}
-</style>
 <?php require_once 'includes/footer.php'; ?>
