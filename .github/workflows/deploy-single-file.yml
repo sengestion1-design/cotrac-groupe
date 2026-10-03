@@ -1,0 +1,41 @@
+name: Deploy single file to IONOS
+
+on:
+  workflow_dispatch:
+    inputs:
+      file_path:
+        description: 'Chemin du fichier à déployer (relatif à la racine du repo), ex: index.php'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup known hosts
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SFTP_KNOWN_HOSTS }}" >> ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Install lftp
+        run: sudo apt-get install -y lftp
+
+      - name: Deploy single file via SFTP
+        env:
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+          FILE_PATH: ${{ inputs.file_path }}
+        run: |
+          if [ ! -f "$FILE_PATH" ]; then
+            echo "Fichier introuvable dans le repo: $FILE_PATH"
+            exit 1
+          fi
+          lftp -u "$SFTP_USER","$SFTP_PASSWORD" sftp://access971979113.webspace-data.io << LFTP_EOF
+          set sftp:auto-confirm yes
+          set net:max-retries 3
+          put "$FILE_PATH" -o "/$FILE_PATH"
+          bye
+          LFTP_EOF
