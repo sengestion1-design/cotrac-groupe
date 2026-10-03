@@ -33,9 +33,11 @@ jobs:
             echo "Fichier introuvable dans le repo: $FILE_PATH"
             exit 1
           fi
+          DIR_PATH=$(dirname "$FILE_PATH")
           lftp -u "$SFTP_USER","$SFTP_PASSWORD" sftp://access971979113.webspace-data.io << LFTP_EOF
           set sftp:auto-confirm yes
           set net:max-retries 3
+          mkdir -p "/$DIR_PATH"
           put "$FILE_PATH" -o "/$FILE_PATH"
           bye
           LFTP_EOF
