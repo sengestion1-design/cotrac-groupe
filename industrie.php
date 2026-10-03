@@ -13,7 +13,7 @@ require_once 'includes/header.php';
 <?php $_industrie_hero_bg = cms_bg_url(cms('industrie','hero','bg_image','')); ?>
 <section class="page-hero" style="position:relative;overflow:hidden;min-height:420px;<?= $_industrie_hero_bg ? 'background-image:url(\''.e($_industrie_hero_bg).'\');background-size:cover;background-position:center;' : '' ?>">
   <?php if (!$_industrie_hero_bg): ?>
-  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.png" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 5%;z-index:0;">
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac2.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 5%;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,30,70,0.85) 50%,rgba(10,30,70,0.65));z-index:1;"></div>
   <?php endif; ?>
   <div style="position:relative;z-index:2;width:100%;">
@@ -185,7 +185,12 @@ require_once 'includes/header.php';
       </p>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+    <style>
+    .indus-equip-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px; }
+    @media (max-width:900px) { .indus-equip-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:560px) { .indus-equip-grid { grid-template-columns:1fr; } }
+    </style>
+    <div class="indus-equip-grid">
 
       <?php
       $equipements = [
@@ -343,18 +348,470 @@ require_once 'includes/header.php';
 </section>
 
 
-<?php
-$galerie_titre  = 'Nos réalisations industrielles';
-$galerie_photos = [
-  ['src'=>'assets/images/industrie/genie-industriel-chantier.jpg', 'alt'=>'Chantier génie industriel',      'caption'=>'Génie industriel — tuyauterie HP'],
-  ['src'=>'assets/images/energie/support-mesure.jpg',              'alt'=>'Mesures et contrôle technique',  'caption'=>'Contrôle &amp; mesure sur site'],
-  ['src'=>'assets/images/energie/raccordement-cable.jpg',          'alt'=>'Raccordement technique',         'caption'=>'Raccordement électrique industriel'],
-  ['src'=>'assets/images/energie/tetes-cable-hta.jpg',            'alt'=>'Têtes de câble HTA',             'caption'=>'Installation têtes de câble'],
-  ['src'=>'assets/images/equipe/ingenieure-plans.jpg',             'alt'=>'Ingénieure sur plans industriels','caption'=>'Conception et étude technique'],
-  ['src'=>'assets/images/energie/pose-poteau-mesure.jpg',         'alt'=>'Mesure sur pylône',              'caption'=>'Instrumentation et mesure'],
-];
-require 'includes/galerie.php';
-?>
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION : CALORIFUGEAGE — INTERVENTION SOCOCIM
+═══════════════════════════════════════════════════════════ -->
+<style>
+.calo-galerie-grid { display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:32px;max-width:900px;margin-left:auto;margin-right:auto; }
+@media (max-width:640px) { .calo-galerie-grid { grid-template-columns:1fr; } }
+.calo-galerie-grid .galerie-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  aspect-ratio: 3/4;
+  background: var(--gris-clair);
+  border: 2px solid rgba(255,255,255,.9);
+  box-shadow: 0 4px 18px rgba(0,0,0,.12);
+  transition: box-shadow .3s, transform .3s;
+}
+.calo-galerie-grid .galerie-item:hover { box-shadow: 0 8px 32px rgba(26,107,181,.25); transform: translateY(-2px); }
+.calo-galerie-grid .galerie-item img { width:100%; height:100%; object-fit:contain; display:block; transition: transform .4s ease; }
+.calo-galerie-grid .galerie-item:hover img { transform: scale(1.06); }
+.calo-galerie-grid .galerie-item-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,22,40,.75) 0%, transparent 55%);
+  opacity: 0; transition: opacity .3s;
+  display: flex; align-items: flex-end; padding: 14px;
+}
+.calo-galerie-grid .galerie-item:hover .galerie-item-overlay { opacity: 1; }
+.calo-galerie-grid .calo-galerie-caption { color:#fff; font-size:.78rem; font-weight:600; text-shadow:0 1px 4px rgba(0,0,0,.6); letter-spacing:.02em; }
+.energie-video-wrap {
+  position: relative;
+  margin: 0 auto;
+  max-width: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,.3);
+  border: 1px solid rgba(255,255,255,.1);
+}
+.energie-video-wrap .energie-video-header {
+  display: flex; align-items: center; gap: 8px;
+  min-height: 46px;
+  padding: 11px 16px; background: #1c2a3e;
+  border-bottom: 1px solid rgba(0,0,0,.3);
+}
+.energie-video-wrap .energie-video-dot { width: 11px; height: 11px; border-radius: 50%; flex-shrink: 0; }
+.energie-video-wrap .energie-video-step {
+  background:#febc2e; color:#1c2a3e; font-weight:700; font-size:.68rem;
+  width:18px; height:18px; border-radius:50%; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center; margin-left:4px;
+}
+.energie-video-wrap .energie-video-title {
+  color: rgba(255,255,255,.85); font-size: .78rem; font-weight: 600; letter-spacing: .02em;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.energie-video-wrap video {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: cover;
+  background: #000;
+}
+.energie-video-duration-badge {
+  position: absolute; right: 10px; bottom: 10px;
+  background: rgba(0,0,0,.75); color: #fff;
+  font-size: .72rem; font-weight: 600;
+  padding: 2px 8px; border-radius: 4px; z-index: 2;
+  pointer-events: none;
+}
+.energie-video-play-overlay {
+  position: absolute; inset: 0; top: 46px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,.12); pointer-events: none; z-index: 1;
+  transition: opacity .2s;
+}
+.energie-video-play-overlay svg { filter: drop-shadow(0 2px 10px rgba(0,0,0,.6)); }
+.energie-video-wrap.playing .energie-video-play-overlay,
+.energie-video-wrap.playing .energie-video-duration-badge { display: none; }
+.calo-video-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 32px;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media (max-width: 900px) {
+  .calo-video-row { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .energie-video-wrap .energie-video-title { font-size: .68rem; }
+  .energie-video-wrap .energie-video-header { padding: 8px 10px; min-height: 38px; }
+}
+</style>
+<section class="section bg-gris">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">Référence chantier</span>
+      <h2 class="section-title" style="font-size:1.8rem;">Calorifugeage industriel — Intervention SOCOCIM</h2>
+      <p class="section-sub">
+        COTRAC est intervenu sur le site de la cimenterie SOCOCIM pour l'isolation thermique de conduits et structures industrielles en hauteur : façonnage sur mesure des jaquettes en tôle, pose sécurisée avec harnais sur passerelles techniques, et finitions étanches à l'humidité. Une prestation clé en main, de la découpe en atelier jusqu'à la mise en service sur site.
+      </p>
+    </div>
+
+    <div class="calo-galerie-grid">
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/calo-atelier-decoupe.jpg" alt="Découpe et traçage des tôles en atelier COTRAC" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Atelier — Traçage et découpe des tôles</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/calo-facconnage-jaquette.jpg" alt="Façonnage d'une jaquette de calorifugeage sur cintreuse" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Façonnage de la jaquette sur cintreuse</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/calo-pose-hauteur-4.jpg" alt="Équipe COTRAC en intervention sur passerelle technique SOCOCIM" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Intervention sur passerelle technique</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/calo-pose-hauteur-5.jpg" alt="Maintien et fixation de la jaquette métallique" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Maintien et fixation de la jaquette</span></div>
+      </div>
+    </div>
+
+    <!-- Vidéos player style macOS encadré -->
+    <div class="calo-video-row">
+      <div class="energie-video-wrap animate-fade-up" style="margin-top:0;">
+        <div class="energie-video-header">
+          <span class="energie-video-dot" style="background:#ff5f57;"></span>
+          <span class="energie-video-dot" style="background:#febc2e;"></span>
+          <span class="energie-video-dot" style="background:#28c840;"></span>
+          <span class="energie-video-step">1</span>
+          <span class="energie-video-title">Pose en hauteur</span>
+        </div>
+        <div class="energie-video-play-overlay">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(255,255,255,.85)"/><path d="M21 16l16 10-16 10V16z" fill="#1c2a3e"/></svg>
+        </div>
+        <span class="energie-video-duration-badge">0:39</span>
+        <video
+          src="<?= SITE_URL ?>/assets/videos/calo-sococim.mp4"
+          controls
+          preload="metadata"
+          poster="<?= SITE_URL ?>/assets/videos/calo-sococim-poster.jpg"
+          onplay="this.closest('.energie-video-wrap').classList.add('playing')">
+          Votre navigateur ne supporte pas la lecture vidéo.
+        </video>
+      </div>
+      <div class="energie-video-wrap animate-fade-up" style="margin-top:0;">
+        <div class="energie-video-header">
+          <span class="energie-video-dot" style="background:#ff5f57;"></span>
+          <span class="energie-video-dot" style="background:#febc2e;"></span>
+          <span class="energie-video-dot" style="background:#28c840;"></span>
+          <span class="energie-video-step">2</span>
+          <span class="energie-video-title">Ajustement jaquette</span>
+        </div>
+        <div class="energie-video-play-overlay">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(255,255,255,.85)"/><path d="M21 16l16 10-16 10V16z" fill="#1c2a3e"/></svg>
+        </div>
+        <span class="energie-video-duration-badge">0:13</span>
+        <video
+          src="<?= SITE_URL ?>/assets/videos/calo-sococim-2.mp4"
+          controls
+          preload="metadata"
+          poster="<?= SITE_URL ?>/assets/videos/calo-sococim-2-poster.jpg"
+          onplay="this.closest('.energie-video-wrap').classList.add('playing')">
+          Votre navigateur ne supporte pas la lecture vidéo.
+        </video>
+      </div>
+      <div class="energie-video-wrap animate-fade-up" style="margin-top:0;">
+        <div class="energie-video-header">
+          <span class="energie-video-dot" style="background:#ff5f57;"></span>
+          <span class="energie-video-dot" style="background:#febc2e;"></span>
+          <span class="energie-video-dot" style="background:#28c840;"></span>
+          <span class="energie-video-step">3</span>
+          <span class="energie-video-title">Fixation finale</span>
+        </div>
+        <div class="energie-video-play-overlay">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(255,255,255,.85)"/><path d="M21 16l16 10-16 10V16z" fill="#1c2a3e"/></svg>
+        </div>
+        <span class="energie-video-duration-badge">0:18</span>
+        <video
+          src="<?= SITE_URL ?>/assets/videos/calo-sococim-3.mp4"
+          controls
+          preload="metadata"
+          poster="<?= SITE_URL ?>/assets/videos/calo-sococim-3-poster.jpg"
+          onplay="this.closest('.energie-video-wrap').classList.add('playing')">
+          Votre navigateur ne supporte pas la lecture vidéo.
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION : GÉNIE INDUSTRIEL — INTERVENTION ICS
+═══════════════════════════════════════════════════════════ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">Référence chantier</span>
+      <h2 class="section-title" style="font-size:1.8rem;">Génie industriel &amp; tuyauterie — Intervention ICS</h2>
+      <p class="section-sub">
+        COTRAC est intervenu sur le site des Industries Chimiques du Sénégal (ICS) pour des travaux de tuyauterie industrielle : soudage de coudes et raccords, montage de canalisations sur structures métalliques, travaux en hauteur sur passerelles techniques et interventions en intérieur d'usine. Une prestation complète mobilisant soudeurs qualifiés et équipements certifiés.
+      </p>
+    </div>
+
+    <div class="calo-galerie-grid" style="grid-template-columns:repeat(3,1fr);max-width:1200px;">
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-soudage-tuyauterie-1.jpg" alt="Soudage de tuyauterie sur structure métallique ICS" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Soudage sur structure métallique</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-soudage-coude-1.jpg" alt="Soudage d'un coude de tuyauterie industrielle" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Soudage d'un coude de tuyauterie</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-3" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-soudage-arc.jpg" alt="Arc de soudure sur raccord de tuyauterie ICS" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Soudure à l'arc — raccord bridé</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-equipe-soudage.jpg" alt="Équipe COTRAC en intervention de soudage ICS" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Équipe COTRAC sur site ICS</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-marquage-tuyau.jpg" alt="Marquage et découpe de tuyauterie industrielle" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Marquage et découpe des tubes</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-interieur-usine-silo.jpg" alt="Intervention en intérieur d'usine ICS près d'un silo de process" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Intervention en intérieur d'usine</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-3" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-travail-hauteur-echelle.jpg" alt="Travail en hauteur sur échelle en intérieur d'usine ICS" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Travail en hauteur sur échelle</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-mesure-passerelle.jpg" alt="Mesure et contrôle sur passerelle technique ICS" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Mesure et contrôle sur passerelle</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-soudage-coude-2.jpg" alt="Soudage d'un raccord coudé sur tuyauterie ICS" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Finition d'un raccord coudé</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-3" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-soudage-coude-3.jpg" alt="Soudage de tuyauterie avec poste inverter ICS" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Soudage avec poste inverter</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-soudage-tuyauterie-2.jpg" alt="Équipe COTRAC assemblant une tuyauterie sur structure ICS" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Assemblage sur structure métallique</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/gi-soudage-coude-4.jpg" alt="Vue d'ensemble d'un raccord de tuyauterie bridé ICS" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Raccord bridé — vue d'ensemble</span></div>
+      </div>
+    </div>
+
+    <!-- Vidéos player style macOS encadré -->
+    <div style="display:flex;justify-content:center;align-items:flex-start;gap:32px;margin-top:32px;flex-wrap:wrap;">
+      <div class="energie-video-wrap animate-fade-up" style="margin-top:0;width:480px;max-width:100%;flex:0 1 480px;">
+        <div class="energie-video-header">
+          <span class="energie-video-dot" style="background:#ff5f57;"></span>
+          <span class="energie-video-dot" style="background:#febc2e;"></span>
+          <span class="energie-video-dot" style="background:#28c840;"></span>
+          <span class="energie-video-step">1</span>
+          <span class="energie-video-title">Meulage sur site ICS</span>
+        </div>
+        <div class="energie-video-play-overlay">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(255,255,255,.85)"/><path d="M21 16l16 10-16 10V16z" fill="#1c2a3e"/></svg>
+        </div>
+        <span class="energie-video-duration-badge">0:22</span>
+        <video
+          src="<?= SITE_URL ?>/assets/videos/gi-ics-1.mp4"
+          controls
+          preload="metadata"
+          poster="<?= SITE_URL ?>/assets/videos/gi-ics-1-poster.jpg"
+          onplay="this.closest('.energie-video-wrap').classList.add('playing')">
+          Votre navigateur ne supporte pas la lecture vidéo.
+        </video>
+      </div>
+      <div class="energie-video-wrap animate-fade-up" style="margin-top:0;width:480px;max-width:100%;flex:0 1 480px;">
+        <div class="energie-video-header">
+          <span class="energie-video-dot" style="background:#ff5f57;"></span>
+          <span class="energie-video-dot" style="background:#febc2e;"></span>
+          <span class="energie-video-dot" style="background:#28c840;"></span>
+          <span class="energie-video-step">2</span>
+          <span class="energie-video-title">Soudage TIG — Raccord</span>
+        </div>
+        <div class="energie-video-play-overlay">
+          <svg width="52" height="52" viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="26" fill="rgba(255,255,255,.85)"/><path d="M21 16l16 10-16 10V16z" fill="#1c2a3e"/></svg>
+        </div>
+        <span class="energie-video-duration-badge">0:17</span>
+        <video
+          src="<?= SITE_URL ?>/assets/videos/gi-ics-2.mp4"
+          controls
+          preload="metadata"
+          poster="<?= SITE_URL ?>/assets/videos/gi-ics-2-poster.jpg"
+          onplay="this.closest('.energie-video-wrap').classList.add('playing')">
+          Votre navigateur ne supporte pas la lecture vidéo.
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Sur le terrain — chantier industriel agroalimentaire ═══ -->
+<section class="section bg-gris">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">Sur le terrain</span>
+      <h2 class="section-title" style="font-size:1.8rem;">Chantier industriel en milieu agroalimentaire</h2>
+      <p class="section-sub">
+        Intervention COTRAC dans une unité de production agroalimentaire : ossature métallique, panneaux isothermes,
+        réseaux de ventilation. Sur ce type de site, nos équipes appliquent les exigences d'hygiène (charlottes, masques,
+        tenues dédiées) et de sécurité (balisage des zones de travail, EPI), en coordination quotidienne avec les équipes du client.
+      </p>
+    </div>
+
+    <div class="calo-galerie-grid">
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/terrain/chantier-industriel-05.jpg" alt="Zone de chantier balisée : ossature métallique et gaines de ventilation, équipe COTRAC en casque et gilet" loading="lazy" style="object-fit:cover;">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Zone balisée — structure métallique &amp; ventilation</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/terrain/chantier-industriel-04.jpg" alt="Superviseurs COTRAC contrôlant la pose de panneaux derrière le balisage de sécurité" loading="lazy" style="object-fit:cover;">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Supervision de la pose des panneaux</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/terrain/chantier-industriel-01.jpg" alt="Réunion de coordination COTRAC avec l'équipe du client en tenue agroalimentaire" loading="lazy" style="object-fit:cover;">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Coordination sur site avec le client</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/terrain/chantier-industriel-03.jpg" alt="Échanges techniques entre COTRAC et le client sur un chantier industriel agroalimentaire" loading="lazy" style="object-fit:cover;">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Échanges techniques avec le client</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/terrain/transport-cuve-industrielle.jpg" alt="Transport et levage d'une cuve industrielle sur site agroalimentaire" loading="lazy" style="object-fit:cover;">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Transport et levage d'une cuve industrielle</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     SECTION : MÉCANIQUE INDUSTRIELLE — INTERVENTION SOCOCIM
+═══════════════════════════════════════════════════════════ -->
+<section class="section bg-gris">
+  <div class="container">
+    <div class="text-center">
+      <span class="section-tag">Référence chantier</span>
+      <h2 class="section-title" style="font-size:1.8rem;">Mécanique industrielle — Intervention SOCOCIM</h2>
+      <p class="section-sub">
+        COTRAC est intervenu sur le site de la cimenterie SOCOCIM pour la maintenance mécanique d'équipements de manutention et de transport de matières : remplacement de moteurs, manchettes et gaines d'alimentation, remise en état de vis d'extraction et de trémies de process, en environnement de production confiné et poussiéreux.
+      </p>
+    </div>
+
+    <div class="calo-galerie-grid" style="grid-template-columns:repeat(4,1fr);max-width:1200px;">
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/meca-equipe-intervention-1.jpg" alt="Équipe COTRAC en intervention mécanique sur équipement SOCOCIM" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Équipe COTRAC en intervention</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/meca-moteur-manchette.jpg" alt="Remplacement d'un moteur et d'une manchette d'alimentation" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Moteur et manchette d'alimentation</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-3" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/meca-intervention-vis.jpg" alt="Intervention sur vis d'extraction industrielle SOCOCIM" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Intervention sur vis d'extraction</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/meca-vue-ensemble-1.jpg" alt="Vue d'ensemble de l'intervention mécanique sur équipement de process" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Vue d'ensemble de l'équipement</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/meca-equipe-intervention-2.jpg" alt="Équipe COTRAC démontant un équipement mécanique poussiéreux" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Démontage de l'équipement</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-3" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/meca-gaine-neuve.jpg" alt="Gaine métallique neuve installée sur trémie de process SOCOCIM" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Gaine neuve installée</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-1" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/meca-equipe-intervention-3.jpg" alt="Équipe COTRAC au travail sur trémie d'alimentation SOCOCIM" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Travail sur trémie d'alimentation</span></div>
+      </div>
+      <div class="galerie-item animate-fade-up delay-2" onclick="iLbOpen(this.querySelector('img').src, this.querySelector('img').alt)">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/meca-equipe-intervention-4.jpg" alt="Équipe COTRAC finalisant l'intervention mécanique SOCOCIM" loading="lazy">
+        <div class="galerie-item-overlay"><span class="calo-galerie-caption">Finalisation de l'intervention</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox dédié aux galeries calorifugeage / ICS / mécanique -->
+<div id="iLightbox" class="i-lightbox" onclick="iLbClose(event)">
+  <button class="i-lightbox-close" onclick="iLbClose(null, true)">&times;</button>
+  <img id="iLightboxImg" src="" alt="">
+</div>
+<style>
+.i-lightbox {
+  display: none; position: fixed; inset: 0; z-index: 99999;
+  background: rgba(10,22,40,.92);
+  align-items: center; justify-content: center;
+  backdrop-filter: blur(6px);
+  animation: iLbFade .2s ease;
+}
+.i-lightbox.open { display: flex; }
+.i-lightbox img {
+  max-width: 97vw; max-height: 96vh; object-fit: contain;
+  border-radius: 10px; box-shadow: 0 20px 60px rgba(0,0,0,.5);
+  animation: iLbZoom .25s cubic-bezier(0.22,1,0.36,1);
+}
+.i-lightbox-close {
+  position: absolute; top: 20px; right: 24px;
+  background: rgba(255,255,255,.12); border: none; color: #fff;
+  width: 44px; height: 44px; border-radius: 50%; font-size: 1.6rem; line-height: 1;
+  cursor: pointer; transition: background .2s;
+}
+.i-lightbox-close:hover { background: rgba(255,255,255,.25); }
+@keyframes iLbFade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes iLbZoom { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: scale(1); } }
+</style>
+<script>
+function iLbOpen(src, alt) {
+  const lb = document.getElementById('iLightbox');
+  document.getElementById('iLightboxImg').src = src;
+  document.getElementById('iLightboxImg').alt = alt || '';
+  lb.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function iLbClose(e, force) {
+  if (force || !e || e.target.id === 'iLightbox') {
+    document.getElementById('iLightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') iLbClose(null, true);
+});
+</script>
+
+
+<!-- ═══ Levage & transport d'équipements industriels ═══ -->
+<section class="section" style="background:#fff;">
+  <div class="container">
+    <div class="grid-2col" style="gap:40px;align-items:center;">
+      <div class="animate-fade-up delay-1">
+        <span class="section-tag">Sur le terrain</span>
+        <h2 class="section-title" style="font-size:1.8rem;">Levage &amp; Transport d'Équipements Industriels</h2>
+        <p style="color:var(--gris);line-height:1.8;">
+          Manutention et transport de cuves et équipements de grand gabarit vers site industriel : grue mobile, remorque surbaissée et équipe qualifiée pour sécuriser chaque étape du levage jusqu'à la mise en place.
+        </p>
+      </div>
+      <div class="animate-fade-up delay-2">
+        <img src="<?= SITE_URL ?>/assets/images/industrie/levage-cuve-site-industriel.jpg"
+             alt="Levage et transport d'une cuve industrielle par grue mobile sur site"
+             loading="lazy"
+             style="width:100%;border-radius:16px;box-shadow:0 12px 48px rgba(0,0,0,0.18);object-fit:cover;max-height:420px;cursor:pointer;"
+             onclick="iLbOpen(this.src, this.alt)">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Galerie « Nos réalisations industrielles » retirée le 2026-09-17 (voir industrie.php.avant-suppression-galerie) -->
 
 <!-- ═══════════════════════════════════════════════════════════
      SECTION : CTA
@@ -366,7 +823,7 @@ require 'includes/galerie.php';
 }
 </style>
 <section class="cta-section-inner" style="position:relative;overflow:hidden;min-height:420px;display:flex;align-items:center;">
-  <img src="<?= SITE_URL ?>/assets/images/equipe/cotrac-chantier.jpg" alt="Chantier COTRAC"
+  <img src="<?= SITE_URL ?>/assets/images/equipe/cta-fond.jpg" alt="Chantier COTRAC"
        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;z-index:0;">
   <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(10,35,80,0.88) 55%,rgba(10,35,80,0.55));z-index:1;"></div>
   <div style="position:relative;z-index:2;width:100%;">
